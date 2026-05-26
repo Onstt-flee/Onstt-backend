@@ -1,0 +1,16 @@
+venv/
+__pycache__/
+*.pyc
+
+stt_data.db
+*.db
+*.sqlite3
+
+audio_storage/
+processed/
+input/
+*.wav
+*.mp3
+*.m4a
+
+.env
