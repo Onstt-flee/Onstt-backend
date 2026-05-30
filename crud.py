@@ -94,16 +94,25 @@ def update_preprocess(db: Session, utterance_id: int, data: schemas.PreprocessUp
 
 
 def create_analysis(db: Session, utterance_id: int, analysis_data: dict):
+    candidate_types = analysis_data.get("candidate_types")
+    error_types = analysis_data.get("error_types")
+
+    if candidate_types is not None and not isinstance(candidate_types, str):
+        candidate_types = json.dumps(candidate_types, ensure_ascii=False)
+
+    if error_types is not None and not isinstance(error_types, str):
+        error_types = json.dumps(error_types, ensure_ascii=False)
+
     db_analysis = models.Analysis(
         utterance_id=utterance_id,
         primary_type=analysis_data.get("primary_type"),
-        candidate_types=analysis_data.get("candidate_types"),
+        candidate_types=candidate_types,
         classification_reason=analysis_data.get("classification_reason"),
         needs_deep_analysis=analysis_data.get("needs_deep_analysis", True),
 
         is_correct=analysis_data.get("is_correct"),
         corrected_text=analysis_data.get("corrected_text"),
-        error_types=analysis_data.get("error_types"),
+        error_types=error_types,
 
         feedback_ko=analysis_data.get("feedback_ko"),
         feedback_ja=analysis_data.get("feedback_ja"),

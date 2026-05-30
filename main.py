@@ -8,7 +8,7 @@ import models
 import schemas
 import crud
 from database import engine, get_db
-
+from analyzer.pipeline import analyze as run_analysis
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -200,9 +200,9 @@ def read_utterance_analysis(
     "/utterances/{utterance_id}/analyze",
     response_model=schemas.AnalysisResponse,
     tags=["Analysis"],
-    summary="특정 발화 임시 분석 실행"
+    summary="특정 발화 분석 실행"
 )
-def analyze_utterance_temp(
+def analyze_utterance(
     utterance_id: int,
     db: Session = Depends(get_db)
 ):
@@ -211,28 +211,12 @@ def analyze_utterance_temp(
     if db_utterance is None:
         raise HTTPException(status_code=404, detail="Utterance not found")
 
-    analysis_data = {
-        "primary_type": "statement",
-        "candidate_types": "[{\"type\":\"statement\",\"score\":0.8}]",
-        "classification_reason": "임시 분석: 일반 평서문으로 처리했습니다.",
-        "needs_deep_analysis": True,
+    input_text = db_utterance.processed_text or db_utterance.normalized_text or db_utterance.stt_text
 
-        "is_correct": False,
-        "corrected_text": "今日は学校に行きました",
-        "error_types": "[\"particle_omission\"]",
+    if input_text is None:
+        raise HTTPException(status_code=400, detail="Utterance text is empty")
 
-        "feedback_ko": "임시 분석 결과입니다. 장소 뒤에는 조사 に가 필요할 수 있습니다.",
-        "feedback_ja": "これは一時的な分析結果です。場所の後には「に」を使うことがあります。",
-
-        "vocab_context": None,
-        "grammar_context": None,
-        "example_context": None,
-        "error_context": None,
-
-        "model_name": "rule_based_temp",
-        "adapter_name": None,
-        "confidence": 0.5,
-    }
+    analysis_data = run_analysis(input_text)
 
     db_analysis = crud.create_analysis(
         db=db,
@@ -241,7 +225,7 @@ def analyze_utterance_temp(
     )
 
     return db_analysis
-    
+
 
 @app.get(
     "/sessions/{session_id}/utterances",
