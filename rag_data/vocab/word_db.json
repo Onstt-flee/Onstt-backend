@@ -1,0 +1,6396 @@
+{
+  "ああ": {
+    "word": "ああ",
+    "reading": "ああ",
+    "meaning": "Ah!, Oh!",
+    "level": "N5",
+    "forms": [
+      "ああ"
+    ]
+  },
+  "会う": {
+    "word": "会う",
+    "reading": "あう",
+    "meaning": "to meet, to see",
+    "level": "N5",
+    "forms": [
+      "会う"
+    ]
+  },
+  "青": {
+    "word": "青",
+    "reading": "あお",
+    "meaning": "blue",
+    "level": "N5",
+    "forms": [
+      "青"
+    ]
+  },
+  "青い": {
+    "word": "青い",
+    "reading": "あおい",
+    "meaning": "blue",
+    "level": "N5",
+    "forms": [
+      "青い"
+    ]
+  },
+  "赤": {
+    "word": "赤",
+    "reading": "あか",
+    "meaning": "red",
+    "level": "N5",
+    "forms": [
+      "赤"
+    ]
+  },
+  "赤い": {
+    "word": "赤い",
+    "reading": "あかい",
+    "meaning": "red",
+    "level": "N5",
+    "forms": [
+      "赤い"
+    ]
+  },
+  "明るい": {
+    "word": "明るい",
+    "reading": "あかるい",
+    "meaning": "bright (in reference to personality or weather); cheerful",
+    "level": "N5",
+    "forms": [
+      "明るい"
+    ]
+  },
+  "秋": {
+    "word": "秋",
+    "reading": "あき",
+    "meaning": "fall (season)",
+    "level": "N5",
+    "forms": [
+      "秋"
+    ]
+  },
+  "開く": {
+    "word": "開く",
+    "reading": "あく",
+    "meaning": "to open, to become open",
+    "level": "N5",
+    "forms": [
+      "開く"
+    ]
+  },
+  "開ける": {
+    "word": "開ける",
+    "reading": "あける",
+    "meaning": "to open (v.t.)",
+    "level": "N5",
+    "forms": [
+      "開ける"
+    ]
+  },
+  "上げる": {
+    "word": "上げる",
+    "reading": "あげる",
+    "meaning": "to raise, to lift",
+    "level": "N5",
+    "forms": [
+      "上げる"
+    ]
+  },
+  "朝": {
+    "word": "朝",
+    "reading": "あさ",
+    "meaning": "morning",
+    "level": "N5",
+    "forms": [
+      "朝"
+    ]
+  },
+  "朝御飯": {
+    "word": "朝御飯",
+    "reading": "あさごはん",
+    "meaning": "breakfast",
+    "level": "N5",
+    "forms": [
+      "朝御飯"
+    ]
+  },
+  "明後日": {
+    "word": "明後日",
+    "reading": "あさって",
+    "meaning": "day after tomorrow",
+    "level": "N5",
+    "forms": [
+      "明後日"
+    ]
+  },
+  "足": {
+    "word": "足",
+    "reading": "あし",
+    "meaning": "foot; leg",
+    "level": "N5",
+    "forms": [
+      "足",
+      "脚"
+    ]
+  },
+  "明日": {
+    "word": "明日",
+    "reading": "あした",
+    "meaning": "tomorrow",
+    "level": "N5",
+    "forms": [
+      "明日"
+    ]
+  },
+  "あそこ": {
+    "word": "あそこ",
+    "reading": "あそこ",
+    "meaning": "there, over there, that place",
+    "level": "N5",
+    "forms": [
+      "あそこ"
+    ]
+  },
+  "遊ぶ": {
+    "word": "遊ぶ",
+    "reading": "あそぶ",
+    "meaning": "to play; to spend time pleasantly; to hang out",
+    "level": "N5",
+    "forms": [
+      "遊ぶ"
+    ]
+  },
+  "暖かい": {
+    "word": "暖かい",
+    "reading": "あたたかい",
+    "meaning": "warm",
+    "level": "N5",
+    "forms": [
+      "暖かい"
+    ]
+  },
+  "頭": {
+    "word": "頭",
+    "reading": "あたま",
+    "meaning": "head",
+    "level": "N5",
+    "forms": [
+      "頭"
+    ]
+  },
+  "新しい": {
+    "word": "新しい",
+    "reading": "あたらしい",
+    "meaning": "new",
+    "level": "N5",
+    "forms": [
+      "新しい"
+    ]
+  },
+  "あちら": {
+    "word": "あちら",
+    "reading": "あちら",
+    "meaning": "this way (polite)",
+    "level": "N5",
+    "forms": [
+      "あちら"
+    ]
+  },
+  "暑い": {
+    "word": "暑い",
+    "reading": "あつい",
+    "meaning": "hot (in reference to weather), warm",
+    "level": "N5",
+    "forms": [
+      "暑い"
+    ]
+  },
+  "熱い": {
+    "word": "熱い",
+    "reading": "あつい",
+    "meaning": "hot (objects)",
+    "level": "N5",
+    "forms": [
+      "熱い"
+    ]
+  },
+  "厚い": {
+    "word": "厚い",
+    "reading": "あつい",
+    "meaning": "kind, warm(hearted), thick, deep",
+    "level": "N5",
+    "forms": [
+      "厚い"
+    ]
+  },
+  "あっち": {
+    "word": "あっち",
+    "reading": "あっち",
+    "meaning": "over there",
+    "level": "N5",
+    "forms": [
+      "あっち"
+    ]
+  },
+  "後": {
+    "word": "後",
+    "reading": "あと",
+    "meaning": "afterwards (later); in the future; the rest; since then",
+    "level": "N5",
+    "forms": [
+      "後"
+    ]
+  },
+  "あなた": {
+    "word": "あなた",
+    "reading": "あなた",
+    "meaning": "you",
+    "level": "N5",
+    "forms": [
+      "あなた"
+    ]
+  },
+  "兄": {
+    "word": "兄",
+    "reading": "あに",
+    "meaning": "(my) older brother (humble)",
+    "level": "N5",
+    "forms": [
+      "兄"
+    ]
+  },
+  "姉": {
+    "word": "姉",
+    "reading": "あね",
+    "meaning": "(my) older sister (humble)",
+    "level": "N5",
+    "forms": [
+      "姉"
+    ]
+  },
+  "アパート": {
+    "word": "アパート",
+    "reading": "アパート",
+    "meaning": "apartment (abbr.)",
+    "level": "N5",
+    "forms": [
+      "アパート"
+    ]
+  },
+  "あの": {
+    "word": "あの",
+    "reading": "あの",
+    "meaning": "that over there; like that, that way; um...",
+    "level": "N5",
+    "forms": [
+      "あの"
+    ]
+  },
+  "浴びる": {
+    "word": "浴びる",
+    "reading": "あびる",
+    "meaning": "to bathe, to shower",
+    "level": "N5",
+    "forms": [
+      "浴びる"
+    ]
+  },
+  "危ない": {
+    "word": "危ない",
+    "reading": "あぶない",
+    "meaning": "dangerous, critical",
+    "level": "N5",
+    "forms": [
+      "危ない"
+    ]
+  },
+  "甘い": {
+    "word": "甘い",
+    "reading": "あまい",
+    "meaning": "generous, sweet",
+    "level": "N5",
+    "forms": [
+      "甘い"
+    ]
+  },
+  "余り": {
+    "word": "余り",
+    "reading": "あまり",
+    "meaning": "not very; surplus",
+    "level": "N5",
+    "forms": [
+      "余り"
+    ]
+  },
+  "雨": {
+    "word": "雨",
+    "reading": "あめ",
+    "meaning": "rain",
+    "level": "N5",
+    "forms": [
+      "雨"
+    ]
+  },
+  "飴": {
+    "word": "飴",
+    "reading": "あめ",
+    "meaning": "(hard) candy",
+    "level": "N5",
+    "forms": [
+      "飴"
+    ]
+  },
+  "洗う": {
+    "word": "洗う",
+    "reading": "あらう",
+    "meaning": "to wash",
+    "level": "N5",
+    "forms": [
+      "洗う"
+    ]
+  },
+  "在る": {
+    "word": "在る",
+    "reading": "ある",
+    "meaning": "to be, to have",
+    "level": "N5",
+    "forms": [
+      "在る"
+    ]
+  },
+  "有る": {
+    "word": "有る",
+    "reading": "ある",
+    "meaning": "to be, to have",
+    "level": "N5",
+    "forms": [
+      "有る"
+    ]
+  },
+  "歩く": {
+    "word": "歩く",
+    "reading": "あるく",
+    "meaning": "to walk",
+    "level": "N5",
+    "forms": [
+      "歩く"
+    ]
+  },
+  "あれ": {
+    "word": "あれ",
+    "reading": "あれ",
+    "meaning": "that one (over there)",
+    "level": "N5",
+    "forms": [
+      "あれ"
+    ]
+  },
+  "いい": {
+    "word": "いい",
+    "reading": "いい; よい",
+    "meaning": "good",
+    "level": "N5",
+    "forms": [
+      "いい",
+      "よい"
+    ]
+  },
+  "いいえ": {
+    "word": "いいえ",
+    "reading": "いいえ",
+    "meaning": "no, not at all",
+    "level": "N5",
+    "forms": [
+      "いいえ"
+    ]
+  },
+  "言う": {
+    "word": "言う",
+    "reading": "いう",
+    "meaning": "to say",
+    "level": "N5",
+    "forms": [
+      "言う"
+    ]
+  },
+  "家": {
+    "word": "家",
+    "reading": "いえ",
+    "meaning": "house, home",
+    "level": "N5",
+    "forms": [
+      "家"
+    ]
+  },
+  "いかが": {
+    "word": "いかが",
+    "reading": "いかが",
+    "meaning": "how, in what way",
+    "level": "N5",
+    "forms": [
+      "いかが"
+    ]
+  },
+  "行く": {
+    "word": "行く",
+    "reading": "いく; ゆく",
+    "meaning": "to go",
+    "level": "N5",
+    "forms": [
+      "行く"
+    ]
+  },
+  "いくつ": {
+    "word": "いくつ",
+    "reading": "いくつ",
+    "meaning": "how many, how old",
+    "level": "N5",
+    "forms": [
+      "いくつ"
+    ]
+  },
+  "いくら": {
+    "word": "いくら",
+    "reading": "いくら",
+    "meaning": "how much, how many",
+    "level": "N5",
+    "forms": [
+      "いくら"
+    ]
+  },
+  "池": {
+    "word": "池",
+    "reading": "いけ",
+    "meaning": "pond",
+    "level": "N5",
+    "forms": [
+      "池"
+    ]
+  },
+  "医者": {
+    "word": "医者",
+    "reading": "いしゃ",
+    "meaning": "doctor; physician",
+    "level": "N5",
+    "forms": [
+      "医者"
+    ]
+  },
+  "椅子": {
+    "word": "椅子",
+    "reading": "いす",
+    "meaning": "chair",
+    "level": "N5",
+    "forms": [
+      "椅子"
+    ]
+  },
+  "忙しい": {
+    "word": "忙しい",
+    "reading": "いそがしい",
+    "meaning": "busy (people, days)",
+    "level": "N5",
+    "forms": [
+      "忙しい"
+    ]
+  },
+  "痛い": {
+    "word": "痛い",
+    "reading": "いたい",
+    "meaning": "hurt; painful; sore",
+    "level": "N5",
+    "forms": [
+      "痛い"
+    ]
+  },
+  "一": {
+    "word": "一",
+    "reading": "いち",
+    "meaning": "one",
+    "level": "N5",
+    "forms": [
+      "一"
+    ]
+  },
+  "一日": {
+    "word": "一日",
+    "reading": "ついたち",
+    "meaning": "one day; first day of the month",
+    "level": "N5",
+    "forms": [
+      "一日"
+    ]
+  },
+  "一番": {
+    "word": "一番",
+    "reading": "いちばん",
+    "meaning": "best (most), first, number one",
+    "level": "N5",
+    "forms": [
+      "一番"
+    ]
+  },
+  "いつ": {
+    "word": "いつ",
+    "reading": "いつ",
+    "meaning": "when",
+    "level": "N5",
+    "forms": [
+      "いつ"
+    ]
+  },
+  "五日": {
+    "word": "五日",
+    "reading": "いつか",
+    "meaning": "five days; fifth day of the month",
+    "level": "N5",
+    "forms": [
+      "五日"
+    ]
+  },
+  "一緒": {
+    "word": "一緒",
+    "reading": "いっしょ",
+    "meaning": "together",
+    "level": "N5",
+    "forms": [
+      "一緒"
+    ]
+  },
+  "五つ": {
+    "word": "五つ",
+    "reading": "いつつ",
+    "meaning": "five things",
+    "level": "N5",
+    "forms": [
+      "五つ"
+    ]
+  },
+  "いつも": {
+    "word": "いつも",
+    "reading": "いつも",
+    "meaning": "always, usually, every time, never (with neg. verb)",
+    "level": "N5",
+    "forms": [
+      "いつも"
+    ]
+  },
+  "犬": {
+    "word": "犬",
+    "reading": "いぬ",
+    "meaning": "dog",
+    "level": "N5",
+    "forms": [
+      "犬"
+    ]
+  },
+  "今": {
+    "word": "今",
+    "reading": "いま",
+    "meaning": "now",
+    "level": "N5",
+    "forms": [
+      "今"
+    ]
+  },
+  "意味": {
+    "word": "意味",
+    "reading": "いみ",
+    "meaning": "meaning, significance",
+    "level": "N5",
+    "forms": [
+      "意味"
+    ]
+  },
+  "妹": {
+    "word": "妹",
+    "reading": "いもうと",
+    "meaning": "younger sister (humble)",
+    "level": "N5",
+    "forms": [
+      "妹"
+    ]
+  },
+  "嫌": {
+    "word": "嫌",
+    "reading": "いや",
+    "meaning": "disagreeable, detestable, unpleasant",
+    "level": "N5",
+    "forms": [
+      "嫌"
+    ]
+  },
+  "入口": {
+    "word": "入口",
+    "reading": "いりぐち",
+    "meaning": "entrance",
+    "level": "N5",
+    "forms": [
+      "入口"
+    ]
+  },
+  "居る": {
+    "word": "居る",
+    "reading": "いる",
+    "meaning": "(humble) to be (animate), to exist",
+    "level": "N5",
+    "forms": [
+      "居る"
+    ]
+  },
+  "要る": {
+    "word": "要る",
+    "reading": "いる",
+    "meaning": "to need",
+    "level": "N5",
+    "forms": [
+      "要る"
+    ]
+  },
+  "入れる": {
+    "word": "入れる",
+    "reading": "いれる",
+    "meaning": "to put in",
+    "level": "N5",
+    "forms": [
+      "入れる"
+    ]
+  },
+  "色": {
+    "word": "色",
+    "reading": "いろ",
+    "meaning": "color",
+    "level": "N5",
+    "forms": [
+      "色"
+    ]
+  },
+  "色々": {
+    "word": "色々",
+    "reading": "いろいろ",
+    "meaning": "various",
+    "level": "N5",
+    "forms": [
+      "色々"
+    ]
+  },
+  "上": {
+    "word": "上",
+    "reading": "うえ",
+    "meaning": "above (up, top, etc.), over, on top of",
+    "level": "N5",
+    "forms": [
+      "上"
+    ]
+  },
+  "後ろ": {
+    "word": "後ろ",
+    "reading": "うしろ",
+    "meaning": "back, behind, rear",
+    "level": "N5",
+    "forms": [
+      "後ろ"
+    ]
+  },
+  "薄い": {
+    "word": "薄い",
+    "reading": "うすい",
+    "meaning": "thin, weak",
+    "level": "N5",
+    "forms": [
+      "薄い"
+    ]
+  },
+  "歌": {
+    "word": "歌",
+    "reading": "うた",
+    "meaning": "a song",
+    "level": "N5",
+    "forms": [
+      "歌"
+    ]
+  },
+  "歌う": {
+    "word": "歌う",
+    "reading": "うたう",
+    "meaning": "to sing",
+    "level": "N5",
+    "forms": [
+      "歌う"
+    ]
+  },
+  "うち": {
+    "word": "うち",
+    "reading": "うち",
+    "meaning": "home; house; my place",
+    "level": "N5",
+    "forms": [
+      "うち"
+    ]
+  },
+  "生まれる": {
+    "word": "生まれる",
+    "reading": "うまれる",
+    "meaning": "to be born",
+    "level": "N5",
+    "forms": [
+      "生まれる"
+    ]
+  },
+  "海": {
+    "word": "海",
+    "reading": "うみ",
+    "meaning": "sea, beach",
+    "level": "N5",
+    "forms": [
+      "海"
+    ]
+  },
+  "売る": {
+    "word": "売る",
+    "reading": "うる",
+    "meaning": "to sell (v.t.)",
+    "level": "N5",
+    "forms": [
+      "売る"
+    ]
+  },
+  "うるさい": {
+    "word": "うるさい",
+    "reading": "うるさい",
+    "meaning": "noisy; annoying",
+    "level": "N5",
+    "forms": [
+      "うるさい"
+    ]
+  },
+  "上着": {
+    "word": "上着",
+    "reading": "うわぎ",
+    "meaning": "coat, jacket",
+    "level": "N5",
+    "forms": [
+      "上着"
+    ]
+  },
+  "絵": {
+    "word": "絵",
+    "reading": "え",
+    "meaning": "a painting; a picture; a drawing",
+    "level": "N5",
+    "forms": [
+      "絵"
+    ]
+  },
+  "映画": {
+    "word": "映画",
+    "reading": "えいが",
+    "meaning": "movie, film",
+    "level": "N5",
+    "forms": [
+      "映画"
+    ]
+  },
+  "映画館": {
+    "word": "映画館",
+    "reading": "えいがかん",
+    "meaning": "movie theater, cinema",
+    "level": "N5",
+    "forms": [
+      "映画館"
+    ]
+  },
+  "英語": {
+    "word": "英語",
+    "reading": "えいご",
+    "meaning": "English (language)",
+    "level": "N5",
+    "forms": [
+      "英語"
+    ]
+  },
+  "ええ": {
+    "word": "ええ",
+    "reading": "ええ",
+    "meaning": "yes",
+    "level": "N5",
+    "forms": [
+      "ええ"
+    ]
+  },
+  "駅": {
+    "word": "駅",
+    "reading": "えき",
+    "meaning": "station",
+    "level": "N5",
+    "forms": [
+      "駅"
+    ]
+  },
+  "エレベーター": {
+    "word": "エレベーター",
+    "reading": "エレベーター",
+    "meaning": "elevator",
+    "level": "N5",
+    "forms": [
+      "エレベーター"
+    ]
+  },
+  "～円": {
+    "word": "～円",
+    "reading": "～えん",
+    "meaning": "Yen",
+    "level": "N5",
+    "forms": [
+      "～円"
+    ]
+  },
+  "鉛筆": {
+    "word": "鉛筆",
+    "reading": "えんぴつ",
+    "meaning": "pencil",
+    "level": "N5",
+    "forms": [
+      "鉛筆"
+    ]
+  },
+  "お～": {
+    "word": "お～",
+    "reading": "お～",
+    "meaning": "honorable ~ (honorific)",
+    "level": "N5",
+    "forms": [
+      "お～"
+    ]
+  },
+  "美味しい": {
+    "word": "美味しい",
+    "reading": "おいしい",
+    "meaning": "delicious, tasty",
+    "level": "N5",
+    "forms": [
+      "美味しい"
+    ]
+  },
+  "多い": {
+    "word": "多い",
+    "reading": "おおい",
+    "meaning": "many; there are a lot",
+    "level": "N5",
+    "forms": [
+      "多い"
+    ]
+  },
+  "大きい": {
+    "word": "大きい",
+    "reading": "おおきい",
+    "meaning": "big, large",
+    "level": "N5",
+    "forms": [
+      "大きい"
+    ]
+  },
+  "大きな": {
+    "word": "大きな",
+    "reading": "おおきな",
+    "meaning": "big",
+    "level": "N5",
+    "forms": [
+      "大きな"
+    ]
+  },
+  "大勢": {
+    "word": "大勢",
+    "reading": "おおぜい",
+    "meaning": "great number of people",
+    "level": "N5",
+    "forms": [
+      "大勢"
+    ]
+  },
+  "お母さん": {
+    "word": "お母さん",
+    "reading": "おかあさん",
+    "meaning": "mother (formal)",
+    "level": "N5",
+    "forms": [
+      "お母さん"
+    ]
+  },
+  "お菓子": {
+    "word": "お菓子",
+    "reading": "おかし",
+    "meaning": "confections, sweets, snack",
+    "level": "N5",
+    "forms": [
+      "お菓子"
+    ]
+  },
+  "お金": {
+    "word": "お金",
+    "reading": "おかね",
+    "meaning": "money",
+    "level": "N5",
+    "forms": [
+      "お金"
+    ]
+  },
+  "起きる": {
+    "word": "起きる",
+    "reading": "おきる",
+    "meaning": "to get up (e.g., from sleeping); to happen",
+    "level": "N5",
+    "forms": [
+      "起きる"
+    ]
+  },
+  "置く": {
+    "word": "置く",
+    "reading": "おく",
+    "meaning": "to put; to lay; to place",
+    "level": "N5",
+    "forms": [
+      "置く"
+    ]
+  },
+  "奥さん": {
+    "word": "奥さん",
+    "reading": "おくさん",
+    "meaning": "(someone else's) wife (hon.)",
+    "level": "N5",
+    "forms": [
+      "奥さん"
+    ]
+  },
+  "お酒": {
+    "word": "お酒",
+    "reading": "おさけ",
+    "meaning": "sake; alcohol",
+    "level": "N5",
+    "forms": [
+      "お酒"
+    ]
+  },
+  "お皿": {
+    "word": "お皿",
+    "reading": "おさら",
+    "meaning": "plate, dish",
+    "level": "N5",
+    "forms": [
+      "お皿"
+    ]
+  },
+  "伯父": {
+    "word": "伯父",
+    "reading": "おじさん",
+    "meaning": "uncle, middle-aged man",
+    "level": "N5",
+    "forms": [
+      "伯父",
+      "叔父さん"
+    ]
+  },
+  "おじいさん": {
+    "word": "おじいさん",
+    "reading": "おじいさん",
+    "meaning": "grandfather, male senior citizen",
+    "level": "N5",
+    "forms": [
+      "おじいさん"
+    ]
+  },
+  "教える": {
+    "word": "教える",
+    "reading": "おしえる",
+    "meaning": "to teach, to inform, to instruct",
+    "level": "N5",
+    "forms": [
+      "教える"
+    ]
+  },
+  "押す": {
+    "word": "押す",
+    "reading": "おす",
+    "meaning": "to push, to press, to stamp (e.g., a passport)",
+    "level": "N5",
+    "forms": [
+      "押す"
+    ]
+  },
+  "遅い": {
+    "word": "遅い",
+    "reading": "おそい",
+    "meaning": "slow; (to be) late",
+    "level": "N5",
+    "forms": [
+      "遅い"
+    ]
+  },
+  "お茶": {
+    "word": "お茶",
+    "reading": "おちゃ",
+    "meaning": "(green) tea",
+    "level": "N5",
+    "forms": [
+      "お茶"
+    ]
+  },
+  "お手洗い": {
+    "word": "お手洗い",
+    "reading": "おてあらい",
+    "meaning": "toilet, restroom, bathroom (lit., a place to wash one's hands)",
+    "level": "N5",
+    "forms": [
+      "お手洗い"
+    ]
+  },
+  "お父さん": {
+    "word": "お父さん",
+    "reading": "おとうさん",
+    "meaning": "father (formal)",
+    "level": "N5",
+    "forms": [
+      "お父さん"
+    ]
+  },
+  "弟": {
+    "word": "弟",
+    "reading": "おとうと",
+    "meaning": "younger brother",
+    "level": "N5",
+    "forms": [
+      "弟"
+    ]
+  },
+  "男": {
+    "word": "男",
+    "reading": "おとこ",
+    "meaning": "man, male",
+    "level": "N5",
+    "forms": [
+      "男"
+    ]
+  },
+  "男の子": {
+    "word": "男の子",
+    "reading": "おとこのこ",
+    "meaning": "boy",
+    "level": "N5",
+    "forms": [
+      "男の子"
+    ]
+  },
+  "一昨日": {
+    "word": "一昨日",
+    "reading": "おととい",
+    "meaning": "the day before yesterday",
+    "level": "N5",
+    "forms": [
+      "一昨日"
+    ]
+  },
+  "おととし": {
+    "word": "おととし",
+    "reading": "おととし",
+    "meaning": "year before last",
+    "level": "N5",
+    "forms": [
+      "おととし"
+    ]
+  },
+  "大人": {
+    "word": "大人",
+    "reading": "おとな",
+    "meaning": "adult",
+    "level": "N5",
+    "forms": [
+      "大人"
+    ]
+  },
+  "お腹": {
+    "word": "お腹",
+    "reading": "おなか",
+    "meaning": "stomach",
+    "level": "N5",
+    "forms": [
+      "お腹"
+    ]
+  },
+  "同じ": {
+    "word": "同じ",
+    "reading": "おなじ",
+    "meaning": "same, identical",
+    "level": "N5",
+    "forms": [
+      "同じ"
+    ]
+  },
+  "お兄さん": {
+    "word": "お兄さん",
+    "reading": "おにいさん",
+    "meaning": "(someone else's) older brother (formal)",
+    "level": "N5",
+    "forms": [
+      "お兄さん"
+    ]
+  },
+  "お姉さん": {
+    "word": "お姉さん",
+    "reading": "おねえさん",
+    "meaning": "older sister (formal)",
+    "level": "N5",
+    "forms": [
+      "お姉さん"
+    ]
+  },
+  "伯母さん": {
+    "word": "伯母さん",
+    "reading": "おばさん",
+    "meaning": "aunt",
+    "level": "N5",
+    "forms": [
+      "伯母さん",
+      "叔母さん"
+    ]
+  },
+  "おばあさん": {
+    "word": "おばあさん",
+    "reading": "おばあさん",
+    "meaning": "grandmother, female senior-citizen",
+    "level": "N5",
+    "forms": [
+      "おばあさん"
+    ]
+  },
+  "お風呂": {
+    "word": "お風呂",
+    "reading": "おふろ",
+    "meaning": "a bath",
+    "level": "N5",
+    "forms": [
+      "お風呂"
+    ]
+  },
+  "お弁当": {
+    "word": "お弁当",
+    "reading": "おべんとう",
+    "meaning": "a boxed lunch",
+    "level": "N5",
+    "forms": [
+      "お弁当"
+    ]
+  },
+  "覚える": {
+    "word": "覚える",
+    "reading": "おぼえる",
+    "meaning": "to learn, to commit to memory, to remember, to memorize",
+    "level": "N5",
+    "forms": [
+      "覚える"
+    ]
+  },
+  "おまわりさん": {
+    "word": "おまわりさん",
+    "reading": "おまわりさん",
+    "meaning": "policeman (friendly term)",
+    "level": "N5",
+    "forms": [
+      "おまわりさん"
+    ]
+  },
+  "重い": {
+    "word": "重い",
+    "reading": "おもい",
+    "meaning": "heavy; serious",
+    "level": "N5",
+    "forms": [
+      "重い"
+    ]
+  },
+  "面白い": {
+    "word": "面白い",
+    "reading": "おもしろい",
+    "meaning": "interesting, amusing",
+    "level": "N5",
+    "forms": [
+      "面白い"
+    ]
+  },
+  "泳ぐ": {
+    "word": "泳ぐ",
+    "reading": "およぐ",
+    "meaning": "to swim",
+    "level": "N5",
+    "forms": [
+      "泳ぐ"
+    ]
+  },
+  "降りる": {
+    "word": "降りる",
+    "reading": "おりる",
+    "meaning": "to get off",
+    "level": "N5",
+    "forms": [
+      "降りる"
+    ]
+  },
+  "終る": {
+    "word": "終る",
+    "reading": "おわる",
+    "meaning": "to finish, to close",
+    "level": "N5",
+    "forms": [
+      "終る"
+    ]
+  },
+  "音楽": {
+    "word": "音楽",
+    "reading": "おんがく",
+    "meaning": "Music",
+    "level": "N5",
+    "forms": [
+      "音楽"
+    ]
+  },
+  "女": {
+    "word": "女",
+    "reading": "おんな",
+    "meaning": "woman, female",
+    "level": "N5",
+    "forms": [
+      "女"
+    ]
+  },
+  "女の子": {
+    "word": "女の子",
+    "reading": "おんなのこ",
+    "meaning": "girl",
+    "level": "N5",
+    "forms": [
+      "女の子"
+    ]
+  },
+  "～回": {
+    "word": "～回",
+    "reading": "～かい",
+    "meaning": "counter for occurrences (~ times)",
+    "level": "N5",
+    "forms": [
+      "～回"
+    ]
+  },
+  "～階": {
+    "word": "～階",
+    "reading": "～かい",
+    "meaning": "counter for stories (floors) of a building",
+    "level": "N5",
+    "forms": [
+      "～階"
+    ]
+  },
+  "外国": {
+    "word": "外国",
+    "reading": "がいこく",
+    "meaning": "foreign country; abroad",
+    "level": "N5",
+    "forms": [
+      "外国"
+    ]
+  },
+  "外国人": {
+    "word": "外国人",
+    "reading": "がいこくじん",
+    "meaning": "foreigner",
+    "level": "N5",
+    "forms": [
+      "外国人"
+    ]
+  },
+  "会社": {
+    "word": "会社",
+    "reading": "かいしゃ",
+    "meaning": "company, corporation",
+    "level": "N5",
+    "forms": [
+      "会社"
+    ]
+  },
+  "階段": {
+    "word": "階段",
+    "reading": "かいだん",
+    "meaning": "stairs",
+    "level": "N5",
+    "forms": [
+      "階段"
+    ]
+  },
+  "買い物": {
+    "word": "買い物",
+    "reading": "かいもの",
+    "meaning": "shopping",
+    "level": "N5",
+    "forms": [
+      "買い物"
+    ]
+  },
+  "買う": {
+    "word": "買う",
+    "reading": "かう",
+    "meaning": "to buy",
+    "level": "N5",
+    "forms": [
+      "買う"
+    ]
+  },
+  "返す": {
+    "word": "返す",
+    "reading": "かえす",
+    "meaning": "to return something",
+    "level": "N5",
+    "forms": [
+      "返す"
+    ]
+  },
+  "帰る": {
+    "word": "帰る",
+    "reading": "かえる",
+    "meaning": "to go back, to go home, to return",
+    "level": "N5",
+    "forms": [
+      "帰る"
+    ]
+  },
+  "顔": {
+    "word": "顔",
+    "reading": "かお",
+    "meaning": "face (body part)",
+    "level": "N5",
+    "forms": [
+      "顔"
+    ]
+  },
+  "かかる": {
+    "word": "かかる",
+    "reading": "かかる",
+    "meaning": "it takes (amount of time, money) (v.i.)",
+    "level": "N5",
+    "forms": [
+      "かかる"
+    ]
+  },
+  "鍵": {
+    "word": "鍵",
+    "reading": "かぎ",
+    "meaning": "a lock; a key",
+    "level": "N5",
+    "forms": [
+      "鍵"
+    ]
+  },
+  "書く": {
+    "word": "書く",
+    "reading": "かく",
+    "meaning": "to write",
+    "level": "N5",
+    "forms": [
+      "書く"
+    ]
+  },
+  "学生": {
+    "word": "学生",
+    "reading": "がくせい",
+    "meaning": "student",
+    "level": "N5",
+    "forms": [
+      "学生"
+    ]
+  },
+  "～か月": {
+    "word": "～か月",
+    "reading": "～かげつ",
+    "meaning": "(number of) months",
+    "level": "N5",
+    "forms": [
+      "～か月"
+    ]
+  },
+  "掛ける": {
+    "word": "掛ける",
+    "reading": "かける",
+    "meaning": "to put on (e.g., glasses); to hang (e.g., on a wall)",
+    "level": "N5",
+    "forms": [
+      "掛ける"
+    ]
+  },
+  "かける": {
+    "word": "かける",
+    "reading": "かける",
+    "meaning": "to dial/call (e.g., phone); to sit down",
+    "level": "N5",
+    "forms": [
+      "かける"
+    ]
+  },
+  "傘": {
+    "word": "傘",
+    "reading": "かさ",
+    "meaning": "umbrella, parasol",
+    "level": "N5",
+    "forms": [
+      "傘"
+    ]
+  },
+  "貸す": {
+    "word": "貸す",
+    "reading": "かす",
+    "meaning": "to lend",
+    "level": "N5",
+    "forms": [
+      "貸す"
+    ]
+  },
+  "風": {
+    "word": "風",
+    "reading": "かぜ",
+    "meaning": "wind, breeze",
+    "level": "N5",
+    "forms": [
+      "風"
+    ]
+  },
+  "風邪": {
+    "word": "風邪",
+    "reading": "かぜ",
+    "meaning": "cold, flu",
+    "level": "N5",
+    "forms": [
+      "風邪"
+    ]
+  },
+  "方": {
+    "word": "方",
+    "reading": "かた",
+    "meaning": "-- honorific form for 人 (ひと) --; way of doing",
+    "level": "N5",
+    "forms": [
+      "方"
+    ]
+  },
+  "家族": {
+    "word": "家族",
+    "reading": "かぞく",
+    "meaning": "family, members of a family",
+    "level": "N5",
+    "forms": [
+      "家族"
+    ]
+  },
+  "片仮名": {
+    "word": "片仮名",
+    "reading": "かたかな",
+    "meaning": "katakana",
+    "level": "N5",
+    "forms": [
+      "片仮名"
+    ]
+  },
+  "～月": {
+    "word": "～月",
+    "reading": "～がつ",
+    "meaning": "month of year",
+    "level": "N5",
+    "forms": [
+      "～月"
+    ]
+  },
+  "学校": {
+    "word": "学校",
+    "reading": "がっこう",
+    "meaning": "a school",
+    "level": "N5",
+    "forms": [
+      "学校"
+    ]
+  },
+  "カップ": {
+    "word": "カップ",
+    "reading": "カップ",
+    "meaning": "cup",
+    "level": "N5",
+    "forms": [
+      "カップ"
+    ]
+  },
+  "家庭": {
+    "word": "家庭",
+    "reading": "かてい",
+    "meaning": "home; family",
+    "level": "N5",
+    "forms": [
+      "家庭"
+    ]
+  },
+  "角": {
+    "word": "角",
+    "reading": "かど",
+    "meaning": "corner (e.g., desk, pavement)",
+    "level": "N5",
+    "forms": [
+      "角"
+    ]
+  },
+  "かばん": {
+    "word": "かばん",
+    "reading": "かばん",
+    "meaning": "bag, basket",
+    "level": "N5",
+    "forms": [
+      "かばん"
+    ]
+  },
+  "花瓶": {
+    "word": "花瓶",
+    "reading": "かびん",
+    "meaning": "(flower) vase",
+    "level": "N5",
+    "forms": [
+      "花瓶"
+    ]
+  },
+  "かぶる": {
+    "word": "かぶる",
+    "reading": "かぶる",
+    "meaning": "to wear, to put on (e.g., a hat on the head)",
+    "level": "N5",
+    "forms": [
+      "かぶる"
+    ]
+  },
+  "紙": {
+    "word": "紙",
+    "reading": "かみ",
+    "meaning": "paper",
+    "level": "N5",
+    "forms": [
+      "紙"
+    ]
+  },
+  "カメラ": {
+    "word": "カメラ",
+    "reading": "カメラ",
+    "meaning": "camera",
+    "level": "N5",
+    "forms": [
+      "カメラ"
+    ]
+  },
+  "火曜日": {
+    "word": "火曜日",
+    "reading": "かようび",
+    "meaning": "Tuesday",
+    "level": "N5",
+    "forms": [
+      "火曜日"
+    ]
+  },
+  "辛い": {
+    "word": "辛い",
+    "reading": "からい",
+    "meaning": "hot and spicy; salty",
+    "level": "N5",
+    "forms": [
+      "辛い"
+    ]
+  },
+  "体": {
+    "word": "体",
+    "reading": "からだ",
+    "meaning": "body; health",
+    "level": "N5",
+    "forms": [
+      "体"
+    ]
+  },
+  "借りる": {
+    "word": "借りる",
+    "reading": "かりる",
+    "meaning": "to borrow, to owe",
+    "level": "N5",
+    "forms": [
+      "借りる"
+    ]
+  },
+  "～がる": {
+    "word": "～がる",
+    "reading": "～がる",
+    "meaning": "feel",
+    "level": "N5",
+    "forms": [
+      "～がる"
+    ]
+  },
+  "軽い": {
+    "word": "軽い",
+    "reading": "かるい",
+    "meaning": "light, non-serious, minor",
+    "level": "N5",
+    "forms": [
+      "軽い"
+    ]
+  },
+  "カレー": {
+    "word": "カレー",
+    "reading": "カレー",
+    "meaning": "curry (abbr. for curry and rice)",
+    "level": "N5",
+    "forms": [
+      "カレー"
+    ]
+  },
+  "カレンダー": {
+    "word": "カレンダー",
+    "reading": "カレンダー",
+    "meaning": "calendar",
+    "level": "N5",
+    "forms": [
+      "カレンダー"
+    ]
+  },
+  "川": {
+    "word": "川",
+    "reading": "かわ",
+    "meaning": "river",
+    "level": "N5",
+    "forms": [
+      "川",
+      "河"
+    ]
+  },
+  "～側": {
+    "word": "～側",
+    "reading": "～がわ",
+    "meaning": "~ side",
+    "level": "N5",
+    "forms": [
+      "～側"
+    ]
+  },
+  "可愛い": {
+    "word": "可愛い",
+    "reading": "かわいい",
+    "meaning": "cute, adorable",
+    "level": "N5",
+    "forms": [
+      "可愛い"
+    ]
+  },
+  "漢字": {
+    "word": "漢字",
+    "reading": "かんじ",
+    "meaning": "kanji; Chinese character",
+    "level": "N5",
+    "forms": [
+      "漢字"
+    ]
+  },
+  "木": {
+    "word": "木",
+    "reading": "き",
+    "meaning": "tree, wood, timber",
+    "level": "N5",
+    "forms": [
+      "木"
+    ]
+  },
+  "黄色": {
+    "word": "黄色",
+    "reading": "きいろ",
+    "meaning": "yellow",
+    "level": "N5",
+    "forms": [
+      "黄色"
+    ]
+  },
+  "黄色い": {
+    "word": "黄色い",
+    "reading": "きいろい",
+    "meaning": "yellow",
+    "level": "N5",
+    "forms": [
+      "黄色い"
+    ]
+  },
+  "消える": {
+    "word": "消える",
+    "reading": "きえる",
+    "meaning": "to vanish, to disappear",
+    "level": "N5",
+    "forms": [
+      "消える"
+    ]
+  },
+  "聞く": {
+    "word": "聞く",
+    "reading": "きく",
+    "meaning": "to hear, to listen, to ask",
+    "level": "N5",
+    "forms": [
+      "聞く"
+    ]
+  },
+  "北": {
+    "word": "北",
+    "reading": "きた",
+    "meaning": "north",
+    "level": "N5",
+    "forms": [
+      "北"
+    ]
+  },
+  "ギター": {
+    "word": "ギター",
+    "reading": "ギター",
+    "meaning": "guitar",
+    "level": "N5",
+    "forms": [
+      "ギター"
+    ]
+  },
+  "汚い": {
+    "word": "汚い",
+    "reading": "きたない",
+    "meaning": "dirty, unclean, filthy",
+    "level": "N5",
+    "forms": [
+      "汚い"
+    ]
+  },
+  "喫茶店": {
+    "word": "喫茶店",
+    "reading": "きっさてん",
+    "meaning": "café",
+    "level": "N5",
+    "forms": [
+      "喫茶店"
+    ]
+  },
+  "切手": {
+    "word": "切手",
+    "reading": "きって",
+    "meaning": "postal (postage) stamps",
+    "level": "N5",
+    "forms": [
+      "切手"
+    ]
+  },
+  "切符": {
+    "word": "切符",
+    "reading": "きっぷ",
+    "meaning": "a ticket",
+    "level": "N5",
+    "forms": [
+      "切符"
+    ]
+  },
+  "昨日": {
+    "word": "昨日",
+    "reading": "きのう",
+    "meaning": "yesterday",
+    "level": "N5",
+    "forms": [
+      "昨日"
+    ]
+  },
+  "九": {
+    "word": "九",
+    "reading": "く",
+    "meaning": "nine",
+    "level": "N5",
+    "forms": [
+      "九"
+    ]
+  },
+  "牛肉": {
+    "word": "牛肉",
+    "reading": "ぎゅうにく",
+    "meaning": "beef",
+    "level": "N5",
+    "forms": [
+      "牛肉"
+    ]
+  },
+  "牛乳": {
+    "word": "牛乳",
+    "reading": "ぎゅうにゅう",
+    "meaning": "milk",
+    "level": "N5",
+    "forms": [
+      "牛乳"
+    ]
+  },
+  "今日": {
+    "word": "今日",
+    "reading": "きょう",
+    "meaning": "today, this day",
+    "level": "N5",
+    "forms": [
+      "今日"
+    ]
+  },
+  "教室": {
+    "word": "教室",
+    "reading": "きょうしつ",
+    "meaning": "classroom",
+    "level": "N5",
+    "forms": [
+      "教室"
+    ]
+  },
+  "兄弟": {
+    "word": "兄弟",
+    "reading": "きょうだい",
+    "meaning": "siblings (humble), brothers and sisters",
+    "level": "N5",
+    "forms": [
+      "兄弟"
+    ]
+  },
+  "去年": {
+    "word": "去年",
+    "reading": "きょねん",
+    "meaning": "last year",
+    "level": "N5",
+    "forms": [
+      "去年"
+    ]
+  },
+  "嫌い": {
+    "word": "嫌い",
+    "reading": "きらい",
+    "meaning": "dislike",
+    "level": "N5",
+    "forms": [
+      "嫌い"
+    ]
+  },
+  "切る": {
+    "word": "切る",
+    "reading": "きる",
+    "meaning": "to cut; to hang up (a phone)",
+    "level": "N5",
+    "forms": [
+      "切る"
+    ]
+  },
+  "着る": {
+    "word": "着る",
+    "reading": "きる",
+    "meaning": "to put on (clothes above your waist); to wear",
+    "level": "N5",
+    "forms": [
+      "着る"
+    ]
+  },
+  "綺麗": {
+    "word": "綺麗",
+    "reading": "きれい",
+    "meaning": "pretty, clean, tidy",
+    "level": "N5",
+    "forms": [
+      "綺麗"
+    ]
+  },
+  "キロ": {
+    "word": "キロ",
+    "reading": "キロ; キロメートル",
+    "meaning": "(abbr.) kilo (kilometer)",
+    "level": "N5",
+    "forms": [
+      "キロ",
+      "キロメートル"
+    ]
+  },
+  "銀行": {
+    "word": "銀行",
+    "reading": "ぎんこう",
+    "meaning": "bank",
+    "level": "N5",
+    "forms": [
+      "銀行"
+    ]
+  },
+  "金曜日": {
+    "word": "金曜日",
+    "reading": "きんようび",
+    "meaning": "Friday",
+    "level": "N5",
+    "forms": [
+      "金曜日"
+    ]
+  },
+  "薬": {
+    "word": "薬",
+    "reading": "くすり",
+    "meaning": "medicine",
+    "level": "N5",
+    "forms": [
+      "薬"
+    ]
+  },
+  "下さい": {
+    "word": "下さい",
+    "reading": "ください",
+    "meaning": "(with te-form verb) please do for me",
+    "level": "N5",
+    "forms": [
+      "下さい"
+    ]
+  },
+  "果物": {
+    "word": "果物",
+    "reading": "くだもの",
+    "meaning": "fruit",
+    "level": "N5",
+    "forms": [
+      "果物"
+    ]
+  },
+  "口": {
+    "word": "口",
+    "reading": "くち",
+    "meaning": "job opening; mouth",
+    "level": "N5",
+    "forms": [
+      "口"
+    ]
+  },
+  "靴": {
+    "word": "靴",
+    "reading": "くつ",
+    "meaning": "shoes, footwear",
+    "level": "N5",
+    "forms": [
+      "靴"
+    ]
+  },
+  "靴下": {
+    "word": "靴下",
+    "reading": "くつした",
+    "meaning": "socks",
+    "level": "N5",
+    "forms": [
+      "靴下"
+    ]
+  },
+  "国": {
+    "word": "国",
+    "reading": "くに",
+    "meaning": "country; place of origin",
+    "level": "N5",
+    "forms": [
+      "国"
+    ]
+  },
+  "曇り": {
+    "word": "曇り",
+    "reading": "くもり",
+    "meaning": "cloudiness, cloudy weather",
+    "level": "N5",
+    "forms": [
+      "曇り"
+    ]
+  },
+  "曇る": {
+    "word": "曇る",
+    "reading": "くもる",
+    "meaning": "to become cloudy, to become dim",
+    "level": "N5",
+    "forms": [
+      "曇る"
+    ]
+  },
+  "暗い": {
+    "word": "暗い",
+    "reading": "くらい",
+    "meaning": "dark, gloomy",
+    "level": "N5",
+    "forms": [
+      "暗い"
+    ]
+  },
+  "～くらい": {
+    "word": "～くらい",
+    "reading": "～くらい; ぐらい",
+    "meaning": "approximate (quantity)",
+    "level": "N5",
+    "forms": [
+      "～くらい",
+      "ぐらい"
+    ]
+  },
+  "クラス": {
+    "word": "クラス",
+    "reading": "クラス",
+    "meaning": "a class",
+    "level": "N5",
+    "forms": [
+      "クラス"
+    ]
+  },
+  "グラム": {
+    "word": "グラム",
+    "reading": "グラム",
+    "meaning": "gram",
+    "level": "N5",
+    "forms": [
+      "グラム"
+    ]
+  },
+  "来る": {
+    "word": "来る",
+    "reading": "くる",
+    "meaning": "to come",
+    "level": "N5",
+    "forms": [
+      "来る"
+    ]
+  },
+  "車": {
+    "word": "車",
+    "reading": "くるま",
+    "meaning": "car, vehicle",
+    "level": "N5",
+    "forms": [
+      "車"
+    ]
+  },
+  "黒": {
+    "word": "黒",
+    "reading": "くろ",
+    "meaning": "black",
+    "level": "N5",
+    "forms": [
+      "黒"
+    ]
+  },
+  "黒い": {
+    "word": "黒い",
+    "reading": "くろい",
+    "meaning": "black; dark",
+    "level": "N5",
+    "forms": [
+      "黒い"
+    ]
+  },
+  "警官": {
+    "word": "警官",
+    "reading": "けいかん",
+    "meaning": "police officer",
+    "level": "N5",
+    "forms": [
+      "警官"
+    ]
+  },
+  "今朝": {
+    "word": "今朝",
+    "reading": "けさ",
+    "meaning": "this morning",
+    "level": "N5",
+    "forms": [
+      "今朝"
+    ]
+  },
+  "消す": {
+    "word": "消す",
+    "reading": "けす",
+    "meaning": "to erase, to delete, to turn off power",
+    "level": "N5",
+    "forms": [
+      "消す"
+    ]
+  },
+  "結構": {
+    "word": "結構",
+    "reading": "けっこう",
+    "meaning": "splendid; enough, tolerably",
+    "level": "N5",
+    "forms": [
+      "結構"
+    ]
+  },
+  "結婚": {
+    "word": "結婚",
+    "reading": "けっこん (する)",
+    "meaning": "marriage (get married)",
+    "level": "N5",
+    "forms": [
+      "結婚"
+    ]
+  },
+  "月曜日": {
+    "word": "月曜日",
+    "reading": "げつようび",
+    "meaning": "Monday",
+    "level": "N5",
+    "forms": [
+      "月曜日"
+    ]
+  },
+  "玄関": {
+    "word": "玄関",
+    "reading": "げんかん",
+    "meaning": "entrance (to a house or a building)",
+    "level": "N5",
+    "forms": [
+      "玄関"
+    ]
+  },
+  "元気": {
+    "word": "元気",
+    "reading": "げんき",
+    "meaning": "health(y), energetic",
+    "level": "N5",
+    "forms": [
+      "元気"
+    ]
+  },
+  "～個": {
+    "word": "～個",
+    "reading": "～こ",
+    "meaning": "counter for small items (e.g., fruits, cups)",
+    "level": "N5",
+    "forms": [
+      "～個"
+    ]
+  },
+  "五": {
+    "word": "五",
+    "reading": "ご",
+    "meaning": "five",
+    "level": "N5",
+    "forms": [
+      "五"
+    ]
+  },
+  "～語": {
+    "word": "～語",
+    "reading": "～ご",
+    "meaning": "word, language",
+    "level": "N5",
+    "forms": [
+      "～語"
+    ]
+  },
+  "公園": {
+    "word": "公園",
+    "reading": "こうえん",
+    "meaning": "a park",
+    "level": "N5",
+    "forms": [
+      "公園"
+    ]
+  },
+  "交差点": {
+    "word": "交差点",
+    "reading": "こうさてん",
+    "meaning": "intersection",
+    "level": "N5",
+    "forms": [
+      "交差点"
+    ]
+  },
+  "紅茶": {
+    "word": "紅茶",
+    "reading": "こうちゃ",
+    "meaning": "black tea",
+    "level": "N5",
+    "forms": [
+      "紅茶"
+    ]
+  },
+  "交番": {
+    "word": "交番",
+    "reading": "こうばん",
+    "meaning": "police box",
+    "level": "N5",
+    "forms": [
+      "交番"
+    ]
+  },
+  "声": {
+    "word": "声",
+    "reading": "こえ",
+    "meaning": "voice",
+    "level": "N5",
+    "forms": [
+      "声"
+    ]
+  },
+  "コート": {
+    "word": "コート",
+    "reading": "コート",
+    "meaning": "coat; court (e.g., tennis)",
+    "level": "N5",
+    "forms": [
+      "コート"
+    ]
+  },
+  "コーヒー": {
+    "word": "コーヒー",
+    "reading": "コーヒー",
+    "meaning": "coffee",
+    "level": "N5",
+    "forms": [
+      "コーヒー"
+    ]
+  },
+  "ここ": {
+    "word": "ここ",
+    "reading": "ここ",
+    "meaning": "here, this place",
+    "level": "N5",
+    "forms": [
+      "ここ"
+    ]
+  },
+  "午後": {
+    "word": "午後",
+    "reading": "ごご",
+    "meaning": "afternoon, P.M.",
+    "level": "N5",
+    "forms": [
+      "午後"
+    ]
+  },
+  "九日": {
+    "word": "九日",
+    "reading": "ここのか",
+    "meaning": "nine days; ninth day of the month",
+    "level": "N5",
+    "forms": [
+      "九日"
+    ]
+  },
+  "九つ": {
+    "word": "九つ",
+    "reading": "ここのつ",
+    "meaning": "nine things",
+    "level": "N5",
+    "forms": [
+      "九つ"
+    ]
+  },
+  "午前": {
+    "word": "午前",
+    "reading": "ごぜん",
+    "meaning": "morning, A.M.",
+    "level": "N5",
+    "forms": [
+      "午前"
+    ]
+  },
+  "答える": {
+    "word": "答える",
+    "reading": "こたえる",
+    "meaning": "to answer, to reply",
+    "level": "N5",
+    "forms": [
+      "答える"
+    ]
+  },
+  "こちら": {
+    "word": "こちら",
+    "reading": "こちら",
+    "meaning": "this person (polite); this way (polite)",
+    "level": "N5",
+    "forms": [
+      "こちら"
+    ]
+  },
+  "こっち": {
+    "word": "こっち",
+    "reading": "こっち",
+    "meaning": "this person; this direction; this side",
+    "level": "N5",
+    "forms": [
+      "こっち"
+    ]
+  },
+  "コップ": {
+    "word": "コップ",
+    "reading": "コップ",
+    "meaning": "a tumbler; a glass",
+    "level": "N5",
+    "forms": [
+      "コップ"
+    ]
+  },
+  "今年": {
+    "word": "今年",
+    "reading": "ことし",
+    "meaning": "this year",
+    "level": "N5",
+    "forms": [
+      "今年"
+    ]
+  },
+  "言葉": {
+    "word": "言葉",
+    "reading": "ことば",
+    "meaning": "language; word(s); expression(s)",
+    "level": "N5",
+    "forms": [
+      "言葉"
+    ]
+  },
+  "子供": {
+    "word": "子供",
+    "reading": "こども",
+    "meaning": "child(ren)",
+    "level": "N5",
+    "forms": [
+      "子供"
+    ]
+  },
+  "この": {
+    "word": "この",
+    "reading": "この",
+    "meaning": "this",
+    "level": "N5",
+    "forms": [
+      "この"
+    ]
+  },
+  "御飯": {
+    "word": "御飯",
+    "reading": "ごはん",
+    "meaning": "rice (cooked); meal",
+    "level": "N5",
+    "forms": [
+      "御飯"
+    ]
+  },
+  "コピーする": {
+    "word": "コピーする",
+    "reading": "コピーする",
+    "meaning": "to copy",
+    "level": "N5",
+    "forms": [
+      "コピーする"
+    ]
+  },
+  "困る": {
+    "word": "困る",
+    "reading": "こまる",
+    "meaning": "to be bothered, to have difficulty",
+    "level": "N5",
+    "forms": [
+      "困る"
+    ]
+  },
+  "これ": {
+    "word": "これ",
+    "reading": "これ",
+    "meaning": "this one",
+    "level": "N5",
+    "forms": [
+      "これ"
+    ]
+  },
+  "～ころ": {
+    "word": "～ころ",
+    "reading": "～ころ; ～ごろ",
+    "meaning": "about, toward, approximately (time)",
+    "level": "N5",
+    "forms": [
+      "～ころ",
+      "～ごろ"
+    ]
+  },
+  "今月": {
+    "word": "今月",
+    "reading": "こんげつ",
+    "meaning": "this month",
+    "level": "N5",
+    "forms": [
+      "今月"
+    ]
+  },
+  "今週": {
+    "word": "今週",
+    "reading": "こんしゅう",
+    "meaning": "this week",
+    "level": "N5",
+    "forms": [
+      "今週"
+    ]
+  },
+  "こんな": {
+    "word": "こんな",
+    "reading": "こんな",
+    "meaning": "such, like this",
+    "level": "N5",
+    "forms": [
+      "こんな"
+    ]
+  },
+  "今晩": {
+    "word": "今晩",
+    "reading": "こんばん",
+    "meaning": "tonight, this evening",
+    "level": "N5",
+    "forms": [
+      "今晩"
+    ]
+  },
+  "さあ": {
+    "word": "さあ",
+    "reading": "さあ",
+    "meaning": "come now, well",
+    "level": "N5",
+    "forms": [
+      "さあ"
+    ]
+  },
+  "～歳": {
+    "word": "～歳",
+    "reading": "～さい",
+    "meaning": "~ years old",
+    "level": "N5",
+    "forms": [
+      "～歳"
+    ]
+  },
+  "財布": {
+    "word": "財布",
+    "reading": "さいふ",
+    "meaning": "wallet",
+    "level": "N5",
+    "forms": [
+      "財布"
+    ]
+  },
+  "魚": {
+    "word": "魚",
+    "reading": "さかな",
+    "meaning": "fish",
+    "level": "N5",
+    "forms": [
+      "魚"
+    ]
+  },
+  "先": {
+    "word": "先",
+    "reading": "さき",
+    "meaning": "future; recent, previous",
+    "level": "N5",
+    "forms": [
+      "先"
+    ]
+  },
+  "咲く": {
+    "word": "咲く",
+    "reading": "さく",
+    "meaning": "to bloom",
+    "level": "N5",
+    "forms": [
+      "咲く"
+    ]
+  },
+  "作文": {
+    "word": "作文",
+    "reading": "さくぶん",
+    "meaning": "essay; composition",
+    "level": "N5",
+    "forms": [
+      "作文"
+    ]
+  },
+  "差す": {
+    "word": "差す",
+    "reading": "さす",
+    "meaning": "to raise (stretch out) hands, to raise (e.g., umbrella)",
+    "level": "N5",
+    "forms": [
+      "差す"
+    ]
+  },
+  "～冊": {
+    "word": "～冊",
+    "reading": "～さつ",
+    "meaning": "counter for books",
+    "level": "N5",
+    "forms": [
+      "～冊"
+    ]
+  },
+  "雑誌": {
+    "word": "雑誌",
+    "reading": "ざっし",
+    "meaning": "magazine, journal",
+    "level": "N5",
+    "forms": [
+      "雑誌"
+    ]
+  },
+  "砂糖": {
+    "word": "砂糖",
+    "reading": "さとう",
+    "meaning": "sugar",
+    "level": "N5",
+    "forms": [
+      "砂糖"
+    ]
+  },
+  "寒い": {
+    "word": "寒い",
+    "reading": "さむい",
+    "meaning": "cold (in reference to weather)",
+    "level": "N5",
+    "forms": [
+      "寒い"
+    ]
+  },
+  "さ来年": {
+    "word": "さ来年",
+    "reading": "さらいねん",
+    "meaning": "year after next",
+    "level": "N5",
+    "forms": [
+      "さ来年"
+    ]
+  },
+  "～さん": {
+    "word": "～さん",
+    "reading": "～さん",
+    "meaning": "Mr. ~, Ms. ~",
+    "level": "N5",
+    "forms": [
+      "～さん"
+    ]
+  },
+  "三": {
+    "word": "三",
+    "reading": "さん",
+    "meaning": "three",
+    "level": "N5",
+    "forms": [
+      "三"
+    ]
+  },
+  "散歩": {
+    "word": "散歩",
+    "reading": "さんぽ (する)",
+    "meaning": "walk, stroll",
+    "level": "N5",
+    "forms": [
+      "散歩"
+    ]
+  },
+  "四": {
+    "word": "四",
+    "reading": "し",
+    "meaning": "four",
+    "level": "N5",
+    "forms": [
+      "四"
+    ]
+  },
+  "～時": {
+    "word": "～時",
+    "reading": "～とき",
+    "meaning": "at the time of ~",
+    "level": "N5",
+    "forms": [
+      "～時"
+    ]
+  },
+  "塩": {
+    "word": "塩",
+    "reading": "しお",
+    "meaning": "salt",
+    "level": "N5",
+    "forms": [
+      "塩"
+    ]
+  },
+  "しかし": {
+    "word": "しかし",
+    "reading": "しかし",
+    "meaning": "however; but",
+    "level": "N5",
+    "forms": [
+      "しかし"
+    ]
+  },
+  "時間": {
+    "word": "時間",
+    "reading": "じかん",
+    "meaning": "time",
+    "level": "N5",
+    "forms": [
+      "時間"
+    ]
+  },
+  "～時間": {
+    "word": "～時間",
+    "reading": "～じかん",
+    "meaning": "~ hours",
+    "level": "N5",
+    "forms": [
+      "～時間"
+    ]
+  },
+  "仕事": {
+    "word": "仕事",
+    "reading": "しごと",
+    "meaning": "work, job, occupation, employment",
+    "level": "N5",
+    "forms": [
+      "仕事"
+    ]
+  },
+  "辞書": {
+    "word": "辞書",
+    "reading": "じしょ",
+    "meaning": "dictionary",
+    "level": "N5",
+    "forms": [
+      "辞書"
+    ]
+  },
+  "静か": {
+    "word": "静か",
+    "reading": "しずか",
+    "meaning": "quiet, calm",
+    "level": "N5",
+    "forms": [
+      "静か"
+    ]
+  },
+  "下": {
+    "word": "下",
+    "reading": "した",
+    "meaning": "under, below, beneath",
+    "level": "N5",
+    "forms": [
+      "下"
+    ]
+  },
+  "七": {
+    "word": "七",
+    "reading": "しち",
+    "meaning": "seven",
+    "level": "N5",
+    "forms": [
+      "七"
+    ]
+  },
+  "質問": {
+    "word": "質問",
+    "reading": "しつもん",
+    "meaning": "question, inquiry",
+    "level": "N5",
+    "forms": [
+      "質問"
+    ]
+  },
+  "自転車": {
+    "word": "自転車",
+    "reading": "じてんしゃ",
+    "meaning": "bicycle",
+    "level": "N5",
+    "forms": [
+      "自転車"
+    ]
+  },
+  "自動車": {
+    "word": "自動車",
+    "reading": "じどうしゃ",
+    "meaning": "automobile",
+    "level": "N5",
+    "forms": [
+      "自動車"
+    ]
+  },
+  "死ぬ": {
+    "word": "死ぬ",
+    "reading": "しぬ",
+    "meaning": "to die",
+    "level": "N5",
+    "forms": [
+      "死ぬ"
+    ]
+  },
+  "字引": {
+    "word": "字引",
+    "reading": "じびき",
+    "meaning": "dictionary",
+    "level": "N5",
+    "forms": [
+      "字引"
+    ]
+  },
+  "自分": {
+    "word": "自分",
+    "reading": "じぶん",
+    "meaning": "myself, oneself",
+    "level": "N5",
+    "forms": [
+      "自分"
+    ]
+  },
+  "閉まる": {
+    "word": "閉まる",
+    "reading": "しまる",
+    "meaning": "to close, to be closed",
+    "level": "N5",
+    "forms": [
+      "閉まる"
+    ]
+  },
+  "閉める": {
+    "word": "閉める",
+    "reading": "しめる",
+    "meaning": "to close, to shut",
+    "level": "N5",
+    "forms": [
+      "閉める"
+    ]
+  },
+  "締める": {
+    "word": "締める",
+    "reading": "しめる",
+    "meaning": "to tie, to fasten, to tighten",
+    "level": "N5",
+    "forms": [
+      "締める"
+    ]
+  },
+  "じゃ": {
+    "word": "じゃ",
+    "reading": "じゃ; じゃあ",
+    "meaning": "well, well then",
+    "level": "N5",
+    "forms": [
+      "じゃ",
+      "じゃあ"
+    ]
+  },
+  "写真": {
+    "word": "写真",
+    "reading": "しゃしん",
+    "meaning": "a picture; a photograph",
+    "level": "N5",
+    "forms": [
+      "写真"
+    ]
+  },
+  "シャツ": {
+    "word": "シャツ",
+    "reading": "シャツ",
+    "meaning": "shirt",
+    "level": "N5",
+    "forms": [
+      "シャツ"
+    ]
+  },
+  "シャワー": {
+    "word": "シャワー",
+    "reading": "シャワー",
+    "meaning": "shower",
+    "level": "N5",
+    "forms": [
+      "シャワー"
+    ]
+  },
+  "十": {
+    "word": "十",
+    "reading": "(〜を) とお",
+    "meaning": "ten (~)",
+    "level": "N5",
+    "forms": [
+      "十"
+    ]
+  },
+  "～中": {
+    "word": "～中",
+    "reading": "～ちゅう",
+    "meaning": "during, while ~ing",
+    "level": "N5",
+    "forms": [
+      "～中"
+    ]
+  },
+  "～週間": {
+    "word": "～週間",
+    "reading": "～しゅうかん",
+    "meaning": "~ weeks",
+    "level": "N5",
+    "forms": [
+      "～週間"
+    ]
+  },
+  "授業": {
+    "word": "授業",
+    "reading": "じゅぎょう",
+    "meaning": "a class (of school)",
+    "level": "N5",
+    "forms": [
+      "授業"
+    ]
+  },
+  "宿題": {
+    "word": "宿題",
+    "reading": "しゅくだい",
+    "meaning": "homework",
+    "level": "N5",
+    "forms": [
+      "宿題"
+    ]
+  },
+  "上手": {
+    "word": "上手",
+    "reading": "じょうず",
+    "meaning": "be good at, skillful",
+    "level": "N5",
+    "forms": [
+      "上手"
+    ]
+  },
+  "丈夫": {
+    "word": "丈夫",
+    "reading": "じょうぶ",
+    "meaning": "strong, solid, durable",
+    "level": "N5",
+    "forms": [
+      "丈夫"
+    ]
+  },
+  "醤油": {
+    "word": "醤油",
+    "reading": "しょうゆ",
+    "meaning": "soy sauce",
+    "level": "N5",
+    "forms": [
+      "醤油"
+    ]
+  },
+  "食堂": {
+    "word": "食堂",
+    "reading": "しょくどう",
+    "meaning": "cafeteria, dining hall",
+    "level": "N5",
+    "forms": [
+      "食堂"
+    ]
+  },
+  "知る": {
+    "word": "知る",
+    "reading": "しる",
+    "meaning": "to know, to understand",
+    "level": "N5",
+    "forms": [
+      "知る"
+    ]
+  },
+  "白": {
+    "word": "白",
+    "reading": "しろ",
+    "meaning": "white",
+    "level": "N5",
+    "forms": [
+      "白"
+    ]
+  },
+  "白い": {
+    "word": "白い",
+    "reading": "しろい",
+    "meaning": "white",
+    "level": "N5",
+    "forms": [
+      "白い"
+    ]
+  },
+  "～人": {
+    "word": "～人",
+    "reading": "～にん",
+    "meaning": "counter for people",
+    "level": "N5",
+    "forms": [
+      "～人"
+    ]
+  },
+  "新聞": {
+    "word": "新聞",
+    "reading": "しんぶん",
+    "meaning": "newspaper",
+    "level": "N5",
+    "forms": [
+      "新聞"
+    ]
+  },
+  "水曜日": {
+    "word": "水曜日",
+    "reading": "すいようび",
+    "meaning": "Wednesday",
+    "level": "N5",
+    "forms": [
+      "水曜日"
+    ]
+  },
+  "吸う": {
+    "word": "吸う",
+    "reading": "すう",
+    "meaning": "to breathe in, to suck",
+    "level": "N5",
+    "forms": [
+      "吸う"
+    ]
+  },
+  "スカート": {
+    "word": "スカート",
+    "reading": "スカート",
+    "meaning": "skirt",
+    "level": "N5",
+    "forms": [
+      "スカート"
+    ]
+  },
+  "好き": {
+    "word": "好き",
+    "reading": "すき",
+    "meaning": "liking, fondness, love",
+    "level": "N5",
+    "forms": [
+      "好き"
+    ]
+  },
+  "～すぎ": {
+    "word": "～すぎ",
+    "reading": "～すぎ",
+    "meaning": "past; to exceed, ~ too much",
+    "level": "N5",
+    "forms": [
+      "～すぎ"
+    ]
+  },
+  "少ない": {
+    "word": "少ない",
+    "reading": "すくない",
+    "meaning": "a little; a few",
+    "level": "N5",
+    "forms": [
+      "少ない"
+    ]
+  },
+  "すぐに": {
+    "word": "すぐに",
+    "reading": "すぐに",
+    "meaning": "immediately, soon",
+    "level": "N5",
+    "forms": [
+      "すぐに"
+    ]
+  },
+  "少し": {
+    "word": "少し",
+    "reading": "すこし",
+    "meaning": "little, few",
+    "level": "N5",
+    "forms": [
+      "少し"
+    ]
+  },
+  "涼しい": {
+    "word": "涼しい",
+    "reading": "すずしい",
+    "meaning": "cool, refreshing (in reference to weather)",
+    "level": "N5",
+    "forms": [
+      "涼しい"
+    ]
+  },
+  "～ずつ": {
+    "word": "～ずつ",
+    "reading": "～ずつ",
+    "meaning": "at a time",
+    "level": "N5",
+    "forms": [
+      "～ずつ"
+    ]
+  },
+  "ストーブ": {
+    "word": "ストーブ",
+    "reading": "ストーブ",
+    "meaning": "heater (lit: stove)",
+    "level": "N5",
+    "forms": [
+      "ストーブ"
+    ]
+  },
+  "スプーン": {
+    "word": "スプーン",
+    "reading": "スプーン",
+    "meaning": "spoon",
+    "level": "N5",
+    "forms": [
+      "スプーン"
+    ]
+  },
+  "スポーツ": {
+    "word": "スポーツ",
+    "reading": "スポーツ",
+    "meaning": "sport(s)",
+    "level": "N5",
+    "forms": [
+      "スポーツ"
+    ]
+  },
+  "ズボン": {
+    "word": "ズボン",
+    "reading": "ズボン",
+    "meaning": "trousers",
+    "level": "N5",
+    "forms": [
+      "ズボン"
+    ]
+  },
+  "住む": {
+    "word": "住む",
+    "reading": "すむ",
+    "meaning": "to reside, to live in",
+    "level": "N5",
+    "forms": [
+      "住む"
+    ]
+  },
+  "する": {
+    "word": "する",
+    "reading": "する",
+    "meaning": "to do, to try; to wear small items (e.g., necktie, watch, etc.)",
+    "level": "N5",
+    "forms": [
+      "する"
+    ]
+  },
+  "座る": {
+    "word": "座る",
+    "reading": "すわる",
+    "meaning": "to sit",
+    "level": "N5",
+    "forms": [
+      "座る"
+    ]
+  },
+  "背": {
+    "word": "背",
+    "reading": "せい",
+    "meaning": "(one's) height, stature",
+    "level": "N5",
+    "forms": [
+      "背"
+    ]
+  },
+  "生徒": {
+    "word": "生徒",
+    "reading": "せいと",
+    "meaning": "student; pupil",
+    "level": "N5",
+    "forms": [
+      "生徒"
+    ]
+  },
+  "セーター": {
+    "word": "セーター",
+    "reading": "セーター",
+    "meaning": "sweater",
+    "level": "N5",
+    "forms": [
+      "セーター"
+    ]
+  },
+  "石鹸": {
+    "word": "石鹸",
+    "reading": "せっけん",
+    "meaning": "soap",
+    "level": "N5",
+    "forms": [
+      "石鹸"
+    ]
+  },
+  "背広": {
+    "word": "背広",
+    "reading": "せびろ",
+    "meaning": "men's suit",
+    "level": "N5",
+    "forms": [
+      "背広"
+    ]
+  },
+  "狭い": {
+    "word": "狭い",
+    "reading": "せまい",
+    "meaning": "narrow; not spacious",
+    "level": "N5",
+    "forms": [
+      "狭い"
+    ]
+  },
+  "ゼロ": {
+    "word": "ゼロ",
+    "reading": "ゼロ",
+    "meaning": "zero",
+    "level": "N5",
+    "forms": [
+      "ゼロ"
+    ]
+  },
+  "千": {
+    "word": "千",
+    "reading": "せん",
+    "meaning": "thousand",
+    "level": "N5",
+    "forms": [
+      "千"
+    ]
+  },
+  "先月": {
+    "word": "先月",
+    "reading": "せんげつ",
+    "meaning": "last month",
+    "level": "N5",
+    "forms": [
+      "先月"
+    ]
+  },
+  "先週": {
+    "word": "先週",
+    "reading": "せんしゅう",
+    "meaning": "last week",
+    "level": "N5",
+    "forms": [
+      "先週"
+    ]
+  },
+  "先生": {
+    "word": "先生",
+    "reading": "せんせい",
+    "meaning": "teacher, professor; master; doctor",
+    "level": "N5",
+    "forms": [
+      "先生"
+    ]
+  },
+  "洗濯": {
+    "word": "洗濯",
+    "reading": "せんたく",
+    "meaning": "washing, laundry",
+    "level": "N5",
+    "forms": [
+      "洗濯"
+    ]
+  },
+  "全部": {
+    "word": "全部",
+    "reading": "ぜんぶ",
+    "meaning": "all, entire, whole",
+    "level": "N5",
+    "forms": [
+      "全部"
+    ]
+  },
+  "そう": {
+    "word": "そう",
+    "reading": "そう; そうです",
+    "meaning": "yes; appears, to be the case",
+    "level": "N5",
+    "forms": [
+      "そう",
+      "そうです"
+    ]
+  },
+  "掃除": {
+    "word": "掃除",
+    "reading": "そうじ (する)",
+    "meaning": "cleaning, sweeping",
+    "level": "N5",
+    "forms": [
+      "掃除"
+    ]
+  },
+  "そうして": {
+    "word": "そうして",
+    "reading": "そうして; そして",
+    "meaning": "and, like that",
+    "level": "N5",
+    "forms": [
+      "そうして",
+      "そして"
+    ]
+  },
+  "そこ": {
+    "word": "そこ",
+    "reading": "そこ",
+    "meaning": "that place, there; bottom, sole",
+    "level": "N5",
+    "forms": [
+      "そこ"
+    ]
+  },
+  "そちら": {
+    "word": "そちら",
+    "reading": "そちら",
+    "meaning": "over there",
+    "level": "N5",
+    "forms": [
+      "そちら"
+    ]
+  },
+  "そっち": {
+    "word": "そっち",
+    "reading": "そっち",
+    "meaning": "over there",
+    "level": "N5",
+    "forms": [
+      "そっち"
+    ]
+  },
+  "外": {
+    "word": "外",
+    "reading": "ほか",
+    "meaning": "other, the rest",
+    "level": "N5",
+    "forms": [
+      "外"
+    ]
+  },
+  "その": {
+    "word": "その",
+    "reading": "その",
+    "meaning": "that",
+    "level": "N5",
+    "forms": [
+      "その"
+    ]
+  },
+  "そば": {
+    "word": "そば",
+    "reading": "そば",
+    "meaning": "near, close, beside; Japanese traditional buckwheat noodle",
+    "level": "N5",
+    "forms": [
+      "そば"
+    ]
+  },
+  "空": {
+    "word": "空",
+    "reading": "そら",
+    "meaning": "sky",
+    "level": "N5",
+    "forms": [
+      "空"
+    ]
+  },
+  "それ": {
+    "word": "それ",
+    "reading": "それ",
+    "meaning": "that one",
+    "level": "N5",
+    "forms": [
+      "それ"
+    ]
+  },
+  "それから": {
+    "word": "それから",
+    "reading": "それから",
+    "meaning": "and then, after that",
+    "level": "N5",
+    "forms": [
+      "それから"
+    ]
+  },
+  "それでは": {
+    "word": "それでは",
+    "reading": "それでは",
+    "meaning": "in that situation, well then...",
+    "level": "N5",
+    "forms": [
+      "それでは"
+    ]
+  },
+  "～台": {
+    "word": "～台",
+    "reading": "～だい",
+    "meaning": "counter for vehicles; machines",
+    "level": "N5",
+    "forms": [
+      "～台"
+    ]
+  },
+  "大学": {
+    "word": "大学",
+    "reading": "だいがく",
+    "meaning": "college; university",
+    "level": "N5",
+    "forms": [
+      "大学"
+    ]
+  },
+  "大使館": {
+    "word": "大使館",
+    "reading": "たいしかん",
+    "meaning": "embassy",
+    "level": "N5",
+    "forms": [
+      "大使館"
+    ]
+  },
+  "大丈夫": {
+    "word": "大丈夫",
+    "reading": "だいじょうぶ",
+    "meaning": "It's ok (all right); No need to worry; Everything is under control",
+    "level": "N5",
+    "forms": [
+      "大丈夫"
+    ]
+  },
+  "大好き": {
+    "word": "大好き",
+    "reading": "だいすき",
+    "meaning": "very like-able, like very much",
+    "level": "N5",
+    "forms": [
+      "大好き"
+    ]
+  },
+  "大切": {
+    "word": "大切",
+    "reading": "たいせつ",
+    "meaning": "important",
+    "level": "N5",
+    "forms": [
+      "大切"
+    ]
+  },
+  "台所": {
+    "word": "台所",
+    "reading": "だいどころ",
+    "meaning": "kitchen",
+    "level": "N5",
+    "forms": [
+      "台所"
+    ]
+  },
+  "大変": {
+    "word": "大変",
+    "reading": "たいへん",
+    "meaning": "very; difficult, hard",
+    "level": "N5",
+    "forms": [
+      "大変"
+    ]
+  },
+  "高い": {
+    "word": "高い",
+    "reading": "たかい",
+    "meaning": "tall, high; expensive",
+    "level": "N5",
+    "forms": [
+      "高い"
+    ]
+  },
+  "～だけ": {
+    "word": "～だけ",
+    "reading": "～だけ",
+    "meaning": "only ~, just ~, as ~",
+    "level": "N5",
+    "forms": [
+      "～だけ"
+    ]
+  },
+  "沢山": {
+    "word": "沢山",
+    "reading": "たくさん",
+    "meaning": "many, much",
+    "level": "N5",
+    "forms": [
+      "沢山"
+    ]
+  },
+  "タクシー": {
+    "word": "タクシー",
+    "reading": "タクシー",
+    "meaning": "taxi",
+    "level": "N5",
+    "forms": [
+      "タクシー"
+    ]
+  },
+  "出す": {
+    "word": "出す",
+    "reading": "だす",
+    "meaning": "to take (something) out; to hand in (something)",
+    "level": "N5",
+    "forms": [
+      "出す"
+    ]
+  },
+  "～たち": {
+    "word": "～たち",
+    "reading": "～たち",
+    "meaning": "plural suffix",
+    "level": "N5",
+    "forms": [
+      "～たち"
+    ]
+  },
+  "立つ": {
+    "word": "立つ",
+    "reading": "たつ",
+    "meaning": "to stand up",
+    "level": "N5",
+    "forms": [
+      "立つ"
+    ]
+  },
+  "たて": {
+    "word": "たて",
+    "reading": "たて",
+    "meaning": "length, height",
+    "level": "N5",
+    "forms": [
+      "たて"
+    ]
+  },
+  "建物": {
+    "word": "建物",
+    "reading": "たてもの",
+    "meaning": "building",
+    "level": "N5",
+    "forms": [
+      "建物"
+    ]
+  },
+  "楽しい": {
+    "word": "楽しい",
+    "reading": "たのしい",
+    "meaning": "enjoyable, fun",
+    "level": "N5",
+    "forms": [
+      "楽しい"
+    ]
+  },
+  "頼む": {
+    "word": "頼む",
+    "reading": "たのむ",
+    "meaning": "to request, to ask (a favor)",
+    "level": "N5",
+    "forms": [
+      "頼む"
+    ]
+  },
+  "たばこ": {
+    "word": "たばこ",
+    "reading": "たばこ",
+    "meaning": "tobacco, cigarettes",
+    "level": "N5",
+    "forms": [
+      "たばこ"
+    ]
+  },
+  "多分": {
+    "word": "多分",
+    "reading": "たぶん",
+    "meaning": "perhaps, probably, maybe",
+    "level": "N5",
+    "forms": [
+      "多分"
+    ]
+  },
+  "食べ物": {
+    "word": "食べ物",
+    "reading": "たべもの",
+    "meaning": "food",
+    "level": "N5",
+    "forms": [
+      "食べ物"
+    ]
+  },
+  "食べる": {
+    "word": "食べる",
+    "reading": "たべる",
+    "meaning": "to eat",
+    "level": "N5",
+    "forms": [
+      "食べる"
+    ]
+  },
+  "卵": {
+    "word": "卵",
+    "reading": "たまご",
+    "meaning": "egg",
+    "level": "N5",
+    "forms": [
+      "卵"
+    ]
+  },
+  "誰": {
+    "word": "誰",
+    "reading": "だれ",
+    "meaning": "who",
+    "level": "N5",
+    "forms": [
+      "誰"
+    ]
+  },
+  "誰か": {
+    "word": "誰か",
+    "reading": "だれか",
+    "meaning": "someone",
+    "level": "N5",
+    "forms": [
+      "誰か"
+    ]
+  },
+  "誕生日": {
+    "word": "誕生日",
+    "reading": "たんじょうび",
+    "meaning": "birthday",
+    "level": "N5",
+    "forms": [
+      "誕生日"
+    ]
+  },
+  "段々": {
+    "word": "段々",
+    "reading": "だんだん",
+    "meaning": "gradually, by degrees",
+    "level": "N5",
+    "forms": [
+      "段々"
+    ]
+  },
+  "小さい": {
+    "word": "小さい",
+    "reading": "ちいさい",
+    "meaning": "small, little",
+    "level": "N5",
+    "forms": [
+      "小さい"
+    ]
+  },
+  "小さな": {
+    "word": "小さな",
+    "reading": "ちいさな",
+    "meaning": "small, little",
+    "level": "N5",
+    "forms": [
+      "小さな"
+    ]
+  },
+  "近い": {
+    "word": "近い",
+    "reading": "ちかい",
+    "meaning": "near, close by, short",
+    "level": "N5",
+    "forms": [
+      "近い"
+    ]
+  },
+  "違う": {
+    "word": "違う",
+    "reading": "ちがう",
+    "meaning": "to be different; to differ; wrong",
+    "level": "N5",
+    "forms": [
+      "違う"
+    ]
+  },
+  "近く": {
+    "word": "近く",
+    "reading": "ちかく",
+    "meaning": "nearby; in the neighborhood",
+    "level": "N5",
+    "forms": [
+      "近く"
+    ]
+  },
+  "地下鉄": {
+    "word": "地下鉄",
+    "reading": "ちかてつ",
+    "meaning": "underground train, subway",
+    "level": "N5",
+    "forms": [
+      "地下鉄"
+    ]
+  },
+  "地図": {
+    "word": "地図",
+    "reading": "ちず",
+    "meaning": "a map",
+    "level": "N5",
+    "forms": [
+      "地図"
+    ]
+  },
+  "父": {
+    "word": "父",
+    "reading": "ちち",
+    "meaning": "(my) father",
+    "level": "N5",
+    "forms": [
+      "父"
+    ]
+  },
+  "茶色": {
+    "word": "茶色",
+    "reading": "ちゃいろ",
+    "meaning": "brown",
+    "level": "N5",
+    "forms": [
+      "茶色"
+    ]
+  },
+  "茶碗": {
+    "word": "茶碗",
+    "reading": "ちゃわん",
+    "meaning": "rice bowl",
+    "level": "N5",
+    "forms": [
+      "茶碗"
+    ]
+  },
+  "丁度": {
+    "word": "丁度",
+    "reading": "ちょうど",
+    "meaning": "just, right, exactly",
+    "level": "N5",
+    "forms": [
+      "丁度"
+    ]
+  },
+  "ちょっと": {
+    "word": "ちょっと",
+    "reading": "ちょっと",
+    "meaning": "a little, somewhat; just a little, somewhat",
+    "level": "N5",
+    "forms": [
+      "ちょっと"
+    ]
+  },
+  "使う": {
+    "word": "使う",
+    "reading": "つかう",
+    "meaning": "to use",
+    "level": "N5",
+    "forms": [
+      "使う"
+    ]
+  },
+  "疲れる": {
+    "word": "疲れる",
+    "reading": "つかれる",
+    "meaning": "to get (become) tired; to become fatigued",
+    "level": "N5",
+    "forms": [
+      "疲れる"
+    ]
+  },
+  "次": {
+    "word": "次",
+    "reading": "つぎ",
+    "meaning": "next",
+    "level": "N5",
+    "forms": [
+      "次"
+    ]
+  },
+  "着く": {
+    "word": "着く",
+    "reading": "つく",
+    "meaning": "to arrive at, to reach",
+    "level": "N5",
+    "forms": [
+      "着く"
+    ]
+  },
+  "机": {
+    "word": "机",
+    "reading": "つくえ",
+    "meaning": "desk",
+    "level": "N5",
+    "forms": [
+      "机"
+    ]
+  },
+  "作る": {
+    "word": "作る",
+    "reading": "つくる",
+    "meaning": "to make, to create",
+    "level": "N5",
+    "forms": [
+      "作る"
+    ]
+  },
+  "つける": {
+    "word": "つける",
+    "reading": "つける",
+    "meaning": "to turn on (e.g., a light); to take",
+    "level": "N5",
+    "forms": [
+      "つける"
+    ]
+  },
+  "勤める": {
+    "word": "勤める",
+    "reading": "つとめる",
+    "meaning": "to work (for)",
+    "level": "N5",
+    "forms": [
+      "勤める"
+    ]
+  },
+  "つまらない": {
+    "word": "つまらない",
+    "reading": "つまらない",
+    "meaning": "boring, dull; insignificant",
+    "level": "N5",
+    "forms": [
+      "つまらない"
+    ]
+  },
+  "冷たい": {
+    "word": "冷たい",
+    "reading": "つめたい",
+    "meaning": "cold (things, people)",
+    "level": "N5",
+    "forms": [
+      "冷たい"
+    ]
+  },
+  "強い": {
+    "word": "強い",
+    "reading": "つよい",
+    "meaning": "strong, powerful",
+    "level": "N5",
+    "forms": [
+      "強い"
+    ]
+  },
+  "手": {
+    "word": "手",
+    "reading": "て",
+    "meaning": "hand",
+    "level": "N5",
+    "forms": [
+      "手"
+    ]
+  },
+  "テープ": {
+    "word": "テープ",
+    "reading": "テープ",
+    "meaning": "tape",
+    "level": "N5",
+    "forms": [
+      "テープ"
+    ]
+  },
+  "テープレコーダー": {
+    "word": "テープレコーダー",
+    "reading": "テープレコーダー",
+    "meaning": "tape recorder",
+    "level": "N5",
+    "forms": [
+      "テープレコーダー"
+    ]
+  },
+  "テーブル": {
+    "word": "テーブル",
+    "reading": "テーブル",
+    "meaning": "table",
+    "level": "N5",
+    "forms": [
+      "テーブル"
+    ]
+  },
+  "出かける": {
+    "word": "出かける",
+    "reading": "でかける",
+    "meaning": "to go out; to depart",
+    "level": "N5",
+    "forms": [
+      "出かける"
+    ]
+  },
+  "手紙": {
+    "word": "手紙",
+    "reading": "てがみ",
+    "meaning": "letter",
+    "level": "N5",
+    "forms": [
+      "手紙"
+    ]
+  },
+  "できる": {
+    "word": "できる",
+    "reading": "できる",
+    "meaning": "to be able to (to accomplish)",
+    "level": "N5",
+    "forms": [
+      "できる"
+    ]
+  },
+  "出口": {
+    "word": "出口",
+    "reading": "でぐち",
+    "meaning": "an exit",
+    "level": "N5",
+    "forms": [
+      "出口"
+    ]
+  },
+  "テスト": {
+    "word": "テスト",
+    "reading": "テスト",
+    "meaning": "test",
+    "level": "N5",
+    "forms": [
+      "テスト"
+    ]
+  },
+  "では": {
+    "word": "では",
+    "reading": "では",
+    "meaning": "then, well, so",
+    "level": "N5",
+    "forms": [
+      "では"
+    ]
+  },
+  "デパート": {
+    "word": "デパート",
+    "reading": "デパート",
+    "meaning": "(abbr.) department store",
+    "level": "N5",
+    "forms": [
+      "デパート"
+    ]
+  },
+  "でも": {
+    "word": "でも",
+    "reading": "でも",
+    "meaning": "but, however",
+    "level": "N5",
+    "forms": [
+      "でも"
+    ]
+  },
+  "出る": {
+    "word": "出る",
+    "reading": "でる",
+    "meaning": "to appear, to leave",
+    "level": "N5",
+    "forms": [
+      "出る"
+    ]
+  },
+  "テレビ": {
+    "word": "テレビ",
+    "reading": "テレビ",
+    "meaning": "television, TV",
+    "level": "N5",
+    "forms": [
+      "テレビ"
+    ]
+  },
+  "天気": {
+    "word": "天気",
+    "reading": "てんき",
+    "meaning": "weather",
+    "level": "N5",
+    "forms": [
+      "天気"
+    ]
+  },
+  "電気": {
+    "word": "電気",
+    "reading": "でんき",
+    "meaning": "electricity, (electric) light",
+    "level": "N5",
+    "forms": [
+      "電気"
+    ]
+  },
+  "電車": {
+    "word": "電車",
+    "reading": "でんしゃ",
+    "meaning": "electric train",
+    "level": "N5",
+    "forms": [
+      "電車"
+    ]
+  },
+  "電話": {
+    "word": "電話",
+    "reading": "でんわ",
+    "meaning": "a telephone",
+    "level": "N5",
+    "forms": [
+      "電話"
+    ]
+  },
+  "戸": {
+    "word": "戸",
+    "reading": "と",
+    "meaning": "door (Japanese style)",
+    "level": "N5",
+    "forms": [
+      "戸"
+    ]
+  },
+  "～度": {
+    "word": "～度",
+    "reading": "～ど",
+    "meaning": "counter for occurrences; ~ degree; ~ point",
+    "level": "N5",
+    "forms": [
+      "～度"
+    ]
+  },
+  "ドア": {
+    "word": "ドア",
+    "reading": "ドア",
+    "meaning": "door (Western style)",
+    "level": "N5",
+    "forms": [
+      "ドア"
+    ]
+  },
+  "トイレ": {
+    "word": "トイレ",
+    "reading": "トイレ",
+    "meaning": "bathroom; toilet",
+    "level": "N5",
+    "forms": [
+      "トイレ"
+    ]
+  },
+  "どう": {
+    "word": "どう",
+    "reading": "どう",
+    "meaning": "how, in what way",
+    "level": "N5",
+    "forms": [
+      "どう"
+    ]
+  },
+  "どうして": {
+    "word": "どうして",
+    "reading": "どうして",
+    "meaning": "why, for what reason",
+    "level": "N5",
+    "forms": [
+      "どうして"
+    ]
+  },
+  "どうぞ": {
+    "word": "どうぞ",
+    "reading": "どうぞ",
+    "meaning": "please, kindly, by all means",
+    "level": "N5",
+    "forms": [
+      "どうぞ"
+    ]
+  },
+  "動物": {
+    "word": "動物",
+    "reading": "どうぶつ",
+    "meaning": "animal",
+    "level": "N5",
+    "forms": [
+      "動物"
+    ]
+  },
+  "どうも": {
+    "word": "どうも",
+    "reading": "どうも",
+    "meaning": "Thank you; somehow; no matter how hard one may try",
+    "level": "N5",
+    "forms": [
+      "どうも"
+    ]
+  },
+  "遠い": {
+    "word": "遠い",
+    "reading": "とおい",
+    "meaning": "far (away), distant",
+    "level": "N5",
+    "forms": [
+      "遠い"
+    ]
+  },
+  "十日": {
+    "word": "十日",
+    "reading": "とおか",
+    "meaning": "ten days; tenth day of the month",
+    "level": "N5",
+    "forms": [
+      "十日"
+    ]
+  },
+  "時々": {
+    "word": "時々",
+    "reading": "ときどき",
+    "meaning": "sometimes",
+    "level": "N5",
+    "forms": [
+      "時々"
+    ]
+  },
+  "時計": {
+    "word": "時計",
+    "reading": "とけい",
+    "meaning": "a watch; a clock",
+    "level": "N5",
+    "forms": [
+      "時計"
+    ]
+  },
+  "どこ": {
+    "word": "どこ",
+    "reading": "どこ",
+    "meaning": "where, what place",
+    "level": "N5",
+    "forms": [
+      "どこ"
+    ]
+  },
+  "所": {
+    "word": "所",
+    "reading": "ところ",
+    "meaning": "place",
+    "level": "N5",
+    "forms": [
+      "所"
+    ]
+  },
+  "年": {
+    "word": "年",
+    "reading": "とし",
+    "meaning": "year, age",
+    "level": "N5",
+    "forms": [
+      "年"
+    ]
+  },
+  "図書館": {
+    "word": "図書館",
+    "reading": "としょかん",
+    "meaning": "library",
+    "level": "N5",
+    "forms": [
+      "図書館"
+    ]
+  },
+  "どちら": {
+    "word": "どちら",
+    "reading": "どちら",
+    "meaning": "which (one) (way); where (polite)",
+    "level": "N5",
+    "forms": [
+      "どちら"
+    ]
+  },
+  "どっち": {
+    "word": "どっち",
+    "reading": "どっち",
+    "meaning": "which one, which way",
+    "level": "N5",
+    "forms": [
+      "どっち"
+    ]
+  },
+  "とても": {
+    "word": "とても",
+    "reading": "とても",
+    "meaning": "very (much), greatly, exceedingly",
+    "level": "N5",
+    "forms": [
+      "とても"
+    ]
+  },
+  "どなた": {
+    "word": "どなた",
+    "reading": "どなた",
+    "meaning": "who",
+    "level": "N5",
+    "forms": [
+      "どなた"
+    ]
+  },
+  "隣": {
+    "word": "隣",
+    "reading": "となり",
+    "meaning": "next to, next door to",
+    "level": "N5",
+    "forms": [
+      "隣"
+    ]
+  },
+  "どの": {
+    "word": "どの",
+    "reading": "どの",
+    "meaning": "which",
+    "level": "N5",
+    "forms": [
+      "どの"
+    ]
+  },
+  "飛ぶ": {
+    "word": "飛ぶ",
+    "reading": "とぶ",
+    "meaning": "to fly, to hop",
+    "level": "N5",
+    "forms": [
+      "飛ぶ"
+    ]
+  },
+  "止まる": {
+    "word": "止まる",
+    "reading": "とまる",
+    "meaning": "to come to a halt",
+    "level": "N5",
+    "forms": [
+      "止まる"
+    ]
+  },
+  "友達": {
+    "word": "友達",
+    "reading": "ともだち",
+    "meaning": "friend",
+    "level": "N5",
+    "forms": [
+      "友達"
+    ]
+  },
+  "土曜日": {
+    "word": "土曜日",
+    "reading": "どようび",
+    "meaning": "Saturday",
+    "level": "N5",
+    "forms": [
+      "土曜日"
+    ]
+  },
+  "鳥": {
+    "word": "鳥",
+    "reading": "とり",
+    "meaning": "chicken (lit., bird)",
+    "level": "N5",
+    "forms": [
+      "鳥"
+    ]
+  },
+  "鶏肉": {
+    "word": "鶏肉",
+    "reading": "とりにく",
+    "meaning": "chicken meat",
+    "level": "N5",
+    "forms": [
+      "鶏肉"
+    ]
+  },
+  "取る": {
+    "word": "取る",
+    "reading": "とる",
+    "meaning": "to take (a class); to get (a grade)",
+    "level": "N5",
+    "forms": [
+      "取る"
+    ]
+  },
+  "撮る": {
+    "word": "撮る",
+    "reading": "とる",
+    "meaning": "to take (a photo), to make (a film)",
+    "level": "N5",
+    "forms": [
+      "撮る"
+    ]
+  },
+  "どれ": {
+    "word": "どれ",
+    "reading": "どれ",
+    "meaning": "which one",
+    "level": "N5",
+    "forms": [
+      "どれ"
+    ]
+  },
+  "どんな": {
+    "word": "どんな",
+    "reading": "どんな",
+    "meaning": "what, what kind of",
+    "level": "N5",
+    "forms": [
+      "どんな"
+    ]
+  },
+  "ない": {
+    "word": "ない",
+    "reading": "ない",
+    "meaning": "there isn't, doesn't have",
+    "level": "N5",
+    "forms": [
+      "ない"
+    ]
+  },
+  "ナイフ": {
+    "word": "ナイフ",
+    "reading": "ナイフ",
+    "meaning": "knife",
+    "level": "N5",
+    "forms": [
+      "ナイフ"
+    ]
+  },
+  "中": {
+    "word": "中",
+    "reading": "なか",
+    "meaning": "inside, middle, among",
+    "level": "N5",
+    "forms": [
+      "中"
+    ]
+  },
+  "長い": {
+    "word": "長い",
+    "reading": "ながい",
+    "meaning": "long, lengthy",
+    "level": "N5",
+    "forms": [
+      "長い"
+    ]
+  },
+  "鳴く": {
+    "word": "鳴く",
+    "reading": "なく",
+    "meaning": "to make sound (animal)",
+    "level": "N5",
+    "forms": [
+      "鳴く"
+    ]
+  },
+  "無くす": {
+    "word": "無くす",
+    "reading": "なくす",
+    "meaning": "to lose something",
+    "level": "N5",
+    "forms": [
+      "無くす"
+    ]
+  },
+  "なぜ": {
+    "word": "なぜ",
+    "reading": "なぜ",
+    "meaning": "why (same as どうして)",
+    "level": "N5",
+    "forms": [
+      "なぜ"
+    ]
+  },
+  "夏": {
+    "word": "夏",
+    "reading": "なつ",
+    "meaning": "summer",
+    "level": "N5",
+    "forms": [
+      "夏"
+    ]
+  },
+  "夏休み": {
+    "word": "夏休み",
+    "reading": "なつやすみ",
+    "meaning": "summer vacation",
+    "level": "N5",
+    "forms": [
+      "夏休み"
+    ]
+  },
+  "～など": {
+    "word": "～など",
+    "reading": "～など",
+    "meaning": "et cetera",
+    "level": "N5",
+    "forms": [
+      "～など"
+    ]
+  },
+  "七つ": {
+    "word": "七つ",
+    "reading": "ななつ",
+    "meaning": "seven things",
+    "level": "N5",
+    "forms": [
+      "七つ"
+    ]
+  },
+  "何": {
+    "word": "何",
+    "reading": "なん; なに",
+    "meaning": "what",
+    "level": "N5",
+    "forms": [
+      "何"
+    ]
+  },
+  "七日": {
+    "word": "七日",
+    "reading": "なのか",
+    "meaning": "seven days; seventh day (of the month)",
+    "level": "N5",
+    "forms": [
+      "七日"
+    ]
+  },
+  "名前": {
+    "word": "名前",
+    "reading": "なまえ",
+    "meaning": "name",
+    "level": "N5",
+    "forms": [
+      "名前"
+    ]
+  },
+  "習う": {
+    "word": "習う",
+    "reading": "ならう",
+    "meaning": "to learn",
+    "level": "N5",
+    "forms": [
+      "習う"
+    ]
+  },
+  "並ぶ": {
+    "word": "並ぶ",
+    "reading": "ならぶ",
+    "meaning": "to line up, to stand in a line (v.i.)",
+    "level": "N5",
+    "forms": [
+      "並ぶ"
+    ]
+  },
+  "並べる": {
+    "word": "並べる",
+    "reading": "ならべる",
+    "meaning": "to put (things) side by side; to line up",
+    "level": "N5",
+    "forms": [
+      "並べる"
+    ]
+  },
+  "なる": {
+    "word": "なる",
+    "reading": "なる",
+    "meaning": "to become",
+    "level": "N5",
+    "forms": [
+      "なる"
+    ]
+  },
+  "何～": {
+    "word": "何～",
+    "reading": "なん～",
+    "meaning": "what sort of ~",
+    "level": "N5",
+    "forms": [
+      "何～"
+    ]
+  },
+  "二": {
+    "word": "二",
+    "reading": "に",
+    "meaning": "two",
+    "level": "N5",
+    "forms": [
+      "二"
+    ]
+  },
+  "にぎやか": {
+    "word": "にぎやか",
+    "reading": "にぎやか",
+    "meaning": "bustling, busy",
+    "level": "N5",
+    "forms": [
+      "にぎやか"
+    ]
+  },
+  "肉": {
+    "word": "肉",
+    "reading": "にく",
+    "meaning": "meat",
+    "level": "N5",
+    "forms": [
+      "肉"
+    ]
+  },
+  "西": {
+    "word": "西",
+    "reading": "にし",
+    "meaning": "west",
+    "level": "N5",
+    "forms": [
+      "西"
+    ]
+  },
+  "～日": {
+    "word": "～日",
+    "reading": "～にち",
+    "meaning": "~ day of the month, for ~ days",
+    "level": "N5",
+    "forms": [
+      "～日"
+    ]
+  },
+  "日曜日": {
+    "word": "日曜日",
+    "reading": "にちようび",
+    "meaning": "Sunday",
+    "level": "N5",
+    "forms": [
+      "日曜日"
+    ]
+  },
+  "荷物": {
+    "word": "荷物",
+    "reading": "にもつ",
+    "meaning": "luggage; baggage",
+    "level": "N5",
+    "forms": [
+      "荷物"
+    ]
+  },
+  "ニュース": {
+    "word": "ニュース",
+    "reading": "ニュース",
+    "meaning": "news",
+    "level": "N5",
+    "forms": [
+      "ニュース"
+    ]
+  },
+  "庭": {
+    "word": "庭",
+    "reading": "にわ",
+    "meaning": "garden",
+    "level": "N5",
+    "forms": [
+      "庭"
+    ]
+  },
+  "脱ぐ": {
+    "word": "脱ぐ",
+    "reading": "ぬぐ",
+    "meaning": "to take off (clothes)",
+    "level": "N5",
+    "forms": [
+      "脱ぐ"
+    ]
+  },
+  "温い": {
+    "word": "温い",
+    "reading": "ぬるい",
+    "meaning": "lukewarm",
+    "level": "N5",
+    "forms": [
+      "温い"
+    ]
+  },
+  "ネクタイ": {
+    "word": "ネクタイ",
+    "reading": "ネクタイ",
+    "meaning": "tie, necktie",
+    "level": "N5",
+    "forms": [
+      "ネクタイ"
+    ]
+  },
+  "猫": {
+    "word": "猫",
+    "reading": "ねこ",
+    "meaning": "cat",
+    "level": "N5",
+    "forms": [
+      "猫"
+    ]
+  },
+  "寝る": {
+    "word": "寝る",
+    "reading": "ねる",
+    "meaning": "to sleep; to go to sleep; to go to bed",
+    "level": "N5",
+    "forms": [
+      "寝る"
+    ]
+  },
+  "～年": {
+    "word": "～年",
+    "reading": "～ねん",
+    "meaning": "~ years",
+    "level": "N5",
+    "forms": [
+      "～年"
+    ]
+  },
+  "ノート": {
+    "word": "ノート",
+    "reading": "ノート",
+    "meaning": "notebook",
+    "level": "N5",
+    "forms": [
+      "ノート"
+    ]
+  },
+  "登る": {
+    "word": "登る",
+    "reading": "のぼる",
+    "meaning": "to climb",
+    "level": "N5",
+    "forms": [
+      "登る"
+    ]
+  },
+  "飲み物": {
+    "word": "飲み物",
+    "reading": "のみもの",
+    "meaning": "drink, beverage",
+    "level": "N5",
+    "forms": [
+      "飲み物"
+    ]
+  },
+  "飲む": {
+    "word": "飲む",
+    "reading": "のむ",
+    "meaning": "to drink",
+    "level": "N5",
+    "forms": [
+      "飲む"
+    ]
+  },
+  "乗る": {
+    "word": "乗る",
+    "reading": "のる",
+    "meaning": "to get on, to ride in, to board",
+    "level": "N5",
+    "forms": [
+      "乗る"
+    ]
+  },
+  "歯": {
+    "word": "歯",
+    "reading": "は",
+    "meaning": "tooth",
+    "level": "N5",
+    "forms": [
+      "歯"
+    ]
+  },
+  "パーティー": {
+    "word": "パーティー",
+    "reading": "パーティー",
+    "meaning": "a party",
+    "level": "N5",
+    "forms": [
+      "パーティー"
+    ]
+  },
+  "はい": {
+    "word": "はい",
+    "reading": "はい",
+    "meaning": "yes",
+    "level": "N5",
+    "forms": [
+      "はい"
+    ]
+  },
+  "～杯": {
+    "word": "～杯",
+    "reading": "～はい",
+    "meaning": "counter for cupfuls",
+    "level": "N5",
+    "forms": [
+      "～杯"
+    ]
+  },
+  "灰皿": {
+    "word": "灰皿",
+    "reading": "はいざら",
+    "meaning": "ashtray",
+    "level": "N5",
+    "forms": [
+      "灰皿"
+    ]
+  },
+  "入る": {
+    "word": "入る",
+    "reading": "はいる",
+    "meaning": "to enter, to contain, to hold",
+    "level": "N5",
+    "forms": [
+      "入る"
+    ]
+  },
+  "葉書": {
+    "word": "葉書",
+    "reading": "はがき",
+    "meaning": "postcard",
+    "level": "N5",
+    "forms": [
+      "葉書"
+    ]
+  },
+  "はく": {
+    "word": "はく",
+    "reading": "はく",
+    "meaning": "to put on (items below your waist)",
+    "level": "N5",
+    "forms": [
+      "はく"
+    ]
+  },
+  "箱": {
+    "word": "箱",
+    "reading": "はこ",
+    "meaning": "box",
+    "level": "N5",
+    "forms": [
+      "箱"
+    ]
+  },
+  "橋": {
+    "word": "橋",
+    "reading": "はし",
+    "meaning": "bridge",
+    "level": "N5",
+    "forms": [
+      "橋"
+    ]
+  },
+  "箸": {
+    "word": "箸",
+    "reading": "はし",
+    "meaning": "chopsticks",
+    "level": "N5",
+    "forms": [
+      "箸"
+    ]
+  },
+  "始まる": {
+    "word": "始まる",
+    "reading": "はじまる",
+    "meaning": "(something) begins",
+    "level": "N5",
+    "forms": [
+      "始まる"
+    ]
+  },
+  "初め": {
+    "word": "初め",
+    "reading": "はじめ",
+    "meaning": "beginning, start",
+    "level": "N5",
+    "forms": [
+      "初め",
+      "始め"
+    ]
+  },
+  "初めて": {
+    "word": "初めて",
+    "reading": "はじめて",
+    "meaning": "for the first time",
+    "level": "N5",
+    "forms": [
+      "初めて"
+    ]
+  },
+  "走る": {
+    "word": "走る",
+    "reading": "はしる",
+    "meaning": "to run",
+    "level": "N5",
+    "forms": [
+      "走る"
+    ]
+  },
+  "バス": {
+    "word": "バス",
+    "reading": "バス",
+    "meaning": "bus; bath; bass",
+    "level": "N5",
+    "forms": [
+      "バス"
+    ]
+  },
+  "バター": {
+    "word": "バター",
+    "reading": "バター",
+    "meaning": "butter",
+    "level": "N5",
+    "forms": [
+      "バター"
+    ]
+  },
+  "二十歳": {
+    "word": "二十歳",
+    "reading": "はたち",
+    "meaning": "20 years old",
+    "level": "N5",
+    "forms": [
+      "二十歳"
+    ]
+  },
+  "働く": {
+    "word": "働く",
+    "reading": "はたらく",
+    "meaning": "to work",
+    "level": "N5",
+    "forms": [
+      "働く"
+    ]
+  },
+  "八": {
+    "word": "八",
+    "reading": "はち",
+    "meaning": "eight",
+    "level": "N5",
+    "forms": [
+      "八"
+    ]
+  },
+  "二十日": {
+    "word": "二十日",
+    "reading": "はつか",
+    "meaning": "twenty days, twentieth (day of the month)",
+    "level": "N5",
+    "forms": [
+      "二十日"
+    ]
+  },
+  "花": {
+    "word": "花",
+    "reading": "はな",
+    "meaning": "flower",
+    "level": "N5",
+    "forms": [
+      "花"
+    ]
+  },
+  "鼻": {
+    "word": "鼻",
+    "reading": "はな",
+    "meaning": "nose",
+    "level": "N5",
+    "forms": [
+      "鼻"
+    ]
+  },
+  "話": {
+    "word": "話",
+    "reading": "はなし",
+    "meaning": "talk (chat), story",
+    "level": "N5",
+    "forms": [
+      "話"
+    ]
+  },
+  "話す": {
+    "word": "話す",
+    "reading": "はなす",
+    "meaning": "to speak",
+    "level": "N5",
+    "forms": [
+      "話す"
+    ]
+  },
+  "母": {
+    "word": "母",
+    "reading": "はは",
+    "meaning": "(my) mother",
+    "level": "N5",
+    "forms": [
+      "母"
+    ]
+  },
+  "早い": {
+    "word": "早い",
+    "reading": "はやい",
+    "meaning": "early",
+    "level": "N5",
+    "forms": [
+      "早い"
+    ]
+  },
+  "速い": {
+    "word": "速い",
+    "reading": "はやい",
+    "meaning": "fast, quick",
+    "level": "N5",
+    "forms": [
+      "速い"
+    ]
+  },
+  "春": {
+    "word": "春",
+    "reading": "はる",
+    "meaning": "spring",
+    "level": "N5",
+    "forms": [
+      "春"
+    ]
+  },
+  "貼る": {
+    "word": "貼る",
+    "reading": "はる",
+    "meaning": "to post; to paste; to attach",
+    "level": "N5",
+    "forms": [
+      "貼る"
+    ]
+  },
+  "晴れ": {
+    "word": "晴れ",
+    "reading": "はれ",
+    "meaning": "clear (sunny) weather",
+    "level": "N5",
+    "forms": [
+      "晴れ"
+    ]
+  },
+  "晴れる": {
+    "word": "晴れる",
+    "reading": "はれる",
+    "meaning": "to be sunny",
+    "level": "N5",
+    "forms": [
+      "晴れる"
+    ]
+  },
+  "半": {
+    "word": "半",
+    "reading": "はん",
+    "meaning": "half (e.g., にじはん | half-past two)",
+    "level": "N5",
+    "forms": [
+      "半"
+    ]
+  },
+  "晩": {
+    "word": "晩",
+    "reading": "ばん",
+    "meaning": "evening",
+    "level": "N5",
+    "forms": [
+      "晩"
+    ]
+  },
+  "～番": {
+    "word": "～番",
+    "reading": "～ばん",
+    "meaning": "~st; ~th best",
+    "level": "N5",
+    "forms": [
+      "～番"
+    ]
+  },
+  "パン": {
+    "word": "パン",
+    "reading": "パン",
+    "meaning": "bread",
+    "level": "N5",
+    "forms": [
+      "パン"
+    ]
+  },
+  "ハンカチ": {
+    "word": "ハンカチ",
+    "reading": "ハンカチ",
+    "meaning": "handkerchief",
+    "level": "N5",
+    "forms": [
+      "ハンカチ"
+    ]
+  },
+  "番号": {
+    "word": "番号",
+    "reading": "ばんごう",
+    "meaning": "number, series of digits",
+    "level": "N5",
+    "forms": [
+      "番号"
+    ]
+  },
+  "晩御飯": {
+    "word": "晩御飯",
+    "reading": "ばんごはん",
+    "meaning": "dinner, evening meal",
+    "level": "N5",
+    "forms": [
+      "晩御飯"
+    ]
+  },
+  "半分": {
+    "word": "半分",
+    "reading": "はんぶん",
+    "meaning": "half",
+    "level": "N5",
+    "forms": [
+      "半分"
+    ]
+  },
+  "東": {
+    "word": "東",
+    "reading": "ひがし",
+    "meaning": "east",
+    "level": "N5",
+    "forms": [
+      "東"
+    ]
+  },
+  "～匹": {
+    "word": "～匹",
+    "reading": "～ひき",
+    "meaning": "counter for small animals",
+    "level": "N5",
+    "forms": [
+      "～匹"
+    ]
+  },
+  "引く": {
+    "word": "引く",
+    "reading": "ひく",
+    "meaning": "to pull, to draw; subtract",
+    "level": "N5",
+    "forms": [
+      "引く"
+    ]
+  },
+  "弾く": {
+    "word": "弾く",
+    "reading": "ひく",
+    "meaning": "to play (a string instrument or piano)",
+    "level": "N5",
+    "forms": [
+      "弾く"
+    ]
+  },
+  "低い": {
+    "word": "低い",
+    "reading": "ひくい",
+    "meaning": "short, low",
+    "level": "N5",
+    "forms": [
+      "低い"
+    ]
+  },
+  "飛行機": {
+    "word": "飛行機",
+    "reading": "ひこうき",
+    "meaning": "airplane",
+    "level": "N5",
+    "forms": [
+      "飛行機"
+    ]
+  },
+  "左": {
+    "word": "左",
+    "reading": "ひだり",
+    "meaning": "left hand side",
+    "level": "N5",
+    "forms": [
+      "左"
+    ]
+  },
+  "人": {
+    "word": "人",
+    "reading": "ひと",
+    "meaning": "man, person",
+    "level": "N5",
+    "forms": [
+      "人"
+    ]
+  },
+  "一つ": {
+    "word": "一つ",
+    "reading": "ひとつ",
+    "meaning": "one thing",
+    "level": "N5",
+    "forms": [
+      "一つ"
+    ]
+  },
+  "一月": {
+    "word": "一月",
+    "reading": "ひとつき",
+    "meaning": "one month",
+    "level": "N5",
+    "forms": [
+      "一月"
+    ]
+  },
+  "一人": {
+    "word": "一人",
+    "reading": "ひとり",
+    "meaning": "one person",
+    "level": "N5",
+    "forms": [
+      "一人"
+    ]
+  },
+  "暇": {
+    "word": "暇",
+    "reading": "ひま",
+    "meaning": "free time, leisure",
+    "level": "N5",
+    "forms": [
+      "暇"
+    ]
+  },
+  "百": {
+    "word": "百",
+    "reading": "ひゃく",
+    "meaning": "hundred",
+    "level": "N5",
+    "forms": [
+      "百"
+    ]
+  },
+  "病院": {
+    "word": "病院",
+    "reading": "びょういん",
+    "meaning": "hospital",
+    "level": "N5",
+    "forms": [
+      "病院"
+    ]
+  },
+  "病気": {
+    "word": "病気",
+    "reading": "びょうき",
+    "meaning": "illness; sickness",
+    "level": "N5",
+    "forms": [
+      "病気"
+    ]
+  },
+  "平仮名": {
+    "word": "平仮名",
+    "reading": "ひらがな",
+    "meaning": "hiragana",
+    "level": "N5",
+    "forms": [
+      "平仮名"
+    ]
+  },
+  "昼": {
+    "word": "昼",
+    "reading": "ひる",
+    "meaning": "noon, daytime",
+    "level": "N5",
+    "forms": [
+      "昼"
+    ]
+  },
+  "昼御飯": {
+    "word": "昼御飯",
+    "reading": "ひるごはん",
+    "meaning": "lunch, midday meal",
+    "level": "N5",
+    "forms": [
+      "昼御飯"
+    ]
+  },
+  "広い": {
+    "word": "広い",
+    "reading": "ひろい",
+    "meaning": "spacious; wide; broad",
+    "level": "N5",
+    "forms": [
+      "広い"
+    ]
+  },
+  "フィルム": {
+    "word": "フィルム",
+    "reading": "フィルム",
+    "meaning": "film (roll of)",
+    "level": "N5",
+    "forms": [
+      "フィルム"
+    ]
+  },
+  "封筒": {
+    "word": "封筒",
+    "reading": "ふうとう",
+    "meaning": "envelope",
+    "level": "N5",
+    "forms": [
+      "封筒"
+    ]
+  },
+  "プール": {
+    "word": "プール",
+    "reading": "プール",
+    "meaning": "swimming pool",
+    "level": "N5",
+    "forms": [
+      "プール"
+    ]
+  },
+  "フォーク": {
+    "word": "フォーク",
+    "reading": "フォーク",
+    "meaning": "fork",
+    "level": "N5",
+    "forms": [
+      "フォーク"
+    ]
+  },
+  "吹く": {
+    "word": "吹く",
+    "reading": "ふく",
+    "meaning": "to blow (wind, etc.)",
+    "level": "N5",
+    "forms": [
+      "吹く"
+    ]
+  },
+  "服": {
+    "word": "服",
+    "reading": "ふく",
+    "meaning": "clothes",
+    "level": "N5",
+    "forms": [
+      "服"
+    ]
+  },
+  "二つ": {
+    "word": "二つ",
+    "reading": "ふたつ",
+    "meaning": "two things",
+    "level": "N5",
+    "forms": [
+      "二つ"
+    ]
+  },
+  "豚肉": {
+    "word": "豚肉",
+    "reading": "ぶたにく",
+    "meaning": "pork",
+    "level": "N5",
+    "forms": [
+      "豚肉"
+    ]
+  },
+  "二人": {
+    "word": "二人",
+    "reading": "ふたり",
+    "meaning": "two people",
+    "level": "N5",
+    "forms": [
+      "二人"
+    ]
+  },
+  "二日": {
+    "word": "二日",
+    "reading": "ふつか",
+    "meaning": "two days; second day of the month",
+    "level": "N5",
+    "forms": [
+      "二日"
+    ]
+  },
+  "太い": {
+    "word": "太い",
+    "reading": "ふとい",
+    "meaning": "fat, thick",
+    "level": "N5",
+    "forms": [
+      "太い"
+    ]
+  },
+  "冬": {
+    "word": "冬",
+    "reading": "ふゆ",
+    "meaning": "winter",
+    "level": "N5",
+    "forms": [
+      "冬"
+    ]
+  },
+  "降る": {
+    "word": "降る",
+    "reading": "ふる",
+    "meaning": "to precipitate, to fall (e.g., rain, snow, etc.)",
+    "level": "N5",
+    "forms": [
+      "降る"
+    ]
+  },
+  "古い": {
+    "word": "古い",
+    "reading": "ふるい",
+    "meaning": "old (in reference to objects, not people), aged, ancient",
+    "level": "N5",
+    "forms": [
+      "古い"
+    ]
+  },
+  "～分": {
+    "word": "～分",
+    "reading": "～ふん",
+    "meaning": "~ minutes",
+    "level": "N5",
+    "forms": [
+      "～分"
+    ]
+  },
+  "文章": {
+    "word": "文章",
+    "reading": "ぶんしょう",
+    "meaning": "sentence, text",
+    "level": "N5",
+    "forms": [
+      "文章"
+    ]
+  },
+  "ページ": {
+    "word": "ページ",
+    "reading": "ページ",
+    "meaning": "a page",
+    "level": "N5",
+    "forms": [
+      "ページ"
+    ]
+  },
+  "下手": {
+    "word": "下手",
+    "reading": "へた",
+    "meaning": "unskillful, poor",
+    "level": "N5",
+    "forms": [
+      "下手"
+    ]
+  },
+  "ベッド": {
+    "word": "ベッド",
+    "reading": "ベッド",
+    "meaning": "bed",
+    "level": "N5",
+    "forms": [
+      "ベッド"
+    ]
+  },
+  "ペット": {
+    "word": "ペット",
+    "reading": "ペット",
+    "meaning": "pet",
+    "level": "N5",
+    "forms": [
+      "ペット"
+    ]
+  },
+  "部屋": {
+    "word": "部屋",
+    "reading": "へや",
+    "meaning": "a room",
+    "level": "N5",
+    "forms": [
+      "部屋"
+    ]
+  },
+  "辺": {
+    "word": "辺",
+    "reading": "へん",
+    "meaning": "area, vicinity",
+    "level": "N5",
+    "forms": [
+      "辺"
+    ]
+  },
+  "ペン": {
+    "word": "ペン",
+    "reading": "ペン",
+    "meaning": "pen",
+    "level": "N5",
+    "forms": [
+      "ペン"
+    ]
+  },
+  "勉強": {
+    "word": "勉強",
+    "reading": "べんきょう (する)",
+    "meaning": "study",
+    "level": "N5",
+    "forms": [
+      "勉強"
+    ]
+  },
+  "便利": {
+    "word": "便利",
+    "reading": "べんり",
+    "meaning": "convenient, handy",
+    "level": "N5",
+    "forms": [
+      "便利"
+    ]
+  },
+  "帽子": {
+    "word": "帽子",
+    "reading": "ぼうし",
+    "meaning": "hat; cap",
+    "level": "N5",
+    "forms": [
+      "帽子"
+    ]
+  },
+  "ボールペン": {
+    "word": "ボールペン",
+    "reading": "ボールペン",
+    "meaning": "ball-point pen",
+    "level": "N5",
+    "forms": [
+      "ボールペン"
+    ]
+  },
+  "ポケット": {
+    "word": "ポケット",
+    "reading": "ポケット",
+    "meaning": "pocket",
+    "level": "N5",
+    "forms": [
+      "ポケット"
+    ]
+  },
+  "欲しい": {
+    "word": "欲しい",
+    "reading": "ほしい",
+    "meaning": "to want, in need of",
+    "level": "N5",
+    "forms": [
+      "欲しい"
+    ]
+  },
+  "ポスト": {
+    "word": "ポスト",
+    "reading": "ポスト",
+    "meaning": "mailbox; post, position",
+    "level": "N5",
+    "forms": [
+      "ポスト"
+    ]
+  },
+  "細い": {
+    "word": "細い",
+    "reading": "ほそい",
+    "meaning": "thin, slender, fine",
+    "level": "N5",
+    "forms": [
+      "細い"
+    ]
+  },
+  "ボタン": {
+    "word": "ボタン",
+    "reading": "ボタン",
+    "meaning": "button",
+    "level": "N5",
+    "forms": [
+      "ボタン"
+    ]
+  },
+  "ホテル": {
+    "word": "ホテル",
+    "reading": "ホテル",
+    "meaning": "hotel",
+    "level": "N5",
+    "forms": [
+      "ホテル"
+    ]
+  },
+  "本": {
+    "word": "本",
+    "reading": "ほん",
+    "meaning": "book",
+    "level": "N5",
+    "forms": [
+      "本"
+    ]
+  },
+  "～本": {
+    "word": "～本",
+    "reading": "～ほん",
+    "meaning": "counter for long cylindrical things",
+    "level": "N5",
+    "forms": [
+      "～本"
+    ]
+  },
+  "本棚": {
+    "word": "本棚",
+    "reading": "ほんだな",
+    "meaning": "bookshelf",
+    "level": "N5",
+    "forms": [
+      "本棚"
+    ]
+  },
+  "本当": {
+    "word": "本当",
+    "reading": "ほんとう",
+    "meaning": "real, true",
+    "level": "N5",
+    "forms": [
+      "本当"
+    ]
+  },
+  "～枚": {
+    "word": "～枚",
+    "reading": "～まい",
+    "meaning": "counter for flat things",
+    "level": "N5",
+    "forms": [
+      "～枚"
+    ]
+  },
+  "毎朝": {
+    "word": "毎朝",
+    "reading": "まいあさ",
+    "meaning": "every morning",
+    "level": "N5",
+    "forms": [
+      "毎朝"
+    ]
+  },
+  "毎月": {
+    "word": "毎月",
+    "reading": "まいげつ; まいつき",
+    "meaning": "every month, monthly",
+    "level": "N5",
+    "forms": [
+      "毎月"
+    ]
+  },
+  "毎週": {
+    "word": "毎週",
+    "reading": "まいしゅう",
+    "meaning": "every week",
+    "level": "N5",
+    "forms": [
+      "毎週"
+    ]
+  },
+  "毎日": {
+    "word": "毎日",
+    "reading": "まいにち",
+    "meaning": "every day",
+    "level": "N5",
+    "forms": [
+      "毎日"
+    ]
+  },
+  "毎年": {
+    "word": "毎年",
+    "reading": "まいねん; まいとし",
+    "meaning": "every year, yearly, annually",
+    "level": "N5",
+    "forms": [
+      "毎年"
+    ]
+  },
+  "毎晩": {
+    "word": "毎晩",
+    "reading": "まいばん",
+    "meaning": "every night",
+    "level": "N5",
+    "forms": [
+      "毎晩"
+    ]
+  },
+  "前": {
+    "word": "前",
+    "reading": "まえ",
+    "meaning": "before, in front",
+    "level": "N5",
+    "forms": [
+      "前"
+    ]
+  },
+  "～前": {
+    "word": "～前",
+    "reading": "～まえ",
+    "meaning": "in front of ~",
+    "level": "N5",
+    "forms": [
+      "～前"
+    ]
+  },
+  "曲る": {
+    "word": "曲る",
+    "reading": "まがる",
+    "meaning": "to turn, to bend",
+    "level": "N5",
+    "forms": [
+      "曲る"
+    ]
+  },
+  "まずい": {
+    "word": "まずい",
+    "reading": "まずい",
+    "meaning": "terrible (in reference to food), unappetizing, unpleasant (taste)",
+    "level": "N5",
+    "forms": [
+      "まずい"
+    ]
+  },
+  "また": {
+    "word": "また",
+    "reading": "また",
+    "meaning": "and; furthermore",
+    "level": "N5",
+    "forms": [
+      "また"
+    ]
+  },
+  "まだ": {
+    "word": "まだ",
+    "reading": "まだ",
+    "meaning": "yet, still, besides",
+    "level": "N5",
+    "forms": [
+      "まだ"
+    ]
+  },
+  "町": {
+    "word": "町",
+    "reading": "まち",
+    "meaning": "town; city",
+    "level": "N5",
+    "forms": [
+      "町"
+    ]
+  },
+  "待つ": {
+    "word": "待つ",
+    "reading": "まつ",
+    "meaning": "to wait",
+    "level": "N5",
+    "forms": [
+      "待つ"
+    ]
+  },
+  "まっすぐ": {
+    "word": "まっすぐ",
+    "reading": "まっすぐ",
+    "meaning": "straight (ahead), direct",
+    "level": "N5",
+    "forms": [
+      "まっすぐ"
+    ]
+  },
+  "マッチ": {
+    "word": "マッチ",
+    "reading": "マッチ",
+    "meaning": "match",
+    "level": "N5",
+    "forms": [
+      "マッチ"
+    ]
+  },
+  "窓": {
+    "word": "窓",
+    "reading": "まど",
+    "meaning": "window",
+    "level": "N5",
+    "forms": [
+      "窓"
+    ]
+  },
+  "丸い": {
+    "word": "丸い",
+    "reading": "まるい",
+    "meaning": "round, circular",
+    "level": "N5",
+    "forms": [
+      "丸い",
+      "円い"
+    ]
+  },
+  "万": {
+    "word": "万",
+    "reading": "まん",
+    "meaning": "ten thousand",
+    "level": "N5",
+    "forms": [
+      "万"
+    ]
+  },
+  "万年筆": {
+    "word": "万年筆",
+    "reading": "まんねんひつ",
+    "meaning": "fountain pen",
+    "level": "N5",
+    "forms": [
+      "万年筆"
+    ]
+  },
+  "磨く": {
+    "word": "磨く",
+    "reading": "みがく",
+    "meaning": "to brush (teeth); to polish",
+    "level": "N5",
+    "forms": [
+      "磨く"
+    ]
+  },
+  "右": {
+    "word": "右",
+    "reading": "みぎ",
+    "meaning": "right hand side",
+    "level": "N5",
+    "forms": [
+      "右"
+    ]
+  },
+  "短い": {
+    "word": "短い",
+    "reading": "みじかい",
+    "meaning": "short (length)",
+    "level": "N5",
+    "forms": [
+      "短い"
+    ]
+  },
+  "水": {
+    "word": "水",
+    "reading": "みず",
+    "meaning": "water",
+    "level": "N5",
+    "forms": [
+      "水"
+    ]
+  },
+  "店": {
+    "word": "店",
+    "reading": "みせ",
+    "meaning": "store, shop",
+    "level": "N5",
+    "forms": [
+      "店"
+    ]
+  },
+  "見せる": {
+    "word": "見せる",
+    "reading": "みせる",
+    "meaning": "to show, to display",
+    "level": "N5",
+    "forms": [
+      "見せる"
+    ]
+  },
+  "道": {
+    "word": "道",
+    "reading": "みち",
+    "meaning": "road, street; way, directions",
+    "level": "N5",
+    "forms": [
+      "道"
+    ]
+  },
+  "三日": {
+    "word": "三日",
+    "reading": "みっか",
+    "meaning": "three days, third day of the month",
+    "level": "N5",
+    "forms": [
+      "三日"
+    ]
+  },
+  "三つ": {
+    "word": "三つ",
+    "reading": "みっつ",
+    "meaning": "three things",
+    "level": "N5",
+    "forms": [
+      "三つ"
+    ]
+  },
+  "緑": {
+    "word": "緑",
+    "reading": "みどり",
+    "meaning": "green",
+    "level": "N5",
+    "forms": [
+      "緑"
+    ]
+  },
+  "皆さん": {
+    "word": "皆さん",
+    "reading": "みなさん",
+    "meaning": "all of you, everyone",
+    "level": "N5",
+    "forms": [
+      "皆さん"
+    ]
+  },
+  "南": {
+    "word": "南",
+    "reading": "みなみ",
+    "meaning": "South",
+    "level": "N5",
+    "forms": [
+      "南"
+    ]
+  },
+  "耳": {
+    "word": "耳",
+    "reading": "みみ",
+    "meaning": "ear",
+    "level": "N5",
+    "forms": [
+      "耳"
+    ]
+  },
+  "見る": {
+    "word": "見る",
+    "reading": "みる",
+    "meaning": "to see, to look",
+    "level": "N5",
+    "forms": [
+      "見る"
+    ]
+  },
+  "みんな": {
+    "word": "みんな",
+    "reading": "みんな",
+    "meaning": "all, everyone, everybody",
+    "level": "N5",
+    "forms": [
+      "みんな"
+    ]
+  },
+  "六日": {
+    "word": "六日",
+    "reading": "むいか",
+    "meaning": "six days; sixth day of month",
+    "level": "N5",
+    "forms": [
+      "六日"
+    ]
+  },
+  "向こう": {
+    "word": "向こう",
+    "reading": "むこう",
+    "meaning": "beyond, over there",
+    "level": "N5",
+    "forms": [
+      "向こう"
+    ]
+  },
+  "難しい": {
+    "word": "難しい",
+    "reading": "むずかしい",
+    "meaning": "difficult",
+    "level": "N5",
+    "forms": [
+      "難しい"
+    ]
+  },
+  "六つ": {
+    "word": "六つ",
+    "reading": "むっつ",
+    "meaning": "six things",
+    "level": "N5",
+    "forms": [
+      "六つ"
+    ]
+  },
+  "村": {
+    "word": "村",
+    "reading": "むら",
+    "meaning": "village",
+    "level": "N5",
+    "forms": [
+      "村"
+    ]
+  },
+  "目": {
+    "word": "目",
+    "reading": "め",
+    "meaning": "eye(s)",
+    "level": "N5",
+    "forms": [
+      "目"
+    ]
+  },
+  "メートル": {
+    "word": "メートル",
+    "reading": "メートル",
+    "meaning": "meter",
+    "level": "N5",
+    "forms": [
+      "メートル"
+    ]
+  },
+  "眼鏡": {
+    "word": "眼鏡",
+    "reading": "めがね",
+    "meaning": "eye glasses",
+    "level": "N5",
+    "forms": [
+      "眼鏡"
+    ]
+  },
+  "もう": {
+    "word": "もう",
+    "reading": "もう",
+    "meaning": "already; again; more",
+    "level": "N5",
+    "forms": [
+      "もう"
+    ]
+  },
+  "木曜日": {
+    "word": "木曜日",
+    "reading": "もくようび",
+    "meaning": "Thursday",
+    "level": "N5",
+    "forms": [
+      "木曜日"
+    ]
+  },
+  "もしもし": {
+    "word": "もしもし",
+    "reading": "もしもし",
+    "meaning": "Hello? (used on the phone)",
+    "level": "N5",
+    "forms": [
+      "もしもし"
+    ]
+  },
+  "持つ": {
+    "word": "持つ",
+    "reading": "もつ",
+    "meaning": "to hold, to carry; to possess",
+    "level": "N5",
+    "forms": [
+      "持つ"
+    ]
+  },
+  "もっと": {
+    "word": "もっと",
+    "reading": "もっと",
+    "meaning": "more",
+    "level": "N5",
+    "forms": [
+      "もっと"
+    ]
+  },
+  "物": {
+    "word": "物",
+    "reading": "もの",
+    "meaning": "thing (concrete object)",
+    "level": "N5",
+    "forms": [
+      "物"
+    ]
+  },
+  "門": {
+    "word": "門",
+    "reading": "もん",
+    "meaning": "gate",
+    "level": "N5",
+    "forms": [
+      "門"
+    ]
+  },
+  "問題": {
+    "word": "問題",
+    "reading": "もんだい",
+    "meaning": "a problem",
+    "level": "N5",
+    "forms": [
+      "問題"
+    ]
+  },
+  "～屋": {
+    "word": "～屋",
+    "reading": "～や",
+    "meaning": "~ shop",
+    "level": "N5",
+    "forms": [
+      "～屋"
+    ]
+  },
+  "八百屋": {
+    "word": "八百屋",
+    "reading": "やおや",
+    "meaning": "greengrocer",
+    "level": "N5",
+    "forms": [
+      "八百屋"
+    ]
+  },
+  "野菜": {
+    "word": "野菜",
+    "reading": "やさい",
+    "meaning": "vegetable",
+    "level": "N5",
+    "forms": [
+      "野菜"
+    ]
+  },
+  "易しい": {
+    "word": "易しい",
+    "reading": "やさしい",
+    "meaning": "easy, plain, simple",
+    "level": "N5",
+    "forms": [
+      "易しい"
+    ]
+  },
+  "安い": {
+    "word": "安い",
+    "reading": "やすい",
+    "meaning": "inexpensive; cheap (things)",
+    "level": "N5",
+    "forms": [
+      "安い"
+    ]
+  },
+  "休み": {
+    "word": "休み",
+    "reading": "やすみ",
+    "meaning": "holiday; day off; absence",
+    "level": "N5",
+    "forms": [
+      "休み"
+    ]
+  },
+  "休む": {
+    "word": "休む",
+    "reading": "やすむ",
+    "meaning": "to rest, to have a break, to get time off",
+    "level": "N5",
+    "forms": [
+      "休む"
+    ]
+  },
+  "八つ": {
+    "word": "八つ",
+    "reading": "やっつ",
+    "meaning": "eight things",
+    "level": "N5",
+    "forms": [
+      "八つ"
+    ]
+  },
+  "山": {
+    "word": "山",
+    "reading": "やま",
+    "meaning": "mountain",
+    "level": "N5",
+    "forms": [
+      "山"
+    ]
+  },
+  "やる": {
+    "word": "やる",
+    "reading": "やる",
+    "meaning": "to do; to give (to pets, parents, siblings, etc.)",
+    "level": "N5",
+    "forms": [
+      "やる"
+    ]
+  },
+  "夕方": {
+    "word": "夕方",
+    "reading": "ゆうがた",
+    "meaning": "late afternoon (typically just before dinner time), evening",
+    "level": "N5",
+    "forms": [
+      "夕方"
+    ]
+  },
+  "夕飯": {
+    "word": "夕飯",
+    "reading": "ゆうはん",
+    "meaning": "dinner, supper, evening meal",
+    "level": "N5",
+    "forms": [
+      "夕飯"
+    ]
+  },
+  "郵便局": {
+    "word": "郵便局",
+    "reading": "ゆうびんきょく",
+    "meaning": "post office",
+    "level": "N5",
+    "forms": [
+      "郵便局"
+    ]
+  },
+  "昨夜": {
+    "word": "昨夜",
+    "reading": "ゆうべ",
+    "meaning": "last night",
+    "level": "N5",
+    "forms": [
+      "昨夜"
+    ]
+  },
+  "有名": {
+    "word": "有名",
+    "reading": "ゆうめい",
+    "meaning": "famous",
+    "level": "N5",
+    "forms": [
+      "有名"
+    ]
+  },
+  "雪": {
+    "word": "雪",
+    "reading": "ゆき",
+    "meaning": "snow",
+    "level": "N5",
+    "forms": [
+      "雪"
+    ]
+  },
+  "ゆっくりと": {
+    "word": "ゆっくりと",
+    "reading": "ゆっくりと",
+    "meaning": "slowly, at ease",
+    "level": "N5",
+    "forms": [
+      "ゆっくりと"
+    ]
+  },
+  "八日": {
+    "word": "八日",
+    "reading": "ようか",
+    "meaning": "eight days; eighth day of the month",
+    "level": "N5",
+    "forms": [
+      "八日"
+    ]
+  },
+  "洋服": {
+    "word": "洋服",
+    "reading": "ようふく",
+    "meaning": "Western-style clothes",
+    "level": "N5",
+    "forms": [
+      "洋服"
+    ]
+  },
+  "よく": {
+    "word": "よく",
+    "reading": "よく",
+    "meaning": "frequently, often (much); well, skillfully",
+    "level": "N5",
+    "forms": [
+      "よく"
+    ]
+  },
+  "横": {
+    "word": "横",
+    "reading": "よこ",
+    "meaning": "beside; side; width",
+    "level": "N5",
+    "forms": [
+      "横"
+    ]
+  },
+  "四日": {
+    "word": "四日",
+    "reading": "よっか",
+    "meaning": "four days; fourth day of the month",
+    "level": "N5",
+    "forms": [
+      "四日"
+    ]
+  },
+  "四つ": {
+    "word": "四つ",
+    "reading": "よっつ",
+    "meaning": "four things",
+    "level": "N5",
+    "forms": [
+      "四つ"
+    ]
+  },
+  "呼ぶ": {
+    "word": "呼ぶ",
+    "reading": "よぶ",
+    "meaning": "to call (one's name); to invite",
+    "level": "N5",
+    "forms": [
+      "呼ぶ"
+    ]
+  },
+  "読む": {
+    "word": "読む",
+    "reading": "よむ",
+    "meaning": "to read",
+    "level": "N5",
+    "forms": [
+      "読む"
+    ]
+  },
+  "夜": {
+    "word": "夜",
+    "reading": "よる",
+    "meaning": "evening, night",
+    "level": "N5",
+    "forms": [
+      "夜"
+    ]
+  },
+  "弱い": {
+    "word": "弱い",
+    "reading": "よわい",
+    "meaning": "weak",
+    "level": "N5",
+    "forms": [
+      "弱い"
+    ]
+  },
+  "来月": {
+    "word": "来月",
+    "reading": "らいげつ",
+    "meaning": "next month",
+    "level": "N5",
+    "forms": [
+      "来月"
+    ]
+  },
+  "来週": {
+    "word": "来週",
+    "reading": "らいしゅう",
+    "meaning": "next week",
+    "level": "N5",
+    "forms": [
+      "来週"
+    ]
+  },
+  "来年": {
+    "word": "来年",
+    "reading": "らいねん",
+    "meaning": "next year",
+    "level": "N5",
+    "forms": [
+      "来年"
+    ]
+  },
+  "ラジオ": {
+    "word": "ラジオ",
+    "reading": "ラジオ",
+    "meaning": "radio",
+    "level": "N5",
+    "forms": [
+      "ラジオ"
+    ]
+  },
+  "ラジオカセ": {
+    "word": "ラジオカセ",
+    "reading": "ラジオカセ",
+    "meaning": "radio cassette player",
+    "level": "N5",
+    "forms": [
+      "ラジオカセ"
+    ]
+  },
+  "りっぱ": {
+    "word": "りっぱ",
+    "reading": "りっぱ",
+    "meaning": "splendid, fine",
+    "level": "N5",
+    "forms": [
+      "りっぱ"
+    ]
+  },
+  "留学生": {
+    "word": "留学生",
+    "reading": "りゅうがくせい",
+    "meaning": "international student",
+    "level": "N5",
+    "forms": [
+      "留学生"
+    ]
+  },
+  "両親": {
+    "word": "両親",
+    "reading": "りょうしん",
+    "meaning": "parents (lit., both parents)",
+    "level": "N5",
+    "forms": [
+      "両親"
+    ]
+  },
+  "料理": {
+    "word": "料理",
+    "reading": "りょうり",
+    "meaning": "cooking; cuisine",
+    "level": "N5",
+    "forms": [
+      "料理"
+    ]
+  },
+  "旅行": {
+    "word": "旅行",
+    "reading": "りょこう",
+    "meaning": "travel, trip",
+    "level": "N5",
+    "forms": [
+      "旅行"
+    ]
+  },
+  "零": {
+    "word": "零",
+    "reading": "れい",
+    "meaning": "zero, nought",
+    "level": "N5",
+    "forms": [
+      "零"
+    ]
+  },
+  "冷蔵庫": {
+    "word": "冷蔵庫",
+    "reading": "れいぞうこ",
+    "meaning": "refrigerator",
+    "level": "N5",
+    "forms": [
+      "冷蔵庫"
+    ]
+  },
+  "レコード": {
+    "word": "レコード",
+    "reading": "レコード",
+    "meaning": "record",
+    "level": "N5",
+    "forms": [
+      "レコード"
+    ]
+  },
+  "レストラン": {
+    "word": "レストラン",
+    "reading": "レストラン",
+    "meaning": "restaurant",
+    "level": "N5",
+    "forms": [
+      "レストラン"
+    ]
+  },
+  "練習": {
+    "word": "練習",
+    "reading": "れんしゅう (する)",
+    "meaning": "(to) practice",
+    "level": "N5",
+    "forms": [
+      "練習"
+    ]
+  },
+  "廊下": {
+    "word": "廊下",
+    "reading": "ろうか",
+    "meaning": "corridor",
+    "level": "N5",
+    "forms": [
+      "廊下"
+    ]
+  },
+  "六": {
+    "word": "六",
+    "reading": "ろく",
+    "meaning": "six",
+    "level": "N5",
+    "forms": [
+      "六"
+    ]
+  },
+  "ワイシャツ": {
+    "word": "ワイシャツ",
+    "reading": "ワイシャツ",
+    "meaning": "shirt (lit: white shirt), business shirt",
+    "level": "N5",
+    "forms": [
+      "ワイシャツ"
+    ]
+  },
+  "若い": {
+    "word": "若い",
+    "reading": "わかい",
+    "meaning": "young",
+    "level": "N5",
+    "forms": [
+      "若い"
+    ]
+  },
+  "分かる": {
+    "word": "分かる",
+    "reading": "わかる",
+    "meaning": "to understand",
+    "level": "N5",
+    "forms": [
+      "分かる"
+    ]
+  },
+  "忘れる": {
+    "word": "忘れる",
+    "reading": "わすれる",
+    "meaning": "to forget",
+    "level": "N5",
+    "forms": [
+      "忘れる"
+    ]
+  },
+  "私": {
+    "word": "私",
+    "reading": "わたくし",
+    "meaning": "I (formal), myself, private affairs",
+    "level": "N5",
+    "forms": [
+      "私"
+    ]
+  },
+  "渡す": {
+    "word": "渡す",
+    "reading": "わたす",
+    "meaning": "to hand (something) over (v.t.); to get across",
+    "level": "N5",
+    "forms": [
+      "渡す"
+    ]
+  },
+  "渡る": {
+    "word": "渡る",
+    "reading": "わたる",
+    "meaning": "to cross over, to go across",
+    "level": "N5",
+    "forms": [
+      "渡る"
+    ]
+  },
+  "悪い": {
+    "word": "悪い",
+    "reading": "わるい",
+    "meaning": "bad, sinful; inferior",
+    "level": "N5",
+    "forms": [
+      "悪い"
+    ]
+  }
+}
