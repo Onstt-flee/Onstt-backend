@@ -1,0 +1,154 @@
+[
+  {
+    "id": "error_001",
+    "error_code": "particle_omission",
+    "title": "조사 누락",
+    "description_ko": "명사 뒤에 필요한 조사 は, が, を, に, へ 등이 생략되어 문장 구조가 불분명해질 수 있는 경우이다.",
+    "reference_examples": [
+      {
+        "observed": "学校行きます",
+        "reference": "学校に行きます"
+      },
+      {
+        "observed": "水飲みます",
+        "reference": "水を飲みます"
+      }
+    ],
+    "related_focus": ["조사", "문장 구조", "명사와 동사의 관계"],
+    "keywords": ["学校", "水", "ご飯", "日本語", "好き", "行きます", "飲みます", "食べます"],
+    "overcorrection_note": "회화체에서는 조사가 생략되는 경우가 있으므로, 의미가 명확하거나 단편 발화인 경우 무조건 오류로 단정하지 않는다."
+  },
+  {
+    "id": "error_002",
+    "error_code": "particle_misuse",
+    "title": "조사 오용",
+    "description_ko": "문맥상 다른 조사가 더 적절한데 잘못된 조사가 사용된 가능성이 있는 경우이다.",
+    "reference_examples": [
+      {
+        "observed": "水が飲みます",
+        "reference": "水を飲みます"
+      },
+      {
+        "observed": "学校を行きます",
+        "reference": "学校に行きます"
+      }
+    ],
+    "related_focus": ["조사 선택", "목적어", "이동 장소"],
+    "keywords": ["が", "を", "に", "へ", "行きます", "飲みます", "食べます"],
+    "overcorrection_note": "조사 선택은 문맥에 따라 달라질 수 있으므로, 단순히 특정 조사가 보인다는 이유만으로 오류로 확정하지 않는다."
+  },
+  {
+    "id": "error_003",
+    "error_code": "verb_conjugation_error",
+    "title": "동사 활용 오류",
+    "description_ko": "동사의 기본형, ます형, 부정형, 희망형 등이 문법적으로 어색하게 결합된 가능성이 있는 경우이다.",
+    "reference_examples": [
+      {
+        "observed": "食べますない",
+        "reference": "食べません"
+      },
+      {
+        "observed": "行くたいです",
+        "reference": "行きたいです"
+      }
+    ],
+    "related_focus": ["동사 활용", "ます형", "부정형", "희망 표현"],
+    "keywords": ["ますない", "くたい", "るたい", "ません", "たいです"],
+    "overcorrection_note": "반말체와 정중체가 혼재된 문장은 문체 기준을 먼저 확인하고, 학습 목적에 따라 제안 수준으로 다룬다."
+  },
+  {
+    "id": "error_004",
+    "error_code": "tense_error",
+    "title": "시제 오류",
+    "description_ko": "昨日, 先週 등 과거 시간 표현과 동사 시제가 맞지 않을 가능성이 있는 경우이다.",
+    "reference_examples": [
+      {
+        "observed": "昨日学校に行きます",
+        "reference": "昨日学校に行きました"
+      },
+      {
+        "observed": "昨日ご飯を食べます",
+        "reference": "昨日ご飯を食べました"
+      }
+    ],
+    "related_focus": ["시제", "과거 표현", "ました"],
+    "keywords": ["昨日", "先週", "去年", "行きます", "食べます", "飲みます", "ました"],
+    "overcorrection_note": "시간 표현이 실제로 과거를 의미하는지 확인해야 하며, 예문이나 인용문에서는 단정하지 않는다."
+  },
+  {
+    "id": "error_005",
+    "error_code": "word_choice_error",
+    "title": "단어 선택 오류",
+    "description_ko": "동사와 명사의 의미 조합이 어색하거나 다른 단어가 더 적절할 가능성이 있는 경우이다.",
+    "reference_examples": [
+      {
+        "observed": "水を食べます",
+        "reference": "水を飲みます"
+      },
+      {
+        "observed": "ラーメンを飲みます",
+        "reference": "ラーメンを食べます"
+      }
+    ],
+    "related_focus": ["단어 선택", "동사와 목적어의 의미 관계"],
+    "keywords": ["水", "食べます", "飲みます", "ラーメン", "ご飯"],
+    "overcorrection_note": "비유적 표현이나 특수 문맥일 수 있으므로, 단어 조합만 보고 기계적으로 오류 확정하지 않는다."
+  },
+  {
+    "id": "error_006",
+    "error_code": "unnatural_expression",
+    "title": "어색한 표현",
+    "description_ko": "문법적으로 완전히 틀렸다고 단정하기는 어렵지만, 학습자 문장으로서 더 자연스러운 표현이 있을 수 있는 경우이다.",
+    "reference_examples": [
+      {
+        "observed": "今日学校に行きました",
+        "reference": "今日は学校に行きました"
+      },
+      {
+        "observed": "これは何",
+        "reference": "これは何ですか"
+      }
+    ],
+    "related_focus": ["자연스러움", "화제 표현", "정중체"],
+    "keywords": ["今日", "何", "どこ", "いつ", "ですか", "好き"],
+    "overcorrection_note": "자연스러운 대안 제안과 오류 판정을 구분해야 한다. 의미가 통하고 회화적으로 자연스러우면 오류로 단정하지 않는다."
+  },
+  {
+    "id": "error_007",
+    "error_code": "overcorrection_risk",
+    "title": "과교정 위험",
+    "description_ko": "정상적인 회화 표현, 인사, 단편 응답, 문맥상 가능한 생략 표현을 불필요하게 고칠 위험이 있는 경우이다.",
+    "reference_examples": [
+      {
+        "observed": "こんにちは",
+        "reference": "こんにちは"
+      },
+      {
+        "observed": "水ください",
+        "reference": "水ください"
+      }
+    ],
+    "related_focus": ["과교정 방지", "회화체", "단편 발화"],
+    "keywords": ["こんにちは", "はじめまして", "ください", "好き", "大丈夫"],
+    "overcorrection_note": "정상 표현은 수정하지 않는다. 특히 greeting, fragment, soft_reference는 교정 대상이 아니라 참고 대상으로 둔다."
+  },
+  {
+    "id": "error_008",
+    "error_code": "non_japanese_input",
+    "title": "비일본어 입력",
+    "description_ko": "입력이 일본어 문장으로 보기 어렵거나 STT 언어가 맞지 않을 가능성이 있는 경우이다.",
+    "reference_examples": [
+      {
+        "observed": "안녕하세요",
+        "reference": "일본어 문장으로 판단하기 어려움"
+      },
+      {
+        "observed": "hello",
+        "reference": "일본어 문장으로 판단하기 어려움"
+      }
+    ],
+    "related_focus": ["입력 언어", "STT 언어 mismatch"],
+    "keywords": ["안녕하세요", "hello"],
+    "overcorrection_note": "비일본어 입력을 억지로 일본어로 번역하거나 교정하지 않는다."
+  }
+]
