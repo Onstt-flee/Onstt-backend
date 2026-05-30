@@ -2,20 +2,21 @@ from typing import Dict, Any
 
 from analyzer.rule_filter import validate_input
 from analyzer.sentence_classifier import classify_sentence
+from analyzer.grammar_retriever import retrieve_grammar_rules
 
 
 def analyze(text: str) -> Dict[str, Any]:
     """
-    분석 파이프라인 1차 버전.
+    분석 파이프라인 2차 버전.
 
     현재 연결된 계층:
     - Layer 1: 입력 검증
     - Layer 2: 문장 타입 분류
+    - Layer 4: 문법 RAG 참고 규칙 검색
     - invalid / greeting / fragment 조기 반환
 
     아직 미구현:
     - 단어 RAG
-    - 문법 RAG
     - 예문 RAG
     - 오류 패턴 RAG
     - LLM 호출
@@ -91,6 +92,12 @@ def analyze(text: str) -> Dict[str, Any]:
             "confidence": 0.85,
         }
 
+    grammar_result = retrieve_grammar_rules(
+        normalized_text,
+        sentence_type=primary_type,
+        top_k=5,
+    )
+
     return {
         "primary_type": primary_type,
         "candidate_types": classification_result["candidate_types"],
@@ -99,10 +106,10 @@ def analyze(text: str) -> Dict[str, Any]:
         "is_correct": None,
         "corrected_text": normalized_text,
         "error_types": [],
-        "feedback_ko": "입력 검증과 문장 타입 분류가 완료되었습니다. 이후 단계에서 RAG 및 LLM 분석이 연결될 예정입니다.",
-        "feedback_ja": "入力検証と文タイプ分類が完了しました。次の段階でRAGとLLM分析を接続する予定です。",
+        "feedback_ko": "입력 검증, 문장 타입 분류, 문법 참고 규칙 검색이 완료되었습니다. 아직 LLM 교정은 수행하지 않았습니다.",
+        "feedback_ja": "入力検証、文タイプ分類、文法参考ルール検索が完了しました。まだLLMによる添削は行っていません。",
         "vocab_context": "",
-        "grammar_context": "",
+        "grammar_context": grammar_result["grammar_context"],
         "example_context": "",
         "error_context": "",
         "model_name": "rule_based_pipeline",
