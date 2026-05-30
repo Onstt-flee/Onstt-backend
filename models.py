@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Text, Float, DateTime, ForeignKey
+from sqlalchemy import Column, Integer, String, Text, Float, DateTime, ForeignKey, Boolean
 from sqlalchemy.sql import func
 from database import Base
 
@@ -48,3 +48,33 @@ class Utterance(Base):
 
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), nullable=True)
+
+
+class Analysis(Base):
+    __tablename__ = "analyses"
+
+    id = Column(Integer, primary_key=True, index=True)
+    utterance_id = Column(Integer, ForeignKey("utterances.id"), nullable=False)
+
+    primary_type = Column(String, nullable=True)
+    candidate_types = Column(Text, nullable=True)
+    classification_reason = Column(Text, nullable=True)
+    needs_deep_analysis = Column(Boolean, default=True)
+
+    is_correct = Column(Boolean, nullable=True)
+    corrected_text = Column(Text, nullable=True)
+    error_types = Column(Text, nullable=True)
+
+    feedback_ko = Column(Text, nullable=True)
+    feedback_ja = Column(Text, nullable=True)
+
+    vocab_context = Column(Text, nullable=True)
+    grammar_context = Column(Text, nullable=True)
+    example_context = Column(Text, nullable=True)
+    error_context = Column(Text, nullable=True)
+
+    model_name = Column(String, nullable=True)
+    adapter_name = Column(String, nullable=True)
+    confidence = Column(Float, nullable=True)
+
+    created_at = Column(DateTime(timezone=True), server_default=func.now())

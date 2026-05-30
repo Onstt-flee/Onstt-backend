@@ -91,3 +91,44 @@ def update_preprocess(db: Session, utterance_id: int, data: schemas.PreprocessUp
     db.refresh(db_utterance)
 
     return db_utterance
+
+
+def create_analysis(db: Session, utterance_id: int, analysis_data: dict):
+    db_analysis = models.Analysis(
+        utterance_id=utterance_id,
+        primary_type=analysis_data.get("primary_type"),
+        candidate_types=analysis_data.get("candidate_types"),
+        classification_reason=analysis_data.get("classification_reason"),
+        needs_deep_analysis=analysis_data.get("needs_deep_analysis", True),
+
+        is_correct=analysis_data.get("is_correct"),
+        corrected_text=analysis_data.get("corrected_text"),
+        error_types=analysis_data.get("error_types"),
+
+        feedback_ko=analysis_data.get("feedback_ko"),
+        feedback_ja=analysis_data.get("feedback_ja"),
+
+        vocab_context=analysis_data.get("vocab_context"),
+        grammar_context=analysis_data.get("grammar_context"),
+        example_context=analysis_data.get("example_context"),
+        error_context=analysis_data.get("error_context"),
+
+        model_name=analysis_data.get("model_name"),
+        adapter_name=analysis_data.get("adapter_name"),
+        confidence=analysis_data.get("confidence"),
+    )
+
+    db.add(db_analysis)
+    db.commit()
+    db.refresh(db_analysis)
+
+    return db_analysis
+
+
+def get_analyses_by_utterance(db: Session, utterance_id: int):
+    return (
+        db.query(models.Analysis)
+        .filter(models.Analysis.utterance_id == utterance_id)
+        .order_by(models.Analysis.created_at.desc())
+        .all()
+    )

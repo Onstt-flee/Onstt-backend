@@ -54,3 +54,34 @@ class PreprocessUpdate(BaseModel):
 class HealthResponse(BaseModel):
     status: str
     message: str
+
+
+class AnalysisResponse(BaseModel):
+    id: int
+    utterance_id: int
+
+    primary_type: Optional[str] = None
+    candidate_types: Optional[str] = None
+    classification_reason: Optional[str] = None
+    needs_deep_analysis: Optional[bool] = None
+
+    is_correct: Optional[bool] = None
+    corrected_text: Optional[str] = None
+    error_types: Optional[str] = None
+
+    feedback_ko: Optional[str] = None
+    feedback_ja: Optional[str] = None
+
+    vocab_context: Optional[str] = None
+    grammar_context: Optional[str] = None
+    example_context: Optional[str] = None
+    error_context: Optional[str] = None
+
+    model_name: Optional[str] = None
+    adapter_name: Optional[str] = None
+    confidence: Optional[float] = None
+
+    created_at: datetime
+
+    class Config:
+        from_attributes = True

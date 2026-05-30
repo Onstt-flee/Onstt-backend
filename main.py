@@ -2,6 +2,7 @@
 
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
+from typing import List
 
 import models
 import schemas
@@ -174,6 +175,73 @@ def read_utterance(
         "updated_at": db_utterance.updated_at
     }
 
+
+@app.get(
+    "/utterances/{utterance_id}/analysis",
+    response_model=List[schemas.AnalysisResponse],
+    tags=["Analysis"],
+    summary="특정 발화의 분석 결과 조회"
+)
+def read_utterance_analysis(
+    utterance_id: int,
+    db: Session = Depends(get_db)
+):
+    db_utterance = crud.get_utterance(db, utterance_id)
+
+    if db_utterance is None:
+        raise HTTPException(status_code=404, detail="Utterance not found")
+
+    analyses = crud.get_analyses_by_utterance(db, utterance_id)
+
+    return analyses
+
+
+@app.post(
+    "/utterances/{utterance_id}/analyze",
+    response_model=schemas.AnalysisResponse,
+    tags=["Analysis"],
+    summary="특정 발화 임시 분석 실행"
+)
+def analyze_utterance_temp(
+    utterance_id: int,
+    db: Session = Depends(get_db)
+):
+    db_utterance = crud.get_utterance(db, utterance_id)
+
+    if db_utterance is None:
+        raise HTTPException(status_code=404, detail="Utterance not found")
+
+    analysis_data = {
+        "primary_type": "statement",
+        "candidate_types": "[{\"type\":\"statement\",\"score\":0.8}]",
+        "classification_reason": "임시 분석: 일반 평서문으로 처리했습니다.",
+        "needs_deep_analysis": True,
+
+        "is_correct": False,
+        "corrected_text": "今日は学校に行きました",
+        "error_types": "[\"particle_omission\"]",
+
+        "feedback_ko": "임시 분석 결과입니다. 장소 뒤에는 조사 に가 필요할 수 있습니다.",
+        "feedback_ja": "これは一時的な分析結果です。場所の後には「に」を使うことがあります。",
+
+        "vocab_context": None,
+        "grammar_context": None,
+        "example_context": None,
+        "error_context": None,
+
+        "model_name": "rule_based_temp",
+        "adapter_name": None,
+        "confidence": 0.5,
+    }
+
+    db_analysis = crud.create_analysis(
+        db=db,
+        utterance_id=utterance_id,
+        analysis_data=analysis_data
+    )
+
+    return db_analysis
+    
 
 @app.get(
     "/sessions/{session_id}/utterances",
