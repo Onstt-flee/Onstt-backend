@@ -5,6 +5,7 @@ from analyzer.sentence_classifier import classify_sentence
 from analyzer.grammar_retriever import retrieve_grammar_rules
 from analyzer.vocab_retriever import retrieve_vocab
 from analyzer.error_retriever import retrieve_error_patterns
+from analyzer.example_retriever import retrieve_examples
 
 
 def analyze(text: str) -> Dict[str, Any]:
@@ -110,6 +111,11 @@ def analyze(text: str) -> Dict[str, Any]:
         top_k=5,
     )
 
+    example_result = retrieve_examples(
+    normalized_text,
+    top_k=5,
+)
+
 
     return {
         "primary_type": primary_type,
@@ -119,11 +125,11 @@ def analyze(text: str) -> Dict[str, Any]:
         "is_correct": None,
         "corrected_text": normalized_text,
         "error_types": [],
-        "feedback_ko": "입력 검증, 문장 타입 분류, 단어 참고 검색, 문법 참고 규칙 검색, 오류 유형 참고 검색이 완료되었습니다. 아직 LLM 교정은 수행하지 않았습니다.",
-        "feedback_ja": "入力検証、文タイプ分類、語彙参考検索、文法参考ルール検索、エラータイプ参考検索が完了しました。まだLLMによる添削は行っていません。",
+"feedback_ko": "입력 검증, 문장 타입 분류, 단어 참고 검색, 문법 참고 규칙 검색, 예문 참고 검색, 오류 유형 참고 검색이 완료되었습니다. 아직 LLM 교정은 수행하지 않았습니다.",
+"feedback_ja": "入力検証、文タイプ分類、語彙参考検索、文法参考ルール検索、例文参考検索、エラータイプ参考検索が完了しました。まだLLMによる添削は行っていません。",
         "vocab_context": vocab_result["vocab_context"],
         "grammar_context": grammar_result["grammar_context"],
-        "example_context": "",
+        "example_context": example_result["example_context"],
         "error_context": error_result["error_context"],
         "model_name": "rule_based_pipeline",
         "adapter_name": None,
