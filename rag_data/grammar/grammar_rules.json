@@ -138,5 +138,19 @@
     "possible_focus": ["질문 표현", "정중체 질문문"],
     "possible_error_types": ["unnatural_expression"],
     "overcorrection_note": "짧은 회화 질문이나 단편 질문을 무조건 ですか 형태로 바꾸면 과교정이 될 수 있다."
+  },
+  {
+    "id": "grammar_011",
+    "title": "場所 + で + 動作する",
+    "level": "N5",
+    "rule_type": "reference",
+    "sentence_types": ["statement"],
+    "keywords": ["で", "図書館", "学校", "レストラン", "駅", "家", "勉強", "勉強します", "勉強しました", "食べます", "食べました", "読みます", "読みました", "します", "しました"],
+    "pattern": "場所 + で + 動作する",
+    "description_ko": "어떤 장소에서 동작이나 활동을 한다고 말할 때 장소 뒤에 조사 で를 붙이는 경우가 많다.",
+    "reference_examples": ["図書館で勉強しました", "レストランで昼ご飯を食べました", "学校で日本語を勉強します"],
+    "possible_focus": ["장소에서 하는 동작", "조사 で 사용 여부", "장소와 동작의 관계"],
+    "possible_error_types": ["particle_omission", "particle_misuse"],
+    "overcorrection_note": "장소 뒤에 で가 없다고 해서 항상 오류는 아니다. 문맥상 장소에서 이루어진 동작인지 확인한 뒤 참고해야 한다."
   }
 ]
