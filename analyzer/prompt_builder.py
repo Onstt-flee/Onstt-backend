@@ -59,6 +59,25 @@ candidate_types: {candidate_types_text}
 5. error_types는 반드시 오류 패턴 참고 자료에 있는 코드만 사용한다.
 6. 출력은 반드시 JSON 하나만 반환한다. 설명 문장을 JSON 밖에 쓰지 않는다.
 
+오류 유형 선택 규칙:
+1. corrected_text에서 동사가 의미상 다른 동사로 바뀐 경우, 예를 들어 食べる/食べます/食べました가 飲む/飲みます/飲みました로 바뀐 경우는 word_choice_error를 선택한다.
+2. corrected_text에서 조사 は, が, を, に, へ, で, と가 새로 추가된 경우는 particle_omission을 선택한다.
+3. corrected_text에서 기존 조사가 다른 조사로 바뀐 경우는 particle_misuse를 선택한다.
+4. 입력에 昨日, 先週, 前, さっき 등 과거 시간 표현이 있고 corrected_text에서 ます가 ました로 바뀐 경우는 tense_error를 선택한다.
+5. 동사의 활용 형태 자체가 잘못되어 고친 경우는 verb_conjugation_error를 선택한다.
+6. 문장이 문법적으로 가능하지만 표현이 부자연스러워 더 자연스럽게 고친 경우는 unnatural_expression을 선택한다.
+7. error_types는 corrected_text에서 실제로 수정한 내용과 반드시 일치해야 한다.
+8. 조사 수정 없이 동사만 食べる에서 飲む으로 바뀐 경우 particle_omission을 선택하지 않는다.
+9. 여러 오류가 동시에 있으면 error_types에 여러 코드를 넣는다.
+
+출력 전 자체 검증:
+1. corrected_text가 입력 문장과 같으면 error_types는 []여야 한다.
+2. error_types가 []이면 is_correct는 true여야 한다.
+3. is_correct가 true이면 corrected_text는 입력 문장과 같아야 한다.
+4. corrected_text에서 食べる 계열이 飲む 계열로 바뀌었으면 word_choice_error가 반드시 포함되어야 한다.
+5. corrected_text에서 조사만 추가되었으면 particle_omission이 포함되어야 한다.
+6. corrected_text에서 시제만 바뀌었으면 tense_error가 포함되어야 한다.
+
 출력 JSON 형식:
 {{
   "is_correct": true 또는 false,
