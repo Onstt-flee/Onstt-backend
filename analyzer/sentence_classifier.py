@@ -22,10 +22,10 @@ REQUEST_PATTERNS = [
 GREETING_PATTERNS = [
     r"こんにちは",
     r"こんばんは",
-    r"おはよう",
+    r"おはよう(?:\s*ございます)?",
     r"はじめまして",
-    r"ありがとう",
-    r"すみません",
+    r"(?:どうも\s*)?ありがとう(?:\s*ござい(?:ます|ました))?",
+    r"すみません(?:\s*でした)?",
 ]
 
 EMOTION_PATTERNS = [
@@ -98,7 +98,12 @@ def classify_sentence(text: str, is_valid: bool = True) -> Dict[str, Any]:
             }
         )
 
-    greeting_matches = _match_patterns(normalized_text, GREETING_PATTERNS)
+    # 인사가 포함된 일반 문장을 조기 정답 처리하지 않도록 단독 인사만 허용한다.
+    greeting_matches = [
+        pattern
+        for pattern in GREETING_PATTERNS
+        if re.fullmatch(rf"(?:{pattern})[\s。．.!！?？]*", normalized_text)
+    ]
     if greeting_matches:
         candidate_types.append(
             {

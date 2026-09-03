@@ -1,6 +1,7 @@
 # analyzer/llm_parser.py
 
 import json
+import math
 import re
 from typing import Any, Dict, List, Optional
 
@@ -78,6 +79,48 @@ def _safe_bool(value: Any) -> Optional[bool]:
 
         if lowered in ["false", "no", "incorrect", "오답", "틀림"]:
             return False
+
+    return None
+
+
+def _validate_required_fields(parsed: Dict[str, Any]) -> Optional[str]:
+    """기본값 보정 전에 응답이 판정 가능한 필수 필드와 값을 갖췄는지 확인한다."""
+    if not isinstance(parsed, dict):
+        return "Parsed JSON is not an object"
+
+    missing_fields = REQUIRED_FIELDS - parsed.keys()
+    if missing_fields:
+        return f"Missing required fields: {', '.join(sorted(missing_fields))}"
+
+    if _safe_bool(parsed["is_correct"]) is None:
+        return "Invalid field: is_correct must be a boolean or a recognized boolean string"
+
+    corrected_text = parsed["corrected_text"]
+    if not isinstance(corrected_text, str) or not corrected_text.strip():
+        return "Invalid field: corrected_text must be a non-empty string"
+
+    for field in ("feedback_ko", "feedback_ja"):
+        if not isinstance(parsed[field], str):
+            return f"Invalid field: {field} must be a string"
+
+    error_types = parsed["error_types"]
+    if not (
+        isinstance(error_types, str)
+        or (
+            isinstance(error_types, list)
+            and all(isinstance(item, str) for item in error_types)
+        )
+    ):
+        return "Invalid field: error_types must be a string or a list of strings"
+
+    confidence = parsed["confidence"]
+    if isinstance(confidence, bool) or not isinstance(confidence, (int, float, str)):
+        return "Invalid field: confidence must be a finite number or numeric string"
+    try:
+        if not math.isfinite(float(confidence)):
+            return "Invalid field: confidence must be finite"
+    except (TypeError, ValueError, OverflowError):
+        return "Invalid field: confidence must be a finite number or numeric string"
 
     return None
 
@@ -449,18 +492,20 @@ def normalize_llm_result(
     adapter_name: Optional[str] = None,
 ) -> Dict[str, Any]:
     """
-    JSON 파싱은 성공했지만 필드 타입이 불안정할 수 있으므로 최종 결과를 보정한다.
+    필수 필드와 값을 검증한 뒤, 호환 가능한 타입을 최종 결과로 보정한다.
     """
-    is_correct = _safe_bool(parsed.get("is_correct"))
+    validation_error = _validate_required_fields(parsed)
+    if validation_error is not None:
+        return _build_fallback(
+            original_text=original_text,
+            raw_text=raw_text,
+            error_message=validation_error,
+            model_name=model_name,
+            adapter_name=adapter_name,
+        )
 
-    corrected_text = _safe_text(
-        parsed.get("corrected_text"),
-        default=original_text,
-    )
-
-    # corrected_text가 빈 문자열이면 원문 유지
-    if not corrected_text.strip():
-        corrected_text = original_text
+    is_correct = _safe_bool(parsed["is_correct"])
+    corrected_text = parsed["corrected_text"]
 
     error_types = _safe_error_types(parsed.get("error_types"))
 
