@@ -1,0 +1,107 @@
+{
+  "schema_version": "0.1",
+  "recorded_at": "2026-09-05T15:43:41.031652+00:00",
+  "status": "baseline_complete_contract_failure",
+  "model": {
+    "id": "Qwen/Qwen3.5-0.8B",
+    "artifact": "ggml-org/Qwen3.5-0.8B-GGUF:BF16",
+    "artifact_revision": "8fea620810c4afa23dd6443f999a48574c1611a3",
+    "artifact_sha256": "9a7bed4041b7975e0f71fa34670d1e9025213bc92905ac0db75d36c4fa3fa623",
+    "parameter_count_reported_by_server": 772845888
+  },
+  "dataset": {
+    "id": "judgment-seed-v0.1",
+    "count": 72,
+    "sha256": "f681ba026cfd6eeca86ebf531e1ac94ceed06525b43fca2b19729ef86ff0d12b",
+    "review_status": "user_reviewed",
+    "expert_certified": false
+  },
+  "run": {
+    "run_id": "20260905T153819Z-Qwen-Qwen3.5-0.8B-5c066654",
+    "output": "evaluation/judgment/runs/qwen35-08b-bf16-full-v01.jsonl",
+    "output_sha256": "d1b091c025b0fbecf2bd2743a55b55b8046f68a6ce8da6a20464e07ae499887c",
+    "manifest_sha256": "7d850ea2b38ebded7cf7732da55c0a44e85d2d656727db1ec8c05739c0712cda",
+    "report_json_sha256": "49b1e0f1ee64cb2fc64d90249d87bbfc29e35bb5ae110639acd04efb28c4f27c",
+    "report_markdown_sha256": "2b51ea0446073cd11b1be03c07b4d383c6a88c9a06fac9b17d17ed72d657c32d",
+    "prompt_version": "judgment-v0.1",
+    "prompt_sha256": "c42a0e77214c333eb964df0c96f4a8986b32dffd41a371a6347846c0eca89042",
+    "generation": {
+      "temperature": 0.0,
+      "top_p": 1.0,
+      "max_tokens": 512
+    },
+    "runtime": {
+      "engine": "llama-server",
+      "engine_commit": "ff067f7",
+      "reasoning": "off",
+      "context_size": 8192,
+      "parallel_slots": 1
+    }
+  },
+  "strict_results": {
+    "transport_success": {
+      "count": 72,
+      "total": 72,
+      "rate": 1.0
+    },
+    "contract_valid": {
+      "count": 0,
+      "total": 72,
+      "rate": 0.0
+    },
+    "system_failures": 72,
+    "decision_accuracy": 0.0,
+    "correction_detection_recall": 0.0,
+    "clear_case_handling_rate": 0.0,
+    "meets_all_targets": false,
+    "note": "Strictly invalid responses are system failures, not grammar decisions. The strict overcorrection metric is not interpretable for this run because no response passed the contract."
+  },
+  "raw_diagnostics_not_official_scores": {
+    "parseable_json_objects": 48,
+    "invalid_or_truncated_json": 24,
+    "exact_top_level_field_sets": 48,
+    "parseable_decisions": {
+      "needs_correction": 47,
+      "insufficient_evidence": 1,
+      "acceptable": 0
+    },
+    "gold_acceptable_raw_needs_correction": {
+      "count": 20,
+      "total_gold_acceptable": 33
+    },
+    "no_op_edit_count": 43,
+    "contract_error_groups": {
+      "edit_source_does_not_match_input_span": 24,
+      "correction_did_not_change_text_or_supply_valid_edits": 21,
+      "invalid_or_truncated_json": 24,
+      "blank_correction_for_correction_decision": 1,
+      "non_correction_did_not_preserve_input": 1,
+      "no_op_edit": 1
+    },
+    "official_sampling_probe": {
+      "cases": [
+        "JG-001",
+        "JG-025"
+      ],
+      "parameters": {
+        "temperature": 1.0,
+        "top_p": 1.0,
+        "top_k": 20,
+        "min_p": 0.0,
+        "presence_penalty": 2.0,
+        "repeat_penalty": 1.0,
+        "seed": 42
+      },
+      "contract_valid_count": 0,
+      "conclusion": "Repetition decreased, but overcorrection and invalid edit spans remained."
+    }
+  },
+  "performance": {
+    "latency_ms_mean": 1129.2583055555556,
+    "latency_ms_p50": 812.889,
+    "latency_ms_p95": 1985.015,
+    "completion_tokens_per_second_of_request_latency": 255.20684065517045,
+    "observed_gpu_memory_mib_after_load": 1954
+  },
+  "conclusion": "Reject the untrained 0.8B model as the current judgment model candidate. Continue to the 2B baseline under the same strict contract before deciding on fine-tuning."
+}
