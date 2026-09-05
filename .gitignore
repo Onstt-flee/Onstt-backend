@@ -15,3 +15,6 @@ input/
 *.m4a
 
 .env
+
+# Local model-evaluation outputs can include large raw responses.
+evaluation/judgment/runs/
