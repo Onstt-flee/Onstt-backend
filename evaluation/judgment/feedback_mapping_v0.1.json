@@ -1,0 +1,64 @@
+{
+  "schema_version": "0.1",
+  "title": "교정 및 피드백 필요 문장 30개와 평가셋 매칭",
+  "numbering_note": "feedback_no는 외부 피드백 표의 번호이며 JG 평가셋 ID와 독립적이다.",
+  "categories": {
+    "particle_usage": {
+      "title": "조사의 활용: 목적지, 장소, 존재 구분",
+      "diagnosis_ko": "行く의 목적지는 に/へ, 동작이 일어나는 장소는 で, 존재하는 장소는 に를 사용합니다.",
+      "usage_tip_ko": "친한 사이의 회화에서는 문맥이 명확할 때 조사가 생략되기도 하지만, 학습자의 기본 교정문에서는 먼저 표준 조사 사용을 제시합니다."
+    },
+    "verb_masu_te": {
+      "title": "동사 활용의 기초: ます형과 て형",
+      "diagnosis_ko": "1그룹 동사는 ます형에서 어말을 い단으로 바꾸며, う·つ·る로 끝나는 동사의 て형은 って가 됩니다.",
+      "usage_tip_ko": "친구에게는 ちょっと待って, 손님이나 직장 상대에게는 少々お待ちください처럼 상황에 따라 정중도를 조절합니다."
+    },
+    "verb_negative": {
+      "title": "동사의 부정형 활용: 의무와 허가",
+      "diagnosis_ko": "의무의 なければならない와 허가의 なくてもいい는 동사의 ない형을 바탕으로 만듭니다.",
+      "usage_tip_ko": "격식 있는 안내에서는 靴は脱がなくても結構です처럼 표현할 수도 있습니다."
+    },
+    "adjective_usage": {
+      "title": "형용사 활용: い형용사와 な형용사",
+      "diagnosis_ko": "い형용사는 熱かった·重くない·安くて처럼 활용하고, な형용사는 서술할 때 静かです·好きです, 명사를 수식할 때 きれいな部屋처럼 사용합니다.",
+      "usage_tip_ko": "この服、安くて可愛い처럼 연결형을 짧은 회화 문장으로 반복 연습할 수 있습니다."
+    },
+    "sentence_polish": {
+      "title": "문장 다듬기: 시제, 명사 연결, 표기, 문체",
+      "diagnosis_ko": "昨日·来週 같은 시간 표현에 맞춰 시제를 선택하고, 명사 연결의 の와 조사 표기 は·を를 구분합니다. 문체 통일은 문맥상 요구될 때 별도 피드백으로 제공합니다.",
+      "usage_tip_ko": "정중체를 유지해야 하는 문맥에서는 昨日は図書館に行って、本を読みました처럼 연결할 수 있습니다."
+    }
+  },
+  "items": [
+    {"feedback_no": 1, "dataset_ids": ["JG-025"], "match_type": "exact", "input_text": "明日は電車で病院を行きます。", "recommended_text": "明日は電車で病院に行きます。", "alternatives": ["明日は電車で病院へ行きます。"], "point_ko": "목적지 조사 오용", "category": "particle_usage", "contract_relation": "aligned", "note_ko": ""},
+    {"feedback_no": 2, "dataset_ids": ["JG-026"], "match_type": "exact", "input_text": "昼休みに食堂をうどんを食べます。", "recommended_text": "昼休みに食堂でうどんを食べます。", "alternatives": [], "point_ko": "동작이 일어나는 장소 조사", "category": "particle_usage", "contract_relation": "aligned", "note_ko": ""},
+    {"feedback_no": 3, "dataset_ids": ["JG-027"], "match_type": "exact", "input_text": "冷蔵庫の中で牛乳があります。", "recommended_text": "冷蔵庫の中に牛乳があります。", "alternatives": [], "point_ko": "사물이 존재하는 장소 조사", "category": "particle_usage", "contract_relation": "aligned", "note_ko": ""},
+    {"feedback_no": 4, "dataset_ids": ["JG-028"], "match_type": "exact", "input_text": "これは姉を自転車です。", "recommended_text": "これは姉の自転車です。", "alternatives": [], "point_ko": "명사와 명사를 연결하는 の", "category": "sentence_polish", "contract_relation": "aligned", "note_ko": ""},
+    {"feedback_no": 5, "dataset_ids": ["JG-029"], "match_type": "exact", "input_text": "毎朝、顔を洗うます。", "recommended_text": "毎朝、顔を洗います。", "alternatives": [], "point_ko": "1그룹 동사의 정중형 접속", "category": "verb_masu_te", "contract_relation": "aligned", "note_ko": ""},
+    {"feedback_no": 6, "dataset_ids": ["JG-030"], "match_type": "exact", "input_text": "さっき、図書館で本を読むました。", "recommended_text": "さっき、図書館で本を読みました。", "alternatives": [], "point_ko": "1그룹 동사의 과거 정중형 접속", "category": "verb_masu_te", "contract_relation": "aligned", "note_ko": ""},
+    {"feedback_no": 7, "dataset_ids": ["JG-031"], "match_type": "exact", "input_text": "明日は駅で友達に会いてください。", "recommended_text": "明日は駅で友達に会ってください。", "alternatives": [], "point_ko": "1그룹 동사의 て형 촉음편", "category": "verb_masu_te", "contract_relation": "aligned", "note_ko": ""},
+    {"feedback_no": 8, "dataset_ids": ["JG-032"], "match_type": "exact", "input_text": "ここで少し待つてください。", "recommended_text": "ここで少し待ってください。", "alternatives": [], "point_ko": "1그룹 동사의 て형 촉음편", "category": "verb_masu_te", "contract_relation": "aligned", "note_ko": ""},
+    {"feedback_no": 9, "dataset_ids": ["JG-033"], "match_type": "exact", "input_text": "昨日は映画を見ませんでしたです。", "recommended_text": "昨日は映画を見ませんでした。", "alternatives": [], "point_ko": "ませんでした 뒤의 불필요한 です 제거", "category": "sentence_polish", "contract_relation": "aligned", "note_ko": "이중 경어가 아니라 정중형 종결의 중복으로 설명한다."},
+    {"feedback_no": 10, "dataset_ids": ["JG-034"], "match_type": "exact", "input_text": "明日は早く起きるなければなりません。", "recommended_text": "明日は早く起きなければなりません。", "alternatives": [], "point_ko": "동사 ない형을 활용한 의무 표현", "category": "verb_negative", "contract_relation": "aligned", "note_ko": ""},
+    {"feedback_no": 11, "dataset_ids": ["JG-035"], "match_type": "exact", "input_text": "このスープは熱いかったです。", "recommended_text": "このスープは熱かったです。", "alternatives": [], "point_ko": "い형용사의 과거형", "category": "adjective_usage", "contract_relation": "aligned", "note_ko": ""},
+    {"feedback_no": 12, "dataset_ids": ["JG-036"], "match_type": "exact", "input_text": "このかばんは重いくないです。", "recommended_text": "このかばんは重くないです。", "alternatives": [], "point_ko": "い형용사의 부정형", "category": "adjective_usage", "contract_relation": "aligned", "note_ko": ""},
+    {"feedback_no": 13, "dataset_ids": ["JG-037"], "match_type": "exact", "input_text": "この部屋では、靴を脱ぐなくてもいいです。", "recommended_text": "この部屋では、靴を脱がなくてもいいです。", "alternatives": [], "point_ko": "동사 ない형을 활용한 허가 표현", "category": "verb_negative", "contract_relation": "aligned", "note_ko": ""},
+    {"feedback_no": 14, "dataset_ids": ["JG-038"], "match_type": "exact", "input_text": "今日は寒いだです。", "recommended_text": "今日は寒いです。", "alternatives": [], "point_ko": "い형용사의 정중체 종결", "category": "adjective_usage", "contract_relation": "aligned", "note_ko": ""},
+    {"feedback_no": 15, "dataset_ids": ["JG-039"], "match_type": "exact", "input_text": "ここは静かなです。", "recommended_text": "ここは静かです。", "alternatives": [], "point_ko": "な형용사의 정중체 종결", "category": "adjective_usage", "contract_relation": "aligned", "note_ko": ""},
+    {"feedback_no": 16, "dataset_ids": ["JG-040"], "match_type": "exact", "input_text": "弟は漢字を読めるます。", "recommended_text": "弟は漢字を読めます。", "alternatives": [], "point_ko": "가능 동사의 정중형 접속", "category": "verb_masu_te", "contract_relation": "aligned", "note_ko": ""},
+    {"feedback_no": 17, "dataset_ids": ["JG-041"], "match_type": "exact", "input_text": "きれい部屋に住んでいます。", "recommended_text": "きれいな部屋に住んでいます。", "alternatives": [], "point_ko": "な형용사의 명사 수식", "category": "adjective_usage", "contract_relation": "aligned", "note_ko": ""},
+    {"feedback_no": 18, "dataset_ids": ["JG-042"], "match_type": "exact", "input_text": "安いな時計を買いました。", "recommended_text": "安い時計を買いました。", "alternatives": [], "point_ko": "い형용사의 명사 수식", "category": "adjective_usage", "contract_relation": "aligned", "note_ko": ""},
+    {"feedback_no": 19, "dataset_ids": ["JG-043"], "match_type": "near_text", "input_text": "昨日のお昼ごはんに、そばを食べます。", "recommended_text": "昨日のお昼ごはんに、そばを食べました。", "alternatives": [], "point_ko": "과거 시점에 맞는 시제", "category": "sentence_polish", "contract_relation": "aligned_after_text_review", "note_ko": "평가셋 원문은 昨日の昼ごはんに、そばを食べます。로 お가 없다. 같은 오류 유형이지만 원문 통일 여부를 결정해야 한다."},
+    {"feedback_no": 20, "dataset_ids": ["JG-044"], "match_type": "exact", "input_text": "来週の日曜日に、初めて京都へ行きました。", "recommended_text": "来週の日曜日に、初めて京都へ行きます。", "alternatives": [], "point_ko": "미래 시점에 맞는 시제", "category": "sentence_polish", "contract_relation": "aligned", "note_ko": ""},
+    {"feedback_no": 21, "dataset_ids": ["JG-045"], "match_type": "exact", "input_text": "昨日は図書館を本を読むました。", "recommended_text": "昨日は図書館で本を読みました。", "alternatives": [], "point_ko": "장소 조사와 과거 정중형의 복합 교정", "category": "particle_usage", "contract_relation": "aligned", "note_ko": ""},
+    {"feedback_no": 22, "dataset_ids": ["JG-046"], "match_type": "exact", "input_text": "この店の料理は安いくて、おいしいでした。", "recommended_text": "この店の料理は安くて、おいしかったです。", "alternatives": [], "point_ko": "い형용사의 연결형과 과거형 복합 교정", "category": "adjective_usage", "contract_relation": "aligned", "note_ko": ""},
+    {"feedback_no": 23, "dataset_ids": ["JG-047"], "match_type": "exact", "input_text": "友達の家で行くました。", "recommended_text": "友達の家に行きました。", "alternatives": ["友達の家へ行きました。"], "point_ko": "목적지 조사와 과거 정중형 복합 교정", "category": "particle_usage", "contract_relation": "aligned", "note_ko": ""},
+    {"feedback_no": 24, "dataset_ids": ["JG-048"], "match_type": "exact", "input_text": "小さいな犬が庭でいます。", "recommended_text": "小さい犬が庭にいます。", "alternatives": [], "point_ko": "형용사 수식과 존재 장소 복합 교정", "category": "particle_usage", "contract_relation": "aligned", "note_ko": ""},
+    {"feedback_no": 25, "dataset_ids": ["JG-062"], "match_type": "exact", "input_text": "ええと、昨日は駅で友達に会うました。", "recommended_text": "ええと、昨日は駅で友達に会いました。", "alternatives": [], "point_ko": "필러를 보존한 과거 정중형 교정", "category": "verb_masu_te", "contract_relation": "aligned", "note_ko": ""},
+    {"feedback_no": 26, "dataset_ids": ["JG-064", "JG-065"], "match_type": "exact_multiple_contexts", "input_text": "昨日は図書館に行きました。そして本を読んだ。", "recommended_text": "昨日は図書館に行って、本を読みました。", "alternatives": ["昨日は図書館に行きました。そして本を読みました。"], "point_ko": "문맥상 요구될 때 정중체 통일과 문장 연결", "category": "sentence_polish", "contract_relation": "advisory_scope_conflict", "note_ko": "동일 원문이 두 문맥에 있다. JG-064는 친한 친구와의 대화라 강제 교정하지 않고, JG-065는 면접의 정중체 요구를 별도 문체 피드백으로 제공한다. 현재 문법 decision은 둘 다 acceptable이다."},
+    {"feedback_no": 27, "dataset_ids": ["JG-067"], "match_type": "exact", "input_text": "わたしわ大学生です。", "recommended_text": "わたしは大学生です。", "alternatives": [], "point_ko": "조사 は의 표기 정규화", "category": "sentence_polish", "contract_relation": "orthography_advisory", "note_ko": "현재 문법 전용 계약에서는 acceptable과 표기 후보 태그로 분리되어 있다. 쓰기 교정 또는 전사 정규화 출력에서는 교정 피드백이 필요하다."},
+    {"feedback_no": 28, "dataset_ids": ["JG-068"], "match_type": "exact", "input_text": "本お読みます。", "recommended_text": "本を読みます。", "alternatives": [], "point_ko": "조사 を의 표기 정규화", "category": "sentence_polish", "contract_relation": "orthography_advisory", "note_ko": "현재 문법 전용 계약에서는 acceptable과 표기 후보 태그로 분리되어 있다. 쓰기 교정 또는 전사 정규화 출력에서는 교정 피드백이 필요하다."},
+    {"feedback_no": 29, "dataset_ids": ["JG-069"], "match_type": "exact", "input_text": "毎朝、バスで大学を行きます。", "recommended_text": "毎朝、バスで大学に行きます。", "alternatives": ["毎朝、バスで大学へ行きます。"], "point_ko": "목적지 조사 오용", "category": "particle_usage", "contract_relation": "aligned", "note_ko": "문법 교정은 필요하지만 원음 없이 학습자와 STT 중 오류 원인을 단정하지 않는다."},
+    {"feedback_no": 30, "dataset_ids": ["JG-072"], "match_type": "exact", "input_text": "りんごが一番好きだです。", "recommended_text": "りんごが一番好きです。", "alternatives": [], "point_ko": "な형용사의 정중체 종결 중복", "category": "adjective_usage", "contract_relation": "aligned_with_context_advisory", "note_ko": "문법 교정과 함께 질문에 맞지 않는 응답이라는 문맥 불일치를 별도 피드백으로 유지한다."}
+  ]
+}

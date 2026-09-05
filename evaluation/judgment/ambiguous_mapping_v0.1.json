@@ -1,0 +1,49 @@
+{
+  "schema_version": "0.1",
+  "title": "애매·미완성·공백·타 언어 문장 14개와 평가셋 매칭",
+  "numbering_note": "ambiguous_no는 외부 애매 문장 표의 번호이며 JG 평가셋 ID와 독립적이다.",
+  "policy_note": "누락된 내용으로 만든 완성문은 정답 교정문이 아니라 대화 복구 또는 연습 예시다.",
+  "categories": {
+    "hesitation_or_noise": {
+      "title": "머뭇거림·침묵·잡음",
+      "diagnosis_ko": "판단 가능한 발화가 없으면 문법을 추측하지 않고 재질문, 반복 요청 또는 생각할 시간을 주는 대화 복구로 전환합니다.",
+      "extension_ko": "상황에 따라 すみません、もう一度ゆっくりお願いできますか 또는 ごめん、ちょっと待ってね처럼 대응할 수 있습니다."
+    },
+    "truncated_sentence": {
+      "title": "서술어·후속절이 누락된 미완성 문장",
+      "diagnosis_ko": "녹음이 중간에 끊긴 문장은 가능한 후속 내용이 여러 개이므로 특정 동사나 결과절을 정답으로 단정하지 않습니다.",
+      "extension_ko": "문장 완성 연습에서는 会いました·行きました 등의 예시를 제시할 수 있지만 실제 발화 복원과 분리합니다."
+    },
+    "missing_transcript_span": {
+      "title": "전사 공백",
+      "diagnosis_ko": "聞き取れない 표시는 실제 단어가 아니며 원음 없이 장소 명사나 형용사를 임의로 채우지 않습니다.",
+      "extension_ko": "원음을 다시 듣거나 사용자에게 누락 구간을 다시 말해 달라고 요청한 뒤 판단합니다."
+    },
+    "other_language": {
+      "title": "영어·한국어 입력",
+      "diagnosis_ko": "일본어 문법 판단 범위 밖 입력입니다. 번역 기능을 제공한다면 번역 예시로 처리하되 문법 교정 정답과 분리합니다.",
+      "extension_ko": "明日は学校に行きます와 明日、学校に行きます는 모두 문맥에 따라 자연스러울 수 있으므로 は를 항상 강제하지 않습니다."
+    },
+    "discourse_or_register": {
+      "title": "필러·어휘 기능·문체 대안",
+      "diagnosis_ko": "문법적으로 성립하는 표현을 자신감이나 길이만으로 오류 처리하지 않습니다. 담화 기능과 문체 요구가 있을 때 별도 대안을 제공합니다.",
+      "extension_ko": "実は는 あのう의 단순 대체어가 아니며, なんか飲む？는 친한 사이에서 자연스럽습니다. 정중체 통일도 요구된 상황에서만 제안합니다."
+    }
+  },
+  "items": [
+    {"ambiguous_no": 1, "dataset_ids": ["JG-050"], "match_type": "exact", "input_text": "……", "state_ko": "침묵·문장 내용 없음", "provided_example": "すみません、よくわかりません。", "example_type": "dialogue_recovery_example", "category": "hesitation_or_noise", "contract_relation": "insufficient_evidence", "recommended_action_ko": "문법 판단을 보류하고 응답 의도 또는 재청취가 필요한지 확인", "note_ko": "침묵만으로 ‘잘 모르겠다’는 의도를 확정할 수 없으므로 자동 대체하지 않는다."},
+    {"ambiguous_no": 2, "dataset_ids": ["JG-051"], "match_type": "exact", "input_text": "あの、ええと……", "state_ko": "필러만 있고 판단할 문장 없음", "provided_example": "あの、少し考えさせてください。", "example_type": "dialogue_recovery_example", "category": "hesitation_or_noise", "contract_relation": "insufficient_evidence", "recommended_action_ko": "잠시 기다리거나 사용자가 말을 이어가도록 유도", "note_ko": "예시 문장은 유용하지만 실제 발화의 교정문은 아니다."},
+    {"ambiguous_no": 3, "dataset_ids": ["JG-052"], "match_type": "exact", "input_text": "昨日、駅で友達に", "state_ko": "서술어 누락·녹음 중단", "provided_example": "昨日、駅で友達に会いました。", "example_type": "completion_practice_example", "category": "truncated_sentence", "contract_relation": "insufficient_evidence", "recommended_action_ko": "후속 발화를 요청하고 원문은 유지", "note_ko": "会いました 외에도 다른 서술어가 가능하므로 정답 복원으로 사용하지 않는다."},
+    {"ambiguous_no": 4, "dataset_ids": ["JG-053"], "match_type": "exact", "input_text": "もし明日雨が降ったら", "state_ko": "조건절 뒤 결과절 누락·녹음 중단", "provided_example": "もし明日雨が降ったら、家にいます。", "example_type": "completion_practice_example", "category": "truncated_sentence", "contract_relation": "insufficient_evidence", "recommended_action_ko": "화자가 의도한 결과절을 다시 요청", "note_ko": "家にいます는 여러 가능한 결과 중 하나일 뿐이다."},
+    {"ambiguous_no": 5, "dataset_ids": ["JG-054"], "match_type": "exact", "input_text": "この本を読んだのは", "state_ko": "초점 구문의 후속 서술어 누락", "provided_example": "この本を読んだのは、先週です。", "example_type": "completion_practice_example", "category": "truncated_sentence", "contract_relation": "insufficient_evidence", "recommended_action_ko": "뒤의 내용이나 질문 억양을 확인", "note_ko": "사람·시간·이유 등 여러 후속 내용이 가능하다."},
+    {"ambiguous_no": 6, "dataset_ids": ["JG-055"], "match_type": "exact", "input_text": "私は昨日、病院に……", "state_ko": "목적지 뒤 서술어 누락·녹음 중단", "provided_example": "私は昨日、病院に行きました。", "example_type": "completion_practice_example", "category": "truncated_sentence", "contract_relation": "insufficient_evidence", "recommended_action_ko": "후속 동사를 다시 말해 달라고 요청", "note_ko": "行きました가 유력해도 실제 발화를 확인하지 않고 정답으로 확정하지 않는다."},
+    {"ambiguous_no": 7, "dataset_ids": ["JG-056"], "match_type": "exact", "input_text": "明日は［聞き取れない］に行きます。", "state_ko": "목적지 명사 전사 누락", "provided_example": "明日は学校に行きます。", "example_type": "slot_filling_practice_example", "category": "missing_transcript_span", "contract_relation": "insufficient_evidence", "recommended_action_ko": "원음 재처리 또는 누락 장소 재질문", "note_ko": "学校는 연습용 예시이며 실제 목적지를 복원한 값이 아니다."},
+    {"ambiguous_no": 8, "dataset_ids": ["JG-057"], "match_type": "exact", "input_text": "［雑音］", "state_ko": "잡음만 있고 발화 내용 없음", "provided_example": "すみません、もう一度お願いします。", "example_type": "dialogue_recovery_example", "category": "hesitation_or_noise", "contract_relation": "insufficient_evidence", "recommended_action_ko": "재발화 또는 재녹음 요청", "note_ko": "추천 문장은 시스템·튜터의 응답이며 사용자 원문의 교정문이 아니다."},
+    {"ambiguous_no": 9, "dataset_ids": ["JG-058"], "match_type": "exact", "input_text": "今日は［聞き取れない］かったです。", "state_ko": "い형용사 어간 전사 누락", "provided_example": "今日は寒かったです。", "example_type": "slot_filling_practice_example", "category": "missing_transcript_span", "contract_relation": "insufficient_evidence", "recommended_action_ko": "원음 재처리 또는 누락 형용사 재질문", "note_ko": "寒는 연습용 예시이며 실제 단어를 복원한 값이 아니다."},
+    {"ambiguous_no": 10, "dataset_ids": ["JG-059"], "match_type": "exact", "input_text": "I went to the station yesterday.", "state_ko": "영어 입력", "provided_example": "昨日は駅に行きました。", "example_type": "translation_example", "category": "other_language", "contract_relation": "out_of_scope_translation", "recommended_action_ko": "문법 판단은 보류하고 번역 기능이 활성화된 경우에만 별도 번역 제공", "note_ko": "영어 문장을 일본어 문법 오류로 판정하지 않는다."},
+    {"ambiguous_no": 11, "dataset_ids": ["JG-060"], "match_type": "exact", "input_text": "내일 학교에 갑니다.", "state_ko": "한국어 입력", "provided_example": "明日は学校に行きます。", "example_type": "translation_example", "category": "other_language", "contract_relation": "out_of_scope_translation", "recommended_action_ko": "문법 판단은 보류하고 번역 기능이 활성화된 경우에만 별도 번역 제공", "note_ko": "明日、学校に行きます도 자연스러울 수 있어 は를 항상 강제하지 않는다."},
+    {"ambiguous_no": 12, "dataset_ids": ["JG-061"], "match_type": "exact", "input_text": "あのう、来週は大阪に行きます。", "state_ko": "문장 속 필러", "provided_example": "実は、来週は大阪に行きます。", "example_type": "discourse_alternative", "category": "discourse_or_register", "contract_relation": "acceptable_with_optional_advisory", "recommended_action_ko": "원문은 문법상 허용하고 필요할 때만 담화 표현 대안 제시", "note_ko": "実は는 ‘실은’이라는 의미를 추가하므로 あのう를 자동 치환하지 않는다."},
+    {"ambiguous_no": 13, "dataset_ids": ["JG-063"], "match_type": "exact", "input_text": "なんか飲む？", "state_ko": "친한 사이의 짧은 회화체", "provided_example": "何か飲みますか？", "example_type": "register_alternative", "category": "discourse_or_register", "contract_relation": "acceptable_with_optional_advisory", "recommended_action_ko": "원문은 허용하고 상대·상황에 따라 정중체 대안 제시", "note_ko": "なんか는 여기서 ‘무언가’를 뜻하며 문장은 친한 사이에서 자연스럽다."},
+    {"ambiguous_no": 14, "dataset_ids": ["JG-064", "JG-065"], "match_type": "exact_multiple_contexts", "input_text": "昨日は図書館に行きました。そして本を読んだ。", "state_ko": "정중체와 보통체가 이어짐", "provided_example": "昨日は図書館に行って、本を読みました。", "example_type": "style_alternative", "category": "discourse_or_register", "contract_relation": "context_sensitive_advisory", "recommended_action_ko": "친구 대화에서는 원문 허용, 면접의 정중체 요구에서는 문체 개선을 별도 제안", "note_ko": "동일 원문이 문맥이 다른 두 문항에 존재한다. 문법 decision과 문체 advisory를 분리한다."}
+  ]
+}
