@@ -1,0 +1,166 @@
+{
+  "schema_version": "0.1",
+  "recorded_at": "2026-09-06T10:50:19.385167+00:00",
+  "status": "baseline_complete_below_targets",
+  "model": {
+    "id": "Qwen/Qwen3.5-4B",
+    "artifact": "unsloth/Qwen3.5-4B-GGUF:BF16",
+    "artifact_revision": "e87f176479d0855a907a41277aca2f8ee7a09523",
+    "artifact_sha256": "9e6e2841a75f503ccb330831832fd7861266e187e0dbf149a954219ccb8c197a",
+    "parameter_count_reported_by_server": 4205751296
+  },
+  "dataset": {
+    "id": "judgment-seed-v0.1",
+    "count": 72,
+    "sha256": "f681ba026cfd6eeca86ebf531e1ac94ceed06525b43fca2b19729ef86ff0d12b",
+    "review_status": "user_reviewed",
+    "expert_certified": false
+  },
+  "run": {
+    "run_id": "20260906T104622Z-Qwen-Qwen3.5-4B-e06c21ff",
+    "output": "evaluation/judgment/runs/qwen35-4b-bf16-full-v01.jsonl",
+    "output_sha256": "b79dd1beb1dee3559fd02b9710da108666d87f749278a8bcdcc4cec7932deac5",
+    "manifest_sha256": "693e116753441314d9b608d559b596b21b7954520f86b703f4bf970942ad84fa",
+    "report_json_sha256": "723361aa031ad9aa108a08d0c078912264247a3b552f27dd1c772178d717da6a",
+    "report_markdown_sha256": "49b07ced8b8de2fc74d99543648a5bc47dea38195bc76af99dfb1f5ea87a1522",
+    "comparison_json_sha256": "452f0c1af4e2460c317c19073d22a6dd434a3cd15dbb81efeb40c9f626e1ad2c",
+    "comparison_markdown_sha256": "432fe5db341429d057025a096f06ee1421b7eed2200ffd7344155ff4634cd5b6",
+    "prompt_version": "judgment-v0.1",
+    "prompt_sha256": "c42a0e77214c333eb964df0c96f4a8986b32dffd41a371a6347846c0eca89042",
+    "generation": {
+      "temperature": 0.0,
+      "top_p": 1.0,
+      "max_tokens": 512
+    },
+    "runtime": {
+      "engine": "llama-server",
+      "engine_commit": "ff067f7",
+      "reasoning": "off",
+      "context_size": 8192,
+      "parallel_slots": 1
+    }
+  },
+  "strict_results": {
+    "transport_success": {
+      "count": 72,
+      "total": 72,
+      "rate": 1.0
+    },
+    "contract_valid": {
+      "count": 19,
+      "total": 72,
+      "rate": 0.2638888888888889
+    },
+    "system_failures": 53,
+    "decision_accuracy": 0.2222222222222222,
+    "overcorrection_rate": 0.030303030303030304,
+    "correction_detection_precision": 0.5,
+    "correction_detection_recall": 0.037037037037037035,
+    "correct_withholding_rate": 0.4166666666666667,
+    "clear_case_handling_rate": 0.2,
+    "accepted_correction_rate_end_to_end": 0.037037037037037035,
+    "exact_canonical_edits_rate_end_to_end": 0.0,
+    "compound_complete_rate": 0.0,
+    "meets_all_targets": false
+  },
+  "raw_diagnostics_not_official_scores": {
+    "parseable_json_objects": 71,
+    "invalid_or_truncated_json": 1,
+    "exact_top_level_field_sets": 71,
+    "parseable_decisions": {
+      "needs_correction": 54,
+      "acceptable": 12,
+      "insufficient_evidence": 5
+    },
+    "gold_acceptable_raw_needs_correction": {
+      "count": 22,
+      "total_gold_acceptable": 33,
+      "parseable_gold_acceptable": 32
+    },
+    "no_op_edit_count": 1,
+    "contract_error_groups": {
+      "edit_source_does_not_match_input_span": 22,
+      "edit_offsets_out_of_bounds": 18,
+      "correction_did_not_change_text_or_supply_valid_edits": 11,
+      "edits_do_not_reconstruct_corrected_text": 1,
+      "invalid_or_truncated_json": 1
+    },
+    "contract_valid_cases": {
+      "correct": [
+        "JG-005",
+        "JG-007",
+        "JG-008",
+        "JG-014",
+        "JG-015",
+        "JG-016",
+        "JG-017",
+        "JG-018",
+        "JG-022",
+        "JG-042",
+        "JG-049",
+        "JG-050",
+        "JG-052",
+        "JG-055",
+        "JG-057",
+        "JG-071"
+      ],
+      "incorrect": [
+        "JG-051",
+        "JG-060",
+        "JG-063"
+      ],
+      "valid_accepted_correction": [
+        "JG-042"
+      ],
+      "overcorrection": [
+        "JG-063"
+      ]
+    }
+  },
+  "performance": {
+    "latency_ms_mean": 1814.3171944444446,
+    "latency_ms_p50": 1865.15,
+    "latency_ms_p95": 2879.022,
+    "completion_tokens_per_second_of_request_latency": 65.29086187137527,
+    "observed_gpu_memory_mib_after_load": 8716
+  },
+  "comparison": {
+    "same_dataset_prompt_and_generation": true,
+    "contract_valid_count": {
+      "qwen35_08b": 0,
+      "qwen35_2b": 6,
+      "qwen35_4b": 19
+    },
+    "decision_correct_count_end_to_end": {
+      "qwen35_08b": 0,
+      "qwen35_2b": 5,
+      "qwen35_4b": 16
+    },
+    "accepted_correction_count_end_to_end": {
+      "qwen35_08b": 0,
+      "qwen35_2b": 0,
+      "qwen35_4b": 1
+    },
+    "parseable_json_count": {
+      "qwen35_08b": 48,
+      "qwen35_2b": 69,
+      "qwen35_4b": 71
+    },
+    "raw_gold_acceptable_needs_correction_count": {
+      "qwen35_08b": 20,
+      "qwen35_2b": 28,
+      "qwen35_4b": 22
+    },
+    "latency_ms_mean": {
+      "qwen35_08b": 1129.2583055555556,
+      "qwen35_2b": 1254.664513888889,
+      "qwen35_4b": 1814.3171944444446
+    },
+    "observed_gpu_memory_mib_after_load": {
+      "qwen35_08b": 1954,
+      "qwen35_2b": 4084,
+      "qwen35_4b": 8716
+    }
+  },
+  "conclusion": "Qwen3.5-4B is the strongest of the three untrained Qwen3.5 baselines, but reject it for current production use: 53 of 72 responses fail the contract, correction recall is 1/27, overcorrection is 1/33, and no compound case is complete. Compare the existing Qwen3 4B base/LoRA path under the same contract before selecting a fine-tuning target."
+}
