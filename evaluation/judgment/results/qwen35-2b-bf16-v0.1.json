@@ -1,0 +1,130 @@
+{
+  "schema_version": "0.1",
+  "recorded_at": "2026-09-05T16:55:27.868662+00:00",
+  "status": "baseline_complete_contract_failure",
+  "model": {
+    "id": "Qwen/Qwen3.5-2B",
+    "artifact": "unsloth/Qwen3.5-2B-GGUF:BF16",
+    "artifact_revision": "f6d5376be1edb4d416d56da11e5397a961aca8ae",
+    "artifact_sha256": "dc11be2ca4519954a3e4b013ef59497b5522209987d67891851113eda89619f1",
+    "parameter_count_reported_by_server": 1881825088
+  },
+  "dataset": {
+    "id": "judgment-seed-v0.1",
+    "count": 72,
+    "sha256": "f681ba026cfd6eeca86ebf531e1ac94ceed06525b43fca2b19729ef86ff0d12b",
+    "review_status": "user_reviewed",
+    "expert_certified": false
+  },
+  "run": {
+    "run_id": "20260905T164940Z-Qwen-Qwen3.5-2B-d9e8db6d",
+    "output": "evaluation/judgment/runs/qwen35-2b-bf16-full-v01.jsonl",
+    "output_sha256": "89113dff211f7c35735d7a7a0aa1d1572cecd6aa6c9505973e1a83f4c87b0593",
+    "manifest_sha256": "26f426f9e2dcdbd5a5aa4702b783797d833cf3530a9db3f8cc2c26a4868acaf6",
+    "report_json_sha256": "1d6e5ef8815f993d590fe8f660695e408a84674d15f20f641abd77f685955e2e",
+    "report_markdown_sha256": "6f1bebfd5e7a197f9e8c9ec3b5d4edf12764f35d6f77231ab30787d99dfd1cd8",
+    "comparison_json_sha256": "05941799ac2c03eb0d40c187a628eae659d78ebea7d20ab3f72d0aaa90822d83",
+    "comparison_markdown_sha256": "2fe35e1dcc9c0f67d1b60682f99d31e5f23b8d9d521b5f27728cc4f950226aac",
+    "prompt_version": "judgment-v0.1",
+    "prompt_sha256": "c42a0e77214c333eb964df0c96f4a8986b32dffd41a371a6347846c0eca89042",
+    "generation": {
+      "temperature": 0.0,
+      "top_p": 1.0,
+      "max_tokens": 512
+    },
+    "runtime": {
+      "engine": "llama-server",
+      "engine_commit": "ff067f7",
+      "reasoning": "off",
+      "context_size": 8192,
+      "parallel_slots": 1
+    }
+  },
+  "strict_results": {
+    "transport_success": {
+      "count": 72,
+      "total": 72,
+      "rate": 1.0
+    },
+    "contract_valid": {
+      "count": 6,
+      "total": 72,
+      "rate": 0.08333333333333333
+    },
+    "system_failures": 66,
+    "decision_accuracy": 0.06944444444444445,
+    "correction_detection_recall": 0.0,
+    "correct_withholding_rate": 0.16666666666666666,
+    "clear_case_handling_rate": 0.05,
+    "meets_all_targets": false,
+    "note": "Strictly invalid responses are system failures, not grammar decisions. The strict overcorrection value of zero is not interpretable as success because only six responses passed the contract and none was a valid correction decision."
+  },
+  "raw_diagnostics_not_official_scores": {
+    "parseable_json_objects": 69,
+    "invalid_or_truncated_json": 3,
+    "exact_top_level_field_sets": 69,
+    "parseable_decisions": {
+      "needs_correction": 63,
+      "acceptable": 4,
+      "insufficient_evidence": 2
+    },
+    "gold_acceptable_raw_needs_correction": {
+      "count": 28,
+      "total_gold_acceptable": 33,
+      "parseable_gold_acceptable": 31
+    },
+    "no_op_edit_count": 33,
+    "contract_error_groups": {
+      "edit_source_does_not_match_input_span": 36,
+      "correction_did_not_change_text_or_supply_valid_edits": 27,
+      "invalid_or_truncated_json": 3
+    },
+    "contract_valid_cases": {
+      "correct": [
+        "JG-007",
+        "JG-014",
+        "JG-015",
+        "JG-049",
+        "JG-050"
+      ],
+      "incorrect": [
+        "JG-057"
+      ]
+    }
+  },
+  "performance": {
+    "latency_ms_mean": 1254.664513888889,
+    "latency_ms_p50": 1118.132,
+    "latency_ms_p95": 2317.69,
+    "completion_tokens_per_second_of_request_latency": 131.42070016614113,
+    "observed_gpu_memory_mib_after_load": 4084
+  },
+  "comparison_to_qwen35_08b": {
+    "same_dataset_prompt_and_generation": true,
+    "contract_valid_count": {
+      "qwen35_08b": 0,
+      "qwen35_2b": 6
+    },
+    "decision_correct_count_end_to_end": {
+      "qwen35_08b": 0,
+      "qwen35_2b": 5
+    },
+    "parseable_json_count": {
+      "qwen35_08b": 48,
+      "qwen35_2b": 69
+    },
+    "raw_gold_acceptable_needs_correction_count": {
+      "qwen35_08b": 20,
+      "qwen35_2b": 28
+    },
+    "latency_ms_mean": {
+      "qwen35_08b": 1129.2583055555556,
+      "qwen35_2b": 1254.664513888889
+    },
+    "observed_gpu_memory_mib_after_load": {
+      "qwen35_08b": 1954,
+      "qwen35_2b": 4084
+    }
+  },
+  "conclusion": "Reject the untrained 2B model as the current judgment model candidate. It improves JSON and contract completion over 0.8B but still fails 66 of 72 contracts, produces no valid correction decision, and shows severe raw overcorrection. Continue to the 4B baseline under the same strict contract before selecting a fine-tuning target."
+}
