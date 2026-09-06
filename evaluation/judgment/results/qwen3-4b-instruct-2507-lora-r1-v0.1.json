@@ -1,0 +1,112 @@
+{
+  "schema_version": "0.1",
+  "recorded_at": "2026-09-06T13:56:11+00:00",
+  "status": "comparison_complete_rejected_for_judgment_contract",
+  "model": {
+    "id": "teach-language-qwen3-4b-2507-r1",
+    "base_artifact": "Qwen/Qwen3-4B-Instruct-2507",
+    "base_artifact_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "adapter_format": "PEFT LoRA",
+    "adapter_bytes": 132187888,
+    "adapter_sha256": "5ec3b135c2c7c8d5e514f8f99dcd309edb39851395f666cb24a287905c70615f",
+    "adapter_config_sha256": "1d8f34698540712e2d8dd248de592c8f430e8d9146841213bc5c5a08e42d6f66",
+    "rank": 16,
+    "alpha": 16,
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj",
+      "up_proj",
+      "down_proj",
+      "gate_proj"
+    ],
+    "tokenizer_matches_base_sha256": true
+  },
+  "dataset": {
+    "id": "judgment-seed-v0.1",
+    "count": 72,
+    "sha256": "f681ba026cfd6eeca86ebf531e1ac94ceed06525b43fca2b19729ef86ff0d12b",
+    "review_status": "user_reviewed",
+    "expert_certified": false
+  },
+  "run": {
+    "run_id": "20260906T135032Z-teach-language-qwen3-4b-2507-r1-7624d181",
+    "output": "evaluation/judgment/runs/qwen3-4b-instruct-2507-lora-r1-full-v01.jsonl",
+    "output_sha256": "0ab7dd2eda97c0014f6c9db5ca53dd7110ff736936642b58356002c3a3de64f6",
+    "manifest_sha256": "707c13c947710380789ca2a8e20c0f886d941d820517bbd813dfffc92de46c8a",
+    "report_json_sha256": "e5d82200f5e35e8ee207b4ceb84b30223fd28e0a8d151dc05fd9671bd0a4524e",
+    "report_markdown_sha256": "fbe7709ce24bb04e92beba32504c16950ab4312e78534dda17dc4a1d60b9dbaf",
+    "comparison_json_sha256": "66f9d73ee8dc09410544f99871707a2e76b1b2ee4567de565d59343686ebd8f1",
+    "comparison_markdown_sha256": "d1a6934a21aa298faf0d47314e8e80f65a5d79bd0e4e902cc9902321010a54ed",
+    "prompt_version": "judgment-v0.1",
+    "prompt_sha256": "c42a0e77214c333eb964df0c96f4a8986b32dffd41a371a6347846c0eca89042",
+    "generation": {
+      "temperature": 0.0,
+      "top_p": 1.0,
+      "max_tokens": 512
+    },
+    "runtime": {
+      "engine": "vLLM",
+      "engine_version": "0.28.0",
+      "python_version": "3.12.14",
+      "torch_version": "2.13.0+cu130",
+      "transformers_version": "5.16.1",
+      "context_size": 8192,
+      "dtype": "bfloat16",
+      "generation_config": "vllm",
+      "flashinfer_sampler": false,
+      "attention_backend": "FlashAttention 2",
+      "gpu_memory_utilization": 0.5,
+      "seed": 0
+    }
+  },
+  "strict_results": {
+    "transport_success": {
+      "count": 72,
+      "total": 72,
+      "rate": 1.0
+    },
+    "contract_valid": {
+      "count": 0,
+      "total": 72,
+      "rate": 0.0
+    },
+    "system_failures": 72,
+    "decision_accuracy": 0.0,
+    "overcorrection_rate": 0.0,
+    "correction_detection_precision": null,
+    "correction_detection_recall": 0.0,
+    "correct_withholding_rate": 0.0,
+    "clear_case_handling_rate": 0.0,
+    "accepted_correction_rate_end_to_end": 0.0,
+    "exact_canonical_edits_rate_end_to_end": 0.0,
+    "compound_complete_rate": 0.0,
+    "meets_all_targets": false
+  },
+  "raw_diagnostics_not_official_scores": {
+    "parseable_json_objects": 0,
+    "invalid_or_truncated_json": 72,
+    "exact_top_level_field_sets": 0,
+    "contract_error_groups": {
+      "json_parse_error_at_first_character": 70,
+      "json_parse_error_at_second_character": 2
+    },
+    "observed_behavior": "The adapter consistently answered with short Korean tutor prose instead of the required JSON object, often asking the learner to inspect the sentence."
+  },
+  "performance": {
+    "latency_ms_mean": 545.5660277777778,
+    "latency_ms_p50": 471.718,
+    "latency_ms_p95": 1097.07,
+    "completion_tokens_per_second_of_request_latency": 62.37151150408162,
+    "gpu_memory_note": "The adapter shared the already loaded base model and vLLM KV cache, so a separate adapter-only GPU memory figure was not measured."
+  },
+  "comparison": {
+    "same_dataset_prompt_generation_runtime_and_base": true,
+    "base_contract_valid_count": 45,
+    "adapter_contract_valid_count": 0,
+    "base_raw_parseable_json_count": 72,
+    "adapter_raw_parseable_json_count": 0
+  },
+  "conclusion": "Reject this existing general language-tutor LoRA as a Japanese grammar judgment adapter. It completed all HTTP calls but produced zero valid JSON responses, while the exact same base model produced 45/72 valid responses. Do not merge it into the new judgment model; train a separate adapter from the clean Qwen3-4B-Instruct-2507 base."
+}
