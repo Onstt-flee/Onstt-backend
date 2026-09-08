@@ -1,0 +1,108 @@
+{
+  "schema_version": "0.1",
+  "recorded_at": "2026-09-08T06:15:53+00:00",
+  "status": "baseline_complete_rejected_for_judgment_contract",
+  "model": {
+    "id": "llm-jp-3-3.7b-instruct3",
+    "artifact": "llm-jp/llm-jp-3-3.7b-instruct3",
+    "artifact_revision": "f5d5466a3316e0c898b4347ece6557a756921220",
+    "format": "Hugging Face safetensors BF16",
+    "weight_bytes": 7565855592,
+    "weight_shards_sha256": [
+      "397b6c1821c334909dd4ee2d1d382b7c020225d9c403a749b734b94973f9ecca",
+      "8df36a1ef7b9827fc90ae52ef039eefed00920022eebc4201a96dffa97a131df"
+    ],
+    "tokenizer_json_sha256": "d0fcf4e1e7a08e855273824678363335b0cd707937332ec1cc48eee259065219"
+  },
+  "dataset": {
+    "id": "judgment-seed-v0.1",
+    "count": 72,
+    "sha256": "f681ba026cfd6eeca86ebf531e1ac94ceed06525b43fca2b19729ef86ff0d12b",
+    "review_status": "user_reviewed",
+    "expert_certified": false
+  },
+  "run": {
+    "run_id": "20260908T061058Z-llm-jp-llm-jp-3-3.7b-instruct3-57b379ec",
+    "output": "evaluation/judgment/runs/llm-jp-3-37b-instruct3-full-v01.jsonl",
+    "output_sha256": "36e0aea9a95020be5cc0b5a95c88d41557a7015616af46fddb4aa2122fde0934",
+    "manifest_sha256": "2198e7dee5ea26d0144155d642cb137451105d97a5dbe41bbd8fcd18b44cbdc4",
+    "report_json_sha256": "8f7d6c7638c05ddbe80ae59bdf9ef2876c04af333c5b623a480f7519c5a7bce1",
+    "report_markdown_sha256": "d31151d298f02b474c77defa47bda22318fe9e64eb6c27fe9bb5b247cd8edbb1",
+    "prompt_version": "judgment-v0.1",
+    "prompt_sha256": "c42a0e77214c333eb964df0c96f4a8986b32dffd41a371a6347846c0eca89042",
+    "chat_template_sha256": "a98ea8a6199642352918973f6fba9b79df8ddac2c0ef5f9d7df82b90b6734c20",
+    "generation": {"temperature": 0.0, "top_p": 1.0, "max_tokens": 512},
+    "runtime": {
+      "engine": "vLLM",
+      "engine_version": "0.28.0",
+      "python_version": "3.12.14",
+      "torch_version": "2.13.0+cu130",
+      "transformers_version": "5.16.1",
+      "context_size": 4096,
+      "dtype": "bfloat16",
+      "generation_config": "vllm",
+      "flashinfer_sampler": false,
+      "attention_backend": "FlashAttention 2",
+      "gpu_memory_utilization": 0.5,
+      "seed": 0
+    }
+  },
+  "template_compatibility": {
+    "method": "The unchanged system and user messages were rendered with the same system-preserving llm-jp instruction template used for the 1.8B test.",
+    "comparison_caveat": "Dataset, message semantics, prompt version, and generation settings are unchanged; the rendered template is model-family specific."
+  },
+  "strict_results": {
+    "transport_success": {"count": 72, "total": 72, "rate": 1.0},
+    "contract_valid": {"count": 0, "total": 72, "rate": 0.0},
+    "system_failures": 72,
+    "decision_accuracy": 0.0,
+    "correction_detection_precision": null,
+    "correction_detection_recall": 0.0,
+    "accepted_correction_rate_end_to_end": 0.0,
+    "compound_complete_rate": 0.0,
+    "meets_all_targets": false
+  },
+  "raw_diagnostics_not_official_scores": {
+    "parseable_json_objects": 67,
+    "invalid_or_truncated_json": 5,
+    "recognized_decisions": 67,
+    "raw_decision_correct": {"count": 31, "total": 72},
+    "raw_overcorrections": 0,
+    "raw_correction_detected": {"count": 0, "total": 27},
+    "raw_accepted_correction": {"count": 0, "total": 27},
+    "completion_hit_max_tokens": {"count": 5, "total": 72},
+    "unique_raw_outputs": 71,
+    "decision_counts": {"acceptable": 66, "insufficient_evidence": 1, "needs_correction": 0},
+    "contract_error_groups": {
+      "non_correction_changed_text": 51,
+      "non_correction_contained_edits": 16,
+      "invalid_or_truncated_json": 5
+    },
+    "observed_behavior": "Most outputs were parseable JSON, but the model never selected needs_correction and often replaced the Japanese input with unrelated or translated text while claiming acceptable."
+  },
+  "performance": {
+    "latency_ms_mean": 1746.298875,
+    "latency_ms_p50": 1333.444,
+    "latency_ms_p95": 6088.8,
+    "prompt_tokens": 39176,
+    "completion_tokens": 10592,
+    "total_tokens": 49768,
+    "completion_tokens_per_second_of_request_latency": 84.24165715110543,
+    "model_weights_gib_reported_by_server": 7.05,
+    "observed_vllm_engine_gpu_memory_mib": 24432,
+    "gpu_memory_note": "vLLM reserved KV cache up to gpu_memory_utilization=0.50; the process figure is not model-only memory."
+  },
+  "comparison": {
+    "strict_contract_valid_count": {
+      "qwen3_4b_base": 45,
+      "qwen3_8b_base": 49,
+      "llm_jp_3_18b_instruct3": 0,
+      "llm_jp_3_37b_instruct3": 0
+    },
+    "raw_decision_correct_count": {
+      "llm_jp_3_18b_instruct3": 25,
+      "llm_jp_3_37b_instruct3": 31
+    }
+  },
+  "conclusion": "Reject llm-jp-3-3.7b-instruct3 as the current judgment baseline and LoRA candidate. It improved parseability and raw decision count over 1.8B but produced zero contract-valid responses and detected none of the 27 correction-required cases."
+}
