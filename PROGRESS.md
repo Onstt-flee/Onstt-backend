@@ -3,7 +3,7 @@
 기준일: 2026-09-08
 
 이 문서는 실제로 완료한 작업, 검증 범위, 미해결 문제, 앞으로의 개발 방향을 구분한다.
-모델 학습과 운영 판단 파이프라인 통합은 아직 시작하지 않았다. 독립 환경에서 Qwen3.5 0.8B·2B·4B, Qwen3-4B-Instruct-2507 베이스, Qwen3-8B 베이스, RakutenAI-2.0-mini-instruct, llm-jp-3 1.8B·3.7B와 기존 언어튜터 LoRA 평가를 완료했다.
+모델 학습과 운영 판단 파이프라인 통합은 아직 시작하지 않았다. 독립 환경에서 Qwen3.5 0.8B·2B·4B, Qwen3-4B-Instruct-2507 베이스, Qwen3-8B 베이스, RakutenAI-2.0-mini-instruct, llm-jp-3 1.8B·3.7B, Phi-4-mini-instruct와 기존 언어튜터 LoRA 평가를 완료했다.
 
 ## 1. 현재 상태 요약
 
@@ -16,14 +16,14 @@
 | 실제 RAG 예문 검색 | 3,003개 자료 로딩·검색 확인 |
 | API 통합 검증 | 메모리 DB + 실제 RAG + 모의 LLM으로 확인 |
 | Swagger 테스트 서버 | 앞서 8001번에서 실행·HTTP 200 확인; 문서 작성 시점에는 접속되지 않음 |
-| 실제 LLM 서버 | llama.cpp로 Qwen3.5 세 모델, vLLM 0.28.0으로 Qwen3 4B·8B, RakutenAI 1.5B, llm-jp 1.8B·3.7B와 기존 LoRA를 127.0.0.1:1234에서 실행·검증; 임시 서버 종료 |
+| 실제 LLM 서버 | llama.cpp로 Qwen3.5 세 모델, vLLM 0.28.0으로 Qwen3 4B·8B, RakutenAI 1.5B, llm-jp 1.8B·3.7B, Phi-4 mini와 기존 LoRA를 127.0.0.1:1234에서 실행·검증; 임시 서버 종료 |
 | 기존 언어튜터 LoRA | 72/72 전송 성공, 엄격 JSON 계약 0/72로 판단모델 재사용 부적합 판정 |
-| 신규 도메인 판단모델 | Qwen3-8B가 엄격 계약 49/72·판단 정답 39/72로 최고이나 목표 미달. 원시 판단은 58/72, 허용 교정문은 4B와 같은 17/27이라 첫 LoRA 효율 후보는 4B 유지 |
-| 최소 판단 평가셋 | 72개 합성 문항 익명 사용자 검수 완료, Qwen3.5 세 모델·Qwen3 4B/8B·RakutenAI 1.5B·llm-jp 1.8B/3.7B·기존 LoRA 실행 완료, 전문가 검수는 미실행 |
-| 독립 모델 실행기 | OpenAI 호환 실제 9개 후보 각 72문항 실행·원시 응답·manifest 저장 완료 |
+| 신규 도메인 판단모델 | Qwen3-8B가 엄격 계약 49/72·판단 정답 39/72로 최고이나 목표 미달. 원시 판단은 58/72, 허용 교정문은 4B와 같은 17/27이라 첫 LoRA 베이스는 Qwen3-4B로 확정 |
+| 최소 판단 평가셋 | 72개 합성 문항 익명 사용자 검수 완료, Qwen3.5 세 모델·Qwen3 4B/8B·RakutenAI 1.5B·llm-jp 1.8B/3.7B·Phi-4 mini·기존 LoRA 실행 완료, 전문가 검수는 미실행 |
+| 독립 모델 실행기 | OpenAI 호환 실제 10개 후보 각 72문항 실행·원시 응답·manifest 저장 완료 |
 | 독립 오프라인 채점기 | 산출물 무결성·핵심 지표·신뢰구간·모델 비교·JSON/Markdown 보고서 구현 |
 
-79개 테스트는 코드·데이터·실행기·채점기를 검증한다. RTX A6000에서 Qwen3.5-0.8B·2B·4B, Qwen3-4B, Qwen3-8B, RakutenAI-1.5B, llm-jp-1.8B·3.7B, 기존 LoRA의 엄격 계약 응답은 각각 0/72·6/72·19/72·45/72·49/72·0/72·0/72·0/72·0/72였다. 가장 나은 8B도 잠정 목표를 통과하지 못했으며, 이는 일본어 전문가 인증이나 운영 품질 통과를 의미하지 않는다.
+79개 테스트는 코드·데이터·실행기·채점기를 검증한다. RTX A6000에서 Qwen3.5-0.8B·2B·4B, Qwen3-4B, Qwen3-8B, RakutenAI-1.5B, llm-jp-1.8B·3.7B, Phi-4 mini, 기존 LoRA의 엄격 계약 응답은 각각 0/72·6/72·19/72·45/72·49/72·0/72·0/72·0/72·20/72·0/72였다. 가장 나은 8B도 잠정 목표를 통과하지 못했으며, 이는 일본어 전문가 인증이나 운영 품질 통과를 의미하지 않는다.
 
 ## 2. 완료한 기존 오류 수정
 
@@ -236,7 +236,7 @@ venv/bin/python -m pip check
 - 원시 응답 72개는 모두 정확한 최상위 필드의 JSON이었다. 계약을 무시한 진단에서 판단 58/72, 교정 탐지 정밀도 21/26·재현율 21/27, 허용 교정문 17/27이었다. 정상 33개 중 4개를 교정 대상으로 판단했고, 23건은 대부분 Unicode edit의 `source`와 원문 구간 불일치 때문에 엄격 계약에 실패했다.
 - 4B 대비 엄격 계약은 4건, 엄격 판단 정답은 3건 늘었지만 원시 판단은 1건만 증가했고 허용 교정문은 17/27로 같았다. 평균 지연시간은 약 2,035ms로 4B의 약 1,399ms보다 45% 높았고 요청 지연시간 기준 생성 처리량은 약 43% 낮았다.
 - 서버 로그의 모델 가중치 적재량은 15.27GiB, vLLM 엔진 프로세스의 관측 GPU 메모리는 약 24,212MiB였다. 후자는 50% KV 캐시 예약을 포함하므로 4B의 프로세스 메모리와 모델 크기 지표로 직접 비교하지 않는다.
-- 엄격 점수의 최고 기준선은 8B지만 크기·속도 대비 실질 개선이 작다. 첫 판단 전용 LoRA는 Qwen3-4B를 효율 후보로 유지하고, 8B는 학습 후 스케일 효과를 확인할 비교 기준선으로 둔다.
+- 엄격 점수의 최고 기준선은 8B지만 크기·속도 대비 실질 개선이 작다. 최종 비교 결과 첫 판단 전용 LoRA 베이스는 Qwen3-4B로 확정했고, 8B는 학습 후 스케일 효과를 확인할 비교 기준선으로 둔다.
 - 재현 가능한 요약은 [Qwen3-8B 베이스 결과](evaluation/judgment/results/qwen3-8b-base-v0.1.json)에 기록했다. 원시 실행·개별 보고서·4B 비교 보고서는 Git 제외 경로 `evaluation/judgment/runs/`에 보존한다.
 
 ### 2026-09-08 추가 진행: RakutenAI-2.0-mini-instruct 기준선
@@ -247,7 +247,7 @@ venv/bin/python -m pip check
 - 나머지 69개는 JSON이 아니었고, 55개는 512토큰 한도까지 한국어 시스템 프롬프트·입력·기호를 반복했다. 따라서 과교정 0% 같은 엄격 지표는 모든 응답이 시스템 실패인 결과일 뿐 성능으로 해석하지 않는다.
 - 평균 지연시간은 약 2,594ms, p50 2,837ms, p95 2,849ms였다. 모델 생성 속도는 빨랐지만 불필요한 반복으로 총 33,658 completion token을 생성했다.
 - 공식 모델 카드가 지원 언어로 일본어와 영어를 명시하고 한국어는 명시하지 않는다. 한국어 시스템 지시와 `reason_ko`는 현재 제품 계약의 일부이므로 모델별로 프롬프트를 번역하지 않고 동일 조건 결과를 유지했다.
-- 현재 판단모델과 LoRA 후보에서 제외한다. 남은 추가 후보인 llm-jp 1.8B·3.7B와 Phi-4-mini를 동일 시험으로 비교한 뒤 첫 LoRA 대상을 최종 확정한다.
+- 현재 판단모델과 LoRA 후보에서 제외했다. 이후 llm-jp 1.8B·3.7B와 Phi-4-mini도 동일 시험으로 비교해 첫 LoRA 대상을 확정했다.
 - 재현 가능한 요약은 [RakutenAI 1.5B 결과](evaluation/judgment/results/rakutenai2-mini-instruct-v0.1.json)에 기록했다. 원시 실행·보고서·Qwen3 비교 보고서는 Git 제외 경로 `evaluation/judgment/runs/`에 보존한다.
 
 ### 2026-09-08 추가 진행: llm-jp-3-1.8b-instruct3 기준선
@@ -255,15 +255,22 @@ venv/bin/python -m pip check
 - 고정 revision `720a59dd7757408f4a38ddcbb80a66ddf4f8cc63`의 BF16 가중치(3,735,253,776바이트, SHA-256 `69954cf696ba84d825a387065b241848a9ca45ae348377fb6d80178ed3c9d481`)를 vLLM 0.28.0에서 실행했다.
 - 공식 채팅 템플릿은 전달된 system 내용을 고정 일본어 문장으로 바꾸므로 최초 실행의 0/72는 성능 비교로 쓰지 않았다. 같은 메시지를 모델의 `### 指示`/`### 応答` 형식에 보존한 호환 템플릿으로 재실행했다.
 - 호환 실행도 전송 72/72, 엄격 계약 0/72였다. JSON 파싱은 62건 가능했지만 `needs_correction`을 한 번도 선택하지 않아 교정 필요 27건을 전부 놓쳤고, 원시 판단 정답은 25/72였다.
-- 현재 판단모델과 LoRA 후보에서 제외한다. 남은 llm-jp 3.7B와 Phi-4-mini를 같은 시험으로 확인한다.
+- 현재 판단모델과 LoRA 후보에서 제외했다. 이후 llm-jp 3.7B와 Phi-4-mini도 같은 시험으로 확인했다.
 - 재현 가능한 요약은 [llm-jp 1.8B 결과](evaluation/judgment/results/llm-jp-3-18b-instruct3-v0.1.json)에 기록했다.
 
 ### 2026-09-08 추가 진행: llm-jp-3-3.7b-instruct3 기준선
 
 - 1.8B와 같은 시스템 지시 보존 템플릿으로 실행했다. 전송은 72/72 성공했지만 엄격 계약은 0/72였다.
 - JSON 67건을 파싱했고 원시 판단은 31/72였으나, `needs_correction`을 한 번도 선택하지 않아 교정 필요 27건을 모두 놓쳤다.
-- 1.8B보다 파싱과 원시 판단은 나아졌지만 현재 판단모델·LoRA 후보에서는 제외한다. 남은 Phi-4-mini를 확인한다.
+- 1.8B보다 파싱과 원시 판단은 나아졌지만 현재 판단모델·LoRA 후보에서는 제외했다. 이후 Phi-4-mini까지 확인했다.
 - 재현 가능한 요약은 [llm-jp 3.7B 결과](evaluation/judgment/results/llm-jp-3-37b-instruct3-v0.1.json)에 기록했다.
+
+### 2026-09-08 추가 진행: Phi-4-mini-instruct 및 최종 기준선 비교
+
+- 공식 시스템 메시지 템플릿과 원래 단문 RoPE 구간인 context 4,096로 실행했다. 전송 72/72, 엄격 계약 20/72, 판단 정답 14/72로 전체 10개 중 엄격 순위 3위였다.
+- 원시 JSON에서는 판단 38/72, 교정 탐지 17/27, 허용 교정문 11/27이었지만 정상 33개 중 14개를 과교정했다. 엄격 실패의 주원인은 Unicode edit 원문 불일치 27건이다.
+- Qwen3-4B는 원시 판단 57/72, 허용 교정문 17/27, 원시 과교정 4/33으로 Phi보다 안정적이다. Qwen3-8B의 추가 이득은 작으므로 첫 판단 전용 LoRA 베이스를 `Qwen/Qwen3-4B-Instruct-2507`로 확정한다.
+- 재현 가능한 요약은 [Phi-4 mini 결과](evaluation/judgment/results/phi-4-mini-instruct-v0.1.json)에 기록했고, 10개 최종 비교 보고서는 Git 제외 경로 `evaluation/judgment/runs/`에 보존한다.
 
 ### 1단계: 최소 판단 규격과 독립 시험지
 
@@ -280,7 +287,7 @@ venv/bin/python -m pip check
 - 첫 크기별 후보 Qwen3.5 0.8B·2B·4B와 추가 비교용 Qwen3-8B를 같은 문항과 생성 조건으로 평가했다.
 - Qwen3.5 9B는 더 큰 모델 기준선·로컬 자료 생성용 후보로 보류한다.
 - 기존 Qwen3-4B-Instruct-2507 단독과 기존 언어튜터 LoRA를 재사용 효과 비교에 포함했고 같은 조건의 72문항 실행을 완료했다.
-- 9개 후보 비교를 완료했다. Qwen3-8B가 엄격 계약 49/72로 가장 높지만 4B 대비 실질 개선은 작다. RakutenAI 1.5B와 llm-jp 1.8B·3.7B는 계약 0/72로 제외했고, Phi-4-mini 확인 후 첫 LoRA 후보를 확정한다.
+- 10개 후보 비교를 완료했다. Qwen3-8B가 엄격 계약 49/72로 가장 높지만 Qwen3-4B 대비 실질 개선이 작다. Phi-4 mini는 20/72로 3위지만 원시 과교정이 14/33이다. 첫 판단 전용 LoRA 베이스는 깨끗한 Qwen3-4B-Instruct-2507로 확정한다.
 
 ### 3단계: 유망 소형 모델 하나의 LoRA 학습
 
@@ -335,6 +342,7 @@ venv/bin/python -m pip check
 - [RakutenAI-2.0-mini-instruct 모델 카드](https://huggingface.co/Rakuten/RakutenAI-2.0-mini-instruct)
 - [llm-jp-3-1.8b-instruct3 모델 카드](https://huggingface.co/llm-jp/llm-jp-3-1.8b-instruct3)
 - [llm-jp-3-3.7b-instruct3 모델 카드](https://huggingface.co/llm-jp/llm-jp-3-3.7b-instruct3)
+- [Microsoft Phi-4-mini-instruct 모델 카드](https://huggingface.co/microsoft/Phi-4-mini-instruct)
 - [vLLM OpenAI 호환 서버](https://docs.vllm.ai/en/latest/serving/openai_compatible_server/)
 - [vLLM LoRA 지원](https://docs.vllm.ai/en/stable/features/lora/)
 - [Qwen3.5-0.8B 모델 카드](https://huggingface.co/Qwen/Qwen3.5-0.8B)
