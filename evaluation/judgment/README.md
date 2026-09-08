@@ -1,6 +1,6 @@
 # 일본어 판단모델 최소 평가셋 v0.1
 
-상태: **72개 합성 문항의 익명 사용자 검수 완료본**. 기존 60개에 경계 문항 12개를 추가했다. Qwen3.5 0.8B·2B·4B, Qwen3-4B-Instruct-2507 베이스, Qwen3-8B 베이스, RakutenAI-2.0-mini-instruct와 기존 언어튜터 LoRA의 오프라인 추론·채점을 완료했으며, 일본어 전문가 검수와 판단 전용 모델 학습은 아직 실행하지 않았다.
+상태: **72개 합성 문항의 익명 사용자 검수 완료본**. 기존 60개에 경계 문항 12개를 추가했다. Qwen3.5 0.8B·2B·4B, Qwen3-4B-Instruct-2507 베이스, Qwen3-8B 베이스, RakutenAI-2.0-mini-instruct, llm-jp-3-1.8b-instruct3와 기존 언어튜터 LoRA의 오프라인 추론·채점을 완료했으며, 일본어 전문가 검수와 판단 전용 모델 학습은 아직 실행하지 않았다.
 이 폴더는 운영 `analyzer` 및 DB와 분리된 오프라인 평가 도구와 결과 요약을 담는다.
 
 ## 1. 지금 준비한 것
@@ -195,9 +195,10 @@ RAG JSON이 바뀌면 다시 검사해야 한다. DB·음성·pickle·모델 가
 12. Qwen3-8B 베이스는 전송 72/72, 엄격 계약 49/72, 판단 정답 39/72였다. 원시 판단 58/72, 허용 교정문 17/27로 엄격 점수는 가장 높지만 4B 대비 실질 개선은 작았다.
 13. 8B의 엄격 교정 탐지 정밀도는 2/3, 재현율은 2/27, 과교정은 1/33, 복합 오류 완전 교정은 0/4였다. 원시 판단에서도 정상 33개 중 4개를 교정 대상으로 판단했으며 모든 목표에 미달했다.
 14. RakutenAI-2.0-mini-instruct는 전송 72/72였지만 엄격 계약은 0/72였다. 직접 파싱 가능한 JSON 3개도 판단 대신 입력 필드를 그대로 반환했고, 55개 응답은 512 completion token 한도에 도달했다.
-15. 같은 4B 베이스에 기존 일반 언어튜터 LoRA를 적용하면 전송은 72/72였지만 JSON과 엄격 계약이 모두 0/72였다. 새 판단모델에는 재사용하지 않는다.
-16. 첫 LoRA의 효율 후보는 깨끗한 Qwen3-4B 베이스로 유지하고 8B는 스케일 비교 기준선으로 둔다. llm-jp 1.8B·3.7B와 Phi-4-mini까지 같은 조건으로 확인한 뒤 최종 확정한다.
-17. 상세한 고정 조건과 진단은 [Qwen3.5 0.8B](results/qwen35-08b-bf16-v0.1.json), [Qwen3.5 2B](results/qwen35-2b-bf16-v0.1.json), [Qwen3.5 4B](results/qwen35-4b-bf16-v0.1.json), [Qwen3 4B 베이스](results/qwen3-4b-instruct-2507-base-v0.1.json), [Qwen3 8B 베이스](results/qwen3-8b-base-v0.1.json), [RakutenAI 1.5B](results/rakutenai2-mini-instruct-v0.1.json), [기존 언어튜터 LoRA](results/qwen3-4b-instruct-2507-lora-r1-v0.1.json)에 기록했다.
+15. llm-jp-3-1.8b-instruct3는 system 내용을 버리는 공식 템플릿을 보정한 뒤에도 전송 72/72, 엄격 계약 0/72였다. 파싱 가능한 JSON은 62건이었지만 교정 필요 판단은 0건이었다.
+16. 같은 4B 베이스에 기존 일반 언어튜터 LoRA를 적용하면 전송은 72/72였지만 JSON과 엄격 계약이 모두 0/72였다. 새 판단모델에는 재사용하지 않는다.
+17. 첫 LoRA의 효율 후보는 깨끗한 Qwen3-4B 베이스로 유지하고 8B는 스케일 비교 기준선으로 둔다. llm-jp 3.7B와 Phi-4-mini까지 같은 조건으로 확인한 뒤 최종 확정한다.
+18. 상세한 고정 조건과 진단은 [Qwen3.5 0.8B](results/qwen35-08b-bf16-v0.1.json), [Qwen3.5 2B](results/qwen35-2b-bf16-v0.1.json), [Qwen3.5 4B](results/qwen35-4b-bf16-v0.1.json), [Qwen3 4B 베이스](results/qwen3-4b-instruct-2507-base-v0.1.json), [Qwen3 8B 베이스](results/qwen3-8b-base-v0.1.json), [RakutenAI 1.5B](results/rakutenai2-mini-instruct-v0.1.json), [llm-jp 1.8B](results/llm-jp-3-18b-instruct3-v0.1.json), [기존 언어튜터 LoRA](results/qwen3-4b-instruct-2507-lora-r1-v0.1.json)에 기록했다.
 
 이번 자동 검사 통과는 문법 성능 측정이 아니다. 문법상 허용 33문항에서는 오교정 1건만으로도 관측 비율이 약 3.03% 변한다. 이 중에는 별도 표기 검수가 필요한 사례도 있다.
 목표 과교정률 2% 이하를 입증하거나 운영 성능을 인증하기에는 표본이 작고 N4 오류 사례도 3개뿐이다.
