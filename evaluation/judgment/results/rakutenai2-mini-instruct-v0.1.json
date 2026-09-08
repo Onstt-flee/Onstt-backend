@@ -1,0 +1,118 @@
+{
+  "schema_version": "0.1",
+  "recorded_at": "2026-09-08T01:19:30+00:00",
+  "status": "baseline_complete_rejected_for_judgment_contract",
+  "model": {
+    "id": "rakutenai2-mini-instruct",
+    "artifact": "Rakuten/RakutenAI-2.0-mini-instruct",
+    "artifact_revision": "6d902489587d324b7d5e201299e4e1a169f3a40b",
+    "format": "Hugging Face safetensors BF16",
+    "weight_bytes": 3069389424,
+    "weight_sha256": "724214f9446b39dac612c39054ed33323ecb6c021ce6a639fcf14de9aa414573",
+    "tokenizer_json_sha256": "bfff7a79d395b2fe2cb0cc87316815c2e8242ce319398201b30572f9c1d3c553",
+    "tokenizer_model_sha256": "7978987401ef447724ded0544d048831954b7517a96555ce1593149e3678b6dc"
+  },
+  "dataset": {
+    "id": "judgment-seed-v0.1",
+    "count": 72,
+    "sha256": "f681ba026cfd6eeca86ebf531e1ac94ceed06525b43fca2b19729ef86ff0d12b",
+    "review_status": "user_reviewed",
+    "expert_certified": false
+  },
+  "run": {
+    "run_id": "20260908T011344Z-rakuten-rakutenai-2.0-mini-instruct-6591baa1",
+    "output": "evaluation/judgment/runs/rakutenai-2.0-mini-instruct-full-v01.jsonl",
+    "output_sha256": "0d587c1ebee5adf0550dac2eba71351065cd1ff0fb079e3fd9ba3ce043d68876",
+    "manifest_sha256": "1ef66533fcfebe507e2176a4bf19a2f5cde3e5fa5de83235a7d4f9d10be75cd0",
+    "report_json_sha256": "22271970fe1fbffd12b53cc01d8ceea38ffc6f096da4758af23e0f0fc031c619",
+    "report_markdown_sha256": "27fdc774feba889323ec6b4334c146d738869e09e5b4a972319c47ab49a52481",
+    "comparison_json_sha256": "a1c9ee4784b040d00d89736efb1b0e752839118f035595593f30df1312725bcb",
+    "comparison_markdown_sha256": "5e1d274ceb0495a7cfa4d573755e0e336f0b09cdbcd4e7e04b378817e0c26e88",
+    "prompt_version": "judgment-v0.1",
+    "prompt_sha256": "c42a0e77214c333eb964df0c96f4a8986b32dffd41a371a6347846c0eca89042",
+    "generation": {
+      "temperature": 0.0,
+      "top_p": 1.0,
+      "max_tokens": 512
+    },
+    "runtime": {
+      "engine": "vLLM",
+      "engine_version": "0.28.0",
+      "python_version": "3.12.14",
+      "torch_version": "2.13.0+cu130",
+      "transformers_version": "5.16.1",
+      "context_size": 8192,
+      "dtype": "bfloat16",
+      "generation_config": "vllm",
+      "flashinfer_sampler": false,
+      "attention_backend": "FlashAttention 2",
+      "gpu_memory_utilization": 0.5,
+      "seed": 0
+    }
+  },
+  "strict_results": {
+    "transport_success": {
+      "count": 72,
+      "total": 72,
+      "rate": 1.0
+    },
+    "contract_valid": {
+      "count": 0,
+      "total": 72,
+      "rate": 0.0
+    },
+    "system_failures": 72,
+    "decision_accuracy": 0.0,
+    "overcorrection_rate": 0.0,
+    "correction_detection_precision": null,
+    "correction_detection_recall": 0.0,
+    "correct_withholding_rate": 0.0,
+    "clear_case_handling_rate": 0.0,
+    "accepted_correction_rate_end_to_end": 0.0,
+    "exact_canonical_edits_rate_end_to_end": 0.0,
+    "compound_complete_rate": 0.0,
+    "meets_all_targets": false
+  },
+  "raw_diagnostics_not_official_scores": {
+    "parseable_json_objects": 3,
+    "invalid_or_truncated_json": 69,
+    "exact_top_level_field_sets": 0,
+    "completion_hit_max_tokens": {
+      "count": 55,
+      "total": 72
+    },
+    "unique_raw_outputs": 64,
+    "contract_error_groups": {
+      "json_parse_error_at_second_character": 69,
+      "wrong_top_level_fields_input_echo": 3
+    },
+    "parseable_json_ids": ["JG-029", "JG-043", "JG-044"],
+    "observed_behavior": "Most responses repeated parts of the Korean system prompt, the learner input, or symbols instead of returning the required JSON. The three directly parseable JSON objects echoed text, context, and learner_level rather than producing a judgment. This model card lists Japanese and English, not Korean; the unchanged Korean judgment contract remains an intentional production-relevant requirement."
+  },
+  "performance": {
+    "latency_ms_mean": 2593.5444583333333,
+    "latency_ms_p50": 2837.139,
+    "latency_ms_p95": 2848.975,
+    "prompt_tokens": 59466,
+    "completion_tokens": 33658,
+    "total_tokens": 93124,
+    "completion_tokens_per_second_of_request_latency": 180.24453782551691,
+    "model_weights_gib_reported_by_server": 2.88,
+    "observed_vllm_engine_gpu_memory_mib": 24750,
+    "gpu_memory_note": "vLLM reserved KV cache up to gpu_memory_utilization=0.50; the process figure is not a model-only memory measurement."
+  },
+  "comparison": {
+    "same_dataset_prompt_and_generation": true,
+    "strict_contract_valid_count": {
+      "qwen3_4b_base": 45,
+      "qwen3_8b_base": 49,
+      "rakutenai2_mini_instruct": 0
+    },
+    "strict_decision_correct_count_end_to_end": {
+      "qwen3_4b_base": 36,
+      "qwen3_8b_base": 39,
+      "rakutenai2_mini_instruct": 0
+    }
+  },
+  "conclusion": "Reject RakutenAI-2.0-mini-instruct as the current Korean-instructed Japanese grammar judgment baseline. It completed all HTTP calls but produced zero contract-valid judgments; only three outputs were directly parseable JSON and all three echoed the input object. Do not fine-tune this candidate before testing the remaining small Japanese and multilingual families under the same fixed benchmark."
+}
