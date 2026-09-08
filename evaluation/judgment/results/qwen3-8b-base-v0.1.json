@@ -1,0 +1,210 @@
+{
+  "schema_version": "0.1",
+  "recorded_at": "2026-09-06T14:47:24+00:00",
+  "status": "baseline_complete_below_targets_marginal_gain_over_4b",
+  "model": {
+    "id": "qwen3-8b-base",
+    "artifact": "Qwen/Qwen3-8B",
+    "artifact_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+    "format": "Hugging Face safetensors BF16",
+    "model_index_sha256": "f9fdbcb91c23971c13ec5d5f2573d2349e8f61f2f049371ec699281748fdb1bc",
+    "weight_shards": [
+      {
+        "name": "model-00001-of-00005.safetensors",
+        "bytes": 3996250744,
+        "sha256": "31d6a825ae35f11fb85b195b4c42c146c051e446433125a215336abdf95cbf5f"
+      },
+      {
+        "name": "model-00002-of-00005.safetensors",
+        "bytes": 3993160032,
+        "sha256": "5991236cea6fe21f3d43cab0f0e84448734fbbe0789816202989f2ddc9d18282"
+      },
+      {
+        "name": "model-00003-of-00005.safetensors",
+        "bytes": 3959604768,
+        "sha256": "c5185c4794be2d8a9784d5753c9922db38df478ce11f9ed0b415b7304d896836"
+      },
+      {
+        "name": "model-00004-of-00005.safetensors",
+        "bytes": 3187841392,
+        "sha256": "b5ee7de71fbf17db3d5704e0c8f2bc7d005ca9e1d7ca2aeb19827b0cfcaa917a"
+      },
+      {
+        "name": "model-00005-of-00005.safetensors",
+        "bytes": 1244659840,
+        "sha256": "20c2d6366ab85c90786ccdd829cd2b9e7d30ef3b2ebbb998280e7e4014b542ff"
+      }
+    ],
+    "total_weight_bytes": 16381470720,
+    "tokenizer_sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4"
+  },
+  "dataset": {
+    "id": "judgment-seed-v0.1",
+    "count": 72,
+    "sha256": "f681ba026cfd6eeca86ebf531e1ac94ceed06525b43fca2b19729ef86ff0d12b",
+    "review_status": "user_reviewed",
+    "expert_certified": false
+  },
+  "run": {
+    "run_id": "20260906T144055Z-qwen-qwen3-8b-5c8d02a9",
+    "output": "evaluation/judgment/runs/qwen3-8b-base-full-v01.jsonl",
+    "output_sha256": "d4b4beec0eb77ce60dd3b683fda08bd1d4fc7f2fe9ea5025a285e283d3064a51",
+    "manifest_sha256": "b046b499fa707a3eeab4561906b7ef355ba7303559cdb9b58ea59905782cb299",
+    "report_json_sha256": "07312b665aa9ec2e6be32b43a125701508a286b7a5fc49c9385ee1ddbbdb8437",
+    "report_markdown_sha256": "c2bd8b83e5f3ba0e4c6cf0cb6794e153032438cc555232fdc7d26a812a4109d5",
+    "comparison_json_sha256": "f3ef39a9d8f1d5eeba5a73de2ec15bb5c3a2f743e2389462eb4b0dd7c777ab8c",
+    "comparison_markdown_sha256": "5ece0f2d7cfeece8b9aae37b63e7d5f3d73e98439b9d6798cc92a7f170912203",
+    "prompt_version": "judgment-v0.1",
+    "prompt_sha256": "c42a0e77214c333eb964df0c96f4a8986b32dffd41a371a6347846c0eca89042",
+    "generation": {
+      "temperature": 0.0,
+      "top_p": 1.0,
+      "max_tokens": 512
+    },
+    "runtime": {
+      "engine": "vLLM",
+      "engine_version": "0.28.0",
+      "python_version": "3.12.14",
+      "torch_version": "2.13.0+cu130",
+      "transformers_version": "5.16.1",
+      "context_size": 8192,
+      "dtype": "bfloat16",
+      "generation_config": "vllm",
+      "default_chat_template_kwargs": {
+        "enable_thinking": false
+      },
+      "flashinfer_sampler": false,
+      "attention_backend": "FlashAttention 2",
+      "gpu_memory_utilization": 0.5,
+      "seed": 0
+    }
+  },
+  "strict_results": {
+    "transport_success": {
+      "count": 72,
+      "total": 72,
+      "rate": 1.0
+    },
+    "contract_valid": {
+      "count": 49,
+      "total": 72,
+      "rate": 0.6805555555555556
+    },
+    "system_failures": 23,
+    "decision_accuracy": 0.5416666666666666,
+    "overcorrection_rate": 0.030303030303030304,
+    "correction_detection_precision": 0.6666666666666666,
+    "correction_detection_recall": 0.07407407407407407,
+    "correct_withholding_rate": 0.6666666666666666,
+    "clear_case_handling_rate": 0.6333333333333333,
+    "accepted_correction_rate_end_to_end": 0.07407407407407407,
+    "exact_canonical_edits_rate_end_to_end": 0.0,
+    "compound_complete_rate": 0.0,
+    "meets_all_targets": false
+  },
+  "raw_diagnostics_not_official_scores": {
+    "parseable_json_objects": 72,
+    "invalid_or_truncated_json": 0,
+    "exact_top_level_field_sets": 72,
+    "parseable_decisions": {
+      "acceptable": 38,
+      "needs_correction": 26,
+      "insufficient_evidence": 8
+    },
+    "raw_decision_correct": {
+      "count": 58,
+      "total": 72,
+      "rate": 0.8055555555555556
+    },
+    "raw_correction_detection": {
+      "true_positive": 21,
+      "predicted_positive": 26,
+      "gold_positive": 27,
+      "precision": 0.8076923076923077,
+      "recall": 0.7777777777777778
+    },
+    "raw_accepted_correction": {
+      "count": 17,
+      "total_gold_corrections": 27,
+      "rate": 0.6296296296296297,
+      "ids": [
+        "JG-025", "JG-026", "JG-029", "JG-030", "JG-031", "JG-032",
+        "JG-033", "JG-038", "JG-039", "JG-040", "JG-041", "JG-042",
+        "JG-043", "JG-047", "JG-062", "JG-069", "JG-072"
+      ]
+    },
+    "gold_acceptable_raw_needs_correction": {
+      "count": 4,
+      "total_gold_acceptable": 33,
+      "rate": 0.12121212121212122,
+      "ids": ["JG-019", "JG-065", "JG-068", "JG-070"]
+    },
+    "raw_correct_withholding": {
+      "count": 8,
+      "total_gold_insufficient_evidence": 12,
+      "rate": 0.6666666666666666,
+      "ids": ["JG-049", "JG-050", "JG-052", "JG-053", "JG-054", "JG-055", "JG-056", "JG-057"]
+    },
+    "raw_missed_correction_ids": ["JG-027", "JG-034", "JG-035", "JG-036", "JG-037", "JG-048"],
+    "no_op_edit_count": 3,
+    "contract_error_groups": {
+      "edit_source_does_not_match_input_span": 20,
+      "edit_offsets_out_of_bounds": 1,
+      "correction_did_not_change_text_or_supply_valid_edits": 1,
+      "edit_did_not_change_its_span": 1
+    },
+    "contract_valid_cases": {
+      "correct_count": 39,
+      "incorrect_count": 10,
+      "valid_accepted_correction": ["JG-032", "JG-041"],
+      "overcorrection": ["JG-068"]
+    }
+  },
+  "performance": {
+    "latency_ms_mean": 2034.8513055555554,
+    "latency_ms_p50": 1576.495,
+    "latency_ms_p95": 3643.862,
+    "completion_tokens_per_second_of_request_latency": 41.4376,
+    "model_weights_gib_reported_by_server": 15.27,
+    "observed_vllm_engine_gpu_memory_mib": 24212,
+    "gpu_memory_note": "vLLM reserved KV cache up to gpu_memory_utilization=0.50; this process figure is not directly comparable with llama-server load-only memory."
+  },
+  "comparison": {
+    "same_dataset_prompt_and_generation": true,
+    "strict_contract_valid_count": {
+      "qwen35_08b": 0,
+      "qwen35_2b": 6,
+      "qwen35_4b": 19,
+      "qwen3_4b_base": 45,
+      "qwen3_8b_base": 49,
+      "existing_language_tutor_lora": 0
+    },
+    "strict_decision_correct_count_end_to_end": {
+      "qwen35_08b": 0,
+      "qwen35_2b": 5,
+      "qwen35_4b": 16,
+      "qwen3_4b_base": 36,
+      "qwen3_8b_base": 39,
+      "existing_language_tutor_lora": 0
+    },
+    "qwen3_4b_vs_8b_raw": {
+      "decision_correct": {
+        "qwen3_4b": 57,
+        "qwen3_8b": 58
+      },
+      "accepted_correction": {
+        "qwen3_4b": 17,
+        "qwen3_8b": 17
+      },
+      "overcorrection": {
+        "qwen3_4b": 4,
+        "qwen3_8b": 4
+      },
+      "correct_withholding": {
+        "qwen3_4b": 7,
+        "qwen3_8b": 8
+      }
+    }
+  },
+  "conclusion": "Qwen3-8B is the strongest strict baseline tested, but its gain over Qwen3-4B is marginal and it is not production-ready. It adds four contract-valid outputs and three strict correct decisions, while raw decision accuracy rises by only one case and accepted correction texts remain 17/27. With roughly twice the weight bytes, 45% higher mean latency, and about 43% lower request-latency throughput than 4B, keep Qwen3-4B as the efficient first LoRA candidate and Qwen3-8B as a scaling reference. Use separate training data to teach the judgment contract, minimal corrections, and Unicode edit offsets."
+}
