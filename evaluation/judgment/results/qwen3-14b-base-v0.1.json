@@ -1,0 +1,137 @@
+{
+  "schema_version": "0.1",
+  "recorded_at": "2026-09-11T02:59:28+00:00",
+  "status": "baseline_complete_below_targets_raw_upper_reference",
+  "model": {
+    "id": "qwen3-14b-base",
+    "artifact": "Qwen/Qwen3-14B",
+    "artifact_revision": "40c069824f4251a91eefaf281ebe4c544efd3e18",
+    "license": "apache-2.0",
+    "format": "Hugging Face safetensors BF16",
+    "model_index_sha256": "62d7ad35757bae5e7baa452cb1483178b7daa50e869e923226b8da10871f7ebc",
+    "config_sha256": "e73c3664ca09b10a673fef0c22e8a6b456201d49bd4713c9691f775720e8857a",
+    "weight_shards": [
+      {"name": "model-00001-of-00008.safetensors", "bytes": 3841788544, "sha256": "e942bdbdf08857d16a8fef7d1dae9fceabeb4e84def6043485fe2f6f085dab0e"},
+      {"name": "model-00002-of-00008.safetensors", "bytes": 3963750816, "sha256": "f7c9c6eee628f5ad831d2d1d292e120505e5fcadeb38f88b4d3c4cb86306ccf9"},
+      {"name": "model-00003-of-00008.safetensors", "bytes": 3963750880, "sha256": "dfb8c5df9404b41ad6ae74e8b6b367135f017b4467b884cf71b17c71954f18a9"},
+      {"name": "model-00004-of-00008.safetensors", "bytes": 3963750880, "sha256": "eab286fec759e3e59ab228621aefa0fef14ed56039e06f959e67257d5af7604d"},
+      {"name": "model-00005-of-00008.safetensors", "bytes": 3963750880, "sha256": "97f0dc2992e59da95c466eff6f4fd0c8335843bbc36ed5c913a6f5150748c0e6"},
+      {"name": "model-00006-of-00008.safetensors", "bytes": 3963750880, "sha256": "9e8e76a013cd5e253865b792991e0b410f869b136b3c500079b531b09198e99e"},
+      {"name": "model-00007-of-00008.safetensors", "bytes": 3963750880, "sha256": "0aee70ee6e91dc00d818804fb47f124d13ee4ad5b4a64553e09dbf9391cd5750"},
+      {"name": "model-00008-of-00008.safetensors", "bytes": 1912371880, "sha256": "0d6b92296e326d39bbbaeb32c3ec454ac606da843d4c8ffa8edf010b62b8c9e0"}
+    ],
+    "total_weight_bytes": 29536665640,
+    "tokenizer_sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4"
+  },
+  "dataset": {
+    "id": "judgment-seed-v0.1",
+    "count": 72,
+    "sha256": "f681ba026cfd6eeca86ebf531e1ac94ceed06525b43fca2b19729ef86ff0d12b",
+    "review_status": "user_reviewed",
+    "expert_certified": false
+  },
+  "run": {
+    "run_id": "20260911T024949Z-qwen-qwen3-14b-a2016123",
+    "output": "evaluation/judgment/runs/qwen3-14b-base-full-v01.jsonl",
+    "output_sha256": "7dd04b4cca1ea3ae85d975bcae58e33051fca8b5e828a607b71c5547a77d1603",
+    "manifest_sha256": "ed4198a10c3c81d452b5c7f12708792ec4dd7e152391cc1f91d84e19ab61b39d",
+    "report_json_sha256": "5a8eab5d97df347f9b73df93b23f0f6846ce752ebdca1dac1f00a6d55313aa53",
+    "report_markdown_sha256": "e69e9abd39e3e38c2332d614f1f1a4a93fb11d317e8b1ba6f6089fa4940e02bb",
+    "scaling_comparison_json_sha256": "917fafa23f03c2dadb41037aa259425b1a69571226092130542fbb4cd7c09c2c",
+    "scaling_comparison_markdown_sha256": "892b9ab5618666562dd4ab2fbe99feed9cd1e0a68c031702e8c5b1988c82a4a9",
+    "all_baselines_comparison_json_sha256": "9e1fa5e72722d50085ec227597cc6b967f340fbde426d1a4c4f14e528b7d2b1a",
+    "all_baselines_comparison_markdown_sha256": "760f861c7cc3d596b34a94dc4b045edf27a47725cd1a5ddc5d862fda7b5aa476",
+    "prompt_version": "judgment-v0.1",
+    "prompt_sha256": "c42a0e77214c333eb964df0c96f4a8986b32dffd41a371a6347846c0eca89042",
+    "generation": {"temperature": 0.0, "top_p": 1.0, "max_tokens": 512},
+    "runtime": {
+      "engine": "vLLM",
+      "engine_version": "0.28.0",
+      "python_version": "3.12.14",
+      "torch_version": "2.13.0+cu130",
+      "transformers_version": "5.16.1",
+      "context_size": 8192,
+      "dtype": "bfloat16",
+      "generation_config": "vllm",
+      "default_chat_template_kwargs": {"enable_thinking": false},
+      "flashinfer_sampler": false,
+      "attention_backend": "FlashAttention 2",
+      "gpu_memory_utilization": 0.9,
+      "seed": 0
+    }
+  },
+  "strict_results": {
+    "transport_success": {"count": 72, "total": 72, "rate": 1.0},
+    "contract_valid": {"count": 45, "total": 72, "rate": 0.625},
+    "system_failures": 27,
+    "decision_correct": {"count": 38, "total": 72, "rate": 0.5277777777777778},
+    "overcorrection": {"count": 1, "total": 33, "rate": 0.030303030303030304},
+    "correction_detection_precision": 0.5,
+    "correction_detection_recall": 0.037037037037037035,
+    "correct_withholding_rate": 0.75,
+    "clear_case_handling_rate": 0.5666666666666667,
+    "accepted_correction_rate_end_to_end": 0.037037037037037035,
+    "exact_canonical_edits_rate_end_to_end": 0.0,
+    "compound_complete_rate": 0.0,
+    "meets_all_targets": false
+  },
+  "raw_diagnostics_not_official_scores": {
+    "parseable_json_objects": 72,
+    "recognized_decisions": 72,
+    "decision_counts": {"acceptable": 34, "needs_correction": 29, "insufficient_evidence": 9},
+    "raw_decision_correct": {"count": 60, "total": 72, "rate": 0.8333333333333334},
+    "raw_correction_detection": {"true_positive": 23, "predicted_positive": 29, "gold_positive": 27, "precision": 0.7931034482758621, "recall": 0.8518518518518519},
+    "raw_accepted_correction": {
+      "count": 19,
+      "total_gold_corrections": 27,
+      "rate": 0.7037037037037037,
+      "ids": ["JG-025", "JG-026", "JG-029", "JG-030", "JG-031", "JG-032", "JG-033", "JG-034", "JG-035", "JG-036", "JG-038", "JG-039", "JG-040", "JG-041", "JG-042", "JG-043", "JG-044", "JG-045", "JG-072"]
+    },
+    "gold_acceptable_raw_needs_correction": {
+      "count": 5,
+      "total_gold_acceptable": 33,
+      "rate": 0.15151515151515152,
+      "ids": ["JG-019", "JG-064", "JG-065", "JG-067", "JG-068"]
+    },
+    "raw_correct_withholding": {
+      "count": 9,
+      "total_gold_insufficient_evidence": 12,
+      "rate": 0.75,
+      "ids": ["JG-049", "JG-050", "JG-052", "JG-053", "JG-054", "JG-055", "JG-056", "JG-057", "JG-058"]
+    },
+    "raw_missed_correction_ids": ["JG-027", "JG-037", "JG-048", "JG-062"],
+    "no_op_edit_count": 1,
+    "contract_error_groups": {"edit_source_does_not_match_input_span": 26, "edit_offsets_out_of_bounds": 1},
+    "contract_valid_cases": {"correct_count": 38, "incorrect_count": 7, "valid_accepted_correction": ["JG-038"], "overcorrection": ["JG-068"]},
+    "observed_behavior": "All 72 responses were parseable JSON. The model produced the strongest raw content among the tested local baselines, but Unicode edit offsets invalidated 27 responses and it overcorrected five acceptable inputs before strict validation."
+  },
+  "performance": {
+    "latency_ms_mean": 3561.3595416666667,
+    "latency_ms_p50": 2602.601,
+    "latency_ms_p95": 6130.955,
+    "prompt_tokens": 38777,
+    "completion_tokens": 5946,
+    "total_tokens": 44723,
+    "completion_tokens_per_second_of_request_latency": 23.18870992022487,
+    "model_weights_gib_reported_by_server": 27.52,
+    "observed_vllm_engine_gpu_memory_mib": 43400,
+    "gpu_memory_note": "vLLM reserved a 13.42 GiB KV cache under gpu_memory_utilization=0.90; the process figure is not model-only memory."
+  },
+  "comparison": {
+    "candidate_count": 11,
+    "strict_rank": 3,
+    "same_dataset_prompt_and_generation": true,
+    "qwen3_scaling": {
+      "contract_valid": {"qwen3_4b": 45, "qwen3_8b": 49, "qwen3_14b": 45},
+      "strict_decision_correct": {"qwen3_4b": 36, "qwen3_8b": 39, "qwen3_14b": 38},
+      "raw_decision_correct": {"qwen3_4b": 57, "qwen3_8b": 58, "qwen3_14b": 60},
+      "raw_accepted_correction": {"qwen3_4b": 17, "qwen3_8b": 17, "qwen3_14b": 19},
+      "raw_overcorrection": {"qwen3_4b": 4, "qwen3_8b": 4, "qwen3_14b": 5},
+      "raw_correct_withholding": {"qwen3_4b": 7, "qwen3_8b": 8, "qwen3_14b": 9}
+    },
+    "selected_first_lora_base": "Qwen/Qwen3-4B-Instruct-2507",
+    "selected_secondary_base": "Qwen/Qwen3-8B",
+    "upper_reference": "Qwen/Qwen3-14B"
+  },
+  "conclusion": "Keep Qwen3-14B as the untrained high-capacity accuracy reference, not as the first LoRA target. Its raw decisions and accepted corrections are the best tested, but strict contract validity does not improve over 4B, strict ranking remains below 8B, raw overcorrection rises to 5/33, and latency is substantially higher. Retain Qwen3-4B as the primary LoRA base and Qwen3-8B as the secondary candidate."
+}
