@@ -1,6 +1,6 @@
 # STT API 진행사항 및 일본어 판단모델 개발 방향
 
-기준일: 2026-09-11
+기준일: 2026-09-13
 
 이 문서는 실제로 완료한 작업, 검증 범위, 미해결 문제, 앞으로의 개발 방향을 구분한다.
 모델 학습과 운영 판단 파이프라인 통합은 아직 시작하지 않았다. 독립 환경에서 Qwen3.5 0.8B·2B·4B, Qwen3-4B-Instruct-2507 베이스, Qwen3-8B·14B 베이스, RakutenAI-2.0-mini-instruct, llm-jp-3 1.8B·3.7B, Phi-4-mini-instruct와 기존 언어튜터 LoRA 평가를 완료했다.
@@ -280,6 +280,12 @@ venv/bin/python -m pip check
 - 평균 지연시간은 약 3,561ms, p95 6,131ms, 요청 지연시간 기준 생성 처리량은 23.19 tok/s였다. 서버 보고 가중치 적재량은 27.52GiB이고 90% GPU 메모리 설정에서 KV 캐시를 포함한 엔진 프로세스 관측치는 약 43,400MiB였다.
 - 원시 내용은 가장 좋았지만 엄격 계약은 4B와 같고 8B보다 낮으며 과교정·비용이 증가했다. 따라서 첫 LoRA 후보는 Qwen3-4B, 보조 후보는 Qwen3-8B로 유지하고 14B는 학습된 소형 모델의 고용량 정확도 상한 비교군으로 둔다.
 - 재현 가능한 요약은 [Qwen3-14B 결과](evaluation/judgment/results/qwen3-14b-base-v0.1.json)에 기록했다. 11개 최종 비교 보고서는 Git 제외 경로 `evaluation/judgment/runs/all-baselines-comparison-v02.json`과 `.md`에 보존한다.
+
+### 2026-09-13 추가 진행: 프로젝트 문서 최신화
+
+- 루트 `README.md`를 현재 진행 상태와 단계별 기준 문서의 색인으로 정리했다. 상세 진행은 `PROGRESS.md`, 평가 방법은 `evaluation/judgment/README.md`, 모델 선정은 `evaluation/judgment/FINAL_MODEL_SELECTION.md`, 목표 구조는 `docs/architecture/SYSTEM_ARCHITECTURE_FUTURE_VS_GITHUB.md`를 기준으로 한다.
+- 목표 아키텍처 문서의 기준 커밋·테스트 수·평가 자동화·11개 모델 결과·4B/8B/14B 역할과 단계 0~2 완료 상태를 최신화했다. 같은 Markdown에서 아키텍처 PDF를 다시 생성했다.
+- 루트 README는 작업 완료 시 최신 요약과 문서 경로를 계속 갱신하되, 상세 실험 수치와 재현 자료는 해당 평가 문서와 결과 JSON에 유지한다.
 
 ### 1단계: 최소 판단 규격과 독립 시험지
 
