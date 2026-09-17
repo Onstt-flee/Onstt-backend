@@ -1,0 +1,51 @@
+{
+  "status": "offline_contract_v0.2_prototype_not_official_score",
+  "model": "judgment-reviewed-v0.1",
+  "run_id": "20260914T114640Z-judgment-reviewed-v0.1-01232208",
+  "run_output_sha256": "408c4dcbad85a4cf007edfc640581406b33cca369b2f7f73c1e813d2e59f0030",
+  "dataset_sha256": "f681ba026cfd6eeca86ebf531e1ac94ceed06525b43fca2b19729ef86ff0d12b",
+  "original_strict_contract": {
+    "numerator": 41,
+    "denominator": 72
+  },
+  "reconstructed_contract": {
+    "numerator": 67,
+    "denominator": 72
+  },
+  "recovered_ids": [
+    "JG-006",
+    "JG-011",
+    "JG-026",
+    "JG-028",
+    "JG-029",
+    "JG-030",
+    "JG-031",
+    "JG-032",
+    "JG-033",
+    "JG-034",
+    "JG-035",
+    "JG-036",
+    "JG-037",
+    "JG-038",
+    "JG-041",
+    "JG-042",
+    "JG-043",
+    "JG-044",
+    "JG-045",
+    "JG-047",
+    "JG-048",
+    "JG-062",
+    "JG-065",
+    "JG-067",
+    "JG-069",
+    "JG-072"
+  ],
+  "remaining_failures": {
+    "JG-001": "correction does not change text",
+    "JG-014": "correction does not change text",
+    "JG-040": "correction does not change text",
+    "JG-046": "cannot map model error types to deterministic diff",
+    "JG-061": "correction does not change text"
+  },
+  "warning": "Reconstruction proves structural feasibility only; it does not make wrong linguistic content correct."
+}

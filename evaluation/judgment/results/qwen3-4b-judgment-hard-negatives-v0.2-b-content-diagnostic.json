@@ -1,0 +1,80 @@
+{
+  "status": "diagnostic_only_not_official_score",
+  "model": "judgment-hard-negatives-v0.2-b",
+  "run_id": "20260914T182248Z-judgment-hard-negatives-v0.2-b-dd3db695",
+  "run_output_sha256": "6374392b17c86716a851084a4b21fb977f6af298033053cc94b6924bef914d56",
+  "dataset_sha256": "f681ba026cfd6eeca86ebf531e1ac94ceed06525b43fca2b19729ef86ff0d12b",
+  "metrics": {
+    "transport_success": {
+      "numerator": 72,
+      "denominator": 72,
+      "value": 1.0
+    },
+    "strict_contract_success": {
+      "numerator": 48,
+      "denominator": 72,
+      "value": 0.6666666666666666
+    },
+    "raw_four_field_json": {
+      "numerator": 72,
+      "denominator": 72,
+      "value": 1.0
+    },
+    "raw_decision_accuracy": {
+      "numerator": 68,
+      "denominator": 72,
+      "value": 0.9444444444444444
+    },
+    "raw_correction_precision": {
+      "numerator": 25,
+      "denominator": 27,
+      "value": 0.9259259259259259
+    },
+    "raw_correction_recall": {
+      "numerator": 25,
+      "denominator": 27,
+      "value": 0.9259259259259259
+    },
+    "raw_overcorrection": {
+      "numerator": 2,
+      "denominator": 33,
+      "value": 0.06060606060606061
+    },
+    "raw_correct_withholding": {
+      "numerator": 12,
+      "denominator": 12,
+      "value": 1.0
+    },
+    "accepted_correction_text": {
+      "numerator": 18,
+      "denominator": 27,
+      "value": 0.6666666666666666
+    }
+  },
+  "error_ids": {
+    "wrong_decision": [
+      "JG-020",
+      "JG-027",
+      "JG-035",
+      "JG-068"
+    ],
+    "overcorrection": [
+      "JG-020",
+      "JG-068"
+    ],
+    "bad_correction_text": [
+      "JG-030",
+      "JG-034",
+      "JG-036",
+      "JG-037",
+      "JG-040",
+      "JG-046",
+      "JG-047"
+    ]
+  },
+  "strict_contract_errors": {
+    "Edit offsets are out of bounds": 1,
+    "Edit source does not match input span": 23
+  },
+  "warning": "Edit offsets and reconstruction are ignored here. Use scorer.py metrics for official comparisons."
+}

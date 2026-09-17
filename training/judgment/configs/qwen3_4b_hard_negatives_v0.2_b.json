@@ -1,0 +1,30 @@
+{
+  "experiment_id": "judgment-qwen3-4b-hard-negatives-v0.2-b",
+  "status": "reviewed_with_generated",
+  "model_path": "/home/cap-minsung/lora-adapter-bank/base-models/qwen3-4b-instruct-2507-hf",
+  "train_file": "training/judgment/data/hard_negatives_v0.2_b_chatml/pilot_train.chatml.jsonl",
+  "eval_file": "training/judgment/data/hard_negatives_v0.2_b_chatml/pilot_dev.chatml.jsonl",
+  "source_dataset": "training/judgment/data/pilot_v0.2_b.jsonl",
+  "output_dir": "/home/cap-minsung/lora-adapter-bank/adapters/judgment-qwen3-4b-hard-negatives-v0.2-b",
+  "max_length": 768,
+  "num_train_epochs": 3.0,
+  "max_steps": 45,
+  "learning_rate": 0.0002,
+  "per_device_train_batch_size": 1,
+  "gradient_accumulation_steps": 16,
+  "warmup_steps": 3,
+  "weight_decay": 0.01,
+  "lora_r": 16,
+  "lora_alpha": 32,
+  "lora_dropout": 0.05,
+  "target_modules": [
+    "q_proj",
+    "k_proj",
+    "v_proj",
+    "o_proj",
+    "gate_proj",
+    "up_proj",
+    "down_proj"
+  ],
+  "seed": 42
+}

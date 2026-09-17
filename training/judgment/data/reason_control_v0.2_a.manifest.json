@@ -1,0 +1,88 @@
+{
+  "experiment_view": "judgment-reason-control-v0.2-a",
+  "control_version": "reason-control-v0.2-a",
+  "created_at": "2026-09-14",
+  "source_dataset": "training/judgment/data/pilot_v0.1.reviewed.jsonl",
+  "source_dataset_sha256": "ff330bb62d479c8779b80ec9fdd9b25ae074172bdc0df5759a83af8c65bff16b",
+  "policy": {
+    "canonical_source_modified": false,
+    "human_review_reason_used_for_training": false,
+    "model_generated_gold_used": false,
+    "expert_review_claimed": false
+  },
+  "validation": {
+    "total": 300,
+    "changed_reason_count": 300,
+    "unchanged_gold_fields": [
+      "decision",
+      "corrected_text",
+      "edits"
+    ],
+    "review_statuses": [
+      "user_reviewed"
+    ],
+    "families": 43,
+    "decisions": {
+      "acceptable": 136,
+      "insufficient_evidence": 45,
+      "needs_correction": 119
+    }
+  },
+  "reason_by_family": {
+    "acceptable_action_location": "동작이 일어나는 장소에 조사 で를 올바르게 사용했습니다.",
+    "acceptable_colloquial_ellipsis": "친밀한 회화에서는 문맥으로 분명한 조사를 생략할 수 있습니다.",
+    "acceptable_conditional_potential": "조건을 나타내는 なら와 가능형의 연결이 올바릅니다.",
+    "acceptable_contraction": "친밀한 회화에서는 〜ている를 〜てる로 줄여 말할 수 있습니다.",
+    "acceptable_destination": "이동 목적지에 조사 に를 올바르게 사용했습니다.",
+    "acceptable_embedded_plain": "〜と思います 앞의 보통형 접속이 올바릅니다.",
+    "acceptable_filler": "문두의 자연스러운 필러는 문법 오류가 아니므로 유지합니다.",
+    "acceptable_i_modifier": "い형용사가 명사를 직접 수식하는 형태가 올바릅니다.",
+    "acceptable_i_past_negative": "い형용사의 과거 부정형 〜くなかった가 올바릅니다.",
+    "acceptable_lexical_compound": "有名店은 하나의 합성명사로 사용할 수 있어 な를 넣지 않아도 됩니다.",
+    "acceptable_na_modifier": "な형용사가 〜な 형태로 명사를 올바르게 수식합니다.",
+    "acceptable_possession": "명사 사이의 소유·소속 관계에 조사 の를 올바르게 사용했습니다.",
+    "acceptable_route": "이동하거나 통과하는 경로에 조사 を를 올바르게 사용했습니다.",
+    "acceptable_short_answer": "질문 문맥에서 의미가 완결된 짧은 대답이므로 허용합니다.",
+    "acceptable_style_switch": "주어진 회화 문맥에서는 정중체와 보통체의 전환을 문법 오류로 보지 않습니다.",
+    "acceptable_te_request": "동사의 て형과 〜てください의 연결이 올바릅니다.",
+    "adjective_connection": "い형용사의 연결형은 어미 い를 くて로 바꿉니다.",
+    "adjective_negative": "い형용사의 부정형은 어미 い를 くない로 바꿉니다.",
+    "adjective_past": "い형용사의 과거형은 어미 い를 かった로 바꿉니다.",
+    "compound_adjective_tense": "い형용사 활용과 시간 표현에 맞는 서술어 시제를 각각 고칩니다.",
+    "compound_modifier_location": "형용사의 명사 수식 형태와 존재 장소의 조사 に를 각각 고칩니다.",
+    "compound_particle_verb": "동작 장소의 조사 で와 동사의 과거 정중형을 각각 고칩니다.",
+    "copula_i_adjective": "い형용사의 정중 종결에는 だ를 덧붙이지 않습니다.",
+    "copula_na_adjective": "な형용사의 정중 종결에서는 어간에 です를 붙입니다.",
+    "copula_preference": "好き의 정중 종결은 だです가 아니라 好きです입니다.",
+    "insufficient_filler_only": "필러만으로는 판단할 문장 내용이 없어 교정하지 않습니다.",
+    "insufficient_missing_audio": "들리지 않은 부분을 텍스트만으로 확정할 수 없어 교정하지 않습니다.",
+    "insufficient_out_of_scope": "일본어가 아닌 발화는 문법 교정 대신 번역 범위로 분리합니다.",
+    "insufficient_silence": "실제 발화 내용이 없어 문법을 판단할 수 없습니다.",
+    "insufficient_truncated": "문장이 끝나지 않아 누락된 내용을 추측하여 교정하지 않습니다.",
+    "modifier_i_extra_na": "い형용사가 명사를 수식할 때는 な를 붙이지 않습니다.",
+    "modifier_na_missing": "な형용사가 명사를 수식할 때는 어간 뒤에 な를 붙입니다.",
+    "modifier_noun_link": "명사와 명사의 소유·소속 관계는 조사 の로 연결합니다.",
+    "particle_action_location": "동작이 일어나는 장소에는 조사 で를 사용합니다.",
+    "particle_destination": "이동 목적지에는 조사 に 또는 へ를 사용합니다.",
+    "particle_existence": "사물의 존재 장소에는 조사 に를 사용합니다.",
+    "particle_existence_lexical_compound": "합성명사 有名店은 유지하고 존재 장소의 조사 で만 に로 고칩니다.",
+    "tense_contextual": "명시된 미래 시간과 맞도록 서술어를 비과거형으로 고칩니다.",
+    "tense_future_past": "미래 시간 표현과 맞도록 과거형 서술어를 비과거형으로 고칩니다.",
+    "tense_past_present": "과거 시간 표현과 맞도록 비과거형 서술어를 과거형으로 고칩니다.",
+    "verb_polite_nonpast": "5단 동사의 어미를 い단으로 바꾸어 ます에 연결합니다.",
+    "verb_polite_past": "5단 동사의 어미를 い단으로 바꾸어 ました에 연결합니다.",
+    "verb_te_form": "동사의 활용 규칙에 맞는 て형으로 고칩니다."
+  },
+  "outputs": {
+    "pilot_dev": {
+      "path": "training/judgment/data/reason_control_v0.2_a/pilot_dev.chatml.jsonl",
+      "count": 60,
+      "sha256": "9e1a132b2cace3349f9ca5b98cebeaf2918146ee4b9ccf51b0ca9fca0fe9ef7b"
+    },
+    "pilot_train": {
+      "path": "training/judgment/data/reason_control_v0.2_a/pilot_train.chatml.jsonl",
+      "count": 240,
+      "sha256": "db3730f5eaa973c6c412e1a49333eb3e18bbb1a0acad72a034dddfa601700672"
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "status": "offline_contract_v0.2_prototype_not_official_score",
+  "model": "judgment-hard-negatives-v0.2-b",
+  "run_id": "20260914T182248Z-judgment-hard-negatives-v0.2-b-dd3db695",
+  "run_output_sha256": "6374392b17c86716a851084a4b21fb977f6af298033053cc94b6924bef914d56",
+  "dataset_sha256": "f681ba026cfd6eeca86ebf531e1ac94ceed06525b43fca2b19729ef86ff0d12b",
+  "original_strict_contract": {
+    "numerator": 48,
+    "denominator": 72
+  },
+  "reconstructed_contract": {
+    "numerator": 71,
+    "denominator": 72
+  },
+  "recovered_ids": [
+    "JG-020",
+    "JG-025",
+    "JG-028",
+    "JG-029",
+    "JG-030",
+    "JG-031",
+    "JG-032",
+    "JG-033",
+    "JG-034",
+    "JG-036",
+    "JG-037",
+    "JG-039",
+    "JG-040",
+    "JG-042",
+    "JG-043",
+    "JG-044",
+    "JG-045",
+    "JG-046",
+    "JG-048",
+    "JG-062",
+    "JG-068",
+    "JG-069",
+    "JG-072"
+  ],
+  "remaining_failures": {
+    "JG-047": "cannot map model error types to deterministic diff"
+  },
+  "warning": "Reconstruction proves structural feasibility only; it does not make wrong linguistic content correct."
+}

@@ -1,0 +1,5 @@
+# Install in the isolated qwen3-lora-train environment.
+trl==0.28.0
+peft==0.20.0
+datasets==4.8.5
+accelerate==1.15.0

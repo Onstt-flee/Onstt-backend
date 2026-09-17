@@ -1,0 +1,44 @@
+{
+  "schema_version": "0.1",
+  "created_at": "2026-09-13",
+  "purpose": "Lexical and situation candidates only; never gold labels, corrections, or edit offsets.",
+  "model": {
+    "artifact": "Qwen/Qwen3-14B",
+    "revision": "40c069824f4251a91eefaf281ebe4c544efd3e18",
+    "temperature": 0.0,
+    "top_p": 1.0
+  },
+  "prompt_sha256": "33ebd26a4dfa94ed46118c9a0e9c04dcc62c561327b7de34e09279a5a68077f6",
+  "raw_response": {
+    "places": ["公園", "駅", "スーパー", "図書館", "カフェ", "病院", "学校", "レストラン", "コンビニ", "ホテル", "神社", "駅前"],
+    "destinations": ["行く", "来る", "戻る", "訪れる", "通う", "寄る", "出る", "入る", "訪問する", "立ち寄る", "立ち止まる", "立ち会う"],
+    "objects": ["本", "傘", "鞄", "スマホ", "コーヒー", "筆記用具", "ノート", "服", "時計", "カメラ", "荷物", "カード"],
+    "people": ["友達", "先生", "家族", "隣人", "店員", "医者", "学生", "観光客", "職人", "教師", "隣人", "同僚"],
+    "godan_verbs": ["食べる", "見る", "行く", "話す", "書く", "買う", "遊ぶ", "待つ", "聞く", "使う", "出す", "入る"],
+    "ichidan_verbs": ["食べる", "遊ぶ", "待つ", "聞く", "使う", "出す", "入る", "来る", "行く", "話す", "書く", "買う"],
+    "i_adjectives": ["大きい", "高い", "安い", "早い", "遅い", "寒い", "暑い", "楽しい", "悲しい", "美味しい", "汚い", "静か"],
+    "na_adjectives": ["忙しい", "元気", "疲れた", "簡単", "難しい", "静か", "無理", "普通", "特別", "自然", "不自然", "有名"],
+    "past_time_phrases": ["昨日", "先週", "去年", "一時間前", "午前中", "夕方", "朝", "夜", "前日", "その日", "その時", "その週"],
+    "future_time_phrases": ["明日", "来週", "来年", "一時間後", "午後", "今夜", "来月", "その日", "その時", "その週", "今後", "今後"],
+    "conversation_contexts": ["約束", "予定", "失敗", "感謝", "挨拶", "紹介", "質問", "答え", "報告", "提案", "依頼", "確認"]
+  },
+  "accepted_after_manual_screening": {
+    "places": ["公園", "駅", "スーパー", "図書館", "カフェ", "病院", "学校", "レストラン", "コンビニ", "ホテル", "神社", "駅前"],
+    "objects": ["本", "傘", "鞄", "スマホ", "コーヒー", "筆記用具", "ノート", "服", "時計", "カメラ", "荷物", "カード"],
+    "people": ["友達", "先生", "家族", "隣人", "店員", "医者", "学生", "観光客", "職人", "教師", "同僚"],
+    "godan_verbs": ["行く", "話す", "書く", "買う", "遊ぶ", "待つ", "聞く", "使う", "出す", "入る"],
+    "ichidan_verbs": ["食べる", "見る"],
+    "i_adjectives": ["大きい", "高い", "安い", "早い", "遅い", "寒い", "暑い", "楽しい", "悲しい", "美味しい", "汚い"],
+    "na_adjectives": ["元気", "簡単", "静か", "無理", "普通", "特別", "自然", "不自然", "有名"],
+    "past_time_phrases": ["昨日", "先週", "去年", "一時間前", "午前中", "夕方", "朝", "夜", "前日", "その日", "その時", "その週"],
+    "future_time_phrases": ["明日", "来週", "来年", "一時間後", "今夜", "来月", "今後"],
+    "conversation_contexts": ["約束", "予定", "失敗", "感謝", "挨拶", "紹介", "質問", "答え", "報告", "提案", "依頼", "確認"]
+  },
+  "screening_notes": [
+    "The model misunderstood the destinations key as movement verbs.",
+    "食べる and 見る were removed from godan_verbs; most ichidan_verbs were misclassified.",
+    "静か was removed from i_adjectives; 忙しい, 疲れた, and 難しい were removed from na_adjectives.",
+    "Duplicate 隣人 and 今後 values were removed.",
+    "Accepted entries remain draft lexical material and do not certify sentence-level correctness."
+  ]
+}

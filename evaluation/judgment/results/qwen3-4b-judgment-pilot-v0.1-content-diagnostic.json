@@ -1,0 +1,88 @@
+{
+  "status": "diagnostic_only_not_official_score",
+  "model": "judgment-pilot-v0.1",
+  "run_id": "20260914T053446Z-judgment-pilot-v0.1-4127d2d5",
+  "run_output_sha256": "bbde50ec9a3e73895ff6e185798479383fc48f33efebb907efa2bd87d0833bec",
+  "dataset_sha256": "f681ba026cfd6eeca86ebf531e1ac94ceed06525b43fca2b19729ef86ff0d12b",
+  "metrics": {
+    "transport_success": {
+      "numerator": 72,
+      "denominator": 72,
+      "value": 1.0
+    },
+    "strict_contract_success": {
+      "numerator": 37,
+      "denominator": 72,
+      "value": 0.5138888888888888
+    },
+    "raw_four_field_json": {
+      "numerator": 72,
+      "denominator": 72,
+      "value": 1.0
+    },
+    "raw_decision_accuracy": {
+      "numerator": 63,
+      "denominator": 72,
+      "value": 0.875
+    },
+    "raw_correction_precision": {
+      "numerator": 26,
+      "denominator": 34,
+      "value": 0.7647058823529411
+    },
+    "raw_correction_recall": {
+      "numerator": 26,
+      "denominator": 27,
+      "value": 0.9629629629629629
+    },
+    "raw_overcorrection": {
+      "numerator": 7,
+      "denominator": 33,
+      "value": 0.21212121212121213
+    },
+    "raw_correct_withholding": {
+      "numerator": 11,
+      "denominator": 12,
+      "value": 0.9166666666666666
+    },
+    "accepted_correction_text": {
+      "numerator": 23,
+      "denominator": 27,
+      "value": 0.8518518518518519
+    }
+  },
+  "error_ids": {
+    "wrong_decision": [
+      "JG-003",
+      "JG-011",
+      "JG-019",
+      "JG-020",
+      "JG-027",
+      "JG-060",
+      "JG-065",
+      "JG-067",
+      "JG-068"
+    ],
+    "overcorrection": [
+      "JG-003",
+      "JG-011",
+      "JG-019",
+      "JG-020",
+      "JG-065",
+      "JG-067",
+      "JG-068"
+    ],
+    "bad_correction_text": [
+      "JG-037",
+      "JG-046",
+      "JG-047"
+    ]
+  },
+  "strict_contract_errors": {
+    "A correction must change text and provide edits": 1,
+    "Edit source does not match input span": 31,
+    "Edits do not reconstruct corrected_text": 1,
+    "Non-correction decisions must preserve input text": 2
+  },
+  "warning": "Edit offsets and reconstruction are ignored here. Use scorer.py metrics for official comparisons."
+}

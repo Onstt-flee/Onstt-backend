@@ -1,0 +1,2005 @@
+{
+  "dataset_id": "judgment-pilot-v0.2-b",
+  "generation_version": "hard-negatives-v0.2-b",
+  "validated_at": "2026-09-14",
+  "source_dataset": "training/judgment/data/pilot_v0.1.reviewed.jsonl",
+  "source_dataset_sha256": "ff330bb62d479c8779b80ec9fdd9b25ae074172bdc0df5759a83af8c65bff16b",
+  "augmentation_path": "training/judgment/data/hard_negatives_v0.2_b.jsonl",
+  "augmentation_sha256": "ac2633833b77e0f9a98452df4a3477cbdf448b2781865e9984a9ca121b0484e9",
+  "combined_path": "training/judgment/data/pilot_v0.2_b.jsonl",
+  "combined_sha256": "e6eb2eb62ff9d8cdb1fcf9c35da73334ddee24e285f0cf7ca7bb050d97180711",
+  "policy": {
+    "canonical_v0.1_modified": false,
+    "model_generated_gold_used": false,
+    "user_review_claimed_for_generated": false,
+    "expert_review_claimed": false,
+    "evaluation_seed_used_as_training_text": false
+  },
+  "generated_validation": {
+    "total": 240,
+    "splits": {
+      "pilot_dev": 48,
+      "pilot_train": 192
+    },
+    "decisions": {
+      "acceptable": 120,
+      "insufficient_evidence": 24,
+      "needs_correction": 96
+    },
+    "pairs": 96,
+    "template_families": 24,
+    "review_status": "generated_validated",
+    "expert_review_claimed": false,
+    "near_seed_threshold": 0.75,
+    "near_seed_matches": 0,
+    "exact_seed_rag_matches": 0
+  },
+  "combined_summary": {
+    "total": 540,
+    "splits": {
+      "pilot_dev": 108,
+      "pilot_train": 432
+    },
+    "decisions": {
+      "acceptable": 256,
+      "insufficient_evidence": 69,
+      "needs_correction": 215
+    },
+    "levels": {
+      "N4": 162,
+      "N5": 378
+    },
+    "review_status": {
+      "generated_validated": 240,
+      "user_reviewed": 300
+    },
+    "provenance": {
+      "deterministic_template": 240,
+      "local_model_assisted": 300
+    },
+    "error_types": {
+      "adjective_conjugation": 23,
+      "copula_conjugation": 29,
+      "modifier_connection": 33,
+      "particle_misuse": 65,
+      "tense_mismatch": 35,
+      "verb_conjugation": 47
+    },
+    "compound_corrections": 17,
+    "template_families": 67
+  },
+  "generation_metadata": [
+    {
+      "id": "JT-0301",
+      "generation_rule": "v02b_transport_destination_train",
+      "source_anchor_id": "JT-0001",
+      "pair_id": "v02b-transport_destination-01",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0302",
+      "generation_rule": "v02b_transport_destination_train",
+      "source_anchor_id": "JT-0301",
+      "pair_id": "v02b-transport_destination-01",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0303",
+      "generation_rule": "v02b_transport_destination_train",
+      "source_anchor_id": "JT-0001",
+      "pair_id": "v02b-transport_destination-02",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0304",
+      "generation_rule": "v02b_transport_destination_train",
+      "source_anchor_id": "JT-0303",
+      "pair_id": "v02b-transport_destination-02",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0305",
+      "generation_rule": "v02b_transport_destination_train",
+      "source_anchor_id": "JT-0001",
+      "pair_id": "v02b-transport_destination-03",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0306",
+      "generation_rule": "v02b_transport_destination_train",
+      "source_anchor_id": "JT-0305",
+      "pair_id": "v02b-transport_destination-03",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0307",
+      "generation_rule": "v02b_transport_destination_train",
+      "source_anchor_id": "JT-0001",
+      "pair_id": "v02b-transport_destination-04",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0308",
+      "generation_rule": "v02b_transport_destination_train",
+      "source_anchor_id": "JT-0307",
+      "pair_id": "v02b-transport_destination-04",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0309",
+      "generation_rule": "v02b_transport_destination_train",
+      "source_anchor_id": "JT-0001",
+      "pair_id": "v02b-transport_destination-05",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0310",
+      "generation_rule": "v02b_transport_destination_train",
+      "source_anchor_id": "JT-0309",
+      "pair_id": "v02b-transport_destination-05",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0311",
+      "generation_rule": "v02b_transport_destination_train",
+      "source_anchor_id": "JT-0001",
+      "pair_id": "v02b-transport_destination-06",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0312",
+      "generation_rule": "v02b_transport_destination_train",
+      "source_anchor_id": "JT-0311",
+      "pair_id": "v02b-transport_destination-06",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0313",
+      "generation_rule": "v02b_transport_destination_train",
+      "source_anchor_id": "JT-0001",
+      "pair_id": "v02b-transport_destination-07",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0314",
+      "generation_rule": "v02b_transport_destination_train",
+      "source_anchor_id": "JT-0313",
+      "pair_id": "v02b-transport_destination-07",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0315",
+      "generation_rule": "v02b_transport_destination_train",
+      "source_anchor_id": "JT-0001",
+      "pair_id": "v02b-transport_destination-08",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0316",
+      "generation_rule": "v02b_transport_destination_train",
+      "source_anchor_id": "JT-0315",
+      "pair_id": "v02b-transport_destination-08",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0317",
+      "generation_rule": "v02b_transport_destination_train",
+      "source_anchor_id": "JT-0001",
+      "pair_id": "v02b-transport_destination-09",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0318",
+      "generation_rule": "v02b_transport_destination_train",
+      "source_anchor_id": "JT-0317",
+      "pair_id": "v02b-transport_destination-09",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0319",
+      "generation_rule": "v02b_transport_destination_dev",
+      "source_anchor_id": "JT-0001",
+      "pair_id": "v02b-transport_destination-10",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0320",
+      "generation_rule": "v02b_transport_destination_dev",
+      "source_anchor_id": "JT-0319",
+      "pair_id": "v02b-transport_destination-10",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0321",
+      "generation_rule": "v02b_transport_destination_dev",
+      "source_anchor_id": "JT-0001",
+      "pair_id": "v02b-transport_destination-11",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0322",
+      "generation_rule": "v02b_transport_destination_dev",
+      "source_anchor_id": "JT-0321",
+      "pair_id": "v02b-transport_destination-11",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0323",
+      "generation_rule": "v02b_transport_destination_dev",
+      "source_anchor_id": "JT-0001",
+      "pair_id": "v02b-transport_destination-12",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0324",
+      "generation_rule": "v02b_transport_destination_dev",
+      "source_anchor_id": "JT-0323",
+      "pair_id": "v02b-transport_destination-12",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0325",
+      "generation_rule": "v02b_route_o_train",
+      "source_anchor_id": "JT-0019",
+      "pair_id": "v02b-route_o-01",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0326",
+      "generation_rule": "v02b_route_o_train",
+      "source_anchor_id": "JT-0325",
+      "pair_id": "v02b-route_o-01",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0327",
+      "generation_rule": "v02b_route_o_train",
+      "source_anchor_id": "JT-0019",
+      "pair_id": "v02b-route_o-02",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0328",
+      "generation_rule": "v02b_route_o_train",
+      "source_anchor_id": "JT-0327",
+      "pair_id": "v02b-route_o-02",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0329",
+      "generation_rule": "v02b_route_o_train",
+      "source_anchor_id": "JT-0019",
+      "pair_id": "v02b-route_o-03",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0330",
+      "generation_rule": "v02b_route_o_train",
+      "source_anchor_id": "JT-0329",
+      "pair_id": "v02b-route_o-03",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0331",
+      "generation_rule": "v02b_route_o_train",
+      "source_anchor_id": "JT-0019",
+      "pair_id": "v02b-route_o-04",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0332",
+      "generation_rule": "v02b_route_o_train",
+      "source_anchor_id": "JT-0331",
+      "pair_id": "v02b-route_o-04",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0333",
+      "generation_rule": "v02b_route_o_train",
+      "source_anchor_id": "JT-0019",
+      "pair_id": "v02b-route_o-05",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0334",
+      "generation_rule": "v02b_route_o_train",
+      "source_anchor_id": "JT-0333",
+      "pair_id": "v02b-route_o-05",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0335",
+      "generation_rule": "v02b_route_o_train",
+      "source_anchor_id": "JT-0019",
+      "pair_id": "v02b-route_o-06",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0336",
+      "generation_rule": "v02b_route_o_train",
+      "source_anchor_id": "JT-0335",
+      "pair_id": "v02b-route_o-06",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0337",
+      "generation_rule": "v02b_route_o_train",
+      "source_anchor_id": "JT-0019",
+      "pair_id": "v02b-route_o-07",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0338",
+      "generation_rule": "v02b_route_o_train",
+      "source_anchor_id": "JT-0337",
+      "pair_id": "v02b-route_o-07",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0339",
+      "generation_rule": "v02b_route_o_train",
+      "source_anchor_id": "JT-0019",
+      "pair_id": "v02b-route_o-08",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0340",
+      "generation_rule": "v02b_route_o_train",
+      "source_anchor_id": "JT-0339",
+      "pair_id": "v02b-route_o-08",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0341",
+      "generation_rule": "v02b_route_o_train",
+      "source_anchor_id": "JT-0019",
+      "pair_id": "v02b-route_o-09",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0342",
+      "generation_rule": "v02b_route_o_train",
+      "source_anchor_id": "JT-0341",
+      "pair_id": "v02b-route_o-09",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0343",
+      "generation_rule": "v02b_route_o_dev",
+      "source_anchor_id": "JT-0019",
+      "pair_id": "v02b-route_o-10",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0344",
+      "generation_rule": "v02b_route_o_dev",
+      "source_anchor_id": "JT-0343",
+      "pair_id": "v02b-route_o-10",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0345",
+      "generation_rule": "v02b_route_o_dev",
+      "source_anchor_id": "JT-0019",
+      "pair_id": "v02b-route_o-11",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0346",
+      "generation_rule": "v02b_route_o_dev",
+      "source_anchor_id": "JT-0345",
+      "pair_id": "v02b-route_o-11",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0347",
+      "generation_rule": "v02b_route_o_dev",
+      "source_anchor_id": "JT-0019",
+      "pair_id": "v02b-route_o-12",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0348",
+      "generation_rule": "v02b_route_o_dev",
+      "source_anchor_id": "JT-0347",
+      "pair_id": "v02b-route_o-12",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0349",
+      "generation_rule": "v02b_plain_form_train",
+      "source_anchor_id": "JT-0082",
+      "pair_id": "v02b-plain_form-01",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0350",
+      "generation_rule": "v02b_plain_form_train",
+      "source_anchor_id": "JT-0349",
+      "pair_id": "v02b-plain_form-01",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0351",
+      "generation_rule": "v02b_plain_form_train",
+      "source_anchor_id": "JT-0082",
+      "pair_id": "v02b-plain_form-02",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0352",
+      "generation_rule": "v02b_plain_form_train",
+      "source_anchor_id": "JT-0351",
+      "pair_id": "v02b-plain_form-02",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0353",
+      "generation_rule": "v02b_plain_form_train",
+      "source_anchor_id": "JT-0082",
+      "pair_id": "v02b-plain_form-03",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0354",
+      "generation_rule": "v02b_plain_form_train",
+      "source_anchor_id": "JT-0353",
+      "pair_id": "v02b-plain_form-03",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0355",
+      "generation_rule": "v02b_plain_form_train",
+      "source_anchor_id": "JT-0082",
+      "pair_id": "v02b-plain_form-04",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0356",
+      "generation_rule": "v02b_plain_form_train",
+      "source_anchor_id": "JT-0355",
+      "pair_id": "v02b-plain_form-04",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0357",
+      "generation_rule": "v02b_plain_form_train",
+      "source_anchor_id": "JT-0082",
+      "pair_id": "v02b-plain_form-05",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0358",
+      "generation_rule": "v02b_plain_form_train",
+      "source_anchor_id": "JT-0357",
+      "pair_id": "v02b-plain_form-05",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0359",
+      "generation_rule": "v02b_plain_form_train",
+      "source_anchor_id": "JT-0082",
+      "pair_id": "v02b-plain_form-06",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0360",
+      "generation_rule": "v02b_plain_form_train",
+      "source_anchor_id": "JT-0359",
+      "pair_id": "v02b-plain_form-06",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0361",
+      "generation_rule": "v02b_plain_form_train",
+      "source_anchor_id": "JT-0082",
+      "pair_id": "v02b-plain_form-07",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0362",
+      "generation_rule": "v02b_plain_form_train",
+      "source_anchor_id": "JT-0361",
+      "pair_id": "v02b-plain_form-07",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0363",
+      "generation_rule": "v02b_plain_form_train",
+      "source_anchor_id": "JT-0082",
+      "pair_id": "v02b-plain_form-08",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0364",
+      "generation_rule": "v02b_plain_form_train",
+      "source_anchor_id": "JT-0363",
+      "pair_id": "v02b-plain_form-08",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0365",
+      "generation_rule": "v02b_plain_form_train",
+      "source_anchor_id": "JT-0082",
+      "pair_id": "v02b-plain_form-09",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0366",
+      "generation_rule": "v02b_plain_form_train",
+      "source_anchor_id": "JT-0365",
+      "pair_id": "v02b-plain_form-09",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0367",
+      "generation_rule": "v02b_plain_form_dev",
+      "source_anchor_id": "JT-0082",
+      "pair_id": "v02b-plain_form-10",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0368",
+      "generation_rule": "v02b_plain_form_dev",
+      "source_anchor_id": "JT-0367",
+      "pair_id": "v02b-plain_form-10",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0369",
+      "generation_rule": "v02b_plain_form_dev",
+      "source_anchor_id": "JT-0082",
+      "pair_id": "v02b-plain_form-11",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0370",
+      "generation_rule": "v02b_plain_form_dev",
+      "source_anchor_id": "JT-0369",
+      "pair_id": "v02b-plain_form-11",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0371",
+      "generation_rule": "v02b_plain_form_dev",
+      "source_anchor_id": "JT-0082",
+      "pair_id": "v02b-plain_form-12",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0372",
+      "generation_rule": "v02b_plain_form_dev",
+      "source_anchor_id": "JT-0371",
+      "pair_id": "v02b-plain_form-12",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0373",
+      "generation_rule": "v02b_explanatory_ndesu_train",
+      "source_anchor_id": "JT-0073",
+      "pair_id": "v02b-explanatory_ndesu-01",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0374",
+      "generation_rule": "v02b_explanatory_ndesu_train",
+      "source_anchor_id": "JT-0373",
+      "pair_id": "v02b-explanatory_ndesu-01",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0375",
+      "generation_rule": "v02b_explanatory_ndesu_train",
+      "source_anchor_id": "JT-0073",
+      "pair_id": "v02b-explanatory_ndesu-02",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0376",
+      "generation_rule": "v02b_explanatory_ndesu_train",
+      "source_anchor_id": "JT-0375",
+      "pair_id": "v02b-explanatory_ndesu-02",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0377",
+      "generation_rule": "v02b_explanatory_ndesu_train",
+      "source_anchor_id": "JT-0073",
+      "pair_id": "v02b-explanatory_ndesu-03",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0378",
+      "generation_rule": "v02b_explanatory_ndesu_train",
+      "source_anchor_id": "JT-0377",
+      "pair_id": "v02b-explanatory_ndesu-03",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0379",
+      "generation_rule": "v02b_explanatory_ndesu_train",
+      "source_anchor_id": "JT-0073",
+      "pair_id": "v02b-explanatory_ndesu-04",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0380",
+      "generation_rule": "v02b_explanatory_ndesu_train",
+      "source_anchor_id": "JT-0379",
+      "pair_id": "v02b-explanatory_ndesu-04",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0381",
+      "generation_rule": "v02b_explanatory_ndesu_train",
+      "source_anchor_id": "JT-0073",
+      "pair_id": "v02b-explanatory_ndesu-05",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0382",
+      "generation_rule": "v02b_explanatory_ndesu_train",
+      "source_anchor_id": "JT-0381",
+      "pair_id": "v02b-explanatory_ndesu-05",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0383",
+      "generation_rule": "v02b_explanatory_ndesu_train",
+      "source_anchor_id": "JT-0073",
+      "pair_id": "v02b-explanatory_ndesu-06",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0384",
+      "generation_rule": "v02b_explanatory_ndesu_train",
+      "source_anchor_id": "JT-0383",
+      "pair_id": "v02b-explanatory_ndesu-06",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0385",
+      "generation_rule": "v02b_explanatory_ndesu_train",
+      "source_anchor_id": "JT-0073",
+      "pair_id": "v02b-explanatory_ndesu-07",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0386",
+      "generation_rule": "v02b_explanatory_ndesu_train",
+      "source_anchor_id": "JT-0385",
+      "pair_id": "v02b-explanatory_ndesu-07",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0387",
+      "generation_rule": "v02b_explanatory_ndesu_train",
+      "source_anchor_id": "JT-0073",
+      "pair_id": "v02b-explanatory_ndesu-08",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0388",
+      "generation_rule": "v02b_explanatory_ndesu_train",
+      "source_anchor_id": "JT-0387",
+      "pair_id": "v02b-explanatory_ndesu-08",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0389",
+      "generation_rule": "v02b_explanatory_ndesu_train",
+      "source_anchor_id": "JT-0073",
+      "pair_id": "v02b-explanatory_ndesu-09",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0390",
+      "generation_rule": "v02b_explanatory_ndesu_train",
+      "source_anchor_id": "JT-0389",
+      "pair_id": "v02b-explanatory_ndesu-09",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0391",
+      "generation_rule": "v02b_explanatory_ndesu_dev",
+      "source_anchor_id": "JT-0073",
+      "pair_id": "v02b-explanatory_ndesu-10",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0392",
+      "generation_rule": "v02b_explanatory_ndesu_dev",
+      "source_anchor_id": "JT-0391",
+      "pair_id": "v02b-explanatory_ndesu-10",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0393",
+      "generation_rule": "v02b_explanatory_ndesu_dev",
+      "source_anchor_id": "JT-0073",
+      "pair_id": "v02b-explanatory_ndesu-11",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0394",
+      "generation_rule": "v02b_explanatory_ndesu_dev",
+      "source_anchor_id": "JT-0393",
+      "pair_id": "v02b-explanatory_ndesu-11",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0395",
+      "generation_rule": "v02b_explanatory_ndesu_dev",
+      "source_anchor_id": "JT-0073",
+      "pair_id": "v02b-explanatory_ndesu-12",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0396",
+      "generation_rule": "v02b_explanatory_ndesu_dev",
+      "source_anchor_id": "JT-0395",
+      "pair_id": "v02b-explanatory_ndesu-12",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0397",
+      "generation_rule": "v02b_adjective_connection_yasui_train",
+      "source_anchor_id": "JT-0055",
+      "pair_id": "v02b-adjective_connection_yasui-01",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0398",
+      "generation_rule": "v02b_adjective_connection_yasui_train",
+      "source_anchor_id": "JT-0397",
+      "pair_id": "v02b-adjective_connection_yasui-01",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0399",
+      "generation_rule": "v02b_adjective_connection_yasui_train",
+      "source_anchor_id": "JT-0055",
+      "pair_id": "v02b-adjective_connection_yasui-02",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0400",
+      "generation_rule": "v02b_adjective_connection_yasui_train",
+      "source_anchor_id": "JT-0399",
+      "pair_id": "v02b-adjective_connection_yasui-02",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0401",
+      "generation_rule": "v02b_adjective_connection_yasui_train",
+      "source_anchor_id": "JT-0055",
+      "pair_id": "v02b-adjective_connection_yasui-03",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0402",
+      "generation_rule": "v02b_adjective_connection_yasui_train",
+      "source_anchor_id": "JT-0401",
+      "pair_id": "v02b-adjective_connection_yasui-03",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0403",
+      "generation_rule": "v02b_adjective_connection_yasui_train",
+      "source_anchor_id": "JT-0055",
+      "pair_id": "v02b-adjective_connection_yasui-04",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0404",
+      "generation_rule": "v02b_adjective_connection_yasui_train",
+      "source_anchor_id": "JT-0403",
+      "pair_id": "v02b-adjective_connection_yasui-04",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0405",
+      "generation_rule": "v02b_adjective_connection_yasui_train",
+      "source_anchor_id": "JT-0055",
+      "pair_id": "v02b-adjective_connection_yasui-05",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0406",
+      "generation_rule": "v02b_adjective_connection_yasui_train",
+      "source_anchor_id": "JT-0405",
+      "pair_id": "v02b-adjective_connection_yasui-05",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0407",
+      "generation_rule": "v02b_adjective_connection_yasui_train",
+      "source_anchor_id": "JT-0055",
+      "pair_id": "v02b-adjective_connection_yasui-06",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0408",
+      "generation_rule": "v02b_adjective_connection_yasui_train",
+      "source_anchor_id": "JT-0407",
+      "pair_id": "v02b-adjective_connection_yasui-06",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0409",
+      "generation_rule": "v02b_adjective_connection_yasui_train",
+      "source_anchor_id": "JT-0055",
+      "pair_id": "v02b-adjective_connection_yasui-07",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0410",
+      "generation_rule": "v02b_adjective_connection_yasui_train",
+      "source_anchor_id": "JT-0409",
+      "pair_id": "v02b-adjective_connection_yasui-07",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0411",
+      "generation_rule": "v02b_adjective_connection_yasui_train",
+      "source_anchor_id": "JT-0055",
+      "pair_id": "v02b-adjective_connection_yasui-08",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0412",
+      "generation_rule": "v02b_adjective_connection_yasui_train",
+      "source_anchor_id": "JT-0411",
+      "pair_id": "v02b-adjective_connection_yasui-08",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0413",
+      "generation_rule": "v02b_adjective_connection_yasui_train",
+      "source_anchor_id": "JT-0055",
+      "pair_id": "v02b-adjective_connection_yasui-09",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0414",
+      "generation_rule": "v02b_adjective_connection_yasui_train",
+      "source_anchor_id": "JT-0413",
+      "pair_id": "v02b-adjective_connection_yasui-09",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0415",
+      "generation_rule": "v02b_adjective_connection_yasui_dev",
+      "source_anchor_id": "JT-0055",
+      "pair_id": "v02b-adjective_connection_yasui-10",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0416",
+      "generation_rule": "v02b_adjective_connection_yasui_dev",
+      "source_anchor_id": "JT-0415",
+      "pair_id": "v02b-adjective_connection_yasui-10",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0417",
+      "generation_rule": "v02b_adjective_connection_yasui_dev",
+      "source_anchor_id": "JT-0055",
+      "pair_id": "v02b-adjective_connection_yasui-11",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0418",
+      "generation_rule": "v02b_adjective_connection_yasui_dev",
+      "source_anchor_id": "JT-0417",
+      "pair_id": "v02b-adjective_connection_yasui-11",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0419",
+      "generation_rule": "v02b_adjective_connection_yasui_dev",
+      "source_anchor_id": "JT-0055",
+      "pair_id": "v02b-adjective_connection_yasui-12",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0420",
+      "generation_rule": "v02b_adjective_connection_yasui_dev",
+      "source_anchor_id": "JT-0419",
+      "pair_id": "v02b-adjective_connection_yasui-12",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0421",
+      "generation_rule": "v02b_filler_preservation_train",
+      "source_anchor_id": "JT-0100",
+      "pair_id": "v02b-filler_preservation-01",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0422",
+      "generation_rule": "v02b_filler_preservation_train",
+      "source_anchor_id": "JT-0421",
+      "pair_id": "v02b-filler_preservation-01",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0423",
+      "generation_rule": "v02b_filler_preservation_train",
+      "source_anchor_id": "JT-0100",
+      "pair_id": "v02b-filler_preservation-02",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0424",
+      "generation_rule": "v02b_filler_preservation_train",
+      "source_anchor_id": "JT-0423",
+      "pair_id": "v02b-filler_preservation-02",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0425",
+      "generation_rule": "v02b_filler_preservation_train",
+      "source_anchor_id": "JT-0100",
+      "pair_id": "v02b-filler_preservation-03",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0426",
+      "generation_rule": "v02b_filler_preservation_train",
+      "source_anchor_id": "JT-0425",
+      "pair_id": "v02b-filler_preservation-03",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0427",
+      "generation_rule": "v02b_filler_preservation_train",
+      "source_anchor_id": "JT-0100",
+      "pair_id": "v02b-filler_preservation-04",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0428",
+      "generation_rule": "v02b_filler_preservation_train",
+      "source_anchor_id": "JT-0427",
+      "pair_id": "v02b-filler_preservation-04",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0429",
+      "generation_rule": "v02b_filler_preservation_train",
+      "source_anchor_id": "JT-0100",
+      "pair_id": "v02b-filler_preservation-05",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0430",
+      "generation_rule": "v02b_filler_preservation_train",
+      "source_anchor_id": "JT-0429",
+      "pair_id": "v02b-filler_preservation-05",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0431",
+      "generation_rule": "v02b_filler_preservation_train",
+      "source_anchor_id": "JT-0100",
+      "pair_id": "v02b-filler_preservation-06",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0432",
+      "generation_rule": "v02b_filler_preservation_train",
+      "source_anchor_id": "JT-0431",
+      "pair_id": "v02b-filler_preservation-06",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0433",
+      "generation_rule": "v02b_filler_preservation_train",
+      "source_anchor_id": "JT-0100",
+      "pair_id": "v02b-filler_preservation-07",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0434",
+      "generation_rule": "v02b_filler_preservation_train",
+      "source_anchor_id": "JT-0433",
+      "pair_id": "v02b-filler_preservation-07",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0435",
+      "generation_rule": "v02b_filler_preservation_train",
+      "source_anchor_id": "JT-0100",
+      "pair_id": "v02b-filler_preservation-08",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0436",
+      "generation_rule": "v02b_filler_preservation_train",
+      "source_anchor_id": "JT-0435",
+      "pair_id": "v02b-filler_preservation-08",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0437",
+      "generation_rule": "v02b_filler_preservation_train",
+      "source_anchor_id": "JT-0100",
+      "pair_id": "v02b-filler_preservation-09",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0438",
+      "generation_rule": "v02b_filler_preservation_train",
+      "source_anchor_id": "JT-0437",
+      "pair_id": "v02b-filler_preservation-09",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0439",
+      "generation_rule": "v02b_filler_preservation_dev",
+      "source_anchor_id": "JT-0100",
+      "pair_id": "v02b-filler_preservation-10",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0440",
+      "generation_rule": "v02b_filler_preservation_dev",
+      "source_anchor_id": "JT-0439",
+      "pair_id": "v02b-filler_preservation-10",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0441",
+      "generation_rule": "v02b_filler_preservation_dev",
+      "source_anchor_id": "JT-0100",
+      "pair_id": "v02b-filler_preservation-11",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0442",
+      "generation_rule": "v02b_filler_preservation_dev",
+      "source_anchor_id": "JT-0441",
+      "pair_id": "v02b-filler_preservation-11",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0443",
+      "generation_rule": "v02b_filler_preservation_dev",
+      "source_anchor_id": "JT-0100",
+      "pair_id": "v02b-filler_preservation-12",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0444",
+      "generation_rule": "v02b_filler_preservation_dev",
+      "source_anchor_id": "JT-0443",
+      "pair_id": "v02b-filler_preservation-12",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0445",
+      "generation_rule": "v02b_style_advisory_boundary_train",
+      "source_anchor_id": "JT-0118",
+      "pair_id": "v02b-style_advisory_boundary-01",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0446",
+      "generation_rule": "v02b_style_advisory_boundary_train",
+      "source_anchor_id": "JT-0445",
+      "pair_id": "v02b-style_advisory_boundary-01",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0447",
+      "generation_rule": "v02b_style_advisory_boundary_train",
+      "source_anchor_id": "JT-0118",
+      "pair_id": "v02b-style_advisory_boundary-02",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0448",
+      "generation_rule": "v02b_style_advisory_boundary_train",
+      "source_anchor_id": "JT-0447",
+      "pair_id": "v02b-style_advisory_boundary-02",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0449",
+      "generation_rule": "v02b_style_advisory_boundary_train",
+      "source_anchor_id": "JT-0118",
+      "pair_id": "v02b-style_advisory_boundary-03",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0450",
+      "generation_rule": "v02b_style_advisory_boundary_train",
+      "source_anchor_id": "JT-0449",
+      "pair_id": "v02b-style_advisory_boundary-03",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0451",
+      "generation_rule": "v02b_style_advisory_boundary_train",
+      "source_anchor_id": "JT-0118",
+      "pair_id": "v02b-style_advisory_boundary-04",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0452",
+      "generation_rule": "v02b_style_advisory_boundary_train",
+      "source_anchor_id": "JT-0451",
+      "pair_id": "v02b-style_advisory_boundary-04",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0453",
+      "generation_rule": "v02b_style_advisory_boundary_train",
+      "source_anchor_id": "JT-0118",
+      "pair_id": "v02b-style_advisory_boundary-05",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0454",
+      "generation_rule": "v02b_style_advisory_boundary_train",
+      "source_anchor_id": "JT-0453",
+      "pair_id": "v02b-style_advisory_boundary-05",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0455",
+      "generation_rule": "v02b_style_advisory_boundary_train",
+      "source_anchor_id": "JT-0118",
+      "pair_id": "v02b-style_advisory_boundary-06",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0456",
+      "generation_rule": "v02b_style_advisory_boundary_train",
+      "source_anchor_id": "JT-0455",
+      "pair_id": "v02b-style_advisory_boundary-06",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0457",
+      "generation_rule": "v02b_style_advisory_boundary_train",
+      "source_anchor_id": "JT-0118",
+      "pair_id": "v02b-style_advisory_boundary-07",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0458",
+      "generation_rule": "v02b_style_advisory_boundary_train",
+      "source_anchor_id": "JT-0457",
+      "pair_id": "v02b-style_advisory_boundary-07",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0459",
+      "generation_rule": "v02b_style_advisory_boundary_train",
+      "source_anchor_id": "JT-0118",
+      "pair_id": "v02b-style_advisory_boundary-08",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0460",
+      "generation_rule": "v02b_style_advisory_boundary_train",
+      "source_anchor_id": "JT-0459",
+      "pair_id": "v02b-style_advisory_boundary-08",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0461",
+      "generation_rule": "v02b_style_advisory_boundary_train",
+      "source_anchor_id": "JT-0118",
+      "pair_id": "v02b-style_advisory_boundary-09",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0462",
+      "generation_rule": "v02b_style_advisory_boundary_train",
+      "source_anchor_id": "JT-0461",
+      "pair_id": "v02b-style_advisory_boundary-09",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0463",
+      "generation_rule": "v02b_style_advisory_boundary_dev",
+      "source_anchor_id": "JT-0118",
+      "pair_id": "v02b-style_advisory_boundary-10",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0464",
+      "generation_rule": "v02b_style_advisory_boundary_dev",
+      "source_anchor_id": "JT-0463",
+      "pair_id": "v02b-style_advisory_boundary-10",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0465",
+      "generation_rule": "v02b_style_advisory_boundary_dev",
+      "source_anchor_id": "JT-0118",
+      "pair_id": "v02b-style_advisory_boundary-11",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0466",
+      "generation_rule": "v02b_style_advisory_boundary_dev",
+      "source_anchor_id": "JT-0465",
+      "pair_id": "v02b-style_advisory_boundary-11",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0467",
+      "generation_rule": "v02b_style_advisory_boundary_dev",
+      "source_anchor_id": "JT-0118",
+      "pair_id": "v02b-style_advisory_boundary-12",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0468",
+      "generation_rule": "v02b_style_advisory_boundary_dev",
+      "source_anchor_id": "JT-0467",
+      "pair_id": "v02b-style_advisory_boundary-12",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0469",
+      "generation_rule": "v02b_stt_orthography_boundary_train",
+      "source_anchor_id": null,
+      "pair_id": "v02b-stt_orthography_boundary-01",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0470",
+      "generation_rule": "v02b_stt_orthography_boundary_train",
+      "source_anchor_id": "JT-0469",
+      "pair_id": "v02b-stt_orthography_boundary-01",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0471",
+      "generation_rule": "v02b_stt_orthography_boundary_train",
+      "source_anchor_id": null,
+      "pair_id": "v02b-stt_orthography_boundary-02",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0472",
+      "generation_rule": "v02b_stt_orthography_boundary_train",
+      "source_anchor_id": "JT-0471",
+      "pair_id": "v02b-stt_orthography_boundary-02",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0473",
+      "generation_rule": "v02b_stt_orthography_boundary_train",
+      "source_anchor_id": null,
+      "pair_id": "v02b-stt_orthography_boundary-03",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0474",
+      "generation_rule": "v02b_stt_orthography_boundary_train",
+      "source_anchor_id": "JT-0473",
+      "pair_id": "v02b-stt_orthography_boundary-03",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0475",
+      "generation_rule": "v02b_stt_orthography_boundary_train",
+      "source_anchor_id": null,
+      "pair_id": "v02b-stt_orthography_boundary-04",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0476",
+      "generation_rule": "v02b_stt_orthography_boundary_train",
+      "source_anchor_id": "JT-0475",
+      "pair_id": "v02b-stt_orthography_boundary-04",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0477",
+      "generation_rule": "v02b_stt_orthography_boundary_train",
+      "source_anchor_id": null,
+      "pair_id": "v02b-stt_orthography_boundary-05",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0478",
+      "generation_rule": "v02b_stt_orthography_boundary_train",
+      "source_anchor_id": "JT-0477",
+      "pair_id": "v02b-stt_orthography_boundary-05",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0479",
+      "generation_rule": "v02b_stt_orthography_boundary_train",
+      "source_anchor_id": null,
+      "pair_id": "v02b-stt_orthography_boundary-06",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0480",
+      "generation_rule": "v02b_stt_orthography_boundary_train",
+      "source_anchor_id": "JT-0479",
+      "pair_id": "v02b-stt_orthography_boundary-06",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0481",
+      "generation_rule": "v02b_stt_orthography_boundary_train",
+      "source_anchor_id": null,
+      "pair_id": "v02b-stt_orthography_boundary-07",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0482",
+      "generation_rule": "v02b_stt_orthography_boundary_train",
+      "source_anchor_id": "JT-0481",
+      "pair_id": "v02b-stt_orthography_boundary-07",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0483",
+      "generation_rule": "v02b_stt_orthography_boundary_train",
+      "source_anchor_id": null,
+      "pair_id": "v02b-stt_orthography_boundary-08",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0484",
+      "generation_rule": "v02b_stt_orthography_boundary_train",
+      "source_anchor_id": "JT-0483",
+      "pair_id": "v02b-stt_orthography_boundary-08",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0485",
+      "generation_rule": "v02b_stt_orthography_boundary_train",
+      "source_anchor_id": null,
+      "pair_id": "v02b-stt_orthography_boundary-09",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0486",
+      "generation_rule": "v02b_stt_orthography_boundary_train",
+      "source_anchor_id": "JT-0485",
+      "pair_id": "v02b-stt_orthography_boundary-09",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0487",
+      "generation_rule": "v02b_stt_orthography_boundary_dev",
+      "source_anchor_id": null,
+      "pair_id": "v02b-stt_orthography_boundary-10",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0488",
+      "generation_rule": "v02b_stt_orthography_boundary_dev",
+      "source_anchor_id": "JT-0487",
+      "pair_id": "v02b-stt_orthography_boundary-10",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0489",
+      "generation_rule": "v02b_stt_orthography_boundary_dev",
+      "source_anchor_id": null,
+      "pair_id": "v02b-stt_orthography_boundary-11",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0490",
+      "generation_rule": "v02b_stt_orthography_boundary_dev",
+      "source_anchor_id": "JT-0489",
+      "pair_id": "v02b-stt_orthography_boundary-11",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0491",
+      "generation_rule": "v02b_stt_orthography_boundary_dev",
+      "source_anchor_id": null,
+      "pair_id": "v02b-stt_orthography_boundary-12",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0492",
+      "generation_rule": "v02b_stt_orthography_boundary_dev",
+      "source_anchor_id": "JT-0491",
+      "pair_id": "v02b-stt_orthography_boundary-12",
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0493",
+      "generation_rule": "v02b_general_embedded_plain_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0494",
+      "generation_rule": "v02b_general_embedded_plain_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0495",
+      "generation_rule": "v02b_general_embedded_plain_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0496",
+      "generation_rule": "v02b_general_embedded_plain_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0497",
+      "generation_rule": "v02b_general_embedded_plain_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0498",
+      "generation_rule": "v02b_general_embedded_plain_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0499",
+      "generation_rule": "v02b_general_colloquial_ellipsis_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0500",
+      "generation_rule": "v02b_general_colloquial_ellipsis_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0501",
+      "generation_rule": "v02b_general_colloquial_ellipsis_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0502",
+      "generation_rule": "v02b_general_colloquial_ellipsis_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0503",
+      "generation_rule": "v02b_general_colloquial_ellipsis_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0504",
+      "generation_rule": "v02b_general_colloquial_ellipsis_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0505",
+      "generation_rule": "v02b_general_contraction_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0506",
+      "generation_rule": "v02b_general_contraction_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0507",
+      "generation_rule": "v02b_general_contraction_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0508",
+      "generation_rule": "v02b_general_contraction_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0509",
+      "generation_rule": "v02b_general_contraction_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0510",
+      "generation_rule": "v02b_general_contraction_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0511",
+      "generation_rule": "v02b_general_short_answer_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0512",
+      "generation_rule": "v02b_general_short_answer_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0513",
+      "generation_rule": "v02b_general_short_answer_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0514",
+      "generation_rule": "v02b_general_short_answer_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0515",
+      "generation_rule": "v02b_general_short_answer_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0516",
+      "generation_rule": "v02b_general_short_answer_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0517",
+      "generation_rule": "v02b_insufficient_silence_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0518",
+      "generation_rule": "v02b_insufficient_silence_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0519",
+      "generation_rule": "v02b_insufficient_silence_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0520",
+      "generation_rule": "v02b_insufficient_silence_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0521",
+      "generation_rule": "v02b_insufficient_silence_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0522",
+      "generation_rule": "v02b_insufficient_silence_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0523",
+      "generation_rule": "v02b_insufficient_filler_only_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0524",
+      "generation_rule": "v02b_insufficient_filler_only_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0525",
+      "generation_rule": "v02b_insufficient_filler_only_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0526",
+      "generation_rule": "v02b_insufficient_filler_only_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0527",
+      "generation_rule": "v02b_insufficient_filler_only_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0528",
+      "generation_rule": "v02b_insufficient_filler_only_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0529",
+      "generation_rule": "v02b_insufficient_truncated_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0530",
+      "generation_rule": "v02b_insufficient_truncated_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0531",
+      "generation_rule": "v02b_insufficient_truncated_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0532",
+      "generation_rule": "v02b_insufficient_truncated_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0533",
+      "generation_rule": "v02b_insufficient_truncated_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0534",
+      "generation_rule": "v02b_insufficient_truncated_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0535",
+      "generation_rule": "v02b_insufficient_missing_audio_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0536",
+      "generation_rule": "v02b_insufficient_missing_audio_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0537",
+      "generation_rule": "v02b_insufficient_missing_audio_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0538",
+      "generation_rule": "v02b_insufficient_missing_audio_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0539",
+      "generation_rule": "v02b_insufficient_missing_audio_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0540",
+      "generation_rule": "v02b_insufficient_missing_audio_train",
+      "source_anchor_id": null,
+      "pair_id": null,
+      "generation_version": "hard-negatives-v0.2-b",
+      "validation_status": "generated_validated"
+    }
+  ],
+  "chatml": {
+    "pilot_dev": {
+      "path": "/home/cap-minsung/stt_api/training/judgment/data/hard_negatives_v0.2_b_chatml/pilot_dev.chatml.jsonl",
+      "count": 108,
+      "sha256": "d269cf0d8009d846046588fa7bc10825fd68d74bc8b2d113620819a5b4e21eae"
+    },
+    "pilot_train": {
+      "path": "/home/cap-minsung/stt_api/training/judgment/data/hard_negatives_v0.2_b_chatml/pilot_train.chatml.jsonl",
+      "count": 432,
+      "sha256": "3f5063274bbda79972957f07e4d86eb4fae2fe47e736c1789943d9c6e063d6cc"
+    }
+  }
+}

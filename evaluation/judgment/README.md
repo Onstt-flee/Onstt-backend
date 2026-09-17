@@ -166,6 +166,18 @@ venv/bin/python -B -m evaluation.judgment.scorer \
 `reason_ko`의 타당성, 의미 보존과 최소 교정의 언어학적 적합성은 자동 점수가 증명하지 못하며 별도 사람 검토 대상이다.
 모델 크기는 manifest에 검증된 수치가 없으므로 자동 순위에 넣지 않고, 같은 조건의 성능을 확인한 뒤 실제 파라미터·메모리 측정과 함께 가장 작은 후보를 선택한다.
 
+### 내용 진단 보조 도구
+
+`content_diagnostics.py`는 모델이 낸 네 필드 JSON에서 판단과 교정문만 비교하고 edit 위치·복원 검증을 의도적으로 무시한다. 엄격 계약 실패가 언어 판단 실패인지 위치 생성 실패인지 분리하는 개발 진단용이며, `scorer.py` 공식 점수를 대체하지 않는다.
+
+```bash
+venv/bin/python -B -m evaluation.judgment.content_diagnostics \
+  --run evaluation/judgment/runs/judgment-qwen3-4b-pilot-v0.1-experimental.jsonl \
+  --output evaluation/judgment/results/qwen3-4b-judgment-pilot-v0.1-content-diagnostic.json
+```
+
+2026-09-14 provisional Qwen3-4B LoRA는 원시 판단 63/72, 허용 교정문 23/27, 올바른 보류 11/12를 기록했다. 사용자 검수 데이터로 다시 학습한 reviewed LoRA는 엄격 계약 41/72·원시 판단 60/72·허용 교정문 23/27·올바른 보류 12/12·원시 과교정 8/33이었다. 근거만 통제한 v0.2-A는 엄격 계약 45/72·원시 판단 63/72·허용 교정문 22/27·보류 12/12·원시 과교정 4/33이었다. 최소대립쌍을 보강한 v0.2-B는 엄격 계약 48/72·원시 판단 68/72·허용 교정문 18/27·보류 12/12·원시 과교정 2/33이다. 현재 가장 유망하지만 교정문과 운영 목표 미달로 채택하지 않았다. 상세 분석은 [provisional 결과](../../training/judgment/PILOT_V0.1_RESULT.md), [reviewed 결과](../../training/judgment/REVIEWED_V0.1_RESULT.md), [v0.2-B 결과](../../training/judgment/HARD_NEGATIVES_V0.2_B_RESULT.md)를 따른다.
+
 ## 7. 중복·오염 점검의 범위
 
 2026-09-03 검사: 기존 RAG JSON 4개에서 문자열 6,920개를 읽어 입력·기준 교정문·허용 교정 후보와 비교했다.

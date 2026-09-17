@@ -1,0 +1,58 @@
+{
+  "schema_version": "0.1",
+  "dataset_id": "judgment-pilot-v0.1-reviewed",
+  "status": "user_reviewed",
+  "reviewed_at": "2026-09-14",
+  "dataset_path": "training/judgment/data/pilot_v0.1.reviewed.jsonl",
+  "dataset_sha256": "ff330bb62d479c8779b80ec9fdd9b25ae074172bdc0df5759a83af8c65bff16b",
+  "base_dataset_path": "training/judgment/data/pilot_v0.1.jsonl",
+  "base_dataset_sha256": "6b8a71d70b33b6731047cdde8855c4ee59fa526d3d4d98d56e4a84ddef716c33",
+  "review_source_path": "training/judgment/data/pilot_v0.1.user_review.jsonl",
+  "review_source_sha256": "63db488140ef81b85da7dfc5b2883bf82547f8014dcbb9743a1f36d821296871",
+  "seed_eval_sha256": "f681ba026cfd6eeca86ebf531e1ac94ceed06525b43fca2b19729ef86ff0d12b",
+  "summary": {
+    "total": 300,
+    "splits": {
+      "pilot_dev": 60,
+      "pilot_train": 240
+    },
+    "decisions": {
+      "acceptable": 136,
+      "insufficient_evidence": 45,
+      "needs_correction": 119
+    },
+    "levels": {
+      "N4": 90,
+      "N5": 210
+    },
+    "review_status": {
+      "user_reviewed": 300
+    },
+    "provenance": {
+      "local_model_assisted": 300
+    },
+    "error_types": {
+      "adjective_conjugation": 23,
+      "copula_conjugation": 17,
+      "modifier_connection": 21,
+      "particle_misuse": 29,
+      "tense_mismatch": 23,
+      "verb_conjugation": 23
+    },
+    "compound_corrections": 17,
+    "template_families": 43
+  },
+  "exact_seed_rag_overlap": {
+    "seed_path": "/home/cap-minsung/stt_api/evaluation/judgment/seed_v0.1.jsonl",
+    "rag_files": 4,
+    "matches": []
+  },
+  "near_seed_overlap_threshold": 0.85,
+  "near_seed_overlap_for_manual_review": [],
+  "review_policy": {
+    "reviewer_identity_stored": false,
+    "expert_review_claimed": false,
+    "three_way_decision": true,
+    "edit_offsets": "deterministic_from_reviewed_correction"
+  }
+}

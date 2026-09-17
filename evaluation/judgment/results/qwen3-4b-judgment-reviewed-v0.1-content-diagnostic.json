@@ -1,0 +1,90 @@
+{
+  "status": "diagnostic_only_not_official_score",
+  "model": "judgment-reviewed-v0.1",
+  "run_id": "20260914T114640Z-judgment-reviewed-v0.1-01232208",
+  "run_output_sha256": "408c4dcbad85a4cf007edfc640581406b33cca369b2f7f73c1e813d2e59f0030",
+  "dataset_sha256": "f681ba026cfd6eeca86ebf531e1ac94ceed06525b43fca2b19729ef86ff0d12b",
+  "metrics": {
+    "transport_success": {
+      "numerator": 72,
+      "denominator": 72,
+      "value": 1.0
+    },
+    "strict_contract_success": {
+      "numerator": 41,
+      "denominator": 72,
+      "value": 0.5694444444444444
+    },
+    "raw_four_field_json": {
+      "numerator": 72,
+      "denominator": 72,
+      "value": 1.0
+    },
+    "raw_decision_accuracy": {
+      "numerator": 60,
+      "denominator": 72,
+      "value": 0.8333333333333334
+    },
+    "raw_correction_precision": {
+      "numerator": 26,
+      "denominator": 34,
+      "value": 0.7647058823529411
+    },
+    "raw_correction_recall": {
+      "numerator": 26,
+      "denominator": 27,
+      "value": 0.9629629629629629
+    },
+    "raw_overcorrection": {
+      "numerator": 8,
+      "denominator": 33,
+      "value": 0.24242424242424243
+    },
+    "raw_correct_withholding": {
+      "numerator": 12,
+      "denominator": 12,
+      "value": 1.0
+    },
+    "accepted_correction_text": {
+      "numerator": 23,
+      "denominator": 27,
+      "value": 0.8518518518518519
+    }
+  },
+  "error_ids": {
+    "wrong_decision": [
+      "JG-001",
+      "JG-006",
+      "JG-011",
+      "JG-014",
+      "JG-019",
+      "JG-020",
+      "JG-027",
+      "JG-061",
+      "JG-065",
+      "JG-067",
+      "JG-068",
+      "JG-070"
+    ],
+    "overcorrection": [
+      "JG-001",
+      "JG-006",
+      "JG-011",
+      "JG-014",
+      "JG-061",
+      "JG-065",
+      "JG-067",
+      "JG-068"
+    ],
+    "bad_correction_text": [
+      "JG-037",
+      "JG-040",
+      "JG-047"
+    ]
+  },
+  "strict_contract_errors": {
+    "A correction must change text and provide edits": 4,
+    "Edit source does not match input span": 27
+  },
+  "warning": "Edit offsets and reconstruction are ignored here. Use scorer.py metrics for official comparisons."
+}
