@@ -6,7 +6,7 @@
 
 ## 현재 개발 상태와 문서 안내
 
-기준일은 2026-09-14입니다. 기존 API 오류 수정과 Python 3.12.3 환경 재구성, 72문항 판단 평가셋 확정, 독립 실행기·채점기 구현, 11개 로컬 모델 기준선 비교와 전체 회귀 테스트 108개 통과를 확인했습니다. 판단 전용 LoRA 파일럿 300문항은 익명 사용자 검수를 완료해 고정했습니다. 근거 통제 v0.2-A 학습·평가에서 과교정은 8/33에서 4/33으로 줄었지만 교정 탐지와 허용 교정문이 각각 1건 감소해 운영 후보로 채택하지 않았습니다.
+기준일은 2026-09-17입니다. 기존 API 오류 수정과 Python 3.12.3 환경 재구성, 72문항 개발셋, 독립 실행기·채점기와 11개 로컬 모델 기준선 비교를 완료했습니다. 판단 출력 계약 v0.2는 edit 위치를 백엔드 Unicode diff로 이동했고, 신규 150문항 blind holdout과 실패 집중 v0.2-C 학습·평가까지 완료했습니다. 전체 회귀 테스트는 120개가 통과했습니다.
 
 현재 선택은 다음과 같습니다.
 
@@ -14,7 +14,7 @@
 - 보조 스케일 비교 모델: `Qwen/Qwen3-8B`
 - 고용량 정확도 상한 기준선: `Qwen/Qwen3-14B`
 - 운영 투입 승인 모델: 없음
-- 현재 단계: Qwen3-4B v0.2-B 전체 학습·72문항 비교 완료, 원시 판단 68/72·과교정 2/33으로 현재 최선이지만 교정문·엄격 계약 목표 미달로 운영 채택 보류
+- 현재 단계: Qwen3-4B v0.2-C 45-step 학습과 최초 blind holdout 평가 완료. 구조 149/150·재현율 59/66은 통과했지만 과교정 8/60·정밀도 59/69로 안전 기준 미달, 운영 채택 보류
 
 현재 운영 `analyzer`는 기존 이진 분석 계약을 사용합니다. 평가에서 사용한 3단계 판단 계약과 선택 모델은 아직 Swagger 또는 운영 API에 통합하지 않았습니다.
 
@@ -28,6 +28,7 @@
 | provisional LoRA 실험 결과 | [`training/judgment/PILOT_V0.1_RESULT.md`](training/judgment/PILOT_V0.1_RESULT.md) | Qwen3-4B provisional 학습 조건, 실패 분석과 해시 |
 | reviewed LoRA 평가 결과 | [`training/judgment/REVIEWED_V0.1_RESULT.md`](training/judgment/REVIEWED_V0.1_RESULT.md) | 사용자 검수 데이터 학습, 3모델 비교, 과교정 분석 |
 | 최소대립쌍 v0.2-B 평가 결과 | [`training/judgment/HARD_NEGATIVES_V0.2_B_RESULT.md`](training/judgment/HARD_NEGATIVES_V0.2_B_RESULT.md) | 540문항 학습, 4모델 비교, 개선·회귀 사례와 채택 판단 |
+| 실패 집중 v0.2-C·blind 평가 결과 | [`training/judgment/FAILURE_FOCUS_V0.2_C_RESULT.md`](training/judgment/FAILURE_FOCUS_V0.2_C_RESULT.md) | 출력 계약 v0.2, 628문항 학습, 150문항 holdout과 운영 보류 근거 |
 | 문법 판단 경계 정의 | [`evaluation/judgment/BOUNDARY_GUIDELINES.md`](evaluation/judgment/BOUNDARY_GUIDELINES.md) | 필러·문체·표기·STT·문맥 판단 원칙 |
 | 사람 검수 절차 | [`evaluation/judgment/REVIEW_PROCESS.md`](evaluation/judgment/REVIEW_PROCESS.md) | 사용자 검수와 전문가 검수의 구분 및 절차 |
 | 최종 검수 기준·주의 사례 | [`evaluation/judgment/FINAL_REVIEW_GUIDE.md`](evaluation/judgment/FINAL_REVIEW_GUIDE.md) | 추측 교정 금지, 번역·복구·스타일 분리 원칙 |

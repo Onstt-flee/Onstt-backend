@@ -431,3 +431,13 @@ venv/bin/python -m pip check
 - [JLPT 공식 FAQ](https://www.jlpt.jp/e/faq/)
 
 위 자료는 설계 검토의 근거다. 특정 모델의 일본어 교정 정확도나 현재 프로젝트에서의 실행 성공을 보장하지 않는다.
+
+## 2026-09-17 판단 계약 v0.2와 v0.2-C blind 평가
+
+- 모델이 edit 위치를 생성하지 않는 `judgment-v0.2` 계약과 백엔드 Unicode diff 재구성을 구현했다. 기존 v0.1은 보존했다.
+- v0.2-B 결과 재생에서 구조 72/72, 판단·교정문 보존 72/72를 확인했다.
+- 기존 데이터·RAG와 정규화 정확 중복 0건인 150문항 holdout을 `generated_validated`로 고정했다.
+- 실패 11건 중심 88문항을 보강해 총 628문항으로 Qwen3-4B를 동일 seed 42·45-step 학습했다.
+- 어댑터 SHA-256: `fbfe847f605c34c0c1d216b3a49d1a0fc6ddd82adaaada9dd9a9515984fc2e08`.
+- blind holdout은 JSON/구조 149/150, 재현율 59/66, 명확 문항 125/126을 통과했으나 과교정 8/60, 정밀도 59/69로 운영 기준을 실패했다.
+- 차단 조건에 따라 FastAPI·Swagger 통합은 수행하지 않았다. 상세 결과: `training/judgment/FAILURE_FOCUS_V0.2_C_RESULT.md`.

@@ -81,7 +81,9 @@ def load_chatml(path: Path) -> list[dict]:
                 raise ValueError(f"{path}:{line_number}: content must be JSON") from exc
             if set(model_input) != {"context", "learner_level", "text"}:
                 raise ValueError(f"{path}:{line_number}: invalid model input")
-            if set(expected) != {"corrected_text", "decision", "edits", "reason_ko"}:
+            valid_v01 = {"corrected_text", "decision", "edits", "reason_ko"}
+            valid_v02 = {"corrected_text", "decision", "error_types", "reason_ko"}
+            if frozenset(expected) not in {frozenset(valid_v01), frozenset(valid_v02)}:
                 raise ValueError(f"{path}:{line_number}: invalid expected output")
             records.append(row)
     if not records:

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 from datetime import datetime, timezone
+from difflib import SequenceMatcher
 import hashlib
 import json
 import os
@@ -20,6 +21,7 @@ import uuid
 
 from evaluation.judgment.dataset import (
     DEFAULT_DATASET,
+    ERROR_TYPES,
     load_records,
     model_inputs,
     validate_judgment,
@@ -29,6 +31,7 @@ from evaluation.judgment.dataset import (
 
 DEFAULT_ENDPOINT = "http://127.0.0.1:1234/v1/chat/completions"
 PROMPT_VERSION = "judgment-v0.1"
+PROMPT_VERSION_V2 = "judgment-v0.2"
 SYSTEM_PROMPT = """당신은 일본어 학습자 발화의 문법 교정 필요성을 판단하는 시스템입니다.
 학습자 점수를 매기거나 더 세련된 표현으로 바꾸지 말고, 주어진 텍스트와 문맥만 판단하세요.
 
@@ -62,6 +65,34 @@ copula_conjugation, modifier_connection, tense_mismatch뿐입니다.
 8. 빈 입력, 잡음뿐인 입력, 누락 구간, 범위 밖 언어는 insufficient_evidence로 처리하세요.
 9. JSON 밖의 설명, Markdown 코드 펜스, 추가 필드는 출력하지 마세요."""
 
+SYSTEM_PROMPT_V2 = """당신은 일본어 학습자 발화의 문법 교정 필요성을 판단하는 시스템입니다.
+학습자 점수를 매기거나 더 세련된 표현으로 바꾸지 말고, 주어진 텍스트와 문맥만 판단하세요.
+
+반드시 JSON 객체 하나만 출력하고 다음 네 필드만 사용하세요.
+{
+  "decision": "acceptable | needs_correction | insufficient_evidence",
+  "corrected_text": "원문 또는 최소 교정문",
+  "error_types": ["허용 오류 유형"],
+  "reason_ko": "짧은 한국어 판단 근거"
+}
+
+허용 오류 유형은 particle_misuse, verb_conjugation, adjective_conjugation,
+copula_conjugation, modifier_connection, tense_mismatch뿐입니다.
+
+판단 규칙:
+1. acceptable 또는 insufficient_evidence이면 corrected_text는 원문과 같고 error_types는 빈 배열이어야 합니다.
+2. needs_correction이면 의미와 문체를 보존하는 최소 교정만 하고 해당 오류 유형을 중복 없이 기록하세요.
+3. 수정 위치는 출력하지 마세요. 위치와 변경 구간은 백엔드가 원문과 corrected_text의 차이로 계산합니다.
+4. 문체 취향, 더 자연스러운 대안, 표기 조언, 발음 추정, 질문 관련성을 문법 교정과 섞지 마세요.
+5. 원음이 없으면 학습자 발음 오류와 STT 전사 오류 중 하나로 단정하지 마세요.
+6. 빈 입력, 잡음뿐인 입력, 누락 구간, 범위 밖 언어는 insufficient_evidence로 처리하세요.
+7. JSON 밖의 설명, Markdown 코드 펜스, 추가 필드는 출력하지 마세요."""
+
+PROMPTS = {
+    PROMPT_VERSION: SYSTEM_PROMPT,
+    PROMPT_VERSION_V2: SYSTEM_PROMPT_V2,
+}
+
 
 Transport = Callable[..., dict[str, Any]]
 
@@ -91,7 +122,10 @@ def _reject_constant(value: str) -> None:
     raise ValueError(f"Non-standard JSON constant: {value}")
 
 
-def build_messages(model_input: dict[str, Any]) -> list[dict[str, str]]:
+def build_messages(
+    model_input: dict[str, Any],
+    prompt_version: str = PROMPT_VERSION,
+) -> list[dict[str, str]]:
     """Build messages from the allowlisted input only; IDs and labels are excluded."""
     if set(model_input) != {"text", "context", "learner_level"}:
         raise ValueError("model_input must contain exactly text, context, learner_level")
@@ -101,8 +135,10 @@ def build_messages(model_input: dict[str, Any]) -> list[dict[str, str]]:
         raise ValueError("model_input.context must be null or a string")
     if model_input["learner_level"] not in {"N5", "N4"}:
         raise ValueError("model_input.learner_level must be N5 or N4")
+    if prompt_version not in PROMPTS:
+        raise ValueError(f"unsupported prompt_version: {prompt_version}")
     return [
-        {"role": "system", "content": SYSTEM_PROMPT},
+        {"role": "system", "content": PROMPTS[prompt_version]},
         {"role": "user", "content": _canonical_json(model_input)},
     ]
 
@@ -114,6 +150,7 @@ def build_request(
     temperature: float = 0.0,
     top_p: float = 1.0,
     max_tokens: int = 512,
+    prompt_version: str = PROMPT_VERSION,
 ) -> dict[str, Any]:
     if not isinstance(model, str) or not model.strip():
         raise ValueError("model must be a nonblank string")
@@ -125,7 +162,7 @@ def build_request(
         raise ValueError("max_tokens must be a positive integer")
     return {
         "model": model,
-        "messages": build_messages(model_input),
+        "messages": build_messages(model_input, prompt_version),
         "temperature": temperature,
         "top_p": top_p,
         "max_tokens": max_tokens,
@@ -136,6 +173,7 @@ def build_request(
 def parse_model_output(
     raw_text: str,
     original_text: str,
+    prompt_version: str = PROMPT_VERSION,
 ) -> tuple[dict[str, Any] | None, str | None]:
     """Validate one model judgment structurally without comparing it to gold labels."""
     try:
@@ -148,10 +186,89 @@ def parse_model_output(
         )
         if not isinstance(parsed, dict):
             raise ValueError("Model content must be one JSON object")
-        validate_judgment(parsed, original_text)
-        return parsed, None
+        if prompt_version == PROMPT_VERSION:
+            validate_judgment(parsed, original_text)
+            return parsed, None
+        if prompt_version != PROMPT_VERSION_V2:
+            raise ValueError(f"unsupported prompt_version: {prompt_version}")
+        return _normalize_v2_judgment(parsed, original_text), None
     except (json.JSONDecodeError, TypeError, ValueError) as exc:
         return None, str(exc)
+
+
+def _normalize_v2_judgment(
+    judgment: dict[str, Any],
+    original_text: str,
+) -> dict[str, Any]:
+    required = {"decision", "corrected_text", "error_types", "reason_ko"}
+    if set(judgment) != required:
+        raise ValueError(
+            "v0.2 judgment must contain exactly decision, corrected_text, "
+            "error_types, reason_ko"
+        )
+    decision = judgment["decision"]
+    corrected = judgment["corrected_text"]
+    error_types = judgment["error_types"]
+    reason = judgment["reason_ko"]
+    if decision not in {"acceptable", "needs_correction", "insufficient_evidence"}:
+        raise ValueError(f"Invalid decision: {decision!r}")
+    if not isinstance(corrected, str):
+        raise ValueError("corrected_text must be a string")
+    if not isinstance(reason, str) or not reason.strip():
+        raise ValueError("reason_ko must be nonblank")
+    if (
+        not isinstance(error_types, list)
+        or any(value not in ERROR_TYPES for value in error_types)
+        or len(error_types) != len(set(error_types))
+    ):
+        raise ValueError("error_types must be a unique list of allowed values")
+    if decision != "needs_correction":
+        if corrected != original_text:
+            raise ValueError("Non-correction decisions must preserve input text")
+        if error_types:
+            raise ValueError("Non-correction decisions must not contain error_types")
+        return {
+            **judgment,
+            "edits": [],
+            "classification_review_required": False,
+        }
+    if not original_text.strip() or not corrected.strip() or corrected == original_text:
+        raise ValueError("A correction must change nonblank text")
+    if not error_types:
+        raise ValueError("A correction must contain at least one error_type")
+    opcodes = [
+        opcode
+        for opcode in SequenceMatcher(
+            None, original_text, corrected, autojunk=False
+        ).get_opcodes()
+        if opcode[0] != "equal"
+    ]
+    if len(error_types) == len(opcodes):
+        assigned = list(error_types)
+        review_required = False
+    elif len(error_types) == 1:
+        assigned = error_types * len(opcodes)
+        review_required = False
+    else:
+        assigned = [
+            error_types[index] if index < len(error_types) else None
+            for index in range(len(opcodes))
+        ]
+        review_required = True
+    edits = []
+    for (_, start, end, target_start, target_end), error_type in zip(opcodes, assigned):
+        edits.append({
+            "start": start,
+            "end": end,
+            "source": original_text[start:end],
+            "replacement": corrected[target_start:target_end],
+            "error_type": error_type,
+        })
+    return {
+        **judgment,
+        "edits": edits,
+        "classification_review_required": review_required,
+    }
 
 
 def call_endpoint(
@@ -278,6 +395,7 @@ def run_evaluation(
     temperature: float = 0.0,
     top_p: float = 1.0,
     max_tokens: int = 512,
+    prompt_version: str = PROMPT_VERSION,
     timeout: float = 120.0,
     api_key: str | None = None,
     overwrite: bool = False,
@@ -303,7 +421,10 @@ def run_evaluation(
         "top_p": top_p,
         "max_tokens": max_tokens,
     }
-    build_request(selected[0]["input"], model, **generation)
+    build_request(
+        selected[0]["input"], model,
+        prompt_version=prompt_version, **generation,
+    )
 
     partial_path, manifest_path = _artifact_paths(output_path)
     existing = [
@@ -330,7 +451,10 @@ def run_evaluation(
 
     with partial_path.open("x", encoding="utf-8") as stream:
         for index, item in enumerate(selected, 1):
-            request_body = build_request(item["input"], model, **generation)
+            request_body = build_request(
+                item["input"], model,
+                prompt_version=prompt_version, **generation,
+            )
             try:
                 response = transport(
                     endpoint=endpoint,
@@ -353,6 +477,7 @@ def run_evaluation(
                 parsed, contract_error = parse_model_output(
                     response.get("raw_text", ""),
                     item["input"]["text"],
+                    prompt_version,
                 )
             else:
                 failed_count += 1
@@ -405,8 +530,8 @@ def run_evaluation(
         "input_ids": [item["id"] for item in selected],
         "endpoint": endpoint,
         "model": model,
-        "prompt_version": PROMPT_VERSION,
-        "prompt_sha256": _sha256_bytes(SYSTEM_PROMPT.encode("utf-8")),
+        "prompt_version": prompt_version,
+        "prompt_sha256": _sha256_bytes(PROMPTS[prompt_version].encode("utf-8")),
         "generation": generation,
         "authentication": "bearer_env" if api_key else "none",
         "transport_success_count": success_count,
@@ -436,6 +561,9 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--temperature", type=float, default=0.0)
     parser.add_argument("--top-p", type=float, default=1.0)
     parser.add_argument("--max-tokens", type=int, default=512)
+    parser.add_argument(
+        "--prompt-version", choices=sorted(PROMPTS), default=PROMPT_VERSION
+    )
     parser.add_argument("--timeout", type=float, default=120.0)
     parser.add_argument("--api-key-env")
     parser.add_argument("--overwrite", action="store_true")
@@ -459,6 +587,7 @@ def main(argv: list[str] | None = None) -> int:
             temperature=args.temperature,
             top_p=args.top_p,
             max_tokens=args.max_tokens,
+            prompt_version=args.prompt_version,
             timeout=args.timeout,
             api_key=api_key,
             overwrite=args.overwrite,

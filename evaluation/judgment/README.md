@@ -47,7 +47,13 @@
 필러·문체·STT 표기·동문서답은 문법 판단과 구분한다. 한 줄 기준과 12개 경계 사례는 [경계 기준 문서](BOUNDARY_GUIDELINES.md)를 따른다.
 보조 항목은 정답 쪽의 `check:` 태그이며 현재 모델 출력이나 자동 판정 기능이 아니다.
 
-## 3. 평가 전용 출력 계약
+## 3. 판단 출력 계약 v0.2
+
+신규 학습·실행은 모델이 `decision`, `corrected_text`, `error_types`, `reason_ko`만 생성하는 `judgment-v0.2`를 사용한다. Unicode 위치와 `source/replacement`는 `runner.py`가 원문과 교정문의 diff로 계산한다. 분류 개수와 diff 개수가 다르면 `classification_review_required`로 표시하며 판단과 교정문 자체는 버리지 않는다. 기존 v0.1 계약과 결과는 재현을 위해 보존한다.
+
+신규 blind holdout은 `holdout_v0.1.jsonl` 150문항이며 SHA-256은 `1694172cc8974aca1bf47ce37b0af9bca2cfb314ca9717d659959047f846ec26`이다. `generated_validated` 자동 검증본이고 사람·전문가 검수를 주장하지 않는다. v0.2-C 최종 결과는 [v0.2-C 결과](../../training/judgment/FAILURE_FOCUS_V0.2_C_RESULT.md)를 따른다.
+
+## 3.1 기존 v0.1 출력 계약
 
 입력은 `text`, `context`(없으면 `null`), `learner_level`이다. 모델에 정답·그룹·검수 메타데이터를 전달하지 않는다.
 출력은 다음 네 필드만 사용한다.

@@ -1,0 +1,33 @@
+{
+  "dataset": "evaluation/judgment/holdout_v0.1.jsonl",
+  "schema_version": "0.1",
+  "role": "sealed_blind_holdout",
+  "generator_seed": 20260917,
+  "records": 150,
+  "sha256": "1694172cc8974aca1bf47ce37b0af9bca2cfb314ca9717d659959047f846ec26",
+  "decisions": {
+    "acceptable": 60,
+    "insufficient_evidence": 24,
+    "needs_correction": 66
+  },
+  "error_types": {
+    "adjective_conjugation": 11,
+    "copula_conjugation": 11,
+    "modifier_connection": 13,
+    "particle_misuse": 13,
+    "tense_mismatch": 12,
+    "verb_conjugation": 12
+  },
+  "compound_error_cases": 6,
+  "review_status": "generated_validated",
+  "human_reviewed": false,
+  "contamination_audit": {
+    "exact_normalized_matches": 0,
+    "sources": [
+      "seed_v0.1",
+      "pilot_v0.2_b",
+      "rag_data JSON"
+    ]
+  },
+  "seal_policy": "Do not inspect model predictions on this set during v0.2-C data or prompt development."
+}

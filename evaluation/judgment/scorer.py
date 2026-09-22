@@ -422,7 +422,9 @@ def load_verified_run(
         if response["transport_success"]:
             transport_success_count += 1
             parsed, contract_error = parse_model_output(
-                response["raw_text"], gold["input"]["text"]
+                response["raw_text"],
+                gold["input"]["text"],
+                manifest["prompt_version"],
             )
         else:
             parsed = None

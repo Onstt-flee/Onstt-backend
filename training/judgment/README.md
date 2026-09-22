@@ -118,6 +118,10 @@ venv/bin/python -B -m training.judgment.train_lora \
 
 보강본 SHA-256은 `ac2633833b77e0f9a98452df4a3477cbdf448b2781865e9984a9ca121b0484e9`, 결합본은 `e6eb2eb62ff9d8cdb1fcf9c35da73334ddee24e285f0cf7ca7bb050d97180711`이다. ChatML은 train `3f5063274bbda79972957f07e4d86eb4fae2fe47e736c1789943d9c6e063d6cc`, dev `d269cf0d8009d846046588fa7bc10825fd68d74bc8b2d113620819a5b4e21eae`다. 전체 45-step 학습은 319.765초, train loss `0.6283`, dev loss `0.3138`이며 어댑터 SHA-256은 `8b558bfad937c75b31528f0c4943252eaaf29ae747adbb1442d4f8e95e2910ae`다. 동일 72문항에서 엄격 계약 48/72, 원시 판단 68/72, 교정 탐지 25/27, 허용 교정문 18/27, 보류 12/12, 과교정 2/33을 기록했다. 상세 비교는 [v0.2-B 결과](HARD_NEGATIVES_V0.2_B_RESULT.md)를 따른다.
 
+## v0.2-C 실패 집중 보강과 blind 평가
+
+위치 생성을 모델에서 제거한 `judgment-v0.2` 계약을 적용하고, v0.2-B 실패 11건을 겨냥한 자동 검증 88문항을 추가했다. 결합본은 628문항이며 Qwen3-4B·seed 42·45-step 조건으로 학습했다. 신규 150문항 blind holdout에서 구조 149/150, 재현율 59/66은 기준을 통과했지만 과교정 8/60과 정밀도 59/69가 안전 기준을 실패했다. 따라서 운영 API 통합은 보류한다. 상세 수치와 해시는 [v0.2-C 결과](FAILURE_FOCUS_V0.2_C_RESULT.md)를 따른다.
+
 ## provisional 파일럿 실험 결과
 
 Qwen3-4B LoRA는 72문항에서 원시 판단 정답을 57건에서 63건, 허용 교정문을 17건에서 23건으로 높였다. 반면 원시 과교정은 4건에서 7건으로 늘었고, edit 위치 오류로 엄격 계약은 45건에서 37건으로 감소했다. 상세 수치와 해시는 [파일럿 결과](PILOT_V0.1_RESULT.md)를 따른다.

@@ -1,0 +1,24 @@
+{
+  "status": "offline_contract_v0.2_replay_not_model_rerun",
+  "source_model": "judgment-hard-negatives-v0.2-b",
+  "source_run_id": "20260914T182248Z-judgment-hard-negatives-v0.2-b-dd3db695",
+  "source_run_sha256": "6374392b17c86716a851084a4b21fb977f6af298033053cc94b6924bef914d56",
+  "dataset_sha256": "f681ba026cfd6eeca86ebf531e1ac94ceed06525b43fca2b19729ef86ff0d12b",
+  "prompt_version": "judgment-v0.2",
+  "structure_success": {
+    "numerator": 72,
+    "denominator": 72,
+    "value": 1.0
+  },
+  "content_preserved": {
+    "numerator": 72,
+    "denominator": 72,
+    "value": 1.0
+  },
+  "classification_review_required_ids": [
+    "JG-047"
+  ],
+  "content_changed_ids": [],
+  "failures": {},
+  "warning": "This replay validates contract separation only. It does not show how the model will respond to the v0.2 prompt."
+}

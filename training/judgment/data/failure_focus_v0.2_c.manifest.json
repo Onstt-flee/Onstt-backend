@@ -1,0 +1,787 @@
+{
+  "dataset_id": "judgment-pilot-v0.2-c",
+  "generation_version": "failure-focus-v0.2-c",
+  "validated_at": "2026-09-17",
+  "source_dataset": "training/judgment/data/pilot_v0.2_b.jsonl",
+  "source_dataset_sha256": "e6eb2eb62ff9d8cdb1fcf9c35da73334ddee24e285f0cf7ca7bb050d97180711",
+  "augmentation_path": "training/judgment/data/failure_focus_v0.2_c.jsonl",
+  "augmentation_sha256": "6caf452efb1ac0bd77927af8096dd560e0224b6b95cb5cf3305fa2a2559577ea",
+  "combined_path": "training/judgment/data/pilot_v0.2_c.jsonl",
+  "combined_sha256": "206e184dfa62614bd2f160175d2a5fe0013ee3efa777c1faad2b763da517b444",
+  "output_contract": "judgment-v0.2",
+  "focus_failure_ids": [
+    "JG-020",
+    "JG-068",
+    "JG-027",
+    "JG-035",
+    "JG-030",
+    "JG-034",
+    "JG-036",
+    "JG-037",
+    "JG-040",
+    "JG-046",
+    "JG-047"
+  ],
+  "generated_validation": {
+    "total": 88,
+    "decisions": {
+      "acceptable": 52,
+      "needs_correction": 36
+    },
+    "exact_seed_rag_matches": 0,
+    "human_reviewed": false,
+    "expert_reviewed": false
+  },
+  "combined_summary": {
+    "total": 628,
+    "splits": {
+      "pilot_dev": 130,
+      "pilot_train": 498
+    },
+    "decisions": {
+      "acceptable": 308,
+      "insufficient_evidence": 69,
+      "needs_correction": 251
+    },
+    "levels": {
+      "N4": 188,
+      "N5": 440
+    },
+    "review_status": {
+      "generated_validated": 328,
+      "user_reviewed": 300
+    },
+    "provenance": {
+      "deterministic_template": 328,
+      "local_model_assisted": 300
+    },
+    "error_types": {
+      "adjective_conjugation": 39,
+      "copula_conjugation": 29,
+      "modifier_connection": 33,
+      "particle_misuse": 73,
+      "tense_mismatch": 35,
+      "verb_conjugation": 67
+    },
+    "compound_corrections": 25,
+    "template_families": 89
+  },
+  "generation_metadata": [
+    {
+      "id": "JT-0541",
+      "generation_rule": "v02c_jg020_polite_acceptance_pilot_train",
+      "source_anchor_id": "jg020_polite_acceptance",
+      "pair_id": null,
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0542",
+      "generation_rule": "v02c_jg020_polite_acceptance_pilot_train",
+      "source_anchor_id": "jg020_polite_acceptance",
+      "pair_id": null,
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0543",
+      "generation_rule": "v02c_jg020_polite_acceptance_pilot_train",
+      "source_anchor_id": "jg020_polite_acceptance",
+      "pair_id": null,
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0544",
+      "generation_rule": "v02c_jg020_polite_acceptance_pilot_train",
+      "source_anchor_id": "jg020_polite_acceptance",
+      "pair_id": null,
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0545",
+      "generation_rule": "v02c_jg020_polite_acceptance_pilot_train",
+      "source_anchor_id": "jg020_polite_acceptance",
+      "pair_id": null,
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0546",
+      "generation_rule": "v02c_jg020_polite_acceptance_pilot_train",
+      "source_anchor_id": "jg020_polite_acceptance",
+      "pair_id": null,
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0547",
+      "generation_rule": "v02c_jg020_polite_acceptance_pilot_dev",
+      "source_anchor_id": "jg020_polite_acceptance",
+      "pair_id": null,
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0548",
+      "generation_rule": "v02c_jg020_polite_acceptance_pilot_dev",
+      "source_anchor_id": "jg020_polite_acceptance",
+      "pair_id": null,
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0549",
+      "generation_rule": "v02c_jg068_stt_orthography_pilot_train",
+      "source_anchor_id": "jg068_stt_orthography",
+      "pair_id": null,
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0550",
+      "generation_rule": "v02c_jg068_stt_orthography_pilot_train",
+      "source_anchor_id": "jg068_stt_orthography",
+      "pair_id": null,
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0551",
+      "generation_rule": "v02c_jg068_stt_orthography_pilot_train",
+      "source_anchor_id": "jg068_stt_orthography",
+      "pair_id": null,
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0552",
+      "generation_rule": "v02c_jg068_stt_orthography_pilot_train",
+      "source_anchor_id": "jg068_stt_orthography",
+      "pair_id": null,
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0553",
+      "generation_rule": "v02c_jg068_stt_orthography_pilot_train",
+      "source_anchor_id": "jg068_stt_orthography",
+      "pair_id": null,
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0554",
+      "generation_rule": "v02c_jg068_stt_orthography_pilot_train",
+      "source_anchor_id": "jg068_stt_orthography",
+      "pair_id": null,
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0555",
+      "generation_rule": "v02c_jg068_stt_orthography_pilot_dev",
+      "source_anchor_id": "jg068_stt_orthography",
+      "pair_id": null,
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0556",
+      "generation_rule": "v02c_jg068_stt_orthography_pilot_dev",
+      "source_anchor_id": "jg068_stt_orthography",
+      "pair_id": null,
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0557",
+      "generation_rule": "v02c_jg027_existence_particle_pilot_train",
+      "source_anchor_id": "jg027_existence_particle",
+      "pair_id": "v02c-jg027_existence_particle-1",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0558",
+      "generation_rule": "v02c_jg027_existence_particle_pilot_train",
+      "source_anchor_id": "JT-0557",
+      "pair_id": "v02c-jg027_existence_particle-1",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0559",
+      "generation_rule": "v02c_jg027_existence_particle_pilot_train",
+      "source_anchor_id": "jg027_existence_particle",
+      "pair_id": "v02c-jg027_existence_particle-2",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0560",
+      "generation_rule": "v02c_jg027_existence_particle_pilot_train",
+      "source_anchor_id": "JT-0559",
+      "pair_id": "v02c-jg027_existence_particle-2",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0561",
+      "generation_rule": "v02c_jg027_existence_particle_pilot_train",
+      "source_anchor_id": "jg027_existence_particle",
+      "pair_id": "v02c-jg027_existence_particle-3",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0562",
+      "generation_rule": "v02c_jg027_existence_particle_pilot_train",
+      "source_anchor_id": "JT-0561",
+      "pair_id": "v02c-jg027_existence_particle-3",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0563",
+      "generation_rule": "v02c_jg027_existence_particle_pilot_dev",
+      "source_anchor_id": "jg027_existence_particle",
+      "pair_id": "v02c-jg027_existence_particle-4",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0564",
+      "generation_rule": "v02c_jg027_existence_particle_pilot_dev",
+      "source_anchor_id": "JT-0563",
+      "pair_id": "v02c-jg027_existence_particle-4",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0565",
+      "generation_rule": "v02c_jg035_i_adj_past_pilot_train",
+      "source_anchor_id": "jg035_i_adj_past",
+      "pair_id": "v02c-jg035_i_adj_past-1",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0566",
+      "generation_rule": "v02c_jg035_i_adj_past_pilot_train",
+      "source_anchor_id": "JT-0565",
+      "pair_id": "v02c-jg035_i_adj_past-1",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0567",
+      "generation_rule": "v02c_jg035_i_adj_past_pilot_train",
+      "source_anchor_id": "jg035_i_adj_past",
+      "pair_id": "v02c-jg035_i_adj_past-2",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0568",
+      "generation_rule": "v02c_jg035_i_adj_past_pilot_train",
+      "source_anchor_id": "JT-0567",
+      "pair_id": "v02c-jg035_i_adj_past-2",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0569",
+      "generation_rule": "v02c_jg035_i_adj_past_pilot_train",
+      "source_anchor_id": "jg035_i_adj_past",
+      "pair_id": "v02c-jg035_i_adj_past-3",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0570",
+      "generation_rule": "v02c_jg035_i_adj_past_pilot_train",
+      "source_anchor_id": "JT-0569",
+      "pair_id": "v02c-jg035_i_adj_past-3",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0571",
+      "generation_rule": "v02c_jg035_i_adj_past_pilot_dev",
+      "source_anchor_id": "jg035_i_adj_past",
+      "pair_id": "v02c-jg035_i_adj_past-4",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0572",
+      "generation_rule": "v02c_jg035_i_adj_past_pilot_dev",
+      "source_anchor_id": "JT-0571",
+      "pair_id": "v02c-jg035_i_adj_past-4",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0573",
+      "generation_rule": "v02c_jg030_masu_past_pilot_train",
+      "source_anchor_id": "jg030_masu_past",
+      "pair_id": "v02c-jg030_masu_past-1",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0574",
+      "generation_rule": "v02c_jg030_masu_past_pilot_train",
+      "source_anchor_id": "JT-0573",
+      "pair_id": "v02c-jg030_masu_past-1",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0575",
+      "generation_rule": "v02c_jg030_masu_past_pilot_train",
+      "source_anchor_id": "jg030_masu_past",
+      "pair_id": "v02c-jg030_masu_past-2",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0576",
+      "generation_rule": "v02c_jg030_masu_past_pilot_train",
+      "source_anchor_id": "JT-0575",
+      "pair_id": "v02c-jg030_masu_past-2",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0577",
+      "generation_rule": "v02c_jg030_masu_past_pilot_train",
+      "source_anchor_id": "jg030_masu_past",
+      "pair_id": "v02c-jg030_masu_past-3",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0578",
+      "generation_rule": "v02c_jg030_masu_past_pilot_train",
+      "source_anchor_id": "JT-0577",
+      "pair_id": "v02c-jg030_masu_past-3",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0579",
+      "generation_rule": "v02c_jg030_masu_past_pilot_dev",
+      "source_anchor_id": "jg030_masu_past",
+      "pair_id": "v02c-jg030_masu_past-4",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0580",
+      "generation_rule": "v02c_jg030_masu_past_pilot_dev",
+      "source_anchor_id": "JT-0579",
+      "pair_id": "v02c-jg030_masu_past-4",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0581",
+      "generation_rule": "v02c_jg034_obligation_pilot_train",
+      "source_anchor_id": "jg034_obligation",
+      "pair_id": "v02c-jg034_obligation-1",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0582",
+      "generation_rule": "v02c_jg034_obligation_pilot_train",
+      "source_anchor_id": "JT-0581",
+      "pair_id": "v02c-jg034_obligation-1",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0583",
+      "generation_rule": "v02c_jg034_obligation_pilot_train",
+      "source_anchor_id": "jg034_obligation",
+      "pair_id": "v02c-jg034_obligation-2",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0584",
+      "generation_rule": "v02c_jg034_obligation_pilot_train",
+      "source_anchor_id": "JT-0583",
+      "pair_id": "v02c-jg034_obligation-2",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0585",
+      "generation_rule": "v02c_jg034_obligation_pilot_train",
+      "source_anchor_id": "jg034_obligation",
+      "pair_id": "v02c-jg034_obligation-3",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0586",
+      "generation_rule": "v02c_jg034_obligation_pilot_train",
+      "source_anchor_id": "JT-0585",
+      "pair_id": "v02c-jg034_obligation-3",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0587",
+      "generation_rule": "v02c_jg034_obligation_pilot_dev",
+      "source_anchor_id": "jg034_obligation",
+      "pair_id": "v02c-jg034_obligation-4",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0588",
+      "generation_rule": "v02c_jg034_obligation_pilot_dev",
+      "source_anchor_id": "JT-0587",
+      "pair_id": "v02c-jg034_obligation-4",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0589",
+      "generation_rule": "v02c_jg036_i_adj_negative_pilot_train",
+      "source_anchor_id": "jg036_i_adj_negative",
+      "pair_id": "v02c-jg036_i_adj_negative-1",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0590",
+      "generation_rule": "v02c_jg036_i_adj_negative_pilot_train",
+      "source_anchor_id": "JT-0589",
+      "pair_id": "v02c-jg036_i_adj_negative-1",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0591",
+      "generation_rule": "v02c_jg036_i_adj_negative_pilot_train",
+      "source_anchor_id": "jg036_i_adj_negative",
+      "pair_id": "v02c-jg036_i_adj_negative-2",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0592",
+      "generation_rule": "v02c_jg036_i_adj_negative_pilot_train",
+      "source_anchor_id": "JT-0591",
+      "pair_id": "v02c-jg036_i_adj_negative-2",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0593",
+      "generation_rule": "v02c_jg036_i_adj_negative_pilot_train",
+      "source_anchor_id": "jg036_i_adj_negative",
+      "pair_id": "v02c-jg036_i_adj_negative-3",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0594",
+      "generation_rule": "v02c_jg036_i_adj_negative_pilot_train",
+      "source_anchor_id": "JT-0593",
+      "pair_id": "v02c-jg036_i_adj_negative-3",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0595",
+      "generation_rule": "v02c_jg036_i_adj_negative_pilot_dev",
+      "source_anchor_id": "jg036_i_adj_negative",
+      "pair_id": "v02c-jg036_i_adj_negative-4",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0596",
+      "generation_rule": "v02c_jg036_i_adj_negative_pilot_dev",
+      "source_anchor_id": "JT-0595",
+      "pair_id": "v02c-jg036_i_adj_negative-4",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0597",
+      "generation_rule": "v02c_jg037_permission_pilot_train",
+      "source_anchor_id": "jg037_permission",
+      "pair_id": "v02c-jg037_permission-1",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0598",
+      "generation_rule": "v02c_jg037_permission_pilot_train",
+      "source_anchor_id": "JT-0597",
+      "pair_id": "v02c-jg037_permission-1",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0599",
+      "generation_rule": "v02c_jg037_permission_pilot_train",
+      "source_anchor_id": "jg037_permission",
+      "pair_id": "v02c-jg037_permission-2",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0600",
+      "generation_rule": "v02c_jg037_permission_pilot_train",
+      "source_anchor_id": "JT-0599",
+      "pair_id": "v02c-jg037_permission-2",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0601",
+      "generation_rule": "v02c_jg037_permission_pilot_train",
+      "source_anchor_id": "jg037_permission",
+      "pair_id": "v02c-jg037_permission-3",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0602",
+      "generation_rule": "v02c_jg037_permission_pilot_train",
+      "source_anchor_id": "JT-0601",
+      "pair_id": "v02c-jg037_permission-3",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0603",
+      "generation_rule": "v02c_jg037_permission_pilot_dev",
+      "source_anchor_id": "jg037_permission",
+      "pair_id": "v02c-jg037_permission-4",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0604",
+      "generation_rule": "v02c_jg037_permission_pilot_dev",
+      "source_anchor_id": "JT-0603",
+      "pair_id": "v02c-jg037_permission-4",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0605",
+      "generation_rule": "v02c_jg040_potential_polite_pilot_train",
+      "source_anchor_id": "jg040_potential_polite",
+      "pair_id": "v02c-jg040_potential_polite-1",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0606",
+      "generation_rule": "v02c_jg040_potential_polite_pilot_train",
+      "source_anchor_id": "JT-0605",
+      "pair_id": "v02c-jg040_potential_polite-1",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0607",
+      "generation_rule": "v02c_jg040_potential_polite_pilot_train",
+      "source_anchor_id": "jg040_potential_polite",
+      "pair_id": "v02c-jg040_potential_polite-2",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0608",
+      "generation_rule": "v02c_jg040_potential_polite_pilot_train",
+      "source_anchor_id": "JT-0607",
+      "pair_id": "v02c-jg040_potential_polite-2",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0609",
+      "generation_rule": "v02c_jg040_potential_polite_pilot_train",
+      "source_anchor_id": "jg040_potential_polite",
+      "pair_id": "v02c-jg040_potential_polite-3",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0610",
+      "generation_rule": "v02c_jg040_potential_polite_pilot_train",
+      "source_anchor_id": "JT-0609",
+      "pair_id": "v02c-jg040_potential_polite-3",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0611",
+      "generation_rule": "v02c_jg040_potential_polite_pilot_dev",
+      "source_anchor_id": "jg040_potential_polite",
+      "pair_id": "v02c-jg040_potential_polite-4",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0612",
+      "generation_rule": "v02c_jg040_potential_polite_pilot_dev",
+      "source_anchor_id": "JT-0611",
+      "pair_id": "v02c-jg040_potential_polite-4",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0613",
+      "generation_rule": "v02c_jg046_two_adjectives_pilot_train",
+      "source_anchor_id": "jg046_two_adjectives",
+      "pair_id": "v02c-jg046_two_adjectives-1",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0614",
+      "generation_rule": "v02c_jg046_two_adjectives_pilot_train",
+      "source_anchor_id": "JT-0613",
+      "pair_id": "v02c-jg046_two_adjectives-1",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0615",
+      "generation_rule": "v02c_jg046_two_adjectives_pilot_train",
+      "source_anchor_id": "jg046_two_adjectives",
+      "pair_id": "v02c-jg046_two_adjectives-2",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0616",
+      "generation_rule": "v02c_jg046_two_adjectives_pilot_train",
+      "source_anchor_id": "JT-0615",
+      "pair_id": "v02c-jg046_two_adjectives-2",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0617",
+      "generation_rule": "v02c_jg046_two_adjectives_pilot_train",
+      "source_anchor_id": "jg046_two_adjectives",
+      "pair_id": "v02c-jg046_two_adjectives-3",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0618",
+      "generation_rule": "v02c_jg046_two_adjectives_pilot_train",
+      "source_anchor_id": "JT-0617",
+      "pair_id": "v02c-jg046_two_adjectives-3",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0619",
+      "generation_rule": "v02c_jg046_two_adjectives_pilot_dev",
+      "source_anchor_id": "jg046_two_adjectives",
+      "pair_id": "v02c-jg046_two_adjectives-4",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0620",
+      "generation_rule": "v02c_jg046_two_adjectives_pilot_dev",
+      "source_anchor_id": "JT-0619",
+      "pair_id": "v02c-jg046_two_adjectives-4",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0621",
+      "generation_rule": "v02c_jg047_destination_past_pilot_train",
+      "source_anchor_id": "jg047_destination_past",
+      "pair_id": "v02c-jg047_destination_past-1",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0622",
+      "generation_rule": "v02c_jg047_destination_past_pilot_train",
+      "source_anchor_id": "JT-0621",
+      "pair_id": "v02c-jg047_destination_past-1",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0623",
+      "generation_rule": "v02c_jg047_destination_past_pilot_train",
+      "source_anchor_id": "jg047_destination_past",
+      "pair_id": "v02c-jg047_destination_past-2",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0624",
+      "generation_rule": "v02c_jg047_destination_past_pilot_train",
+      "source_anchor_id": "JT-0623",
+      "pair_id": "v02c-jg047_destination_past-2",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0625",
+      "generation_rule": "v02c_jg047_destination_past_pilot_train",
+      "source_anchor_id": "jg047_destination_past",
+      "pair_id": "v02c-jg047_destination_past-3",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0626",
+      "generation_rule": "v02c_jg047_destination_past_pilot_train",
+      "source_anchor_id": "JT-0625",
+      "pair_id": "v02c-jg047_destination_past-3",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0627",
+      "generation_rule": "v02c_jg047_destination_past_pilot_dev",
+      "source_anchor_id": "jg047_destination_past",
+      "pair_id": "v02c-jg047_destination_past-4",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    },
+    {
+      "id": "JT-0628",
+      "generation_rule": "v02c_jg047_destination_past_pilot_dev",
+      "source_anchor_id": "JT-0627",
+      "pair_id": "v02c-jg047_destination_past-4",
+      "generation_version": "failure-focus-v0.2-c",
+      "validation_status": "generated_validated"
+    }
+  ],
+  "chatml": {
+    "pilot_dev": {
+      "path": "/home/cap-minsung/stt_api/training/judgment/data/failure_focus_v0.2_c_chatml/pilot_dev.chatml.jsonl",
+      "count": 130,
+      "sha256": "e3f6f4d128c09e08a313560e50debaf8ea01a7b7feff5a2ee246c118262c5b13"
+    },
+    "pilot_train": {
+      "path": "/home/cap-minsung/stt_api/training/judgment/data/failure_focus_v0.2_c_chatml/pilot_train.chatml.jsonl",
+      "count": 498,
+      "sha256": "cb59cbdf01e5e116f1273ed7773948969e4935d9d8dd4894829ce8fd2f7862c9"
+    }
+  }
+}

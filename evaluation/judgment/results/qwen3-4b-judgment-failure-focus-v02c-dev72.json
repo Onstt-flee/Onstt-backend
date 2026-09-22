@@ -1,0 +1,1242 @@
+{
+  "schema_version": "0.1",
+  "created_at": "2026-09-17T08:14:17.750551+00:00",
+  "dataset_path": "/home/cap-minsung/stt_api/evaluation/judgment/seed_v0.1.jsonl",
+  "dataset_sha256": "f681ba026cfd6eeca86ebf531e1ac94ceed06525b43fca2b19729ef86ff0d12b",
+  "input_ids": [
+    "JG-001",
+    "JG-002",
+    "JG-003",
+    "JG-004",
+    "JG-005",
+    "JG-006",
+    "JG-007",
+    "JG-008",
+    "JG-009",
+    "JG-010",
+    "JG-011",
+    "JG-012",
+    "JG-013",
+    "JG-014",
+    "JG-015",
+    "JG-016",
+    "JG-017",
+    "JG-018",
+    "JG-019",
+    "JG-020",
+    "JG-021",
+    "JG-022",
+    "JG-023",
+    "JG-024",
+    "JG-025",
+    "JG-026",
+    "JG-027",
+    "JG-028",
+    "JG-029",
+    "JG-030",
+    "JG-031",
+    "JG-032",
+    "JG-033",
+    "JG-034",
+    "JG-035",
+    "JG-036",
+    "JG-037",
+    "JG-038",
+    "JG-039",
+    "JG-040",
+    "JG-041",
+    "JG-042",
+    "JG-043",
+    "JG-044",
+    "JG-045",
+    "JG-046",
+    "JG-047",
+    "JG-048",
+    "JG-049",
+    "JG-050",
+    "JG-051",
+    "JG-052",
+    "JG-053",
+    "JG-054",
+    "JG-055",
+    "JG-056",
+    "JG-057",
+    "JG-058",
+    "JG-059",
+    "JG-060",
+    "JG-061",
+    "JG-062",
+    "JG-063",
+    "JG-064",
+    "JG-065",
+    "JG-066",
+    "JG-067",
+    "JG-068",
+    "JG-069",
+    "JG-070",
+    "JG-071",
+    "JG-072"
+  ],
+  "configuration_policy": "identical prompt and generation settings required",
+  "leaderboard": [
+    {
+      "rank": 1,
+      "run_id": "20260917T081241Z-judgment-v02c-427a75ae",
+      "model": "judgment-v02c",
+      "meets_all_targets": false,
+      "json_contract_success_rate": 0.9861111111111112,
+      "overcorrection_rate": 0.06060606060606061,
+      "correction_detection_precision": 0.9259259259259259,
+      "correction_detection_recall": 0.9259259259259259,
+      "clear_case_handling_rate": 0.9833333333333333,
+      "decision_accuracy": 0.9027777777777778,
+      "accepted_correction_rate_end_to_end": 0.7407407407407407
+    }
+  ],
+  "runs": [
+    {
+      "schema_version": "0.1",
+      "run": {
+        "run_id": "20260917T081241Z-judgment-v02c-427a75ae",
+        "model": "judgment-v02c",
+        "run_path": "/home/cap-minsung/stt_api/evaluation/judgment/runs/judgment-qwen3-4b-failure-focus-v0.2-c-dev72.jsonl",
+        "manifest_path": "/home/cap-minsung/stt_api/evaluation/judgment/runs/judgment-qwen3-4b-failure-focus-v0.2-c-dev72.jsonl.manifest.json",
+        "dataset_sha256": "f681ba026cfd6eeca86ebf531e1ac94ceed06525b43fca2b19729ef86ff0d12b",
+        "prompt_version": "judgment-v0.2",
+        "prompt_sha256": "9252477191ce2af588d7ab0e754ef9d1a5df7ea541b636c8a0b15b8292865f0e",
+        "generation": {
+          "temperature": 0.0,
+          "top_p": 1.0,
+          "max_tokens": 512
+        },
+        "input_ids": [
+          "JG-001",
+          "JG-002",
+          "JG-003",
+          "JG-004",
+          "JG-005",
+          "JG-006",
+          "JG-007",
+          "JG-008",
+          "JG-009",
+          "JG-010",
+          "JG-011",
+          "JG-012",
+          "JG-013",
+          "JG-014",
+          "JG-015",
+          "JG-016",
+          "JG-017",
+          "JG-018",
+          "JG-019",
+          "JG-020",
+          "JG-021",
+          "JG-022",
+          "JG-023",
+          "JG-024",
+          "JG-025",
+          "JG-026",
+          "JG-027",
+          "JG-028",
+          "JG-029",
+          "JG-030",
+          "JG-031",
+          "JG-032",
+          "JG-033",
+          "JG-034",
+          "JG-035",
+          "JG-036",
+          "JG-037",
+          "JG-038",
+          "JG-039",
+          "JG-040",
+          "JG-041",
+          "JG-042",
+          "JG-043",
+          "JG-044",
+          "JG-045",
+          "JG-046",
+          "JG-047",
+          "JG-048",
+          "JG-049",
+          "JG-050",
+          "JG-051",
+          "JG-052",
+          "JG-053",
+          "JG-054",
+          "JG-055",
+          "JG-056",
+          "JG-057",
+          "JG-058",
+          "JG-059",
+          "JG-060",
+          "JG-061",
+          "JG-062",
+          "JG-063",
+          "JG-064",
+          "JG-065",
+          "JG-066",
+          "JG-067",
+          "JG-068",
+          "JG-069",
+          "JG-070",
+          "JG-071",
+          "JG-072"
+        ]
+      },
+      "counts": {
+        "total": 72,
+        "gold": {
+          "acceptable": 33,
+          "needs_correction": 27,
+          "insufficient_evidence": 12
+        },
+        "system_failures": 1,
+        "transport_failures": 0,
+        "contract_failures_after_transport": 1
+      },
+      "metrics": {
+        "transport_success_rate": {
+          "numerator": 72,
+          "denominator": 72,
+          "value": 1.0,
+          "ci95_wilson": [
+            0.9493488274035422,
+            1.0
+          ]
+        },
+        "json_contract_success_rate": {
+          "numerator": 71,
+          "denominator": 72,
+          "value": 0.9861111111111112,
+          "ci95_wilson": [
+            0.9254339785252386,
+            0.9975440481170943
+          ]
+        },
+        "decision_accuracy": {
+          "numerator": 65,
+          "denominator": 72,
+          "value": 0.9027777777777778,
+          "ci95_wilson": [
+            0.8126495420487314,
+            0.9521036800263443
+          ]
+        },
+        "overcorrection_rate": {
+          "numerator": 2,
+          "denominator": 33,
+          "value": 0.06060606060606061,
+          "ci95_wilson": [
+            0.016780883087191875,
+            0.1960624480864781
+          ]
+        },
+        "correction_detection_precision": {
+          "numerator": 25,
+          "denominator": 27,
+          "value": 0.9259259259259259,
+          "ci95_wilson": [
+            0.7663040731697686,
+            0.9794453459390113
+          ]
+        },
+        "correction_detection_recall": {
+          "numerator": 25,
+          "denominator": 27,
+          "value": 0.9259259259259259,
+          "ci95_wilson": [
+            0.7663040731697686,
+            0.9794453459390113
+          ]
+        },
+        "correct_withholding_rate": {
+          "numerator": 10,
+          "denominator": 12,
+          "value": 0.8333333333333334,
+          "ci95_wilson": [
+            0.5519691377470266,
+            0.9530348578161463
+          ]
+        },
+        "clear_case_handling_rate": {
+          "numerator": 59,
+          "denominator": 60,
+          "value": 0.9833333333333333,
+          "ci95_wilson": [
+            0.9114487027240993,
+            0.9970518402052136
+          ]
+        },
+        "canonical_correction_exact_rate_end_to_end": {
+          "numerator": 20,
+          "denominator": 27,
+          "value": 0.7407407407407407,
+          "ci95_wilson": [
+            0.5532142868544692,
+            0.8682962543809281
+          ]
+        },
+        "accepted_correction_rate_end_to_end": {
+          "numerator": 20,
+          "denominator": 27,
+          "value": 0.7407407407407407,
+          "ci95_wilson": [
+            0.5532142868544692,
+            0.8682962543809281
+          ]
+        },
+        "accepted_correction_rate_given_detected": {
+          "numerator": 20,
+          "denominator": 25,
+          "value": 0.8,
+          "ci95_wilson": [
+            0.6086904963045967,
+            0.9113941531319742
+          ]
+        },
+        "exact_canonical_edits_rate_end_to_end": {
+          "numerator": 6,
+          "denominator": 27,
+          "value": 0.2222222222222222,
+          "ci95_wilson": [
+            0.10607239452360037,
+            0.4075692886663257
+          ]
+        },
+        "edit_micro_precision": {
+          "numerator": 8,
+          "denominator": 32,
+          "value": 0.25,
+          "ci95_wilson": [
+            0.1325240091850904,
+            0.4210655899424448
+          ]
+        },
+        "edit_micro_recall": {
+          "numerator": 8,
+          "denominator": 31,
+          "value": 0.25806451612903225,
+          "ci95_wilson": [
+            0.13701705906393744,
+            0.43246135809433794
+          ]
+        },
+        "compound_complete_rate": {
+          "numerator": 1,
+          "denominator": 4,
+          "value": 0.25,
+          "ci95_wilson": [
+            0.04558726080970055,
+            0.6993581574175981
+          ]
+        },
+        "compound_missing_edit_count": 5
+      },
+      "confusion_matrix": {
+        "acceptable": {
+          "acceptable": 30,
+          "needs_correction": 2,
+          "insufficient_evidence": 0,
+          "system_failure": 1
+        },
+        "needs_correction": {
+          "acceptable": 2,
+          "needs_correction": 25,
+          "insufficient_evidence": 0,
+          "system_failure": 0
+        },
+        "insufficient_evidence": {
+          "acceptable": 2,
+          "needs_correction": 0,
+          "insufficient_evidence": 10,
+          "system_failure": 0
+        }
+      },
+      "error_type_metrics": {
+        "adjective_conjugation": {
+          "precision": {
+            "numerator": 2,
+            "denominator": 2,
+            "value": 1.0,
+            "ci95_wilson": [
+              0.34238022750665303,
+              1.0
+            ]
+          },
+          "recall": {
+            "numerator": 2,
+            "denominator": 3,
+            "value": 0.6666666666666666,
+            "ci95_wilson": [
+              0.2076596008020477,
+              0.9385080552796037
+            ]
+          },
+          "gold_support": 3,
+          "predicted_count": 2
+        },
+        "copula_conjugation": {
+          "precision": {
+            "numerator": 3,
+            "denominator": 5,
+            "value": 0.6,
+            "ci95_wilson": [
+              0.2307242812760128,
+              0.882379225767352
+            ]
+          },
+          "recall": {
+            "numerator": 3,
+            "denominator": 4,
+            "value": 0.75,
+            "ci95_wilson": [
+              0.30064184258240184,
+              0.9544127391902995
+            ]
+          },
+          "gold_support": 4,
+          "predicted_count": 5
+        },
+        "modifier_connection": {
+          "precision": {
+            "numerator": 3,
+            "denominator": 4,
+            "value": 0.75,
+            "ci95_wilson": [
+              0.30064184258240184,
+              0.9544127391902995
+            ]
+          },
+          "recall": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0,
+            "ci95_wilson": [
+              0.4385029682449546,
+              1.0
+            ]
+          },
+          "gold_support": 3,
+          "predicted_count": 4
+        },
+        "particle_misuse": {
+          "precision": {
+            "numerator": 6,
+            "denominator": 7,
+            "value": 0.8571428571428571,
+            "ci95_wilson": [
+              0.4868721707256811,
+              0.9743203756552565
+            ]
+          },
+          "recall": {
+            "numerator": 6,
+            "denominator": 8,
+            "value": 0.75,
+            "ci95_wilson": [
+              0.40927543031016883,
+              0.9285207872478909
+            ]
+          },
+          "gold_support": 8,
+          "predicted_count": 7
+        },
+        "tense_mismatch": {
+          "precision": {
+            "numerator": 2,
+            "denominator": 3,
+            "value": 0.6666666666666666,
+            "ci95_wilson": [
+              0.2076596008020477,
+              0.9385080552796037
+            ]
+          },
+          "recall": {
+            "numerator": 2,
+            "denominator": 2,
+            "value": 1.0,
+            "ci95_wilson": [
+              0.34238022750665303,
+              1.0
+            ]
+          },
+          "gold_support": 2,
+          "predicted_count": 3
+        },
+        "verb_conjugation": {
+          "precision": {
+            "numerator": 7,
+            "denominator": 8,
+            "value": 0.875,
+            "ci95_wilson": [
+              0.5291118177871464,
+              0.9775825085499433
+            ]
+          },
+          "recall": {
+            "numerator": 7,
+            "denominator": 10,
+            "value": 0.7,
+            "ci95_wilson": [
+              0.39677814746114537,
+              0.8922087325936989
+            ]
+          },
+          "gold_support": 10,
+          "predicted_count": 8
+        }
+      },
+      "by_learner_level": {
+        "N4": {
+          "count": 14,
+          "json_contract_success_rate": {
+            "numerator": 13,
+            "denominator": 14,
+            "value": 0.9285714285714286,
+            "ci95_wilson": [
+              0.6853129557584889,
+              0.9872777847521093
+            ]
+          },
+          "decision_accuracy": {
+            "numerator": 13,
+            "denominator": 14,
+            "value": 0.9285714285714286,
+            "ci95_wilson": [
+              0.6853129557584889,
+              0.9872777847521093
+            ]
+          },
+          "overcorrection_rate": {
+            "numerator": 0,
+            "denominator": 9,
+            "value": 0.0,
+            "ci95_wilson": [
+              0.0,
+              0.2991450484195441
+            ]
+          },
+          "correction_detection_precision": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0,
+            "ci95_wilson": [
+              0.4385029682449546,
+              1.0
+            ]
+          },
+          "correction_detection_recall": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0,
+            "ci95_wilson": [
+              0.4385029682449546,
+              1.0
+            ]
+          },
+          "correct_withholding_rate": {
+            "numerator": 2,
+            "denominator": 2,
+            "value": 1.0,
+            "ci95_wilson": [
+              0.34238022750665303,
+              1.0
+            ]
+          },
+          "clear_case_handling_rate": {
+            "numerator": 11,
+            "denominator": 12,
+            "value": 0.9166666666666666,
+            "ci95_wilson": [
+              0.646120088858883,
+              0.9851349055950829
+            ]
+          }
+        },
+        "N5": {
+          "count": 58,
+          "json_contract_success_rate": {
+            "numerator": 58,
+            "denominator": 58,
+            "value": 1.0,
+            "ci95_wilson": [
+              0.9378821442127971,
+              1.0
+            ]
+          },
+          "decision_accuracy": {
+            "numerator": 52,
+            "denominator": 58,
+            "value": 0.896551724137931,
+            "ci95_wilson": [
+              0.7921189700751577,
+              0.951718592576371
+            ]
+          },
+          "overcorrection_rate": {
+            "numerator": 2,
+            "denominator": 24,
+            "value": 0.08333333333333333,
+            "ci95_wilson": [
+              0.023158815297043306,
+              0.25848802193210685
+            ]
+          },
+          "correction_detection_precision": {
+            "numerator": 22,
+            "denominator": 24,
+            "value": 0.9166666666666666,
+            "ci95_wilson": [
+              0.741511978067893,
+              0.9768411847029567
+            ]
+          },
+          "correction_detection_recall": {
+            "numerator": 22,
+            "denominator": 24,
+            "value": 0.9166666666666666,
+            "ci95_wilson": [
+              0.741511978067893,
+              0.9768411847029567
+            ]
+          },
+          "correct_withholding_rate": {
+            "numerator": 8,
+            "denominator": 10,
+            "value": 0.8,
+            "ci95_wilson": [
+              0.49016247153664183,
+              0.9433178485456247
+            ]
+          },
+          "clear_case_handling_rate": {
+            "numerator": 48,
+            "denominator": 48,
+            "value": 1.0,
+            "ci95_wilson": [
+              0.9258998703338824,
+              0.9999999999999999
+            ]
+          }
+        }
+      },
+      "by_review_tag": {
+        "boundary_case": {
+          "count": 12,
+          "json_contract_success_rate": {
+            "numerator": 12,
+            "denominator": 12,
+            "value": 1.0,
+            "ci95_wilson": [
+              0.7575059933447592,
+              1.0
+            ]
+          },
+          "decision_accuracy": {
+            "numerator": 12,
+            "denominator": 12,
+            "value": 1.0,
+            "ci95_wilson": [
+              0.7575059933447592,
+              1.0
+            ]
+          },
+          "overcorrection_rate": {
+            "numerator": 0,
+            "denominator": 9,
+            "value": 0.0,
+            "ci95_wilson": [
+              0.0,
+              0.2991450484195441
+            ]
+          },
+          "correction_detection_precision": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0,
+            "ci95_wilson": [
+              0.4385029682449546,
+              1.0
+            ]
+          },
+          "correction_detection_recall": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0,
+            "ci95_wilson": [
+              0.4385029682449546,
+              1.0
+            ]
+          },
+          "correct_withholding_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null,
+            "ci95_wilson": null
+          },
+          "clear_case_handling_rate": {
+            "numerator": 12,
+            "denominator": 12,
+            "value": 1.0,
+            "ci95_wilson": [
+              0.7575059933447592,
+              1.0
+            ]
+          }
+        },
+        "check:attribution_unknown": {
+          "count": 3,
+          "json_contract_success_rate": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0,
+            "ci95_wilson": [
+              0.4385029682449546,
+              1.0
+            ]
+          },
+          "decision_accuracy": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0,
+            "ci95_wilson": [
+              0.4385029682449546,
+              1.0
+            ]
+          },
+          "overcorrection_rate": {
+            "numerator": 0,
+            "denominator": 2,
+            "value": 0.0,
+            "ci95_wilson": [
+              0.0,
+              0.6576197724933469
+            ]
+          },
+          "correction_detection_precision": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0,
+            "ci95_wilson": [
+              0.20654931437723745,
+              1.0
+            ]
+          },
+          "correction_detection_recall": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0,
+            "ci95_wilson": [
+              0.20654931437723745,
+              1.0
+            ]
+          },
+          "correct_withholding_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null,
+            "ci95_wilson": null
+          },
+          "clear_case_handling_rate": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0,
+            "ci95_wilson": [
+              0.4385029682449546,
+              1.0
+            ]
+          }
+        },
+        "check:context_match": {
+          "count": 1,
+          "json_contract_success_rate": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0,
+            "ci95_wilson": [
+              0.20654931437723745,
+              1.0
+            ]
+          },
+          "decision_accuracy": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0,
+            "ci95_wilson": [
+              0.20654931437723745,
+              1.0
+            ]
+          },
+          "overcorrection_rate": {
+            "numerator": 0,
+            "denominator": 1,
+            "value": 0.0,
+            "ci95_wilson": [
+              0.0,
+              0.7934506856227626
+            ]
+          },
+          "correction_detection_precision": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null,
+            "ci95_wilson": null
+          },
+          "correction_detection_recall": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null,
+            "ci95_wilson": null
+          },
+          "correct_withholding_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null,
+            "ci95_wilson": null
+          },
+          "clear_case_handling_rate": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0,
+            "ci95_wilson": [
+              0.20654931437723745,
+              1.0
+            ]
+          }
+        },
+        "check:context_mismatch": {
+          "count": 2,
+          "json_contract_success_rate": {
+            "numerator": 2,
+            "denominator": 2,
+            "value": 1.0,
+            "ci95_wilson": [
+              0.34238022750665303,
+              1.0
+            ]
+          },
+          "decision_accuracy": {
+            "numerator": 2,
+            "denominator": 2,
+            "value": 1.0,
+            "ci95_wilson": [
+              0.34238022750665303,
+              1.0
+            ]
+          },
+          "overcorrection_rate": {
+            "numerator": 0,
+            "denominator": 1,
+            "value": 0.0,
+            "ci95_wilson": [
+              0.0,
+              0.7934506856227626
+            ]
+          },
+          "correction_detection_precision": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0,
+            "ci95_wilson": [
+              0.20654931437723745,
+              1.0
+            ]
+          },
+          "correction_detection_recall": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0,
+            "ci95_wilson": [
+              0.20654931437723745,
+              1.0
+            ]
+          },
+          "correct_withholding_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null,
+            "ci95_wilson": null
+          },
+          "clear_case_handling_rate": {
+            "numerator": 2,
+            "denominator": 2,
+            "value": 1.0,
+            "ci95_wilson": [
+              0.34238022750665303,
+              1.0
+            ]
+          }
+        },
+        "check:filler_preserve": {
+          "count": 2,
+          "json_contract_success_rate": {
+            "numerator": 2,
+            "denominator": 2,
+            "value": 1.0,
+            "ci95_wilson": [
+              0.34238022750665303,
+              1.0
+            ]
+          },
+          "decision_accuracy": {
+            "numerator": 2,
+            "denominator": 2,
+            "value": 1.0,
+            "ci95_wilson": [
+              0.34238022750665303,
+              1.0
+            ]
+          },
+          "overcorrection_rate": {
+            "numerator": 0,
+            "denominator": 1,
+            "value": 0.0,
+            "ci95_wilson": [
+              0.0,
+              0.7934506856227626
+            ]
+          },
+          "correction_detection_precision": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0,
+            "ci95_wilson": [
+              0.20654931437723745,
+              1.0
+            ]
+          },
+          "correction_detection_recall": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0,
+            "ci95_wilson": [
+              0.20654931437723745,
+              1.0
+            ]
+          },
+          "correct_withholding_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null,
+            "ci95_wilson": null
+          },
+          "clear_case_handling_rate": {
+            "numerator": 2,
+            "denominator": 2,
+            "value": 1.0,
+            "ci95_wilson": [
+              0.34238022750665303,
+              1.0
+            ]
+          }
+        },
+        "check:lexical_content_preserve": {
+          "count": 1,
+          "json_contract_success_rate": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0,
+            "ci95_wilson": [
+              0.20654931437723745,
+              1.0
+            ]
+          },
+          "decision_accuracy": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0,
+            "ci95_wilson": [
+              0.20654931437723745,
+              1.0
+            ]
+          },
+          "overcorrection_rate": {
+            "numerator": 0,
+            "denominator": 1,
+            "value": 0.0,
+            "ci95_wilson": [
+              0.0,
+              0.7934506856227626
+            ]
+          },
+          "correction_detection_precision": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null,
+            "ci95_wilson": null
+          },
+          "correction_detection_recall": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null,
+            "ci95_wilson": null
+          },
+          "correct_withholding_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null,
+            "ci95_wilson": null
+          },
+          "clear_case_handling_rate": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0,
+            "ci95_wilson": [
+              0.20654931437723745,
+              1.0
+            ]
+          }
+        },
+        "check:orthography_candidate": {
+          "count": 2,
+          "json_contract_success_rate": {
+            "numerator": 2,
+            "denominator": 2,
+            "value": 1.0,
+            "ci95_wilson": [
+              0.34238022750665303,
+              1.0
+            ]
+          },
+          "decision_accuracy": {
+            "numerator": 2,
+            "denominator": 2,
+            "value": 1.0,
+            "ci95_wilson": [
+              0.34238022750665303,
+              1.0
+            ]
+          },
+          "overcorrection_rate": {
+            "numerator": 0,
+            "denominator": 2,
+            "value": 0.0,
+            "ci95_wilson": [
+              0.0,
+              0.6576197724933469
+            ]
+          },
+          "correction_detection_precision": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null,
+            "ci95_wilson": null
+          },
+          "correction_detection_recall": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null,
+            "ci95_wilson": null
+          },
+          "correct_withholding_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null,
+            "ci95_wilson": null
+          },
+          "clear_case_handling_rate": {
+            "numerator": 2,
+            "denominator": 2,
+            "value": 1.0,
+            "ci95_wilson": [
+              0.34238022750665303,
+              1.0
+            ]
+          }
+        },
+        "check:style_advisory": {
+          "count": 1,
+          "json_contract_success_rate": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0,
+            "ci95_wilson": [
+              0.20654931437723745,
+              1.0
+            ]
+          },
+          "decision_accuracy": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0,
+            "ci95_wilson": [
+              0.20654931437723745,
+              1.0
+            ]
+          },
+          "overcorrection_rate": {
+            "numerator": 0,
+            "denominator": 1,
+            "value": 0.0,
+            "ci95_wilson": [
+              0.0,
+              0.7934506856227626
+            ]
+          },
+          "correction_detection_precision": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null,
+            "ci95_wilson": null
+          },
+          "correction_detection_recall": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null,
+            "ci95_wilson": null
+          },
+          "correct_withholding_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null,
+            "ci95_wilson": null
+          },
+          "clear_case_handling_rate": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0,
+            "ci95_wilson": [
+              0.20654931437723745,
+              1.0
+            ]
+          }
+        },
+        "check:style_preserve": {
+          "count": 2,
+          "json_contract_success_rate": {
+            "numerator": 2,
+            "denominator": 2,
+            "value": 1.0,
+            "ci95_wilson": [
+              0.34238022750665303,
+              1.0
+            ]
+          },
+          "decision_accuracy": {
+            "numerator": 2,
+            "denominator": 2,
+            "value": 1.0,
+            "ci95_wilson": [
+              0.34238022750665303,
+              1.0
+            ]
+          },
+          "overcorrection_rate": {
+            "numerator": 0,
+            "denominator": 2,
+            "value": 0.0,
+            "ci95_wilson": [
+              0.0,
+              0.6576197724933469
+            ]
+          },
+          "correction_detection_precision": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null,
+            "ci95_wilson": null
+          },
+          "correction_detection_recall": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null,
+            "ci95_wilson": null
+          },
+          "correct_withholding_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null,
+            "ci95_wilson": null
+          },
+          "clear_case_handling_rate": {
+            "numerator": 2,
+            "denominator": 2,
+            "value": 1.0,
+            "ci95_wilson": [
+              0.34238022750665303,
+              1.0
+            ]
+          }
+        }
+      },
+      "performance": {
+        "latency_ms": {
+          "count": 72,
+          "mean": 814.6684166666666,
+          "p50": 801.371,
+          "p95": 1062.016
+        },
+        "usage_rows": 72,
+        "usage_totals": {
+          "prompt_tokens": 32297,
+          "completion_tokens": 3720,
+          "total_tokens": 36017
+        },
+        "completion_tokens_per_second_of_request_latency": 63.42048569658351
+      },
+      "targets": {
+        "json_contract_success_rate": {
+          "operator": ">=",
+          "value": 0.99,
+          "observed": 0.9861111111111112,
+          "passed": false
+        },
+        "overcorrection_rate": {
+          "operator": "<=",
+          "value": 0.02,
+          "observed": 0.06060606060606061,
+          "passed": false
+        },
+        "correction_detection_precision": {
+          "operator": ">=",
+          "value": 0.95,
+          "observed": 0.9259259259259259,
+          "passed": false
+        },
+        "correction_detection_recall": {
+          "operator": ">=",
+          "value": 0.8,
+          "observed": 0.9259259259259259,
+          "passed": true
+        },
+        "clear_case_handling_rate": {
+          "operator": ">=",
+          "value": 0.85,
+          "observed": 0.9833333333333333,
+          "passed": true
+        }
+      },
+      "meets_all_targets": false,
+      "case_lists": {
+        "system_failure_ids": [
+          "JG-014"
+        ],
+        "decision_error_ids": [
+          "JG-003",
+          "JG-006",
+          "JG-014",
+          "JG-027",
+          "JG-035",
+          "JG-059",
+          "JG-060"
+        ],
+        "overcorrection_ids": [
+          "JG-003",
+          "JG-006"
+        ],
+        "missed_correction_ids": [
+          "JG-027",
+          "JG-035"
+        ],
+        "noncanonical_but_accepted_ids": []
+      },
+      "limitations": [
+        "reason_ko의 언어학적 타당성과 의미 보존은 자동 채점하지 않습니다.",
+        "accepted_corrections는 가능한 정답 표현을 모두 열거한 목록이 아닙니다.",
+        "user_reviewed 데이터는 일본어 전문가 인증을 의미하지 않습니다.",
+        "Wilson 구간은 표본 불확실성만 나타내며 데이터 대표성은 보장하지 않습니다."
+      ]
+    }
+  ]
+}

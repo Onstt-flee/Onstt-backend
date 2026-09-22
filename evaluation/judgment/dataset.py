@@ -17,7 +17,7 @@ ERROR_TYPES = {
     "particle_misuse", "verb_conjugation", "adjective_conjugation",
     "copula_conjugation", "modifier_connection", "tense_mismatch",
 }
-REVIEW_STATUSES = {"provisional", "user_reviewed", "expert_reviewed"}
+REVIEW_STATUSES = {"provisional", "generated_validated", "user_reviewed", "expert_reviewed"}
 REVIEW_CHECK_LABELS = {
     "check:filler_preserve": "필러 유지",
     "check:lexical_content_preserve": "의미 있는 표현 유지",
@@ -119,8 +119,10 @@ def validate_record(record):
         "accepted_corrections", "provenance", "review",
     }, "record")
     _require(record["schema_version"] == "0.1", "Unsupported schema_version")
-    _require(isinstance(record["id"], str) and re.fullmatch(r"JG-\d{3,}", record["id"]), "Invalid id")
-    _require(record["split"] == "seed_eval", "This dataset is reserved for seed_eval, not training")
+    split = record["split"]
+    _choice(split, {"seed_eval", "holdout_eval"}, "split")
+    id_pattern = r"JG-\d{3,}" if split == "seed_eval" else r"JH-\d{4,}"
+    _require(isinstance(record["id"], str) and re.fullmatch(id_pattern, record["id"]), "Invalid id for split")
     group = record["group_id"]
     _require(isinstance(group, str) and re.fullmatch(r"[a-z][a-z0-9_]*", group), "Invalid group_id")
     tags = record["tags"]
@@ -148,15 +150,16 @@ def validate_record(record):
 
     provenance = record["provenance"]
     _keys(provenance, {"kind", "source_id", "external_text_used"}, "provenance")
-    _require(provenance["kind"] == "assistant_authored", "Seed provenance must be assistant_authored")
+    expected_kind = "assistant_authored" if split == "seed_eval" else "deterministic_template"
+    _require(provenance["kind"] == expected_kind, f"Invalid provenance.kind for {split}")
     _require(_nonblank(provenance["source_id"]), "provenance.source_id is required")
     _require(provenance["external_text_used"] is False, "Seed must not claim imported external text")
 
     review = record["review"]
     _keys(review, {"status", "reviewed_at"}, "review")
     _choice(review["status"], REVIEW_STATUSES, "review.status")
-    if review["status"] == "provisional":
-        _require(review["reviewed_at"] is None, "Provisional records cannot claim completed review")
+    if review["status"] in {"provisional", "generated_validated"}:
+        _require(review["reviewed_at"] is None, "Unreviewed records cannot claim completed review")
     else:
         reviewed_at = review["reviewed_at"]
         _require(isinstance(reviewed_at, str) and re.fullmatch(r"\d{4}-\d{2}-\d{2}", reviewed_at), "reviewed_at must be YYYY-MM-DD")
