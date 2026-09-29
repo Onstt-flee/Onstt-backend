@@ -6,7 +6,7 @@
 
 ## 현재 개발 상태와 문서 안내
 
-기준일은 2026-09-29입니다. 기존 API 오류 수정과 Python 3.12.3 환경 재구성, 72문항 개발셋, 독립 실행기·채점기와 11개 로컬 모델 기준선 비교를 완료했습니다. v0.2-E는 교정문을 회복했지만 안전 기준을 실패했습니다. 이에 D 판단을 고정하고 D·E 교정문만 비교하는 정답 비사용 후보 게이트를 구현했습니다. 개발셋에서 D의 안전 지표를 유지하며 허용 교정문을 19/27→22/27로 높였습니다. 새 120문항 시험지는 아직 실행하지 않았고 운영 채택은 보류 중입니다.
+기준일은 2026-09-29입니다. 기존 API 오류 수정과 Python 3.12.3 환경 재구성, 판단모델 데이터·실행기·채점기 및 D/E LoRA 실험을 완료했습니다. 동결한 `holdout_v0.2` 120문항을 단 한 번 실행한 결과, D가 과교정 2/50으로 안전 기준(최대 1/50)을 실패했고 조건부 D+E 게이트도 교정문 개선이 0건이었습니다. 따라서 운영 API 통합을 중단했으며, 실패 분석에 따른 v0.2-F 설계와 새 `holdout_v0.3` 봉인을 완료했습니다.
 
 현재 선택은 다음과 같습니다.
 
@@ -14,7 +14,7 @@
 - 보조 스케일 비교 모델: `Qwen/Qwen3-8B`
 - 고용량 정확도 상한 기준선: `Qwen/Qwen3-14B`
 - 운영 투입 승인 모델: 없음
-- 현재 단계: D 판단+E 교정 후보 게이트 오프라인 개발셋 검증 완료. 규칙·어댑터 고정 후 holdout 실행 전
+- 현재 단계: `holdout_v0.2` 소비 완료·운영 채택 실패. v0.2-F 학습 전 `holdout_v0.3` 봉인 완료
 
 현재 운영 `analyzer`는 기존 이진 분석 계약을 사용합니다. 평가에서 사용한 3단계 판단 계약과 선택 모델은 아직 Swagger 또는 운영 API에 통합하지 않았습니다.
 
@@ -38,6 +38,8 @@
 | v0.2-E 학습·C/D/E 개발셋 결과 | [`training/judgment/V0.2_E_TRAIN_AND_DEV72_RESULT.md`](training/judgment/V0.2_E_TRAIN_AND_DEV72_RESULT.md) | 45-step 학습 해시, 교정 회복·안전성 회귀와 채택 보류 근거 |
 | D 판단+E 교정 후보 게이트 | [`training/judgment/V0.2_DE_CANDIDATE_GATE_RESULT.md`](training/judgment/V0.2_DE_CANDIDATE_GATE_RESULT.md) | 정답 비사용 선택 규칙, 개발셋 개선·한계와 holdout 전 조건 |
 | 최종 holdout 실행 규약 | [`evaluation/judgment/holdout_v0.2.protocol.json`](evaluation/judgment/holdout_v0.2.protocol.json) | D/E 어댑터·프롬프트·선택기 해시와 단일 실행·채택 임계값 |
+| 소비된 holdout v0.2 최종 결과 | [`training/judgment/V0.2_DE_HOLDOUT_V0.2_RESULT.md`](training/judgment/V0.2_DE_HOLDOUT_V0.2_RESULT.md) | D 안전 기준 실패, 게이트 개선 0건, API 통합 중단 근거 |
+| v0.2-F 보강 설계·새 시험지 | [`training/judgment/V0.2_F_DESIGN.md`](training/judgment/V0.2_F_DESIGN.md) | 실패 유형 보강 범위와 `holdout_v0.3` 봉인·사용 금지 조건 |
 | 문법 판단 경계 정의 | [`evaluation/judgment/BOUNDARY_GUIDELINES.md`](evaluation/judgment/BOUNDARY_GUIDELINES.md) | 필러·문체·표기·STT·문맥 판단 원칙 |
 | 사람 검수 절차 | [`evaluation/judgment/REVIEW_PROCESS.md`](evaluation/judgment/REVIEW_PROCESS.md) | 사용자 검수와 전문가 검수의 구분 및 절차 |
 | 최종 검수 기준·주의 사례 | [`evaluation/judgment/FINAL_REVIEW_GUIDE.md`](evaluation/judgment/FINAL_REVIEW_GUIDE.md) | 추측 교정 금지, 번역·복구·스타일 분리 원칙 |
