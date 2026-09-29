@@ -1,0 +1,110 @@
+{
+  "dataset_id": "judgment-pilot-v0.2-d",
+  "generation_version": "failure-focus-v0.2-d",
+  "validated_at": "2026-09-22",
+  "output_contract": "judgment-v0.2",
+  "source_dataset": "training/judgment/data/pilot_v0.2_c.jsonl",
+  "source_dataset_sha256": "206e184dfa62614bd2f160175d2a5fe0013ee3efa777c1faad2b763da517b444",
+  "augmentation_path": "training/judgment/data/failure_focus_v0.2_d.jsonl",
+  "augmentation_sha256": "839dd14a75f17d67bdf480a6024f9d13e057ca640833a4273add0ebdbe34dc78",
+  "combined_path": "training/judgment/data/pilot_v0.2_d.jsonl",
+  "combined_sha256": "e9667e0b1555c260bdb95ab77736a8b51b9e5fa1dedf18a0d2e23cfce9a2e638",
+  "augmentation_summary": {
+    "total": 120,
+    "splits": {
+      "pilot_dev": 24,
+      "pilot_train": 96
+    },
+    "decisions": {
+      "acceptable": 60,
+      "insufficient_evidence": 20,
+      "needs_correction": 40
+    },
+    "levels": {
+      "N4": 36,
+      "N5": 84
+    },
+    "review_status": {
+      "generated_validated": 120
+    },
+    "provenance": {
+      "deterministic_template": 120
+    },
+    "error_types": {
+      "adjective_conjugation": 13,
+      "particle_misuse": 26,
+      "verb_conjugation": 11
+    },
+    "compound_corrections": 10,
+    "template_families": 31
+  },
+  "combined_summary": {
+    "total": 748,
+    "splits": {
+      "pilot_dev": 154,
+      "pilot_train": 594
+    },
+    "decisions": {
+      "acceptable": 368,
+      "insufficient_evidence": 89,
+      "needs_correction": 291
+    },
+    "levels": {
+      "N4": 224,
+      "N5": 524
+    },
+    "review_status": {
+      "generated_validated": 448,
+      "user_reviewed": 300
+    },
+    "provenance": {
+      "deterministic_template": 448,
+      "local_model_assisted": 300
+    },
+    "error_types": {
+      "adjective_conjugation": 52,
+      "copula_conjugation": 29,
+      "modifier_connection": 33,
+      "particle_misuse": 99,
+      "tense_mismatch": 35,
+      "verb_conjugation": 78
+    },
+    "compound_corrections": 35,
+    "template_families": 120
+  },
+  "generated_validation": {
+    "records": 120,
+    "human_reviewed": false,
+    "expert_reviewed": false,
+    "compound_error_cases": 10,
+    "contamination_audit": {
+      "exact_normalized_matches": 0,
+      "near_dataset_matches_at_or_above_0_85": 0,
+      "max_dataset_character_3gram_jaccard": 0.75,
+      "source_sha256": {
+        "evaluation/judgment/seed_v0.1.jsonl": "f681ba026cfd6eeca86ebf531e1ac94ceed06525b43fca2b19729ef86ff0d12b",
+        "evaluation/judgment/holdout_v0.1.jsonl": "1694172cc8974aca1bf47ce37b0af9bca2cfb314ca9717d659959047f846ec26",
+        "evaluation/judgment/holdout_v0.2.jsonl": "a2ae7f655953f617e2f56219c2065ea5cc68118f95a7492fe048e23669b2736d",
+        "training/judgment/data/pilot_v0.2_c.jsonl": "206e184dfa62614bd2f160175d2a5fe0013ee3efa777c1faad2b763da517b444",
+        "rag_data/errors/error_patterns.json": "8341f7058290d866599ab707593b5f1715c3112160807c459438e97a95af4a96",
+        "rag_data/examples/texts.json": "88e41bd429b70ad2098ff512597c3a04bfe398d3bad8bfff8f287c6fca6651ad",
+        "rag_data/grammar/grammar_rules.json": "6fe941c1e980ea31000c8a77153849ea9de06ab6b7de8a7958dd3c3c1eee8085",
+        "rag_data/vocab/word_db.json": "ef6bc83c3b85c3df6357e653110fca6f3a10df8f21caf3cc3b2f165c8fc98fff"
+      },
+      "limitation": "Exact overlap includes RAG JSON. Near audit covers existing datasets only; semantic or pretraining overlap is not ruled out."
+    }
+  },
+  "chatml": {
+    "pilot_dev": {
+      "path": "/home/cap-minsung/stt_api/training/judgment/data/failure_focus_v0.2_d_chatml/pilot_dev.chatml.jsonl",
+      "count": 154,
+      "sha256": "67cdc1a54c0c7cdbc411742e304c6d246639090621a2c72cb25b7ac8e19e1f0a"
+    },
+    "pilot_train": {
+      "path": "/home/cap-minsung/stt_api/training/judgment/data/failure_focus_v0.2_d_chatml/pilot_train.chatml.jsonl",
+      "count": 594,
+      "sha256": "2af21b1633adf2f209fad07d6638086fae0f60aa0903d5287bef7a827ff8061a"
+    }
+  },
+  "holdout_policy": "Holdouts used only for overlap audit; no model predictions inspected or used for training."
+}

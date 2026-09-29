@@ -1,6 +1,6 @@
 # 일본어 판단모델 최소 평가셋 v0.1
 
-상태: **72개 합성 문항의 익명 사용자 검수 완료본**. 기존 60개에 경계 문항 12개를 추가했다. Qwen3.5 0.8B·2B·4B, Qwen3-4B-Instruct-2507 베이스, Qwen3-8B·14B 베이스, RakutenAI-2.0-mini-instruct, llm-jp-3 1.8B·3.7B, Phi-4-mini-instruct와 기존 언어튜터 LoRA까지 11개 후보의 오프라인 추론·채점을 완료했으며, 일본어 전문가 검수와 판단 전용 모델 학습은 아직 실행하지 않았다.
+상태: **72개 합성 문항의 익명 사용자 검수와 Qwen3-4B 판단 전용 LoRA 개발 실험 완료본**. 기존 60개에 경계 문항 12개를 추가했다. 11개 베이스 후보의 오프라인 비교 후 v0.2-D/E LoRA와 판단 잠금 후보 게이트까지 개발셋에서 검증했다. 일본어 전문가 검수와 운영 API 통합은 아직 완료하지 않았다.
 이 폴더는 운영 `analyzer` 및 DB와 분리된 오프라인 평가 도구와 결과 요약을 담는다.
 전체 11개 모델의 비교, 평가 기준과 최종 2개 후보 선정 근거는 [최종 모델 선정 문서](FINAL_MODEL_SELECTION.md)에 정리했다.
 
@@ -52,6 +52,18 @@
 신규 학습·실행은 모델이 `decision`, `corrected_text`, `error_types`, `reason_ko`만 생성하는 `judgment-v0.2`를 사용한다. Unicode 위치와 `source/replacement`는 `runner.py`가 원문과 교정문의 diff로 계산한다. 분류 개수와 diff 개수가 다르면 `classification_review_required`로 표시하며 판단과 교정문 자체는 버리지 않는다. 기존 v0.1 계약과 결과는 재현을 위해 보존한다.
 
 신규 blind holdout은 `holdout_v0.1.jsonl` 150문항이며 SHA-256은 `1694172cc8974aca1bf47ce37b0af9bca2cfb314ca9717d659959047f846ec26`이다. `generated_validated` 자동 검증본이고 사람·전문가 검수를 주장하지 않는다. v0.2-C 최종 결과는 [v0.2-C 결과](../../training/judgment/FAILURE_FOCUS_V0.2_C_RESULT.md)를 따른다.
+
+같은 v0.2 계약으로 다시 학습한 v0.2-B 540문항 대조군과 v0.2-C의 72문항 개발셋 비교는 [동일 계약 대조 결과](../../training/judgment/CONTRACT_CONTROL_V0.2_B_RESULT.md)를 따른다. 150문항 holdout은 대조군 실행이나 모델 선택에 재사용하지 않았다.
+
+새 미사용 최종 비교용 시험지는 `holdout_v0.2.jsonl` 120문항이며 SHA-256은 `a2ae7f655953f617e2f56219c2065ea5cc68118f95a7492fe048e23669b2736d`이다. 기존 개발셋·150문항 holdout·v0.2-C 학습 데이터·RAG와 정규화 정확 중복 0건, 기존 세 데이터셋과 문자 3-gram Jaccard 0.85 이상 근접 중복 0건이다. `generated_validated`로만 표시하며, v0.2-D 데이터·모델·채점 기준을 고정하기 전에는 모델을 실행하지 않는다. v0.2-D의 45-step 학습은 완료했으나 이 시험지의 모델 추론은 아직 실행하지 않았다. 설계와 사용 조건은 [v0.2-D 설계](../../training/judgment/V0.2_D_DESIGN.md)를 따른다.
+
+v0.2-C와 v0.2-D는 동일 프롬프트·생성 설정으로 기존 72문항 개발셋에서 비교했다. D는 판단 69/72·과교정 0/33으로 개선됐지만 허용 교정문 19/27·복합 오류 0/4로 회귀했다. [비교 보고서](../../training/judgment/V0.2_D_DEV72_COMPARISON.md)와 [상세 채점](results/qwen3-4b-v02c-vs-v02d-dev72.md)을 참고한다. 새 120문항 holdout은 여전히 미사용이다.
+
+교정문 회귀를 겨냥한 v0.2-E 데이터 80문항을 생성해 45-step 학습하고 같은 개발셋에서 C·D·E를 비교했다. E는 교정문 20/27·복합 오류 1/4를 회복했지만 과교정 1/33·판단 66/72로 사전 기준을 실패했다. [v0.2-E 결과](../../training/judgment/V0.2_E_TRAIN_AND_DEV72_RESULT.md)와 [상세 채점](results/qwen3-4b-v02c-vs-v02d-vs-v02e-dev72.md)을 참고한다. 새 holdout은 계속 봉인한다.
+
+D의 판단을 고정하고 D·E가 함께 교정을 제안한 경우만 문체·활용 오류 잔존·변경량으로 후보를 고르는 오프라인 게이트를 구현했다. 정답을 선택에 사용하지 않았고 개발셋에서 D의 판단 69/72·과교정 0/33을 유지하면서 허용 교정문을 19/27→22/27로 높였다. [후보 게이트 결과](../../training/judgment/V0.2_DE_CANDIDATE_GATE_RESULT.md)와 [상세 채점](results/qwen3-4b-v02d-vs-v02e-vs-gated-dev72.md)을 따른다. holdout은 아직 미사용이다.
+
+최종 holdout 실행 조건은 `holdout_v0.2.protocol.json`에 동결했다. 조건부 게이트 지연시간은 D의 전체 호출 시간에 D가 `needs_correction`을 낸 문항의 E 호출 시간만 더해 계산한다. 원시 실행과 가중치는 Git에서 제외하고 protocol·결과 요약·해시만 추적한다.
 
 ## 3.1 기존 v0.1 출력 계약
 

@@ -1,6 +1,6 @@
 # 일본어 문법 판단 LoRA 데이터
 
-상태: **파일럿 v0.1 300문항 익명 사용자 검수 및 reviewed LoRA 비교 완료**. canonical 원본과 기존 실험은 보존했다. `v0.2-A`는 안전 우선 채택 기준 미달로 보류했다. 자동 검증 최소대립쌍을 포함한 540문항 `v0.2-B`는 전체 45-step 학습과 고정 72문항 평가를 완료했으며, 현재 가장 유망하지만 운영 목표 미달로 채택을 보류했다.
+상태: **D 판단+E 교정 후보 게이트 오프라인 구현·개발셋 검증 완료**. D의 안전 지표를 유지하며 허용 교정문을 22/27로 개선했다. 미사용 시험지는 계속 봉인했고 운영 후보는 아직 없다.
 
 ## 목적과 격리 원칙
 
@@ -25,21 +25,45 @@
 - `data/pilot_v0.2_b.jsonl`: 기존 통제본과 보강본을 결합한 540문항 학습 소스
 - `data/hard_negatives_v0.2_b_chatml/`: v0.2-B train/dev ChatML
 - `data/hard_negatives_v0.2_b.manifest.json`: 생성 규칙·최소대립쌍·누수 검사·해시
+- `data/contract_control_v0.2_b_chatml/`: 기존 540문항을 위치 없는 v0.2 출력으로 재내보낸 대조군 train/dev
+- `data/contract_control_v0.2_b.manifest.json`: 정답 불변성과 파생 파일 해시
+- `data/failure_focus_v0.2_d.jsonl`: 공통 실패 유형 보강 120문항
+- `data/pilot_v0.2_d.jsonl`: v0.2-C 원본 628문항과 새 120문항을 결합한 748문항
+- `data/failure_focus_v0.2_d_chatml/`: 위치 없는 v0.2 출력의 train/dev
+- `data/failure_focus_v0.2_d.manifest.json`: 분포·누수 감사·해시
 - `REVIEW_CHECKPOINT.md`: 1차 300문항·2차 228문항의 검수 순서와 주의 기준
 - `sources/qwen3_14b_lexicon_v0.1.json`: 14B 원시 어휘 제안, 선별 결과와 오분류 기록
+- `data/failure_focus_v0.2_e.jsonl`: 최소 교정·문체 보존·복합 오류 회귀 보강 80문항
+- `data/pilot_v0.2_e.jsonl`: v0.2-D 748문항과 새 80문항을 결합한 828문항
+- `data/failure_focus_v0.2_e_chatml/`: 위치 없는 v0.2 출력의 train/dev
+- `data/failure_focus_v0.2_e.manifest.json`: 분포·최소대립쌍·누수 감사·해시
 - `data.py`: 학습 레코드 계약·split 격리·중복 검사
 - `generate_pilot.py`: 결정론적 파일럿 생성기
 - `apply_user_review.py`: 외부 검수를 익명 3단계 판단으로 정규화하고 reviewed 데이터를 생성하는 도구
 - `export_chatml.py`: 검수 완료 데이터만 ChatML로 내보내는 도구
 - `build_reason_control.py`: canonical을 수정하지 않고 템플릿별 통제 근거를 주입하는 `v0.2-A` 생성기
 - `build_hard_negatives.py`: 8개 취약 유형의 최소대립쌍과 정상·보류 문장을 생성·검증하는 `v0.2-B` 생성기
+- `build_contract_control.py`: 기존 v0.2-B 정답·분할을 유지하는 동일 계약 대조군 생성기
+- `build_failure_focus_v0_2_d.py`: 공통 실패 유형의 v0.2-D 데이터·ChatML 생성 및 holdout 누수 감사
+- `build_failure_focus_v0_2_e.py`: v0.2-D 교정문 회귀 보강 데이터·ChatML 생성 및 holdout 누수 감사
 - `train_lora.py`: provisional 명시 동의와 입력 검증을 요구하는 독립 LoRA 학습기
 - `configs/qwen3_4b_pilot_v0.1.json`: 기존 provisional Qwen3-4B 실험 설정
 - `configs/qwen3_4b_reviewed_v0.1.json`: 검수 완료 데이터 전용 다음 학습 설정
 - `configs/qwen3_4b_reason_control_v0.2_a.json`: 기존 학습 조건을 유지한 근거 통제 실험 설정
 - `configs/qwen3_4b_hard_negatives_v0.2_b.json`: 데이터 증가와 무관하게 45 step으로 고정한 보강 실험 설정
+- `configs/qwen3_4b_contract_control_v0.2_b.json`: v0.2-C와 동일 조건으로 학습하는 별도 대조군 설정
+- `configs/qwen3_4b_failure_focus_v0.2_d.json`: 별도 어댑터에 seed 42·45-step 학습하는 v0.2-D 설정
 - `PILOT_V0.1_RESULT.md`: provisional 실험 결과와 실패 분석
+- `configs/qwen3_4b_failure_focus_v0.2_e.json`: 동일 조건의 별도 v0.2-E 어댑터 설정
 - `REVIEWED_V0.1_RESULT.md`: 검수 완료 데이터 학습·72문항 비교와 다음 실험 조건
+- `CONTRACT_CONTROL_V0.2_B_RESULT.md`: 동일 출력 계약 대조군과 v0.2-C의 개발셋 비교·실패 원인
+- `V0.2_D_DESIGN.md`: 새 시험지 봉인과 후속 학습·평가 순서
+- `V0.2_D_DATA_RESULT.md`: 120문항 보강 데이터의 분포·해시·누수 검사 결과
+- `V0.2_D_TRAIN_RESULT.md`: 45-step 학습 조건·손실·어댑터 해시와 개발셋 평가 상태
+- `V0.2_D_DEV72_COMPARISON.md`: C↔D 동일 조건 개발셋 비교와 교정문 회귀 분석
+- `V0.2_E_DESIGN_AND_DATA.md`: 교정문 회귀 보강 설계, 80문항 생성·누수 검사와 채택 기준
+- `V0.2_E_TRAIN_AND_DEV72_RESULT.md`: v0.2-E 학습 해시, C·D·E 개발셋 비교와 채택 보류 근거
+- `V0.2_DE_CANDIDATE_GATE_RESULT.md`: D 판단 고정 후보 선택 규칙, 개발셋 개선·한계와 해시
 
 ## 데이터 구성
 
@@ -121,6 +145,22 @@ venv/bin/python -B -m training.judgment.train_lora \
 ## v0.2-C 실패 집중 보강과 blind 평가
 
 위치 생성을 모델에서 제거한 `judgment-v0.2` 계약을 적용하고, v0.2-B 실패 11건을 겨냥한 자동 검증 88문항을 추가했다. 결합본은 628문항이며 Qwen3-4B·seed 42·45-step 조건으로 학습했다. 신규 150문항 blind holdout에서 구조 149/150, 재현율 59/66은 기준을 통과했지만 과교정 8/60과 정밀도 59/69가 안전 기준을 실패했다. 따라서 운영 API 통합은 보류한다. 상세 수치와 해시는 [v0.2-C 결과](FAILURE_FOCUS_V0.2_C_RESULT.md)를 따른다.
+
+## v0.2-B 동일 출력 계약 대조군
+
+기존 540문항의 정답을 바꾸지 않고 위치 없는 `judgment-v0.2` 출력으로 재내보내 별도 Qwen3-4B 어댑터를 seed 42·45-step 학습했다. 같은 72문항 개발셋에서 v0.2-C는 대조군보다 과교정 3/33→2/33, 교정 탐지 정밀도 25/29→25/27, 허용 교정문 17/27→20/27로 개선됐다. 두 모델 모두 운영 안전 기준은 실패했다. 이미 확인한 150문항 holdout은 재사용하지 않았다. 전체 해시와 공통 실패 문항은 [동일 계약 대조 결과](CONTRACT_CONTROL_V0.2_B_RESULT.md)에 기록했다.
+
+## v0.2-D 설계 및 새 시험지
+
+미사용 120문항 시험지를 별도 해시로 고정한 뒤, 개발셋 공통 실패를 겨냥한 120문항을 생성·검증했다. 기존 628문항을 변경하지 않고 총 748문항으로 결합했으며 train 594/dev 154다. 새 데이터와 기존 평가·학습·RAG 사이 정확·근접 중복은 설정한 기준에서 0건이다. 같은 seed 42·45-step 조건으로 별도 LoRA를 학습하고 72문항 개발셋에서 C와 비교했다. D는 판단 69/72·과교정 0/33으로 개선됐지만 교정문 일치 19/27·복합 오류 완전 탐지 0/4로 후퇴했다. 설계·봉인은 [v0.2-D 설계](V0.2_D_DESIGN.md), 데이터는 [v0.2-D 데이터 결과](V0.2_D_DATA_RESULT.md), 학습은 [v0.2-D 학습 결과](V0.2_D_TRAIN_RESULT.md), 문항별 분석은 [C↔D 개발셋 비교](V0.2_D_DEV72_COMPARISON.md)를 따른다.
+
+## v0.2-E 교정문 회귀 보강
+
+정중체 유지, い형용사 연결·수식, 복합 오류 전체 교정, 완결된 구어체 허용을 중심으로 80문항을 결정론적으로 생성했다. 추가분은 정상 32·교정 40·보류 8이고 복합 오류 12문항과 최소대립쌍 16개를 포함한다. 기존 748문항은 변경하지 않았으며 결합본은 828문항이다. 동일 조건 45-step 학습 뒤 E는 개발셋 교정문 20/27·복합 오류 1/4를 회복했지만 과교정 1/33·판단 66/72로 채택 기준을 실패했다. 설계·해시는 [v0.2-E 설계·데이터](V0.2_E_DESIGN_AND_DATA.md), 결과는 [v0.2-E 학습·비교](V0.2_E_TRAIN_AND_DEV72_RESULT.md)를 따른다.
+
+## D 판단 + E 교정 후보 게이트
+
+D의 판단을 절대 변경하지 않고 두 모델이 모두 교정을 제안할 때만 요청 의도·정중체·오류 잔존·변경량으로 후보를 선택한다. 정답을 선택 과정에 사용하지 않았다. 개발셋에서 D의 판단 정확도 69/72와 과교정 0/33을 유지하면서 허용 교정문을 19/27→22/27, 복합 오류 완전 교정을 0/4→1/4로 높였다. 상세 규칙·해시·한계는 [후보 게이트 결과](V0.2_DE_CANDIDATE_GATE_RESULT.md)를 따른다. 규칙과 어댑터를 고정하기 전에는 holdout을 실행하지 않는다.
 
 ## provisional 파일럿 실험 결과
 

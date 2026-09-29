@@ -1,0 +1,113 @@
+{
+  "dataset_id": "judgment-pilot-v0.2-e",
+  "generation_version": "failure-focus-v0.2-e",
+  "validated_at": "2026-09-29",
+  "output_contract": "judgment-v0.2",
+  "source_dataset": "training/judgment/data/pilot_v0.2_d.jsonl",
+  "source_dataset_sha256": "e9667e0b1555c260bdb95ab77736a8b51b9e5fa1dedf18a0d2e23cfce9a2e638",
+  "augmentation_path": "training/judgment/data/failure_focus_v0.2_e.jsonl",
+  "augmentation_sha256": "9ae2a902d13301ea042e3db3413d73ea6de8e95df20bf90b2de1cd1df7a23890",
+  "combined_path": "training/judgment/data/pilot_v0.2_e.jsonl",
+  "combined_sha256": "4a60ffac2baf09cd5dda9a145fbadc437d1ffbec3c1e5a2b3780113d6ae11220",
+  "augmentation_summary": {
+    "total": 80,
+    "splits": {
+      "pilot_dev": 20,
+      "pilot_train": 60
+    },
+    "decisions": {
+      "acceptable": 32,
+      "insufficient_evidence": 8,
+      "needs_correction": 40
+    },
+    "levels": {
+      "N4": 24,
+      "N5": 56
+    },
+    "review_status": {
+      "generated_validated": 80
+    },
+    "provenance": {
+      "deterministic_template": 80
+    },
+    "error_types": {
+      "adjective_conjugation": 16,
+      "copula_conjugation": 4,
+      "modifier_connection": 13,
+      "particle_misuse": 8,
+      "verb_conjugation": 11
+    },
+    "compound_corrections": 12,
+    "template_families": 32
+  },
+  "combined_summary": {
+    "total": 828,
+    "splits": {
+      "pilot_dev": 174,
+      "pilot_train": 654
+    },
+    "decisions": {
+      "acceptable": 400,
+      "insufficient_evidence": 97,
+      "needs_correction": 331
+    },
+    "levels": {
+      "N4": 248,
+      "N5": 580
+    },
+    "review_status": {
+      "generated_validated": 528,
+      "user_reviewed": 300
+    },
+    "provenance": {
+      "deterministic_template": 528,
+      "local_model_assisted": 300
+    },
+    "error_types": {
+      "adjective_conjugation": 68,
+      "copula_conjugation": 33,
+      "modifier_connection": 46,
+      "particle_misuse": 107,
+      "tense_mismatch": 35,
+      "verb_conjugation": 89
+    },
+    "compound_corrections": 47,
+    "template_families": 152
+  },
+  "generated_validation": {
+    "records": 80,
+    "human_reviewed": false,
+    "expert_reviewed": false,
+    "compound_error_cases": 12,
+    "paired_cases": 16,
+    "contamination_audit": {
+      "exact_normalized_matches": 0,
+      "near_dataset_matches_at_or_above_0_85": 0,
+      "max_dataset_character_3gram_jaccard": 0.6667,
+      "source_sha256": {
+        "evaluation/judgment/seed_v0.1.jsonl": "f681ba026cfd6eeca86ebf531e1ac94ceed06525b43fca2b19729ef86ff0d12b",
+        "evaluation/judgment/holdout_v0.1.jsonl": "1694172cc8974aca1bf47ce37b0af9bca2cfb314ca9717d659959047f846ec26",
+        "evaluation/judgment/holdout_v0.2.jsonl": "a2ae7f655953f617e2f56219c2065ea5cc68118f95a7492fe048e23669b2736d",
+        "training/judgment/data/pilot_v0.2_d.jsonl": "e9667e0b1555c260bdb95ab77736a8b51b9e5fa1dedf18a0d2e23cfce9a2e638",
+        "rag_data/errors/error_patterns.json": "8341f7058290d866599ab707593b5f1715c3112160807c459438e97a95af4a96",
+        "rag_data/examples/texts.json": "88e41bd429b70ad2098ff512597c3a04bfe398d3bad8bfff8f287c6fca6651ad",
+        "rag_data/grammar/grammar_rules.json": "6fe941c1e980ea31000c8a77153849ea9de06ab6b7de8a7958dd3c3c1eee8085",
+        "rag_data/vocab/word_db.json": "ef6bc83c3b85c3df6357e653110fca6f3a10df8f21caf3cc3b2f165c8fc98fff"
+      },
+      "limitation": "Exact overlap includes RAG JSON. Near audit covers existing datasets only; semantic or pretraining overlap is not ruled out."
+    }
+  },
+  "chatml": {
+    "pilot_dev": {
+      "path": "/home/cap-minsung/stt_api/training/judgment/data/failure_focus_v0.2_e_chatml/pilot_dev.chatml.jsonl",
+      "count": 174,
+      "sha256": "2dae13a9942bb6b297146ee58a8d51ae9cb012723d9951c7a5e2a933a15f7fbe"
+    },
+    "pilot_train": {
+      "path": "/home/cap-minsung/stt_api/training/judgment/data/failure_focus_v0.2_e_chatml/pilot_train.chatml.jsonl",
+      "count": 654,
+      "sha256": "472e8d4cf8d3d8259dea5dceeb467a733d062587a71cb7e1ba2ae5e3233073a9"
+    }
+  },
+  "holdout_policy": "Holdouts used only for overlap audit; no model predictions inspected or used for training."
+}

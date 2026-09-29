@@ -1,0 +1,58 @@
+{
+  "protocol_version": "judgment-holdout-v0.2-final-1",
+  "status": "sealed_before_inference",
+  "holdout": {
+    "path": "evaluation/judgment/holdout_v0.2.jsonl",
+    "sha256": "a2ae7f655953f617e2f56219c2065ea5cc68118f95a7492fe048e23669b2736d",
+    "manifest_sha256": "f66881fa0a63288bc7721f69e89b18e16240fb8a8fe9999640e6bb99cf242dda",
+    "count": 120,
+    "distribution": {"acceptable": 50, "needs_correction": 50, "insufficient_evidence": 20}
+  },
+  "base_model": {
+    "path": "/home/cap-minsung/lora-adapter-bank/base-models/qwen3-4b-instruct-2507-hf",
+    "config_sha256": "5beea1a4a34c62782bfb2f911c606741a3bab8f92d80a118fa053c28af12e8ba",
+    "index_sha256": "d6c42883a895dfef5b0080ed2116a1bcd764f558406b98923d675978a1abf29c",
+    "tokenizer_sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4"
+  },
+  "primary": {
+    "model_name": "judgment-v02d",
+    "adapter_path": "/home/cap-minsung/lora-adapter-bank/adapters/judgment-qwen3-4b-failure-focus-v0.2-d",
+    "adapter_sha256": "2e758256afe68c3005b595f9f664b5f76734606b923dbb2c7bc858e81e9e55c6",
+    "dataset_sha256": "e9667e0b1555c260bdb95ab77736a8b51b9e5fa1dedf18a0d2e23cfce9a2e638",
+    "config_sha256": "f5b979ddadda490cfe0a9a70a731cc2495628c63dd85d83939fc473f612087ca"
+  },
+  "secondary": {
+    "model_name": "judgment-v02e",
+    "adapter_path": "/home/cap-minsung/lora-adapter-bank/adapters/judgment-qwen3-4b-failure-focus-v0.2-e",
+    "adapter_sha256": "ccfd9ca02ef338e76c594eff3484f205cc0a0275a27bb6f3d5a70245b039d755",
+    "dataset_sha256": "4a60ffac2baf09cd5dda9a145fbadc437d1ffbec3c1e5a2b3780113d6ae11220",
+    "config_sha256": "1720ba169fd02db6e250a1f9372e9f13a2d5ce3786c155871425f719d7011562"
+  },
+  "evaluation": {
+    "prompt_version": "judgment-v0.2",
+    "prompt_sha256": "9252477191ce2af588d7ab0e754ef9d1a5df7ea541b636c8a0b15b8292865f0e",
+    "generation": {"temperature": 0.0, "top_p": 1.0, "max_tokens": 512},
+    "runner_sha256": "0884093a3f7dd9341bb7e0c4d43956bda5d11e735d036c0bfd000569197d8a46",
+    "scorer_sha256": "4a09b2dc44ed03c26cd8aef5efafa76019b13df8d09cd464aa602e2326a6e974",
+    "selector_version": "primary-decision-candidate-gate-v0.1",
+    "selector_sha256": "ce67f8ad8528e7bd7d8bf6ae56a47916e69a6372d51cf17beccb3f63efc419c0"
+  },
+  "thresholds": {
+    "contract_success_min": {"numerator": 119, "denominator": 120},
+    "overcorrection_max": {"numerator": 1, "denominator": 50},
+    "correction_precision_min": 0.95,
+    "correction_recall_min": 0.80,
+    "clear_case_handling_min": 0.85,
+    "gate_accepted_correction_gain_min": 3,
+    "gate_compound_correction_must_not_decrease": true,
+    "gate_p95_latency_ms_max": 5000,
+    "gate_p95_to_primary_ratio_max": 2.0
+  },
+  "execution_policy": {
+    "runs_per_adapter": 1,
+    "primary_decision_locked": true,
+    "secondary_latency_counted_only_when_primary_needs_correction": true,
+    "no_retuning_or_rerun_after_unsealing": true,
+    "raw_runs_tracked_by_git": false
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "dataset": "evaluation/judgment/holdout_v0.2.jsonl",
+  "schema_version": "0.1",
+  "role": "sealed_blind_holdout",
+  "generator_seed": 20260922,
+  "records": 120,
+  "sha256": "a2ae7f655953f617e2f56219c2065ea5cc68118f95a7492fe048e23669b2736d",
+  "decisions": {
+    "acceptable": 50,
+    "insufficient_evidence": 20,
+    "needs_correction": 50
+  },
+  "groups": {
+    "adjective_past_error": 10,
+    "adjective_past_ok": 10,
+    "casual_style_ok": 10,
+    "compound_particle_verb_error": 10,
+    "destination_particle_error": 10,
+    "existence_de_error": 10,
+    "existence_ni_ok": 10,
+    "filler_ok": 5,
+    "foreign_language_boundary": 8,
+    "incomplete_utterance": 8,
+    "missing_audio_span": 4,
+    "route_wo_ok": 10,
+    "stt_orthography_boundary": 5,
+    "verb_conjugation_error": 10
+  },
+  "compound_error_cases": 10,
+  "review_status": "generated_validated",
+  "human_reviewed": false,
+  "expert_reviewed": false,
+  "contamination_audit": {
+    "exact_normalized_matches": 0,
+    "normalization": "NFKC, strip whitespace/punctuation",
+    "minimum_fingerprint_length": 4,
+    "source_sha256": {
+      "evaluation/judgment/seed_v0.1.jsonl": "f681ba026cfd6eeca86ebf531e1ac94ceed06525b43fca2b19729ef86ff0d12b",
+      "evaluation/judgment/holdout_v0.1.jsonl": "1694172cc8974aca1bf47ce37b0af9bca2cfb314ca9717d659959047f846ec26",
+      "training/judgment/data/pilot_v0.2_c.jsonl": "206e184dfa62614bd2f160175d2a5fe0013ee3efa777c1faad2b763da517b444",
+      "rag_data/errors/error_patterns.json": "8341f7058290d866599ab707593b5f1715c3112160807c459438e97a95af4a96",
+      "rag_data/examples/texts.json": "88e41bd429b70ad2098ff512597c3a04bfe398d3bad8bfff8f287c6fca6651ad",
+      "rag_data/grammar/grammar_rules.json": "6fe941c1e980ea31000c8a77153849ea9de06ab6b7de8a7958dd3c3c1eee8085",
+      "rag_data/vocab/word_db.json": "ef6bc83c3b85c3df6357e653110fca6f3a10df8f21caf3cc3b2f165c8fc98fff"
+    },
+    "near_dataset_matches_at_or_above_0_85": 0,
+    "max_dataset_character_3gram_jaccard": 0.625,
+    "limitation": "Exact match includes RAG JSON; near-duplicate audit covers three prior datasets only. Paraphrase and pretraining overlap are not excluded."
+  },
+  "seal_policy": "Do not inspect model predictions until v0.2-D data, adapter and evaluation protocol are fixed; evaluate once for final comparison."
+}

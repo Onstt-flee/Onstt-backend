@@ -1,0 +1,20 @@
+{
+  "experiment_id": "judgment-qwen3-4b-contract-control-v0.2-b",
+  "source_dataset": "training/judgment/data/pilot_v0.2_b.jsonl",
+  "source_dataset_sha256": "e6eb2eb62ff9d8cdb1fcf9c35da73334ddee24e285f0cf7ca7bb050d97180711",
+  "output_contract": "judgment-v0.2",
+  "gold_labels_changed": false,
+  "records": 540,
+  "chatml": {
+    "pilot_dev": {
+      "path": "/home/cap-minsung/stt_api/training/judgment/data/contract_control_v0.2_b_chatml/pilot_dev.chatml.jsonl",
+      "count": 108,
+      "sha256": "550ea943912df877dd6bd7416fe12640f15e2a68a73d694b7361eccf642cfea5"
+    },
+    "pilot_train": {
+      "path": "/home/cap-minsung/stt_api/training/judgment/data/contract_control_v0.2_b_chatml/pilot_train.chatml.jsonl",
+      "count": 432,
+      "sha256": "2573bc9276ad3fc1a7193d8cd11f25e5659225e35d0faefc8a487d9f29d5def2"
+    }
+  }
+}

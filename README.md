@@ -6,7 +6,7 @@
 
 ## 현재 개발 상태와 문서 안내
 
-기준일은 2026-09-17입니다. 기존 API 오류 수정과 Python 3.12.3 환경 재구성, 72문항 개발셋, 독립 실행기·채점기와 11개 로컬 모델 기준선 비교를 완료했습니다. 판단 출력 계약 v0.2는 edit 위치를 백엔드 Unicode diff로 이동했고, 신규 150문항 blind holdout과 실패 집중 v0.2-C 학습·평가까지 완료했습니다. 전체 회귀 테스트는 120개가 통과했습니다.
+기준일은 2026-09-29입니다. 기존 API 오류 수정과 Python 3.12.3 환경 재구성, 72문항 개발셋, 독립 실행기·채점기와 11개 로컬 모델 기준선 비교를 완료했습니다. v0.2-E는 교정문을 회복했지만 안전 기준을 실패했습니다. 이에 D 판단을 고정하고 D·E 교정문만 비교하는 정답 비사용 후보 게이트를 구현했습니다. 개발셋에서 D의 안전 지표를 유지하며 허용 교정문을 19/27→22/27로 높였습니다. 새 120문항 시험지는 아직 실행하지 않았고 운영 채택은 보류 중입니다.
 
 현재 선택은 다음과 같습니다.
 
@@ -14,7 +14,7 @@
 - 보조 스케일 비교 모델: `Qwen/Qwen3-8B`
 - 고용량 정확도 상한 기준선: `Qwen/Qwen3-14B`
 - 운영 투입 승인 모델: 없음
-- 현재 단계: Qwen3-4B v0.2-C 45-step 학습과 최초 blind holdout 평가 완료. 구조 149/150·재현율 59/66은 통과했지만 과교정 8/60·정밀도 59/69로 안전 기준 미달, 운영 채택 보류
+- 현재 단계: D 판단+E 교정 후보 게이트 오프라인 개발셋 검증 완료. 규칙·어댑터 고정 후 holdout 실행 전
 
 현재 운영 `analyzer`는 기존 이진 분석 계약을 사용합니다. 평가에서 사용한 3단계 판단 계약과 선택 모델은 아직 Swagger 또는 운영 API에 통합하지 않았습니다.
 
@@ -29,6 +29,15 @@
 | reviewed LoRA 평가 결과 | [`training/judgment/REVIEWED_V0.1_RESULT.md`](training/judgment/REVIEWED_V0.1_RESULT.md) | 사용자 검수 데이터 학습, 3모델 비교, 과교정 분석 |
 | 최소대립쌍 v0.2-B 평가 결과 | [`training/judgment/HARD_NEGATIVES_V0.2_B_RESULT.md`](training/judgment/HARD_NEGATIVES_V0.2_B_RESULT.md) | 540문항 학습, 4모델 비교, 개선·회귀 사례와 채택 판단 |
 | 실패 집중 v0.2-C·blind 평가 결과 | [`training/judgment/FAILURE_FOCUS_V0.2_C_RESULT.md`](training/judgment/FAILURE_FOCUS_V0.2_C_RESULT.md) | 출력 계약 v0.2, 628문항 학습, 150문항 holdout과 운영 보류 근거 |
+| 동일 계약 v0.2-B 대조군 비교 | [`training/judgment/CONTRACT_CONTROL_V0.2_B_RESULT.md`](training/judgment/CONTRACT_CONTROL_V0.2_B_RESULT.md) | 출력 계약 변경과 추가 데이터 효과 분리, 72문항 대조와 공통 실패 유형 |
+| 새 미사용 시험지·v0.2-D 설계 | [`training/judgment/V0.2_D_DESIGN.md`](training/judgment/V0.2_D_DESIGN.md) | 120문항 봉인·중복 감사, 보강 범위와 평가 순서 |
+| v0.2-D 학습 데이터 생성 결과 | [`training/judgment/V0.2_D_DATA_RESULT.md`](training/judgment/V0.2_D_DATA_RESULT.md) | 추가 120문항·결합 748문항, 출력 계약과 누수 감사·해시 |
+| v0.2-D 45-step LoRA 학습 결과 | [`training/judgment/V0.2_D_TRAIN_RESULT.md`](training/judgment/V0.2_D_TRAIN_RESULT.md) | 동일 하이퍼파라미터, 손실·가중치 해시 |
+| v0.2-C↔D 개발셋 비교·회귀 분석 | [`training/judgment/V0.2_D_DEV72_COMPARISON.md`](training/judgment/V0.2_D_DEV72_COMPARISON.md) | 동일 조건 72문항 비교, 교정문 회귀와 holdout 보류 근거 |
+| v0.2-E 교정문 회귀 보강 설계·데이터 | [`training/judgment/V0.2_E_DESIGN_AND_DATA.md`](training/judgment/V0.2_E_DESIGN_AND_DATA.md) | 추가 80문항·결합 828문항, 누수 감사·해시와 사전 채택 기준 |
+| v0.2-E 학습·C/D/E 개발셋 결과 | [`training/judgment/V0.2_E_TRAIN_AND_DEV72_RESULT.md`](training/judgment/V0.2_E_TRAIN_AND_DEV72_RESULT.md) | 45-step 학습 해시, 교정 회복·안전성 회귀와 채택 보류 근거 |
+| D 판단+E 교정 후보 게이트 | [`training/judgment/V0.2_DE_CANDIDATE_GATE_RESULT.md`](training/judgment/V0.2_DE_CANDIDATE_GATE_RESULT.md) | 정답 비사용 선택 규칙, 개발셋 개선·한계와 holdout 전 조건 |
+| 최종 holdout 실행 규약 | [`evaluation/judgment/holdout_v0.2.protocol.json`](evaluation/judgment/holdout_v0.2.protocol.json) | D/E 어댑터·프롬프트·선택기 해시와 단일 실행·채택 임계값 |
 | 문법 판단 경계 정의 | [`evaluation/judgment/BOUNDARY_GUIDELINES.md`](evaluation/judgment/BOUNDARY_GUIDELINES.md) | 필러·문체·표기·STT·문맥 판단 원칙 |
 | 사람 검수 절차 | [`evaluation/judgment/REVIEW_PROCESS.md`](evaluation/judgment/REVIEW_PROCESS.md) | 사용자 검수와 전문가 검수의 구분 및 절차 |
 | 최종 검수 기준·주의 사례 | [`evaluation/judgment/FINAL_REVIEW_GUIDE.md`](evaluation/judgment/FINAL_REVIEW_GUIDE.md) | 추측 교정 금지, 번역·복구·스타일 분리 원칙 |
