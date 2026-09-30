@@ -1,0 +1,78 @@
+{
+  "protocol_version": "judgment-holdout-v0.3-df-gate-1",
+  "status": "frozen_before_inference",
+  "frozen_at": "2026-09-30",
+  "holdout": {
+    "path": "evaluation/judgment/holdout_v0.3.jsonl",
+    "sha256": "cb37c594d40478057ab65d98fff6dcaf7889db9fd799dc3ee414a455ff5cde4f",
+    "manifest_path": "evaluation/judgment/holdout_v0.3.manifest.json",
+    "manifest_sha256": "78dbd70d7cf5ae833449abb530b52c78d02d817764ff6282f8cc8b86861de3ed",
+    "records": 120,
+    "single_use": true
+  },
+  "base_model": {
+    "path": "/home/cap-minsung/lora-adapter-bank/base-models/qwen3-4b-instruct-2507-hf",
+    "manifest_sha256": "86cf6cbe487216982ba0cc0adafa649925d1f2e61d86b2fc63cfe34f99f91013"
+  },
+  "primary": {
+    "served_model": "judgment-v02d",
+    "dataset_path": "training/judgment/data/pilot_v0.2_d.jsonl",
+    "dataset_sha256": "e9667e0b1555c260bdb95ab77736a8b51b9e5fa1dedf18a0d2e23cfce9a2e638",
+    "config_path": "training/judgment/configs/qwen3_4b_failure_focus_v0.2_d.json",
+    "config_sha256": "f5b979ddadda490cfe0a9a70a731cc2495628c63dd85d83939fc473f612087ca",
+    "adapter_path": "/home/cap-minsung/lora-adapter-bank/adapters/judgment-qwen3-4b-failure-focus-v0.2-d",
+    "adapter_sha256": "2e758256afe68c3005b595f9f664b5f76734606b923dbb2c7bc858e81e9e55c6"
+  },
+  "secondary": {
+    "served_model": "judgment-v02f",
+    "dataset_path": "training/judgment/data/pilot_v0.2_f.jsonl",
+    "dataset_sha256": "4203acbc2ffab6f31cfbc0e5ae76104daf4a4432248ec7f8bf898b2e56b7c294",
+    "config_path": "training/judgment/configs/qwen3_4b_failure_focus_v0.2_f.json",
+    "config_sha256": "56ecda71c114f0b735e3f335f5e743f3d387510ff364e3c4cefeeae73735059e",
+    "adapter_path": "/home/cap-minsung/lora-adapter-bank/adapters/judgment-qwen3-4b-failure-focus-v0.2-f",
+    "adapter_sha256": "35a0d7519c67b5327ced9b7b7d805b5b82ffffb945651e09e3c209ba42e768ca"
+  },
+  "inference": {
+    "endpoint": "http://127.0.0.1:1234/v1/chat/completions",
+    "prompt_version": "judgment-v0.2",
+    "prompt_sha256": "9252477191ce2af588d7ab0e754ef9d1a5df7ea541b636c8a0b15b8292865f0e",
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "max_tokens": 512,
+    "runner_sha256": "0884093a3f7dd9341bb7e0c4d43956bda5d11e735d036c0bfd000569197d8a46",
+    "scorer_sha256": "4a09b2dc44ed03c26cd8aef5efafa76019b13df8d09cd464aa602e2326a6e974"
+  },
+  "selector": {
+    "core_version": "primary-decision-candidate-gate-v0.1",
+    "core_sha256": "ce67f8ad8528e7bd7d8bf6ae56a47916e69a6372d51cf17beccb3f63efc419c0",
+    "wrapper_version": "explicit-model-name-wrapper-v0.2",
+    "wrapper_sha256": "f916483c9dced42ef2abe0fdf80f510ffca0570cf54c477be7ac2b2663660391",
+    "derived_model": "judgment-v02d-gated-v02f",
+    "policy": "D owns the decision. F is called only when D returns needs_correction; F may replace only the correction candidate when both request correction. Score ties keep D. Gold labels are forbidden."
+  },
+  "safety_thresholds": {
+    "json_contract_success_rate_min": 0.99,
+    "overcorrection_rate_max": 0.02,
+    "overcorrection_max_count_among_50_acceptable": 1,
+    "correction_detection_precision_min": 0.95,
+    "correction_detection_recall_min": 0.80,
+    "clear_case_handling_rate_min": 0.85
+  },
+  "gate_adoption_thresholds": {
+    "accepted_correction_gain_min_count": 2,
+    "compound_complete_must_not_decrease": true,
+    "decision_overcorrection_withholding_must_not_regress": true,
+    "conditional_gate_p95_ms_max": 5000,
+    "conditional_gate_p95_to_primary_ratio_max": 2.0
+  },
+  "execution_policy": {
+    "load_base_once": true,
+    "run_primary_exactly_once": true,
+    "run_secondary_exactly_once": true,
+    "score_primary_and_gate_with_same_scorer": true,
+    "no_rule_model_or_threshold_change_after_results": true,
+    "raw_runs_and_weights_git_ignored": true,
+    "holdout_becomes_consumed_after_first_inference": true
+  },
+  "failure_branch": "If D fails any safety threshold, do not integrate the API and do not reuse holdout_v0.3 as a final test. If D passes but the gate fails an adoption threshold, retain D only as the research candidate."
+}

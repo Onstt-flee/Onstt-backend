@@ -1,6 +1,6 @@
 # 일본어 문법 판단 LoRA 데이터
 
-상태: **동결된 holdout_v0.2 단일 실행 후 운영 채택 실패**. D는 과교정 2/50으로 안전 기준을 넘었고 진단용 D+E 게이트의 교정문 증가는 0건이었다. API 통합은 중단했으며 v0.2-F 보강 설계와 새 holdout_v0.3 봉인을 완료했다.
+상태: **v0.2-F 학습과 D+F 조건부 후보 게이트의 72문항 개발 진단 완료**. F 단독은 구조·과교정·판단이 D보다 후퇴했지만, D 판단을 잠근 게이트는 D의 판단·과교정·보류를 유지하며 허용 교정문을 19/27→21/27로 높였다. `holdout_v0.3` 실행 규약을 봉인했으며 시험은 아직 실행하지 않았다. 운영 후보와 API 통합은 아직 없다.
 
 ## 목적과 격리 원칙
 
@@ -46,6 +46,7 @@
 - `build_contract_control.py`: 기존 v0.2-B 정답·분할을 유지하는 동일 계약 대조군 생성기
 - `build_failure_focus_v0_2_d.py`: 공통 실패 유형의 v0.2-D 데이터·ChatML 생성 및 holdout 누수 감사
 - `build_failure_focus_v0_2_e.py`: v0.2-D 교정문 회귀 보강 데이터·ChatML 생성 및 holdout 누수 감사
+- `build_failure_focus_v0_2_f.py`: holdout 안전 실패 보강 120문항·ChatML 생성 및 v0.3 포함 누수 감사
 - `train_lora.py`: provisional 명시 동의와 입력 검증을 요구하는 독립 LoRA 학습기
 - `configs/qwen3_4b_pilot_v0.1.json`: 기존 provisional Qwen3-4B 실험 설정
 - `configs/qwen3_4b_reviewed_v0.1.json`: 검수 완료 데이터 전용 다음 학습 설정
@@ -55,6 +56,7 @@
 - `configs/qwen3_4b_failure_focus_v0.2_d.json`: 별도 어댑터에 seed 42·45-step 학습하는 v0.2-D 설정
 - `PILOT_V0.1_RESULT.md`: provisional 실험 결과와 실패 분석
 - `configs/qwen3_4b_failure_focus_v0.2_e.json`: 동일 조건의 별도 v0.2-E 어댑터 설정
+- `configs/qwen3_4b_failure_focus_v0.2_f.json`: v0.2-E와 같은 seed 42·45-step의 별도 v0.2-F 어댑터 설정
 - `REVIEWED_V0.1_RESULT.md`: 검수 완료 데이터 학습·72문항 비교와 다음 실험 조건
 - `CONTRACT_CONTROL_V0.2_B_RESULT.md`: 동일 출력 계약 대조군과 v0.2-C의 개발셋 비교·실패 원인
 - `V0.2_D_DESIGN.md`: 새 시험지 봉인과 후속 학습·평가 순서
@@ -66,6 +68,8 @@
 - `V0.2_DE_CANDIDATE_GATE_RESULT.md`: D 판단 고정 후보 선택 규칙, 개발셋 개선·한계와 해시
 - `V0.2_DE_HOLDOUT_V0.2_RESULT.md`: 단일 실행 해시·최종 지표·운영 채택 실패와 분기 결정
 - `V0.2_F_DESIGN.md`: holdout 실패 유형 중심 보강 범위와 새 시험지 사용 금지 조건
+- `V0.2_F_DATA_RESULT.md`: 추가 120문항·결합 948문항, 누수 감사·ChatML·학습 설정 검증 결과
+- `V0.2_F_TRAIN_AND_DEV72_RESULT.md`: 45-step 학습 해시, D/E/F 개발셋 비교와 채택 실패 근거
 
 ## 데이터 구성
 
@@ -185,6 +189,10 @@ Qwen3-4B LoRA는 72문항에서 원시 판단 정답을 57건에서 63건, 허�
 11. 완료: 고정 72문항을 동일 조건으로 실행해 베이스·reviewed·v0.2-A와 비교했다.
 12. 완료: D/E/선택기/임계값을 동결하고 `holdout_v0.2`를 단 한 번 실행했다. 안전 기준 실패로 API 통합을 중단했다.
 13. 완료: 실패 유형 중심 [v0.2-F 설계](V0.2_F_DESIGN.md)를 작성하고 새 `holdout_v0.3` 120문항을 생성·중복 검사·봉인했다.
-14. 다음: 봉인된 시험지를 열지 않고 v0.2-F 학습 데이터와 어댑터를 준비·검증한다.
+14. 완료: 봉인된 시험지를 열지 않고 v0.2-F 추가 120문항과 결합 948문항, ChatML 및 45-step 학습 설정을 생성·검증했다.
+15. 완료: 별도 v0.2-F 어댑터를 45-step 학습하고 기존 72문항에서 D/E/F를 비교했다. F는 교정문을 개선했지만 안전 지표가 후퇴해 채택하지 않았다.
+16. 완료: D 판단을 잠근 D+F 교정 후보 게이트를 개발셋에서 진단했다. D 안전 지표를 유지하고 허용 교정문을 2건 개선했으며 조건부 p95 1948.001ms로 사전 기준을 통과했다.
+17. 완료: D/F 데이터·어댑터·프롬프트·선택기·채점기·임계값을 `holdout_v0.3.protocol.json`에 봉인하고 자동 해시 검증 테스트를 추가했다.
+18. 다음: 현재 상태를 로컬 체크포인트 커밋으로 고정한 뒤 `holdout_v0.3`에서 D와 F를 각각 정확히 한 번 실행한다. 결과 확인 후 재실행·사후 조정하지 않는다.
 
 현재 파일럿은 일본어 전문가 인증본이 아니며, 구조 검증 통과를 언어학적 정확성으로 해석하지 않는다.

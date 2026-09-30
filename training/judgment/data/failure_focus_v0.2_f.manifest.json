@@ -1,0 +1,114 @@
+{
+  "dataset_id": "judgment-pilot-v0.2-f",
+  "generation_version": "failure-focus-v0.2-f",
+  "validated_at": "2026-09-30",
+  "output_contract": "judgment-v0.2",
+  "source_dataset": "training/judgment/data/pilot_v0.2_e.jsonl",
+  "source_dataset_sha256": "4a60ffac2baf09cd5dda9a145fbadc437d1ffbec3c1e5a2b3780113d6ae11220",
+  "augmentation_path": "training/judgment/data/failure_focus_v0.2_f.jsonl",
+  "augmentation_sha256": "53a48231439d78d534c51eee07d26b73266a4c7bd7f9aebea2d11cab414f24b8",
+  "combined_path": "training/judgment/data/pilot_v0.2_f.jsonl",
+  "combined_sha256": "4203acbc2ffab6f31cfbc0e5ae76104daf4a4432248ec7f8bf898b2e56b7c294",
+  "augmentation_summary": {
+    "total": 120,
+    "splits": {
+      "pilot_dev": 30,
+      "pilot_train": 90
+    },
+    "decisions": {
+      "acceptable": 68,
+      "insufficient_evidence": 16,
+      "needs_correction": 36
+    },
+    "levels": {
+      "N4": 36,
+      "N5": 84
+    },
+    "review_status": {
+      "generated_validated": 120
+    },
+    "provenance": {
+      "deterministic_template": 120
+    },
+    "error_types": {
+      "adjective_conjugation": 12,
+      "modifier_connection": 6,
+      "particle_misuse": 12,
+      "verb_conjugation": 18
+    },
+    "compound_corrections": 12,
+    "template_families": 20
+  },
+  "combined_summary": {
+    "total": 948,
+    "splits": {
+      "pilot_dev": 204,
+      "pilot_train": 744
+    },
+    "decisions": {
+      "acceptable": 468,
+      "insufficient_evidence": 113,
+      "needs_correction": 367
+    },
+    "levels": {
+      "N4": 284,
+      "N5": 664
+    },
+    "review_status": {
+      "generated_validated": 648,
+      "user_reviewed": 300
+    },
+    "provenance": {
+      "deterministic_template": 648,
+      "local_model_assisted": 300
+    },
+    "error_types": {
+      "adjective_conjugation": 80,
+      "copula_conjugation": 33,
+      "modifier_connection": 52,
+      "particle_misuse": 119,
+      "tense_mismatch": 35,
+      "verb_conjugation": 107
+    },
+    "compound_corrections": 59,
+    "template_families": 172
+  },
+  "generated_validation": {
+    "records": 120,
+    "human_reviewed": false,
+    "expert_reviewed": false,
+    "compound_error_cases": 12,
+    "paired_cases": 36,
+    "contamination_audit": {
+      "exact_normalized_matches": 0,
+      "near_dataset_matches_at_or_above_0_85": 0,
+      "max_dataset_character_3gram_jaccard": 0.7692,
+      "source_sha256": {
+        "evaluation/judgment/seed_v0.1.jsonl": "f681ba026cfd6eeca86ebf531e1ac94ceed06525b43fca2b19729ef86ff0d12b",
+        "evaluation/judgment/holdout_v0.1.jsonl": "1694172cc8974aca1bf47ce37b0af9bca2cfb314ca9717d659959047f846ec26",
+        "evaluation/judgment/holdout_v0.2.jsonl": "a2ae7f655953f617e2f56219c2065ea5cc68118f95a7492fe048e23669b2736d",
+        "evaluation/judgment/holdout_v0.3.jsonl": "cb37c594d40478057ab65d98fff6dcaf7889db9fd799dc3ee414a455ff5cde4f",
+        "training/judgment/data/pilot_v0.2_e.jsonl": "4a60ffac2baf09cd5dda9a145fbadc437d1ffbec3c1e5a2b3780113d6ae11220",
+        "rag_data/errors/error_patterns.json": "8341f7058290d866599ab707593b5f1715c3112160807c459438e97a95af4a96",
+        "rag_data/examples/texts.json": "88e41bd429b70ad2098ff512597c3a04bfe398d3bad8bfff8f287c6fca6651ad",
+        "rag_data/grammar/grammar_rules.json": "6fe941c1e980ea31000c8a77153849ea9de06ab6b7de8a7958dd3c3c1eee8085",
+        "rag_data/vocab/word_db.json": "ef6bc83c3b85c3df6357e653110fca6f3a10df8f21caf3cc3b2f165c8fc98fff"
+      },
+      "limitation": "Exact overlap includes RAG JSON. Near audit covers existing datasets only; semantic or pretraining overlap is not ruled out."
+    }
+  },
+  "chatml": {
+    "pilot_dev": {
+      "path": "/home/cap-minsung/stt_api/training/judgment/data/failure_focus_v0.2_f_chatml/pilot_dev.chatml.jsonl",
+      "count": 204,
+      "sha256": "9f69070d6dd09058735c3b45ca5854858574e4a84a9fcf393e23472cdbeaf8c4"
+    },
+    "pilot_train": {
+      "path": "/home/cap-minsung/stt_api/training/judgment/data/failure_focus_v0.2_f_chatml/pilot_train.chatml.jsonl",
+      "count": 744,
+      "sha256": "81e83399bc3acedfaa4503d21cb9db2a6e6e0aabf65c800382947ba3e5cd7cc0"
+    }
+  },
+  "holdout_policy": "Holdouts used only for overlap audit; no model predictions inspected or used for training.",
+  "sealed_holdout_policy": "holdout_v0.3 remains inference-free until v0.2-F data, adapter and thresholds are committed."
+}
