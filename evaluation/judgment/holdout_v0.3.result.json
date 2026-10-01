@@ -1,0 +1,140 @@
+{
+  "schema_version": "0.1",
+  "decision": "select_d_only_for_feature_flag_shadow_integration",
+  "holdout_status": "consumed_once",
+  "evaluated_at": "2026-09-30",
+  "pre_inference_commit": "dc48d08c312f7edd707c5fd979ee3dab84c3748f",
+  "protocol_path": "evaluation/judgment/holdout_v0.3.protocol.json",
+  "protocol_sha256": "f709e045dd6a7e81fdf68c9a0c4b332563a5e9d3b360061a1f632c0f19607042",
+  "holdout_sha256": "cb37c594d40478057ab65d98fff6dcaf7889db9fd799dc3ee414a455ff5cde4f",
+  "raw_runs_git_ignored": true,
+  "artifacts": {
+    "primary_run_sha256": "43c05738628444fe829e4dde742a3c21370c5b763f7a43ded9d3a0216e032093",
+    "primary_manifest_sha256": "78ec118b2167159c8b6386a79c1eb759a917060b3f52cf8f58586b5099f9779d",
+    "secondary_run_sha256": "bdfc760b7fa6c988927683efdd986d0872032d127fe792e67ab4a248f0a21291",
+    "secondary_manifest_sha256": "e087642898c8c33e458eba42a29d1330f918da4eda982763ef54bb0b367635dd",
+    "gated_run_sha256": "5eca8cd4f1d17650ccda3caf8c8e60c09f556aa11e4988d25a1ba5e169e4e0ca",
+    "gated_manifest_sha256": "4b3a824f300effdc69bb6a0b09e185e2bfeffccfb4db7a95ab3c98c2cf037dec",
+    "selection_audit_sha256": "3008137e00fe6e1e2f0914efe4fbc8f43e04708000863d0462f1ee4c7201e679",
+    "score_json_sha256": "b62e76134c7894d3b1abe512bb5743cdda7ac1dea69d829bdf41200366852c1e",
+    "score_markdown_sha256": "6233c769c90add1cdfb1e2a910d967c454b13882eca968c5f17d4ce12af2de27"
+  },
+  "primary_d": {
+    "safety_pass": true,
+    "json_contract": [
+      120,
+      120
+    ],
+    "decision_accuracy": [
+      109,
+      120
+    ],
+    "overcorrection": [
+      0,
+      50
+    ],
+    "correction_precision": [
+      43,
+      44
+    ],
+    "correction_recall": [
+      43,
+      50
+    ],
+    "clear_case_handling": [
+      100,
+      100
+    ],
+    "correct_withholding": [
+      16,
+      20
+    ],
+    "accepted_correction": [
+      41,
+      50
+    ],
+    "compound_complete": [
+      0,
+      10
+    ],
+    "latency_ms": {
+      "mean": 823.5898416666666,
+      "p50": 804.074,
+      "p95": 987.643
+    }
+  },
+  "secondary_f_diagnostic_only": {
+    "safety_pass": true,
+    "not_posthoc_selected": true,
+    "json_contract": [
+      120,
+      120
+    ],
+    "decision_accuracy": [
+      115,
+      120
+    ],
+    "overcorrection": [
+      0,
+      50
+    ],
+    "correction_precision": [
+      46,
+      47
+    ],
+    "correction_recall": [
+      46,
+      50
+    ],
+    "correct_withholding": [
+      19,
+      20
+    ],
+    "accepted_correction": [
+      43,
+      50
+    ],
+    "compound_complete": [
+      0,
+      10
+    ],
+    "latency_ms": {
+      "mean": 828.815825,
+      "p50": 816.885,
+      "p95": 1017.703
+    }
+  },
+  "d_f_gate": {
+    "adopted": false,
+    "secondary_called": 44,
+    "secondary_selected": 1,
+    "secondary_selected_ids": [
+      "JH-0364"
+    ],
+    "accepted_correction_gain": 0,
+    "accepted_correction_gain_required": 2,
+    "compound_complete": [
+      0,
+      10
+    ],
+    "judgment_overcorrection_withholding_regressed": false,
+    "latency_ms": {
+      "mean": 1149.8541833333334,
+      "p50": 849.243,
+      "p95": 2034.527
+    },
+    "p95_limit_ms": 5000,
+    "p95_to_primary_ratio": 2.06,
+    "p95_to_primary_ratio_limit": 2.0,
+    "failed_thresholds": [
+      "accepted_correction_gain",
+      "conditional_gate_p95_to_primary_ratio"
+    ]
+  },
+  "constraints": {
+    "holdout_must_not_be_rerun_for_selection": true,
+    "f_requires_a_new_sealed_holdout_to_be_promoted_as_primary": true,
+    "api_default_promotion_blocked_until_shadow_validation": true,
+    "expert_review_claimed": false
+  }
+}

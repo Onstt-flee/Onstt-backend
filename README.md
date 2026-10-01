@@ -6,15 +6,16 @@
 
 ## 현재 개발 상태와 문서 안내
 
-기준일은 2026-09-30입니다. 기존 API 오류 수정과 Python 3.12.3 환경 재구성, 판단모델 데이터·실행기·채점기 및 D/E/F LoRA 실험을 완료했습니다. 소비된 `holdout_v0.2`에서는 D가 과교정 2/50으로 안전 기준을 실패했습니다. 후속 F 단독도 개발셋 안전 지표가 후퇴했지만, D 판단을 잠그고 F의 교정 후보만 고르는 D+F 게이트는 개발셋에서 D의 안전 지표를 유지하며 허용 교정문을 19/27→21/27로 개선했습니다. 새 `holdout_v0.3` 실행 규약은 봉인했으며 실제 시험은 아직 실행하지 않았습니다.
+기준일은 2026-09-30입니다. 기존 API 오류 수정과 Python 3.12.3 환경 재구성, 판단모델 데이터·실행기·채점기 및 D/E/F LoRA 실험을 완료했습니다. 사전 봉인한 `holdout_v0.3` 120문항을 D와 F에서 각각 정확히 한 번 실행한 결과, D는 구조 120/120·과교정 0/50·정밀도 97.73%·재현율 86%로 안전 기준을 모두 통과했습니다. D+F 게이트는 교정문 증가 0건과 D 대비 p95 2.06배로 추가 채택 기준을 실패했습니다. D 단독을 기능 플래그·shadow 통합 후보로 선택하되 실제 STT 파일럿 전에는 운영 기본값으로 승격하지 않습니다.
 
 현재 선택은 다음과 같습니다.
 
 - 첫 판단 전용 LoRA 학습 베이스: `Qwen/Qwen3-4B-Instruct-2507`
 - 보조 스케일 비교 모델: `Qwen/Qwen3-8B`
 - 고용량 정확도 상한 기준선: `Qwen/Qwen3-14B`
-- 운영 투입 승인 모델: 없음
-- 현재 단계: D+F 조건부 후보 게이트 개발 진단 완료, `holdout_v0.3` 단일 실행 전 체크포인트 봉인. 운영 승인 모델은 아직 없음
+- 운영 통합 후보: `Qwen3-4B + judgment-v0.2-D LoRA` 단독
+- 운영 기본값 승인 모델: 없음
+- 현재 단계: `holdout_v0.3` 소비 완료, D 단독의 기능 플래그·shadow API 통합 준비
 
 현재 운영 `analyzer`는 기존 이진 분석 계약을 사용합니다. 평가에서 사용한 3단계 판단 계약과 선택 모델은 아직 Swagger 또는 운영 API에 통합하지 않았습니다.
 
@@ -44,6 +45,7 @@
 | v0.2-F 학습·개발셋 비교 | [`training/judgment/V0.2_F_TRAIN_AND_DEV72_RESULT.md`](training/judgment/V0.2_F_TRAIN_AND_DEV72_RESULT.md) | 45-step 학습, D/E/F 안전성·교정문 비교와 F 단독 채택 실패 |
 | D 판단+F 교정 후보 게이트 | [`training/judgment/V0.2_DF_CANDIDATE_GATE_RESULT.md`](training/judgment/V0.2_DF_CANDIDATE_GATE_RESULT.md) | D 판단 잠금, 개발셋 교정문 +2와 조건부 지연시간 검증 |
 | holdout v0.3 실행 규약 | [`evaluation/judgment/holdout_v0.3.protocol.json`](evaluation/judgment/holdout_v0.3.protocol.json) | D/F 데이터·가중치·프롬프트·선택기·임계값과 단일 실행 정책 봉인 |
+| 소비된 holdout v0.3 최종 결과 | [`training/judgment/V0.2_DF_HOLDOUT_V0.3_RESULT.md`](training/judgment/V0.2_DF_HOLDOUT_V0.3_RESULT.md) | D 안전 기준 통과, D+F 게이트 탈락, D 단독 shadow 통합 결정 |
 | 문법 판단 경계 정의 | [`evaluation/judgment/BOUNDARY_GUIDELINES.md`](evaluation/judgment/BOUNDARY_GUIDELINES.md) | 필러·문체·표기·STT·문맥 판단 원칙 |
 | 사람 검수 절차 | [`evaluation/judgment/REVIEW_PROCESS.md`](evaluation/judgment/REVIEW_PROCESS.md) | 사용자 검수와 전문가 검수의 구분 및 절차 |
 | 최종 검수 기준·주의 사례 | [`evaluation/judgment/FINAL_REVIEW_GUIDE.md`](evaluation/judgment/FINAL_REVIEW_GUIDE.md) | 추측 교정 금지, 번역·복구·스타일 분리 원칙 |
