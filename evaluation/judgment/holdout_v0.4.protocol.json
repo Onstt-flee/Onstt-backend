@@ -1,0 +1,97 @@
+{
+  "protocol_version": "judgment-holdout-v0.4-d-vs-f-1",
+  "status": "frozen_before_inference",
+  "frozen_at": "2026-10-09",
+  "pre_protocol_checkpoint": "b469e14371b0b6a51b11fce43d08f9c43736224e",
+  "holdout": {
+    "path": "evaluation/judgment/holdout_v0.4.jsonl",
+    "sha256": "904ca090ccd0e209f95fa68a6a3e9fd762a0009c802f7eae7670838f9558221e",
+    "manifest_path": "evaluation/judgment/holdout_v0.4.manifest.json",
+    "manifest_sha256": "f64276ad839514f6ca88ff5d8bc753ba5c954caeab3b5d0bf66d516b6a63e0eb",
+    "records": 120,
+    "distribution": {
+      "acceptable": 50,
+      "needs_correction": 50,
+      "insufficient_evidence": 20,
+      "compound_error_cases": 10
+    },
+    "single_use": true,
+    "model_inference_count_before_protocol_freeze": 0
+  },
+  "base_model": {
+    "path": "/home/cap-minsung/lora-adapter-bank/base-models/qwen3-4b-instruct-2507-hf",
+    "manifest_sha256": "86cf6cbe487216982ba0cc0adafa649925d1f2e61d86b2fc63cfe34f99f91013"
+  },
+  "candidates": {
+    "d": {
+      "served_model": "judgment-v02d",
+      "dataset_path": "training/judgment/data/pilot_v0.2_d.jsonl",
+      "dataset_sha256": "e9667e0b1555c260bdb95ab77736a8b51b9e5fa1dedf18a0d2e23cfce9a2e638",
+      "config_path": "training/judgment/configs/qwen3_4b_failure_focus_v0.2_d.json",
+      "config_sha256": "f5b979ddadda490cfe0a9a70a731cc2495628c63dd85d83939fc473f612087ca",
+      "adapter_path": "/home/cap-minsung/lora-adapter-bank/adapters/judgment-qwen3-4b-failure-focus-v0.2-d",
+      "adapter_sha256": "2e758256afe68c3005b595f9f664b5f76734606b923dbb2c7bc858e81e9e55c6"
+    },
+    "f": {
+      "served_model": "judgment-v02f",
+      "dataset_path": "training/judgment/data/pilot_v0.2_f.jsonl",
+      "dataset_sha256": "4203acbc2ffab6f31cfbc0e5ae76104daf4a4432248ec7f8bf898b2e56b7c294",
+      "config_path": "training/judgment/configs/qwen3_4b_failure_focus_v0.2_f.json",
+      "config_sha256": "56ecda71c114f0b735e3f335f5e743f3d387510ff364e3c4cefeeae73735059e",
+      "adapter_path": "/home/cap-minsung/lora-adapter-bank/adapters/judgment-qwen3-4b-failure-focus-v0.2-f",
+      "adapter_sha256": "35a0d7519c67b5327ced9b7b7d805b5b82ffffb945651e09e3c209ba42e768ca"
+    }
+  },
+  "inference": {
+    "endpoint": "http://127.0.0.1:1234/v1/chat/completions",
+    "prompt_version": "judgment-v0.2",
+    "prompt_sha256": "9252477191ce2af588d7ab0e754ef9d1a5df7ea541b636c8a0b15b8292865f0e",
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "max_tokens": 512,
+    "runner_sha256": "0884093a3f7dd9341bb7e0c4d43956bda5d11e735d036c0bfd000569197d8a46",
+    "scorer_sha256": "4a09b2dc44ed03c26cd8aef5efafa76019b13df8d09cd464aa602e2326a6e974",
+    "load_base_once": true,
+    "run_each_candidate_exactly_once": true
+  },
+  "eligibility_thresholds": {
+    "json_contract_success_rate_min": 0.99,
+    "overcorrection_rate_max": 0.02,
+    "overcorrection_max_count_among_50_acceptable": 1,
+    "correction_detection_precision_min": 0.95,
+    "correction_detection_recall_min": 0.8,
+    "clear_case_handling_rate_min": 0.85,
+    "correct_withholding_rate_min": 0.8,
+    "accepted_correction_rate_min": 0.8
+  },
+  "f_adoption_over_d": {
+    "decision_correct_gain_min_count": 3,
+    "accepted_correction_gain_min_count": 2,
+    "overcorrection_must_not_regress": true,
+    "precision_and_recall_must_not_regress": true,
+    "correct_withholding_must_not_regress": true,
+    "compound_complete_must_not_regress": true,
+    "p95_ms_max": 1500,
+    "p95_to_d_ratio_max": 1.25,
+    "ties_keep_d": true
+  },
+  "selection_policy": {
+    "if_only_one_candidate_is_eligible": "select_that_candidate",
+    "if_both_are_eligible": "select_f_only_if_every_f_adoption_over_d_condition_passes; otherwise keep_d",
+    "if_neither_is_eligible": "select_none_and_stop_operational_promotion",
+    "no_post_result_rule_model_prompt_threshold_or_label_change": true
+  },
+  "execution_policy": {
+    "labels_forbidden_in_model_requests": true,
+    "same_prompt_generation_and_scorer_required": true,
+    "raw_runs_and_weights_git_ignored": true,
+    "record_run_output_and_report_sha256": true,
+    "holdout_becomes_consumed_after_first_candidate_inference": true,
+    "no_rerun_for_model_selection": true
+  },
+  "interpretation_limits": [
+    "generated_validated holdout is not Japanese expert certification",
+    "text-only evaluation does not measure pronunciation or assign STT responsibility",
+    "automatic accepted corrections are not an exhaustive set of valid Japanese rewrites"
+  ]
+}

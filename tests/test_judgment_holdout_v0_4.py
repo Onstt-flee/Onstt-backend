@@ -9,6 +9,8 @@ import unittest
 
 from evaluation.judgment.build_holdout_v0_4 import DATA, MANIFEST, build, build_records
 
+PROTOCOL = Path(__file__).resolve().parents[1] / "evaluation" / "judgment" / "holdout_v0.4.protocol.json"
+
 
 def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -43,6 +45,25 @@ class JudgmentHoldoutV04Tests(unittest.TestCase):
 
             self.assertLess(generated["contamination_audit"]["max_dataset_character_3gram_jaccard"], 0.85)
             self.assertIsNotNone(generated["contamination_audit"]["max_dataset_character_3gram_pair"])
+
+    def test_protocol_is_frozen_before_inference_and_hashes_match(self):
+        protocol = json.loads(PROTOCOL.read_text(encoding="utf-8"))
+        self.assertEqual(protocol["status"], "frozen_before_inference")
+        self.assertEqual(protocol["holdout"]["model_inference_count_before_protocol_freeze"], 0)
+        self.assertEqual(sha256(DATA), protocol["holdout"]["sha256"])
+        self.assertEqual(sha256(MANIFEST), protocol["holdout"]["manifest_sha256"])
+        self.assertEqual(set(protocol["candidates"]), {"d", "f"})
+        for candidate in protocol["candidates"].values():
+            self.assertEqual(
+                sha256(Path(__file__).resolve().parents[1] / candidate["dataset_path"]),
+                candidate["dataset_sha256"],
+            )
+            self.assertEqual(
+                sha256(Path(__file__).resolve().parents[1] / candidate["config_path"]),
+                candidate["config_sha256"],
+            )
+        self.assertTrue(protocol["inference"]["run_each_candidate_exactly_once"])
+        self.assertTrue(protocol["execution_policy"]["no_rerun_for_model_selection"])
 
 if __name__ == "__main__":
     unittest.main()
