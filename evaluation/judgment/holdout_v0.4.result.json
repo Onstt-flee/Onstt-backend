@@ -1,0 +1,191 @@
+{
+  "candidates": {
+    "d": {
+      "model": "judgment-v02d",
+      "run_id": "20261009T130745Z-judgment-v02d-6b7056e4",
+      "metrics": {
+        "json_contract_success_rate": {
+          "numerator": 120,
+          "denominator": 120,
+          "value": 1.0
+        },
+        "decision_accuracy": {
+          "numerator": 113,
+          "denominator": 120,
+          "value": 0.9416666666666667
+        },
+        "overcorrection_rate": {
+          "numerator": 0,
+          "denominator": 50,
+          "value": 0.0
+        },
+        "correction_detection_precision": {
+          "numerator": 45,
+          "denominator": 46,
+          "value": 0.9782608695652174
+        },
+        "correction_detection_recall": {
+          "numerator": 45,
+          "denominator": 50,
+          "value": 0.9
+        },
+        "correct_withholding_rate": {
+          "numerator": 18,
+          "denominator": 20,
+          "value": 0.9
+        },
+        "clear_case_handling_rate": {
+          "numerator": 100,
+          "denominator": 100,
+          "value": 1.0
+        },
+        "accepted_correction_rate_end_to_end": {
+          "numerator": 32,
+          "denominator": 50,
+          "value": 0.64
+        },
+        "compound_complete_rate": {
+          "numerator": 0,
+          "denominator": 10,
+          "value": 0.0
+        }
+      },
+      "p95_latency_ms": 1032.574,
+      "system_failure_ids": [],
+      "decision_error_ids": [
+        "JH-0477",
+        "JH-0453",
+        "JH-0450",
+        "JH-0505",
+        "JH-0473",
+        "JH-0495",
+        "JH-0457"
+      ],
+      "overcorrection_ids": [],
+      "missed_correction_ids": [
+        "JH-0477",
+        "JH-0453",
+        "JH-0450",
+        "JH-0473",
+        "JH-0457"
+      ],
+      "eligibility_checks": {
+        "json_contract_success_rate": true,
+        "overcorrection_rate": true,
+        "correction_detection_precision": true,
+        "correction_detection_recall": true,
+        "clear_case_handling_rate": true,
+        "correct_withholding_rate": true,
+        "accepted_correction_rate": false
+      },
+      "eligible": false
+    },
+    "f": {
+      "model": "judgment-v02f",
+      "run_id": "20261009T130937Z-judgment-v02f-67835cc2",
+      "metrics": {
+        "json_contract_success_rate": {
+          "numerator": 119,
+          "denominator": 120,
+          "value": 0.9916666666666667
+        },
+        "decision_accuracy": {
+          "numerator": 115,
+          "denominator": 120,
+          "value": 0.9583333333333334
+        },
+        "overcorrection_rate": {
+          "numerator": 1,
+          "denominator": 50,
+          "value": 0.02
+        },
+        "correction_detection_precision": {
+          "numerator": 48,
+          "denominator": 50,
+          "value": 0.96
+        },
+        "correction_detection_recall": {
+          "numerator": 48,
+          "denominator": 50,
+          "value": 0.96
+        },
+        "correct_withholding_rate": {
+          "numerator": 18,
+          "denominator": 20,
+          "value": 0.9
+        },
+        "clear_case_handling_rate": {
+          "numerator": 100,
+          "denominator": 100,
+          "value": 1.0
+        },
+        "accepted_correction_rate_end_to_end": {
+          "numerator": 36,
+          "denominator": 50,
+          "value": 0.72
+        },
+        "compound_complete_rate": {
+          "numerator": 0,
+          "denominator": 10,
+          "value": 0.0
+        }
+      },
+      "p95_latency_ms": 1018.189,
+      "system_failure_ids": [
+        "JH-0496"
+      ],
+      "decision_error_ids": [
+        "JH-0450",
+        "JH-0505",
+        "JH-0496",
+        "JH-0457",
+        "JH-0413"
+      ],
+      "overcorrection_ids": [
+        "JH-0413"
+      ],
+      "missed_correction_ids": [
+        "JH-0450",
+        "JH-0457"
+      ],
+      "eligibility_checks": {
+        "json_contract_success_rate": true,
+        "overcorrection_rate": true,
+        "correction_detection_precision": true,
+        "correction_detection_recall": true,
+        "clear_case_handling_rate": true,
+        "correct_withholding_rate": true,
+        "accepted_correction_rate": false
+      },
+      "eligible": false
+    }
+  },
+  "f_adoption_checks": {
+    "decision_correct_gain": false,
+    "accepted_correction_gain": true,
+    "overcorrection_no_regression": false,
+    "precision_no_regression": false,
+    "recall_no_regression": true,
+    "correct_withholding_no_regression": true,
+    "compound_complete_no_regression": true,
+    "p95_absolute": true,
+    "p95_ratio": true
+  },
+  "selected_candidate": null,
+  "selection_decision": "neither_candidate_eligible",
+  "operational_promotion_allowed": false,
+  "schema_version": "judgment-holdout-v0.4-result-1",
+  "created_at": "2026-10-09T13:12:00+00:00",
+  "status": "consumed",
+  "protocol_path": "/home/cap-minsung/stt_api/evaluation/judgment/holdout_v0.4.protocol.json",
+  "protocol_sha256": "75e26ec35270666fee72c2f3a07d3ebe1f058db51e783d49b5f6bdfb1613182a",
+  "protocol_checkpoint": "e84fb74f5ecbaaf18b7f5fa3777f01810c248e8a",
+  "holdout_sha256": "904ca090ccd0e209f95fa68a6a3e9fd762a0009c802f7eae7670838f9558221e",
+  "comparison_report_path": "/home/cap-minsung/stt_api/evaluation/judgment/results/qwen3-4b-v02d-vs-v02f-holdout-v04.json",
+  "comparison_report_sha256": "d3c5d4d5e952a3dc8c51f98091f52fae59a0d045d364f4dc98f3869b52923fd2",
+  "execution_policy": {
+    "d_inference_count": 1,
+    "f_inference_count": 1,
+    "rerun_for_model_selection_allowed": false
+  }
+}

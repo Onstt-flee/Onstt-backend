@@ -1,6 +1,6 @@
 # 일본어 문법 판단모델 기준선 총정리 및 최종 후보 선정
 
-기준일: 2026-10-06
+기준일: 2026-10-09
 평가셋: `judgment-seed-v0.1` 72문항
 데이터 SHA-256: `f681ba026cfd6eeca86ebf531e1ac94ceed06525b43fca2b19729ef86ff0d12b`
 프롬프트: `judgment-v0.1`
@@ -10,7 +10,7 @@
 
 현재 테스트한 기준선 중 **학습 없이 운영 API에 바로 투입할 수 있다고 판정한 모델은 없다.** 모든 모델이 사전에 정한 운영 후보 목표를 하나 이상 통과하지 못했다.
 
-후속 Qwen3-4B LoRA 실험에서는 v0.2-D가 봉인된 `holdout_v0.3`의 안전 기준을 통과했다. 기능 플래그 API와 실제 STT 50건 shadow에서는 출력 계약 49/50(98%)이었으나, 원문 보존 위반에만 1회 재시도하는 정책을 추가한 뒤 기존 표본과 비중복인 실제 STT 100건에서 최종 계약 99/100과 성공 99건 p95 1108.711ms로 제한적 staging/shadow 기준을 통과했다. 재시도 1건은 회복되지 않았고 503으로 차단됐다. 원문 보존 프롬프트 v0.2.1, 실제 운영 원문을 쓰지 않은 합성 보강 G, 같은 데이터의 노출 빈도만 고정한 H도 개발셋에서 D의 안전성을 넘지 못해 미채택했다. 따라서 베이스 모델 비교 결론은 유지하고 **Qwen3-4B + v0.2-D LoRA 단독은 제한적 staging/shadow 후보지만 아직 운영 기본값 승인 모델이 아니다.** D+F 게이트도 채택하지 않는다. 새 `holdout_v0.4`는 모델 추론 0회로 봉인 상태를 유지한다. 실제 STT 독립 품질 확인을 위해 기존 shadow 150건을 제외한 30건을 예측 비노출 상태로 봉인했으며 현재 익명 텍스트 라벨을 기다린다. 결정론적 경계 게이트 v0.1은 D 개발 replay에서 판단 70/72·보류 12/12를 기록했다. 실제 저장 STT 340건 dry-run에서는 bypass와 advisory가 모두 0건이어서 아직 운영 API에 연결하지 않았다. 상세는 [holdout v0.3 결과](../../training/judgment/V0.2_DF_HOLDOUT_V0.3_RESULT.md), [기존 50건 shadow 결과](../../training/judgment/JUDGMENT_D_SHADOW_V0.1_RESULT.md), [비중복 100건 shadow 결과](../../training/judgment/JUDGMENT_D_SHADOW_V0.2_RESULT.md), [v0.2-G 결과](../../training/judgment/V0.2_G_TRAIN_AND_DEV72_RESULT.md), [v0.2-H 결과](../../training/judgment/V0.2_H_TRAIN_AND_DEV72_RESULT.md), [경계 게이트 결과](../../training/judgment/DETERMINISTIC_BOUNDARY_GATE_V0.1_RESULT.md)를 따른다.
+후속 Qwen3-4B LoRA 실험에서는 v0.2-D가 봉인된 `holdout_v0.3`의 안전 기준을 통과했다. 기능 플래그 API와 실제 STT 50건 shadow에서는 출력 계약 49/50(98%)이었으나, 원문 보존 위반에만 1회 재시도하는 정책을 추가한 뒤 기존 표본과 비중복인 실제 STT 100건에서 최종 계약 99/100과 성공 99건 p95 1108.711ms로 제한적 staging/shadow 기준을 통과했다. 재시도 1건은 회복되지 않았고 503으로 차단됐다. 원문 보존 프롬프트 v0.2.1, 실제 운영 원문을 쓰지 않은 합성 보강 G, 같은 데이터의 노출 빈도만 고정한 H도 개발셋에서 D의 안전성을 넘지 못해 미채택했다. 따라서 베이스 모델 비교 결론은 유지한다. 이후 봉인된 `holdout_v0.4`에서 D/F 단독을 각각 한 번 비교했으나 허용 교정문이 D 32/50, F 36/50으로 사전 40/50 기준을 모두 실패했다. **최종 운영 승격 후보는 없으며 D는 기본 비활성 연구·staging 기준선으로만 유지한다.** v0.4는 소비 완료됐고 모델 선택용으로 재실행하지 않는다. 실제 STT 독립 품질 확인을 위해 기존 shadow 150건을 제외한 30건을 예측 비노출 상태로 봉인했으며 현재 익명 텍스트 라벨을 기다린다. 결정론적 경계 게이트 v0.1은 D 개발 replay에서 판단 70/72·보류 12/12를 기록했다. 실제 저장 STT 340건 dry-run에서는 bypass와 advisory가 모두 0건이어서 아직 운영 API에 연결하지 않았다. 상세는 [holdout v0.3 결과](../../training/judgment/V0.2_DF_HOLDOUT_V0.3_RESULT.md), [기존 50건 shadow 결과](../../training/judgment/JUDGMENT_D_SHADOW_V0.1_RESULT.md), [비중복 100건 shadow 결과](../../training/judgment/JUDGMENT_D_SHADOW_V0.2_RESULT.md), [v0.2-G 결과](../../training/judgment/V0.2_G_TRAIN_AND_DEV72_RESULT.md), [v0.2-H 결과](../../training/judgment/V0.2_H_TRAIN_AND_DEV72_RESULT.md), [경계 게이트 결과](../../training/judgment/DETERMINISTIC_BOUNDARY_GATE_V0.1_RESULT.md)를 따른다.
 
 다만 다음 판단 전용 LoRA 개발에 사용할 수 있는 모델은 아래 두 개로 좁힌다.
 

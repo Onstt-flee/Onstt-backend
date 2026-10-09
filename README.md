@@ -6,14 +6,15 @@
 
 ## 현재 개발 상태와 문서 안내
 
-기준일은 2026-10-08입니다. v0.2-D는 봉인된 `holdout_v0.3` 안전 기준을 통과했고, 기존 50건과 겹치지 않는 실제 저장 STT 100건 shadow에서도 최종 출력 계약 99/100, 재시도율 1%, 성공 99건 p95 1108.711ms로 제한적 staging/shadow 기준을 통과했습니다. 원문 보존 위반 1건은 1회 재시도 후에도 실패해 503 차단 대상으로 남았습니다. sudo 없는 사용자 systemd, 최대 64건·TTL 30초의 단일 consumer 큐와 1 req/s·burst 1의 비식별 admission을 구현했습니다. 합성 rate probe 100건에서 기존 `/analyze` 응답은 100/100 성공했고, shadow 성공 23건·`sampled_out` 77건·failure/drop 0건을 확인했습니다. 기능 플래그 기본 비활성, 운영 기본값·학습자 노출 미승인과 새 `holdout_v0.4` 모델 추론 0회를 유지합니다. 후속 v0.2-I 통제 학습은 교정문을 1건 개선했지만 구조·과교정·보류가 회귀해 미채택했습니다.
+기준일은 2026-10-09입니다. v0.2-D는 봉인된 `holdout_v0.3` 안전 기준을 통과했고, 기존 50건과 겹치지 않는 실제 저장 STT 100건 shadow에서도 최종 출력 계약 99/100, 재시도율 1%, 성공 99건 p95 1108.711ms로 제한적 staging/shadow 기준을 통과했습니다. 원문 보존 위반 1건은 1회 재시도 후에도 실패해 503 차단 대상으로 남았습니다. sudo 없는 사용자 systemd, 최대 64건·TTL 30초의 단일 consumer 큐와 1 req/s·burst 1의 비식별 admission을 구현했습니다. 합성 rate probe 100건에서 기존 `/analyze` 응답은 100/100 성공했고, shadow 성공 23건·`sampled_out` 77건·failure/drop 0건을 확인했습니다. 기능 플래그 기본 비활성과 학습자 노출 미승인을 유지합니다. 후속 v0.2-I는 안전성 회귀로 미채택했고, 봉인된 `holdout_v0.4`의 D/F 단독 1회 비교에서는 허용 교정문이 D 32/50·F 36/50으로 사전 40/50 기준을 모두 실패했습니다. v0.4는 소비 완료됐으며 최종 운영 승격 후보는 없습니다.
 
 현재 선택은 다음과 같습니다.
 
 - 첫 판단 전용 LoRA 학습 베이스: `Qwen/Qwen3-4B-Instruct-2507`
 - 보조 스케일 비교 모델: `Qwen/Qwen3-8B`
 - 고용량 정확도 상한 기준선: `Qwen/Qwen3-14B`
-- 운영 통합 후보: `Qwen3-4B + judgment-v0.2-D LoRA` 단독
+- 연구·staging 기준선: `Qwen3-4B + judgment-v0.2-D LoRA` 단독
+- 최종 운영 승격 후보: 없음
 - 운영 기본값 승인 모델: 없음
 - 현재 단계: `/analyze` shadow 앞의 비식별 token-bucket admission 완료. 1 req/s 이하 전량 처리, 2·10 req/s 초과분은 `sampled_out`, queue failure/drop 0을 확인했다. 기능 플래그 기본 비활성 및 사람 검수·음성 평가 후순위는 유지
 
@@ -66,6 +67,7 @@
 | v0.2-H 고정 노출 샘플링 실험 | [`training/judgment/V0.2_H_TRAIN_AND_DEV72_RESULT.md`](training/judgment/V0.2_H_TRAIN_AND_DEV72_RESULT.md) | 같은 G 의미 소스의 720개 노출 고정, D/G/H 비교와 미채택·v0.4 미사용 근거 |
 | v0.2-I D+F 통제 학습 실험 | [`training/judgment/V0.2_I_TRAIN_AND_DEV72_RESULT.md`](training/judgment/V0.2_I_TRAIN_AND_DEV72_RESULT.md) | D에 F 보강분만 결합한 45-step 학습, 교정 소폭 개선과 안전성 회귀·미채택 근거 |
 | holdout v0.4 D/F 단독 비교 규약 | [`training/judgment/V0.2_DF_HOLDOUT_V0.4_PROTOCOL.md`](training/judgment/V0.2_DF_HOLDOUT_V0.4_PROTOCOL.md) | D/F를 각 1회 비교하는 절대 안전 기준·F 승격 조건·재실행 금지 정책 |
+| 소비된 holdout v0.4 최종 결과 | [`training/judgment/V0.2_DF_HOLDOUT_V0.4_RESULT.md`](training/judgment/V0.2_DF_HOLDOUT_V0.4_RESULT.md) | D/F 모두 허용 교정문 80% 미달, 운영 승격 후보 없음과 다음 학습 분기 |
 | 결정론적 경계 게이트 v0.1 | [`training/judgment/DETERMINISTIC_BOUNDARY_GATE_V0.1_RESULT.md`](training/judgment/DETERMINISTIC_BOUNDARY_GATE_V0.1_RESULT.md) | 빈 입력·비일본어 사전 라우팅과 STT advisory 분리, D/H replay·운영 미통합 근거 |
 | 문법 판단 경계 정의 | [`evaluation/judgment/BOUNDARY_GUIDELINES.md`](evaluation/judgment/BOUNDARY_GUIDELINES.md) | 필러·문체·표기·STT·문맥 판단 원칙 |
 | 사람 검수 절차 | [`evaluation/judgment/REVIEW_PROCESS.md`](evaluation/judgment/REVIEW_PROCESS.md) | 사용자 검수와 전문가 검수의 구분 및 절차 |
