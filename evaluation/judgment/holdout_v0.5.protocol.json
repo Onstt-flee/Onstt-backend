@@ -1,0 +1,77 @@
+{
+  "protocol_version": "judgment-holdout-v0.5-j-final-1",
+  "status": "frozen_before_inference",
+  "frozen_at": "2026-10-10",
+  "pre_protocol_checkpoint": "9202719189599dc7c41a0e743a324ce2cac72fa2",
+  "holdout": {
+    "path": "evaluation/judgment/holdout_v0.5.jsonl",
+    "sha256": "b4b7ed63ccbd9008a7fa5544a3a494af20843e3accb4f6917700504b32ae6963",
+    "manifest_path": "evaluation/judgment/holdout_v0.5.manifest.json",
+    "manifest_sha256": "e037c436c37bb3ca179a2914fa8c7ee0429f0456a9a8fc7110dbf515ac526f6c",
+    "records": 120,
+    "distribution": {
+      "acceptable": 50,
+      "needs_correction": 50,
+      "insufficient_evidence": 20,
+      "compound_error_cases": 10
+    },
+    "single_use": true,
+    "model_inference_count_before_protocol_freeze": 0
+  },
+  "base_model": {
+    "path": "/home/cap-minsung/lora-adapter-bank/base-models/qwen3-4b-instruct-2507-hf",
+    "manifest_sha256": "86cf6cbe487216982ba0cc0adafa649925d1f2e61d86b2fc63cfe34f99f91013"
+  },
+  "candidate": {
+    "served_model": "judgment-v02j",
+    "dataset_path": "training/judgment/data/pilot_v0.2_j.jsonl",
+    "dataset_sha256": "bb9ad7e05a8336c95fb51bd19478e2b12a52ee508c9843cfa99d1c251f3b35c5",
+    "config_path": "training/judgment/configs/qwen3_4b_final_v0.2_j.json",
+    "config_sha256": "d77cd642f6d4cf20c5cd0b70d39b3b1db74dc1af379c34b89e061f9125363b9c",
+    "adapter_path": "/home/cap-minsung/lora-adapter-bank/adapters/judgment-qwen3-4b-final-v0.2-j",
+    "adapter_sha256": "b9f5bb39069ed002690d36d850f26b8a4b1519568230bb473311c84b1a34efb6",
+    "run_manifest_sha256": "a634a9bc8e12b3890930dec19dd4ba46b5ee641e51d0d4d03fe62a61f2e26211"
+  },
+  "inference": {
+    "endpoint": "http://127.0.0.1:1234/v1/chat/completions",
+    "prompt_version": "judgment-v0.2",
+    "prompt_sha256": "9252477191ce2af588d7ab0e754ef9d1a5df7ea541b636c8a0b15b8292865f0e",
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "max_tokens": 512,
+    "runner_sha256": "0884093a3f7dd9341bb7e0c4d43956bda5d11e735d036c0bfd000569197d8a46",
+    "scorer_sha256": "4a09b2dc44ed03c26cd8aef5efafa76019b13df8d09cd464aa602e2326a6e974",
+    "run_candidate_exactly_once": true
+  },
+  "eligibility_thresholds": {
+    "json_contract_success_rate_min": 0.99,
+    "overcorrection_rate_max": 0.02,
+    "overcorrection_max_count_among_50_acceptable": 1,
+    "correction_detection_precision_min": 0.95,
+    "correction_detection_recall_min": 0.8,
+    "clear_case_handling_rate_min": 0.85,
+    "correct_withholding_rate_min": 0.8,
+    "accepted_correction_rate_min": 0.8,
+    "compound_complete_rate_min": 0.3,
+    "p95_latency_ms_max": 1500
+  },
+  "selection_policy": {
+    "if_all_thresholds_pass": "select_j_as_limited_staging_candidate",
+    "if_any_threshold_fails": "select_none_and_end_lora_iteration",
+    "no_post_result_rule_model_prompt_threshold_or_label_change": true
+  },
+  "execution_policy": {
+    "labels_forbidden_in_model_requests": true,
+    "raw_runs_and_weights_git_ignored": true,
+    "record_run_output_and_report_sha256": true,
+    "holdout_becomes_consumed_after_first_inference": true,
+    "no_rerun_for_model_selection": true,
+    "no_further_lora_tuning_on_v0_5": true
+  },
+  "interpretation_limits": [
+    "generated_validated holdout is not Japanese expert certification",
+    "text-only evaluation does not measure pronunciation or assign STT responsibility",
+    "v0.5 is lexically de-duplicated but structurally related to v0.4",
+    "automatic accepted corrections are not exhaustive"
+  ]
+}
