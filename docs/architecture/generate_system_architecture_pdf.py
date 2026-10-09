@@ -193,7 +193,7 @@ class ArchitectureDiagram(Flowable):
         self._title(c, w, h, "목표 운영 아키텍처", "계층형 모놀리스 + 독립 GPU inference")
         self._box(c, 4, 300, 88, 45, ["Edge / Client", "Pi STT + idempotency"], "#E8F1F7")
         self._box(c, 111, 300, 88, 45, ["API v1", "auth / validation"], "#DDEEDC")
-        self._box(c, 218, 300, 102, 45, ["Application", "JudgmentService"], "#FFF2CC")
+        self._box(c, 218, 300, 102, 45, ["Application", "JudgmentService", "bounded shadow queue"], "#FFF2CC", size=7.2)
         self._box(c, 345, 300, 137, 45, ["Domain Contract", "decision / edit / advisory"], "#FCE4D6")
         self._arrow(c, 92, 322, 111, 322)
         self._arrow(c, 199, 322, 218, 322)

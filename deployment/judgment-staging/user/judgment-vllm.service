@@ -1,0 +1,24 @@
+[Unit]
+Description=Judgment staging vLLM server (user session)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+EnvironmentFile=%h/.config/stt-api/judgment-staging.env
+Environment=VLLM_USE_FLASHINFER_SAMPLER=0
+Environment=XDG_CACHE_HOME=%C/stt-api-judgment-vllm
+Environment=CUDA_CACHE_PATH=%C/stt-api-judgment-vllm/cuda
+CacheDirectory=stt-api-judgment-vllm
+CacheDirectoryMode=0750
+UMask=0027
+ExecStart=%h/lora-adapter-bank/envs/qwen3-peft/bin/vllm serve %h/lora-adapter-bank/base-models/qwen3-4b-instruct-2507-hf --host 127.0.0.1 --port 1234 --dtype bfloat16 --max-model-len 4096 --gpu-memory-utilization 0.80 --generation-config vllm --enable-lora --lora-modules judgment-v02d=%h/lora-adapter-bank/adapters/judgment-qwen3-4b-failure-focus-v0.2-d
+Restart=on-failure
+RestartSec=10
+TimeoutStartSec=600
+TimeoutStopSec=90
+KillSignal=SIGINT
+NoNewPrivileges=true
+
+# Deliberately no [Install] section: staging is started manually and is not
+# enabled at login.

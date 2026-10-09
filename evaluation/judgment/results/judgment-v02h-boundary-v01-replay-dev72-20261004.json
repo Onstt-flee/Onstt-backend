@@ -1,0 +1,211 @@
+{
+  "schema_version": "0.1",
+  "status": "offline_boundary_policy_replay_not_model_rerun",
+  "policy_version": "judgment-boundary-v0.1",
+  "source_model": "judgment-v02h",
+  "source_run_id": "20261003T161157Z-judgment-v02h-67a06fe7",
+  "source_run_sha256": "76f94ed385774ad2effbbfb754b8119c73406789b79583ccb89c57bc84ba1948",
+  "dataset_sha256": "f681ba026cfd6eeca86ebf531e1ac94ceed06525b43fca2b19729ef86ff0d12b",
+  "input_count": 72,
+  "model_call_avoided_count": 5,
+  "model_call_avoided_ids": [
+    "JG-049",
+    "JG-050",
+    "JG-057",
+    "JG-059",
+    "JG-060"
+  ],
+  "orthography_advisory_ids": [
+    "JG-067",
+    "JG-068"
+  ],
+  "orthography_override_ids": [],
+  "changed_ids": [
+    "JG-049",
+    "JG-050",
+    "JG-057",
+    "JG-059",
+    "JG-060"
+  ],
+  "before": {
+    "json_contract_success_rate": {
+      "numerator": 71,
+      "denominator": 72,
+      "value": 0.9861111111111112,
+      "ci95_wilson": [
+        0.9254339785252386,
+        0.9975440481170943
+      ]
+    },
+    "decision_accuracy": {
+      "numerator": 68,
+      "denominator": 72,
+      "value": 0.9444444444444444,
+      "ci95_wilson": [
+        0.8656798403400208,
+        0.9781857840186834
+      ]
+    },
+    "overcorrection_rate": {
+      "numerator": 1,
+      "denominator": 33,
+      "value": 0.030303030303030304,
+      "ci95_wilson": [
+        0.00536941053687183,
+        0.1531872538211892
+      ]
+    },
+    "correction_detection_precision": {
+      "numerator": 26,
+      "denominator": 27,
+      "value": 0.9629629629629629,
+      "ci95_wilson": [
+        0.8171653406642414,
+        0.9934318540192149
+      ]
+    },
+    "correction_detection_recall": {
+      "numerator": 26,
+      "denominator": 27,
+      "value": 0.9629629629629629,
+      "ci95_wilson": [
+        0.8171653406642414,
+        0.9934318540192149
+      ]
+    },
+    "correct_withholding_rate": {
+      "numerator": 10,
+      "denominator": 12,
+      "value": 0.8333333333333334,
+      "ci95_wilson": [
+        0.5519691377470266,
+        0.9530348578161463
+      ]
+    },
+    "clear_case_handling_rate": {
+      "numerator": 60,
+      "denominator": 60,
+      "value": 1.0,
+      "ci95_wilson": [
+        0.93982814785791,
+        0.9999999999999998
+      ]
+    },
+    "accepted_correction_rate_end_to_end": {
+      "numerator": 19,
+      "denominator": 27,
+      "value": 0.7037037037037037,
+      "ci95_wilson": [
+        0.5151931703585185,
+        0.8414695953022023
+      ]
+    },
+    "compound_complete_rate": {
+      "numerator": 0,
+      "denominator": 4,
+      "value": 0.0,
+      "ci95_wilson": [
+        0.0,
+        0.4898908364545973
+      ]
+    }
+  },
+  "after": {
+    "json_contract_success_rate": {
+      "numerator": 72,
+      "denominator": 72,
+      "value": 1.0,
+      "ci95_wilson": [
+        0.9493488274035422,
+        1.0
+      ]
+    },
+    "decision_accuracy": {
+      "numerator": 70,
+      "denominator": 72,
+      "value": 0.9722222222222222,
+      "ci95_wilson": [
+        0.9042582477856177,
+        0.9923489780955054
+      ]
+    },
+    "overcorrection_rate": {
+      "numerator": 1,
+      "denominator": 33,
+      "value": 0.030303030303030304,
+      "ci95_wilson": [
+        0.00536941053687183,
+        0.1531872538211892
+      ]
+    },
+    "correction_detection_precision": {
+      "numerator": 26,
+      "denominator": 27,
+      "value": 0.9629629629629629,
+      "ci95_wilson": [
+        0.8171653406642414,
+        0.9934318540192149
+      ]
+    },
+    "correction_detection_recall": {
+      "numerator": 26,
+      "denominator": 27,
+      "value": 0.9629629629629629,
+      "ci95_wilson": [
+        0.8171653406642414,
+        0.9934318540192149
+      ]
+    },
+    "correct_withholding_rate": {
+      "numerator": 12,
+      "denominator": 12,
+      "value": 1.0,
+      "ci95_wilson": [
+        0.7575059933447592,
+        1.0
+      ]
+    },
+    "clear_case_handling_rate": {
+      "numerator": 60,
+      "denominator": 60,
+      "value": 1.0,
+      "ci95_wilson": [
+        0.93982814785791,
+        0.9999999999999998
+      ]
+    },
+    "accepted_correction_rate_end_to_end": {
+      "numerator": 19,
+      "denominator": 27,
+      "value": 0.7037037037037037,
+      "ci95_wilson": [
+        0.5151931703585185,
+        0.8414695953022023
+      ]
+    },
+    "compound_complete_rate": {
+      "numerator": 0,
+      "denominator": 4,
+      "value": 0.0,
+      "ci95_wilson": [
+        0.0,
+        0.4898908364545973
+      ]
+    }
+  },
+  "before_system_failure_ids": [
+    "JG-049"
+  ],
+  "after_system_failure_ids": [],
+  "before_decision_error_ids": [
+    "JG-027",
+    "JG-049",
+    "JG-060",
+    "JG-068"
+  ],
+  "after_decision_error_ids": [
+    "JG-027",
+    "JG-068"
+  ],
+  "warning": "Development-set replay only. The policy does not use gold labels for routing, but these metrics use reviewed labels after prediction. Do not treat this as holdout or production evidence."
+}

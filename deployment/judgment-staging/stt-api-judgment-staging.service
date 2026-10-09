@@ -1,0 +1,29 @@
+[Unit]
+Description=STT API judgment staging (single worker)
+After=network-online.target judgment-vllm.service
+Wants=network-online.target judgment-vllm.service
+
+[Service]
+Type=simple
+User=cap-minsung
+Group=cap-minsung
+EnvironmentFile=/etc/stt-api/judgment-staging.env
+Environment=PYTHONPATH=/home/cap-minsung/stt_api
+WorkingDirectory=/var/lib/stt-api-judgment-staging
+ExecStartPre=/home/cap-minsung/stt_api/venv/bin/python -B -m scripts.check_judgment_staging --database /var/lib/stt-api-judgment-staging/stt_data.db --skip-live
+StateDirectory=stt-api-judgment-staging
+StateDirectoryMode=0750
+UMask=0027
+ExecStart=/home/cap-minsung/stt_api/venv/bin/uvicorn main:app --host 127.0.0.1 --port 8001 --workers 1
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=45
+KillSignal=SIGINT
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=read-only
+ProtectSystem=strict
+ReadWritePaths=/var/lib/stt-api-judgment-staging
+
+[Install]
+WantedBy=multi-user.target

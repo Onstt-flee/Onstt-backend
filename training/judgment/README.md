@@ -1,6 +1,6 @@
 # 일본어 문법 판단 LoRA 데이터
 
-상태: **holdout v0.3 단일 실행 완료, D 단독을 기능 플래그·shadow 통합 후보로 선택**. D는 안전 기준을 모두 통과했고 D+F 게이트는 교정문 증가 0건·p95 비율 2.06배로 미채택했다. F 단독은 진단 점수가 더 높았지만 사후 선택하지 않는다. 운영 API 통합과 실제 STT shadow 검증은 아직 수행하지 않았다.
+상태: **v0.2-D 제한적 staging과 `/analyze` shadow admission 검증 완료, 기본 비활성 유지**. 1 req/s token bucket으로 0.5·1 req/s는 전량 처리했고 2·10 req/s 초과분은 `sampled_out`으로 분리했다. 총 100건의 기존 응답은 전부 성공했고 shadow failure/drop은 0건이다. 운영 기본값과 학습자 노출은 승인하지 않으며 새 `holdout_v0.4`는 모델 추론 0회다. 후속 v0.2-I 통제 학습은 교정문 1건·복합 오류 1건을 개선했지만 구조·과교정·보류 회귀로 미채택했다.
 
 ## 목적과 격리 원칙
 
@@ -37,6 +37,15 @@
 - `data/pilot_v0.2_e.jsonl`: v0.2-D 748문항과 새 80문항을 결합한 828문항
 - `data/failure_focus_v0.2_e_chatml/`: 위치 없는 v0.2 출력의 train/dev
 - `data/failure_focus_v0.2_e.manifest.json`: 분포·최소대립쌍·누수 감사·해시
+- `data/contract_preservation_v0.2_g.jsonl`: 실제 운영 원문 없이 만든 계약 보존 합성 108문항
+- `data/pilot_v0.2_g.jsonl`: v0.2-D와 G 추가분을 결합한 856문항
+- `data/contract_preservation_v0.2_g_chatml/`: 위치 없는 v0.2 출력의 train/dev
+- `data/contract_preservation_v0.2_g.manifest.json`: 분포·누수 감사·운영 원문 미사용 증거와 해시
+- `data/sampling_focus_v0.2_h_chatml/`: G와 같은 의미 소스에서 720개 실제 노출 순서를 고정한 H train/dev ChatML
+- `data/sampling_focus_v0.2_h.manifest.json`: 고정 노출 구성·입력 해시·분포 기록
+- `data/pilot_v0.2_i.jsonl`: v0.2-D 748문항과 F 보강분 120문항만 결합한 868문항
+- `data/failure_focus_v0.2_i_chatml/`: D 안전 앵커를 포함해 720개 train 노출을 고정한 I train/dev ChatML
+- `data/failure_focus_v0.2_i.manifest.json`: D+F 계보·노출 분포·보호 holdout 해시
 - `data.py`: 학습 레코드 계약·split 격리·중복 검사
 - `generate_pilot.py`: 결정론적 파일럿 생성기
 - `apply_user_review.py`: 외부 검수를 익명 3단계 판단으로 정규화하고 reviewed 데이터를 생성하는 도구
@@ -47,6 +56,9 @@
 - `build_failure_focus_v0_2_d.py`: 공통 실패 유형의 v0.2-D 데이터·ChatML 생성 및 holdout 누수 감사
 - `build_failure_focus_v0_2_e.py`: v0.2-D 교정문 회귀 보강 데이터·ChatML 생성 및 holdout 누수 감사
 - `build_failure_focus_v0_2_f.py`: holdout 안전 실패 보강 120문항·ChatML 생성 및 v0.3 포함 누수 감사
+- `build_contract_preservation_v0_2_g.py`: shadow 원문 없이 계약 경계 최소대립·보류 문항을 생성하는 v0.2-G 빌더
+- `build_sampling_focus_v0_2_h.py`: 새 정답 없이 G train의 보류·정상 노출을 고정하는 v0.2-H 빌더
+- `build_failure_focus_v0_2_i.py`: D 원본과 F 보강분만 결합하고 D 안전 앵커를 반복하는 v0.2-I 빌더
 - `train_lora.py`: provisional 명시 동의와 입력 검증을 요구하는 독립 LoRA 학습기
 - `configs/qwen3_4b_pilot_v0.1.json`: 기존 provisional Qwen3-4B 실험 설정
 - `configs/qwen3_4b_reviewed_v0.1.json`: 검수 완료 데이터 전용 다음 학습 설정
@@ -57,6 +69,9 @@
 - `PILOT_V0.1_RESULT.md`: provisional 실험 결과와 실패 분석
 - `configs/qwen3_4b_failure_focus_v0.2_e.json`: 동일 조건의 별도 v0.2-E 어댑터 설정
 - `configs/qwen3_4b_failure_focus_v0.2_f.json`: v0.2-E와 같은 seed 42·45-step의 별도 v0.2-F 어댑터 설정
+- `configs/qwen3_4b_contract_preservation_v0.2_g.json`: v0.2-D에서 분기한 seed 42·45-step G 설정
+- `configs/qwen3_4b_sampling_focus_v0.2_h.json`: H 고정 노출 ChatML을 사용하는 seed 42·45-step 설정
+- `configs/qwen3_4b_failure_focus_v0.2_i.json`: D+F 통제 데이터의 seed 42·45-step I 설정
 - `REVIEWED_V0.1_RESULT.md`: 검수 완료 데이터 학습·72문항 비교와 다음 실험 조건
 - `CONTRACT_CONTROL_V0.2_B_RESULT.md`: 동일 출력 계약 대조군과 v0.2-C의 개발셋 비교·실패 원인
 - `V0.2_D_DESIGN.md`: 새 시험지 봉인과 후속 학습·평가 순서
@@ -71,6 +86,13 @@
 - `V0.2_F_DATA_RESULT.md`: 추가 120문항·결합 948문항, 누수 감사·ChatML·학습 설정 검증 결과
 - `V0.2_F_TRAIN_AND_DEV72_RESULT.md`: 45-step 학습 해시, D/E/F 개발셋 비교와 F 단독 채택 실패 근거
 - `V0.2_DF_CANDIDATE_GATE_RESULT.md`: D 판단 잠금 D+F 게이트의 개발셋 진단 결과
+- `V0.2_1_PROMPT_HARDENING_RESULT.md`: 원문 보존 프롬프트 강화의 개발셋 회귀와 미채택 근거
+- `V0.2_G_TRAIN_AND_DEV72_RESULT.md`: 합성 계약 보강 108문항, 45-step 학습과 D/G 개발셋 비교
+- `V0.2_H_DESIGN.md`: 새 holdout v0.4 봉인과 고정 노출 샘플링의 사전 기준
+- `V0.2_H_TRAIN_AND_DEV72_RESULT.md`: H 학습 해시, D/G/H 동일 서버 비교와 미채택 근거
+- `V0.2_I_DESIGN.md`: D+F 통제 학습 계보와 사전 채택 기준
+- `V0.2_I_TRAIN_AND_DEV72_RESULT.md`: I 학습 해시, D/I 동일 서버 비교와 안전성 회귀·미채택 근거
+- `DETERMINISTIC_BOUNDARY_GATE_V0.1_RESULT.md`: 빈 입력·비일본어·STT 표기 경계의 오프라인 정책과 D/H replay 결과
 - `V0.2_DF_HOLDOUT_V0.3_RESULT.md`: 봉인 시험지 단일 실행, D 단독 선택과 게이트 미채택 근거
 
 ## 데이터 구성
@@ -197,6 +219,52 @@ Qwen3-4B LoRA는 72문항에서 원시 판단 정답을 57건에서 63건, 허�
 17. 완료: D/F 데이터·어댑터·프롬프트·선택기·채점기·임계값을 `holdout_v0.3.protocol.json`에 봉인하고 자동 해시 검증 테스트를 추가했다.
 18. 완료: 체크포인트 `dc48d08` 상태에서 `holdout_v0.3`의 D/F를 각각 정확히 한 번 실행하고 D 단독과 D+F 게이트를 동일 채점기로 비교했다.
 19. 완료: D는 안전 기준을 모두 통과했다. 게이트는 교정문 증가와 지연시간 비율 기준을 실패해 미채택하고 D 단독을 shadow 통합 후보로 선택했다.
-20. 다음: 기존 `/analyze`를 변경하지 않고 기본 비활성 기능 플래그의 별도 판단 API를 구현한 뒤 단위·Swagger·실제 STT 50건 shadow 검증을 진행한다.
+20. 완료: 기존 `/analyze`를 변경하지 않고 기본 비활성 기능 플래그의 별도 판단 API와 저장 테이블을 구현했으며 단위·Swagger 검증을 통과했다.
+21. 완료: 실제 STT 50건 D 단독 shadow에서 49/50 계약 성공, p50 801.741ms, p95 1237.647ms를 기록했다. 1건은 `insufficient_evidence`가 원문을 보존하지 않아 계약 위반으로 차단됐다.
+22. 유지: 99% 구조 기준 미달로 운영 기본값 승격을 보류한다. 상세는 [실제 STT shadow 결과](JUDGMENT_D_SHADOW_V0.1_RESULT.md)를 따른다.
+23. 완료: 비교정 원문 보존 지시를 강화한 v0.2.1 프롬프트를 동일 72문항에서 비교했으나 계약 69/72·판단 59/72·재현율 18/27로 후퇴해 미채택했다. [프롬프트 강화 결과](V0.2_1_PROMPT_HARDENING_RESULT.md)를 따른다.
+24. 완료: 실제 shadow 원문을 사용하지 않은 v0.2-G 합성 108문항과 결합 856문항을 생성·검증하고 같은 seed 42·45-step으로 학습했다.
+25. 완료: 동일 서버·프롬프트로 D/G를 72문항에서 비교했다. G는 구조 71/72, 과교정 1/33, 판단 67/72, 허용 교정 17/27로 D보다 후퇴해 미채택했다. [v0.2-G 결과](V0.2_G_TRAIN_AND_DEV72_RESULT.md)를 따른다.
+26. 완료: 새 미사용 `holdout_v0.4` 120문항을 생성·중복 감사·해시 봉인했다. 모델 추론은 0회다.
+27. 완료: 새 정답 없이 G의 720개 학습 노출을 고정한 H를 같은 seed 42·45-step으로 학습했다.
+28. 완료: 동일 서버에서 D/G/H를 비교했다. H는 구조 71/72, 과교정 1/33, 판단 68/72, 보류 10/12로 사전 기준을 실패해 미채택했다. [v0.2-H 결과](V0.2_H_TRAIN_AND_DEV72_RESULT.md)를 따른다.
+29. 완료: 빈 입력·잡음·명백한 비일본어를 사전 라우팅하고 STT 표기는 advisory로 분리하는 경계 게이트 v0.1을 구현했다.
+30. 완료: D/H 기존 run에 라벨 비의존 replay를 수행했다. D는 판단 70/72·보류 12/12·과교정 0/33, H는 구조 72/72·판단 70/72·보류 12/12지만 과교정 1/33이다. [경계 게이트 결과](DETERMINISTIC_BOUNDARY_GATE_V0.1_RESULT.md)를 따른다.
+31. 완료: 실제 저장 STT 적격 340건을 읽기 전용·무모델·비식별 집계로 dry-run했다. bypass와 advisory는 0건, DB 해시와 judgment_results는 불변이었다.
+32. 보류: adversarial 경계 세트 확대는 실제 340건에서 개입 0건이므로 운영 핵심 경로에서 제외했다.
+33. 완료: 비교정 원문 보존 위반에만 1회 재시도하고 기존 50건 snapshot을 제외한 실제 STT 100건 shadow를 실행했다. 최종 계약 99/100, 재시도 1건·회복 0건, 성공 p95 1108.711ms로 제한적 staging/shadow 기준을 통과했다. [100건 shadow 결과](JUDGMENT_D_SHADOW_V0.2_RESULT.md)를 따른다.
+34. 완료: 기존 shadow 150건을 제외한 실제 STT 30건 독립 품질 검수 표본을 예측 비노출로 봉인했다. 실제 음성 파일이 없어 발음/STT 귀속은 판단 불가로 잠갔다. [검수 가이드](../../evaluation/judgment/QUALITY_REVIEW_V0.1_GUIDE.md)를 따른다.
+35. 보류: private review JSONL 30건의 사람 라벨과 음성·발음 평가는 사용자 결정에 따라 후순위로 둔다. 표본은 봉인 상태와 모델 추론 0회를 유지한다.
+36. 완료: 추가 학습 없이 v0.2-D의 제한적 staging 실행 안전성을 검증했다. `/tmp` 복제 DB의 live 사전점검과 POST/GET은 통과했고 원본 DB 해시·행 수는 불변이며 서버는 종료했다. 재현 절차는 [`docs/JUDGMENT_STAGING_RUNBOOK.md`](../../docs/JUDGMENT_STAGING_RUNBOOK.md)를 따른다.
 
 현재 파일럿은 일본어 전문가 인증본이 아니며, 구조 검증 통과를 언어학적 정확성으로 해석하지 않는다.
+
+37. 완료: 원문·발화 ID·문맥·원시 오류를 수집하지 않는 프로세스 로컬 `GET /health/judgment` 집계와 사전점검 경로를 추가했다. 기능 플래그 기본 비활성과 staging 범위는 유지한다.
+
+38. 완료: 커밋을 학습 이후로 보류하는 동안 원시 실행·DB·가중치·오디오·대용량 파일의 혼입과 보호 해시 변경을 차단하는 읽기 전용 체크포인트 감사 도구를 추가했다.
+
+39. 완료: 합성 1,000이벤트·16 worker로 상태 집계 동시성을 확인하고 timeout·재시도 재실패·DB 저장 실패를 주입해 503·미저장·익명 실패 집계를 검증했다. [staging 장애 결과](STAGING_RESILIENCE_RESULT.md)를 따른다.
+
+40. 완료: 격리 SQLite와 합성 입력으로 실제 FastAPI–vLLM D LoRA 경로를 동시성 1/2/4에서 측정했다. 측정 26/26건이 HTTP 200·계약을 통과했고 동시성 4 p95 867.775ms, 4.786 req/s였다. [staging 실부하 결과](STAGING_HTTP_LOAD_RESULT.md)를 따른다.
+
+41. 완료: 프로세스별 동시 판단 상한·즉시 429 backpressure·모델 alias readiness·종료 drain을 추가했다. 상한 2의 live 동시성 8 실험에서 2건 성공, 14건 429, 모델/DB 실패 0건을 확인했다. [staging 런타임 안전 결과](STAGING_RUNTIME_SAFETY_RESULT.md)를 따른다.
+
+42. 완료: 동시성 2로 150건을 57.519초간 지속 실행해 150/150 계약 성공, p95 850.022ms를 확인했다. vLLM 중단 시 readiness 503, 재기동 후 API 재시작 없이 200 복구와 실제 판단 성공을 검증했다. [단기 soak·복구 결과](STAGING_SOAK_RECOVERY_RESULT.md)를 따른다.
+
+43. 완료: sudo 없는 사용자 systemd로 vLLM과 단일-worker API를 설치·실기동했다. live 사전점검, readiness 200→503→200 복구, 합성 판단 POST/GET을 통과했고 종료 후 환경·격리 DB·포트·GPU를 초기 상태로 복원했다. `Linger=no`이므로 로그인 세션 staging 범위만 인정한다. [배포 서비스 결과](STAGING_DEPLOYMENT_TEMPLATE_RESULT.md)를 따른다.
+
+44. 완료: 사용자 staging의 환경·서비스 전환을 원자적 fail-closed 관리기로 묶었다. start/status/stop 실기동과 전체 live 사전점검을 통과했고 판단 요청 없이 DB·포트·GPU 불변 상태로 종료했다. 상세는 [배포 서비스 결과](STAGING_DEPLOYMENT_TEMPLATE_RESULT.md)를 따른다.
+
+45. 완료: 기존 `/analyze` 응답·분석 저장을 변경하지 않는 background shadow를 별도 기본 비활성 플래그로 연결했다. 합성 인사 live 호출에서 응답 34.087ms, shadow 성공 742.162ms, 판단 저장 0건과 익명 집계를 확인했다. [shadow 통합 결과](STAGING_ANALYZE_SHADOW_RESULT.md)를 따른다.
+
+46. 완료: 동일 합성 입력 26건으로 shadow OFF/ON을 비교해 기존 `/analyze` HTTP·계약 26/26과 판단 저장 0건을 재확인했다. ON에서는 2건만 모델 호출에 성공하고 24건이 안전하게 `overloaded`로 폐기돼, 현재 background 방식은 응답 보호에는 성공했지만 대표성 있는 수집 용량은 부족하다. [OFF/ON 부하 결과](STAGING_ANALYZE_SHADOW_LOAD_RESULT.md)를 따른다.
+
+47. 완료: 최대 64건·TTL 30초·단일 consumer·종료 drain을 갖는 프로세스 로컬 shadow 큐를 구현했다. 동일 burst에서 예약·enqueue·모델 성공 26/26, drop 0건이며 큐 대기 p95는 14.88초였다. [shadow 큐 결과](STAGING_ANALYZE_SHADOW_QUEUE_RESULT.md)를 따른다.
+
+48. 완료: 0.5·1·2·10 req/s 합성 rate probe를 실행했다. 낮은 세 구간은 drop 0, 10 req/s 80건은 응답 80/80을 유지하면서 queue full 3건·TTL 만료 16건으로 제한됐다. [rate probe 결과](STAGING_ANALYZE_SHADOW_RATE_RESULT.md)를 따른다.
+
+49. 완료: 큐 앞에 1 req/s·burst 1의 내용·사용자 비의존 token bucket을 추가했다. 0.5·1·2·10 req/s 총 100건에서 응답 100/100, shadow 성공 23건, sampled out 77건, failure/drop 0건을 확인했다. [admission 결과](STAGING_ANALYZE_SHADOW_ADMISSION_RESULT.md)를 따른다.
+
+50. 완료: D 748문항에 F 보강분 120문항만 결합한 v0.2-I를 동일 seed 42·45-step으로 학습했다. I는 허용 교정문 20/27·복합 오류 1/4로 소폭 개선됐지만 구조 71/72·과교정 1/33·판단 67/72·보류 9/12로 안전 기준을 실패해 미채택했다. [v0.2-I 결과](V0.2_I_TRAIN_AND_DEV72_RESULT.md)를 따른다.
+
+51. 다음: 운영 후보는 v0.2-D로 유지한다. 기능 플래그 기본 비활성과 실제 학습자 노출 보류를 유지하며, `holdout_v0.4`는 별도 protocol·체크포인트 없이 실행하지 않는다.

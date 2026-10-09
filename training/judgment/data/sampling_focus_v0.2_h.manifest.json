@@ -1,0 +1,91 @@
+{
+  "dataset_id": "judgment-sampling-focus-v0.2-h",
+  "validated_at": "2026-10-04",
+  "source_dataset": "training/judgment/data/pilot_v0.2_g.jsonl",
+  "source_dataset_sha256": "03d18efb9e1c3650fd87c65bb9d23abe7f4a27beaef09966b14cbd412ddead76",
+  "output_contract": "judgment-v0.2",
+  "sampling_policy": {
+    "optimizer_steps": 45,
+    "gradient_accumulation_steps": 16,
+    "scheduled_microbatches": 720,
+    "base_d_train_once": 594,
+    "g_train_once": 81,
+    "g_extra_insufficient_evidence": 24,
+    "g_extra_acceptable": 21,
+    "extra_needs_correction": 0,
+    "repeat_ids": [
+      "JT-0989",
+      "JT-0990",
+      "JT-0991",
+      "JT-0993",
+      "JT-0994",
+      "JT-0995",
+      "JT-0997",
+      "JT-0998",
+      "JT-0999",
+      "JT-1001",
+      "JT-1002",
+      "JT-1003",
+      "JT-1005",
+      "JT-1006",
+      "JT-1007",
+      "JT-1009",
+      "JT-1010",
+      "JT-1011",
+      "JT-1013",
+      "JT-1014",
+      "JT-1015",
+      "JT-1017",
+      "JT-1018",
+      "JT-1019",
+      "JT-0949",
+      "JT-0950",
+      "JT-0951",
+      "JT-0953",
+      "JT-0954",
+      "JT-0955",
+      "JT-0957",
+      "JT-0958",
+      "JT-0959",
+      "JT-0961",
+      "JT-0962",
+      "JT-0963",
+      "JT-0965",
+      "JT-0966",
+      "JT-0967",
+      "JT-0969",
+      "JT-0970",
+      "JT-0971",
+      "JT-0973",
+      "JT-0974",
+      "JT-0975"
+    ],
+    "selection_rule": "all G train insufficient_evidence, then first 21 G train acceptable in canonical order"
+  },
+  "train": {
+    "path": "training/judgment/data/sampling_focus_v0.2_h_chatml/pilot_train.chatml.jsonl",
+    "count": 720,
+    "unique_inputs": 675,
+    "decision_exposures": {
+      "acceptable": 352,
+      "insufficient_evidence": 124,
+      "needs_correction": 244
+    },
+    "sha256": "3453f7c99c6604105ff3f58c8746bdd97250902ccfc159c3ed388caf93fa2d19"
+  },
+  "dev": {
+    "path": "training/judgment/data/sampling_focus_v0.2_h_chatml/pilot_dev.chatml.jsonl",
+    "count": 181,
+    "unique_inputs": 181,
+    "sha256": "bb49e5acaa56061f2370935545ec24638ef77570e78727948e1d2f3f5f7782a7"
+  },
+  "holdout_policy": {
+    "holdout_v0.4_read_by_builder": false,
+    "model_inference_before_protocol_freeze": false
+  },
+  "limitations": [
+    "Repeated examples change exposure frequency but not gold semantics.",
+    "The trainer must retain seed 42, shuffle enabled, batch 1, accumulation 16, and max_steps 45.",
+    "generated_validated records are not human or expert reviewed."
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "schema_version": "judgment-shadow-v0.2",
+  "generated_at": "2026-10-06T00:56:14.084607+00:00",
+  "status": "operational_shadow_without_gold_labels",
+  "database_write_policy": "read_only_no_judgment_persistence",
+  "selection": {
+    "policy": "latest_eligible_japanese_excluding_authenticated_prior_snapshot",
+    "requested": 100,
+    "selected": 100,
+    "exclusion": {
+      "policy": "authenticated_prior_input_snapshot",
+      "excluded_count": 50,
+      "input_snapshot_sha256": "804f0d8f1ed698b5577d7a8d7ed4e51175884db6784296e53c22fb98b43a7eb3",
+      "raw_sha256": "f4990f19603b8acf67153932f98059f7cf5ce90bb874d99bfd6236fa400e9ef8",
+      "summary_sha256": "47072f21af5560849c97f14008de4081674ec93b983f51653438a0176975ddc3"
+    },
+    "context_policy": "null_exact_dialogue_context_unavailable",
+    "input_snapshot_sha256": "4ab2133b08bac958f537f44e07e04c582e102d3484f5ec99a5711731c189ddf3",
+    "text_source_counts": {
+      "stt_text": 100
+    },
+    "learner_level_counts": {
+      "N5": 100
+    },
+    "stt_model_counts": {
+      "whisper-tiny-lowskilled": 50,
+      "whisper-tiny-tts": 50
+    }
+  },
+  "runtime": {
+    "strategy": "d_only_with_single_preservation_retry",
+    "model_name": "judgment-v02d",
+    "adapter_name": "judgment-qwen3-4b-failure-focus-v0.2-d",
+    "contract_version": "judgment-v0.2",
+    "model_calls": 101,
+    "retry_policy": "preservation_contract_violation_only_once",
+    "retry_attempts": 1,
+    "retry_recoveries": 0,
+    "retry_failures": 1,
+    "e_calls": 0
+  },
+  "results": {
+    "first_attempt_successes": 99,
+    "first_attempt_contract_success_rate": 0.99,
+    "successes": 99,
+    "failures": 1,
+    "json_contract_success_rate": 0.99,
+    "retry_rate": 0.01,
+    "decision_counts": {
+      "acceptable": 82,
+      "insufficient_evidence": 7,
+      "needs_correction": 10
+    },
+    "failure_counts": {
+      "JudgmentServiceError": 1
+    },
+    "latency_ms": {
+      "count": 99,
+      "p50": 878.567,
+      "p95": 1108.711,
+      "max": 1306.228
+    }
+  },
+  "database_integrity": {
+    "before": {
+      "sha256": "ef3b42b92516c5332f2ed1dcd63ffe1a9c2ff8a53650c24a32205a0161ff09c9",
+      "judgment_results_count": 0
+    },
+    "after": {
+      "sha256": "ef3b42b92516c5332f2ed1dcd63ffe1a9c2ff8a53650c24a32205a0161ff09c9",
+      "judgment_results_count": 0
+    },
+    "unchanged": true,
+    "writes": 0
+  },
+  "acceptance": {
+    "thresholds": {
+      "sample_size": 100,
+      "minimum_successes": 99,
+      "maximum_final_failures": 1,
+      "maximum_retry_rate": 0.05,
+      "maximum_p95_latency_ms": 2500.0
+    },
+    "checks": {
+      "final_contract_success_at_least_99_of_100": true,
+      "final_failures_at_most_1": true,
+      "retry_rate_at_most_5_percent": true,
+      "total_latency_p95_at_most_2500_ms": true,
+      "database_unchanged": true
+    },
+    "passed": true
+  },
+  "artifacts": {
+    "raw_output": "evaluation/judgment/runs/shadow_v0.2/raw.jsonl",
+    "raw_sha256": "804fbd45436273fe0b782d8851a912a0b40a27bd4a239c7f42ee33809829db31",
+    "raw_contains_private_text": true,
+    "raw_git_ignored": true
+  },
+  "interpretation": {
+    "quality_metrics_available": false,
+    "reason": "No gold labels or audio evidence are used in shadow mode.",
+    "pronunciation_or_stt_blame_assigned": false,
+    "learner_exposure_approved": false
+  }
+}

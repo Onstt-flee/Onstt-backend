@@ -1,0 +1,124 @@
+{
+  "dataset_id": "judgment-failure-focus-v0.2-i",
+  "validated_at": "2026-10-08",
+  "output_contract": "judgment-v0.2",
+  "design": "v0.2-D base plus v0.2-F augmentation only; fixed 720-example exposure",
+  "sources": {
+    "training/judgment/data/pilot_v0.2_d.jsonl": "e9667e0b1555c260bdb95ab77736a8b51b9e5fa1dedf18a0d2e23cfce9a2e638",
+    "training/judgment/data/failure_focus_v0.2_f.jsonl": "53a48231439d78d534c51eee07d26b73266a4c7bd7f9aebea2d11cab414f24b8"
+  },
+  "combined": {
+    "path": "training/judgment/data/pilot_v0.2_i.jsonl",
+    "count": 868,
+    "summary": {
+      "total": 868,
+      "splits": {
+        "pilot_dev": 184,
+        "pilot_train": 684
+      },
+      "decisions": {
+        "acceptable": 436,
+        "insufficient_evidence": 105,
+        "needs_correction": 327
+      },
+      "levels": {
+        "N4": 260,
+        "N5": 608
+      },
+      "review_status": {
+        "generated_validated": 568,
+        "user_reviewed": 300
+      },
+      "provenance": {
+        "deterministic_template": 568,
+        "local_model_assisted": 300
+      },
+      "error_types": {
+        "adjective_conjugation": 64,
+        "copula_conjugation": 29,
+        "modifier_connection": 39,
+        "particle_misuse": 111,
+        "tense_mismatch": 35,
+        "verb_conjugation": 96
+      },
+      "compound_corrections": 47,
+      "template_families": 140
+    },
+    "sha256": "9a91a8b9582c076b0008a0c978b67efc1c20189349c426c4edcb73ba96eacc8a"
+  },
+  "train": {
+    "path": "training/judgment/data/failure_focus_v0.2_i_chatml/pilot_train.chatml.jsonl",
+    "count": 720,
+    "unique_inputs": 684,
+    "decision_exposures": {
+      "acceptable": 367,
+      "insufficient_evidence": 100,
+      "needs_correction": 253
+    },
+    "base_d_once": 594,
+    "f_augmentation_once": 90,
+    "repeated_d_acceptable": 24,
+    "repeated_d_insufficient_evidence": 12,
+    "repeat_ids": [
+      "JT-0001",
+      "JT-0002",
+      "JT-0003",
+      "JT-0004",
+      "JT-0005",
+      "JT-0006",
+      "JT-0007",
+      "JT-0008",
+      "JT-0009",
+      "JT-0010",
+      "JT-0011",
+      "JT-0012",
+      "JT-0013",
+      "JT-0014",
+      "JT-0015",
+      "JT-0016",
+      "JT-0017",
+      "JT-0018",
+      "JT-0028",
+      "JT-0029",
+      "JT-0030",
+      "JT-0031",
+      "JT-0032",
+      "JT-0033",
+      "JT-0256",
+      "JT-0257",
+      "JT-0258",
+      "JT-0259",
+      "JT-0260",
+      "JT-0261",
+      "JT-0262",
+      "JT-0263",
+      "JT-0264",
+      "JT-0265",
+      "JT-0266",
+      "JT-0267"
+    ],
+    "sha256": "8678ccd89715fb7c713190cbf78a870a2712be1040dbd8f3f23d9a86acbd0785"
+  },
+  "dev": {
+    "path": "training/judgment/data/failure_focus_v0.2_i_chatml/pilot_dev.chatml.jsonl",
+    "count": 184,
+    "unique_inputs": 184,
+    "sha256": "9e5eb264ea7f1eaf6efa83e8069039c0229b05d1be0e98c24dacb195ebf42b3b"
+  },
+  "sealed_holdout": {
+    "path": "evaluation/judgment/holdout_v0.4.jsonl",
+    "sha256": "904ca090ccd0e209f95fa68a6a3e9fd762a0009c802f7eae7670838f9558221e",
+    "content_read_by_builder": false,
+    "model_inference_count": 0
+  },
+  "review": {
+    "new_gold_examples_created": 0,
+    "human_or_expert_review_claimed": false,
+    "status": "reviewed_with_generated"
+  },
+  "limitations": [
+    "The F augmentation is generated_validated, not expert reviewed.",
+    "Repeated D safety anchors change exposure frequency without adding semantics.",
+    "Development-set improvement is not final generalization evidence."
+  ]
+}

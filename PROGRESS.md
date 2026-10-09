@@ -1,9 +1,9 @@
 # STT API 진행사항 및 일본어 판단모델 개발 방향
 
-기준일: 2026-09-30
+기준일: 2026-10-06
 
 이 문서는 실제로 완료한 작업, 검증 범위, 미해결 문제, 앞으로의 개발 방향을 구분한다.
-운영 판단 파이프라인 통합은 시작하지 않았다. 판단 전용 LoRA 파일럿 300문항은 익명 사용자 검수와 reviewed LoRA 비교를 완료했다. 과교정 원인을 분리하기 위해 판단·교정 정답을 유지하고 학습 근거만 통제한 `v0.2-A` 입력을 준비했으며, 학습과 72문항 평가를 완료했으나 안전 우선 채택 기준에 미달했다. 이번 검수는 일본어 전문가 인증이 아니다. 독립 환경에서 Qwen3.5 0.8B·2B·4B, Qwen3-4B-Instruct-2507 베이스, Qwen3-8B·14B 베이스, RakutenAI-2.0-mini-instruct, llm-jp-3 1.8B·3.7B, Phi-4-mini-instruct와 기존 언어튜터 LoRA 평가를 완료했다.
+판단 전용 LoRA의 독립 평가를 완료하고 `holdout_v0.3` 안전 기준을 통과한 v0.2-D를 기능 플래그 기반 D 단독 판단 API에 연결했다. 기존 이진 `/analyze` 경로와 데이터는 유지하며, 새 경로는 기본 비활성 상태다. 라이브 D·Swagger 스모크 뒤 기존 50건과 비중복인 실제 STT 100건에서 제한적 1회 재시도 shadow를 완료했다. 최종 계약 성공률 99/100, 재시도율 1%, 성공 99건 p95 1108.711ms로 staging/shadow 기준을 통과했지만 운영 기본값과 학습자 노출은 승인하지 않았다. 이번 데이터 검수는 일본어 전문가 인증이 아니다.
 
 ## 1. 현재 상태 요약
 
@@ -11,14 +11,15 @@
 | --- | --- |
 | 우선 처리한 오류 4개 | 수정 완료 |
 | 프로젝트 Python 환경 | 3.12.3으로 재구성 완료 |
-| 코드 회귀 테스트 | 155개 통과 (판단모델·holdout·D+F 선택기·v0.3 봉인 검증 포함) |
+| 코드 회귀 테스트 | 256개 통과 (`/analyze` shadow·사용자 systemd 수명주기·v0.2-I 데이터 계보 테스트 포함) |
 | 설치 의존성 검사 | `pip check` 통과 |
 | 실제 RAG 예문 검색 | 3,003개 자료 로딩·검색 확인 |
-| API 통합 검증 | 메모리 DB + 실제 RAG + 모의 LLM으로 확인 |
-| Swagger 테스트 서버 | 앞서 8001번에서 실행·HTTP 200 확인; 문서 작성 시점에는 접속되지 않음 |
+| API 통합 검증 | D 단독 POST/GET 판단 API를 메모리 DB·모의 모델과 라이브 vLLM·격리 SQLite 양쪽에서 확인 |
+| Swagger 테스트 서버 | 8001에서 docs/OpenAPI와 정상·교정·보류·404·400 확인, 비활성 서버 8002에서 503 확인; 검증 후 종료 |
+| 실제 STT shadow | 기존 50건은 49/50, 비중복 100건 재시도 파일럿은 최종 99/100·재시도 1건·회복 0건·성공 p95 1108.711ms; staging/shadow 기준 통과, 운영 기본값 미승인 |
 | 실제 LLM 서버 | llama.cpp로 Qwen3.5 세 모델, vLLM 0.28.0으로 Qwen3 4B·8B·14B, RakutenAI 1.5B, llm-jp 1.8B·3.7B, Phi-4 mini와 기존 LoRA를 127.0.0.1:1234에서 실행·검증; 임시 서버 종료 |
 | 기존 언어튜터 LoRA | 72/72 전송 성공, 엄격 JSON 계약 0/72로 판단모델 재사용 부적합 판정 |
-| 신규 도메인 판단모델 | v0.2-D가 holdout v0.2에서 구조 119/120·정밀도 95.83%·재현율 92%였으나 과교정 2/50으로 안전 기준 실패. 운영 승인 모델 없음 |
+| 신규 도메인 판단모델 | v0.2-D가 새 holdout v0.3에서 구조 120/120·과교정 0/50·정밀도 97.73%·재현율 86%로 안전 기준 통과. 기능 플래그·shadow 통합 후보이며 운영 기본값은 아님 |
 | 최소 판단 평가셋 | 72개 합성 문항 익명 사용자 검수 완료, Qwen3.5 세 모델·Qwen3 4B/8B/14B·RakutenAI 1.5B·llm-jp 1.8B/3.7B·Phi-4 mini·기존 LoRA 실행 완료, 전문가 검수는 미실행 |
 | LoRA 파일럿 provisional 원본 | 300문항 보존(학습 240·개발 60, 정상 135·교정 120·보류 45), 기존 실험 재현 전용 |
 | LoRA 파일럿 reviewed | 익명 사용자 검수 300/300 완료(정상 136·교정 119·보류 45), 평가셋/RAG 정확·근접 중복 0건, 새 ChatML 생성 완료 |
@@ -80,7 +81,7 @@
 - 실패 시 `parse_success=false`, `is_correct=null`, 원문 유지, `confidence=0.0`과 실패 원인을 반환한다.
 - 정상 JSON, 코드펜스, 설명이 섞인 응답, 기존에 지원하던 문자열 타입 보정은 유지했다.
 
-현재의 `is_correct=null` 실패 처리와, 모델이 정상적으로 반환할 의미상의 '판단 보류'는 구분해야 한다. 평가 전용 새 판단 계약은 `evaluation/judgment/`에 준비했으며 운영 API에는 아직 연결하지 않았다.
+기존 분석의 `is_correct=null` 실패 처리와, 새 판단모델이 정상적으로 반환하는 `insufficient_evidence`는 분리했다. 판단 API에서 모델 연결·출력 계약 실패는 HTTP 503으로 처리하며 판단 보류로 저장하지 않는다.
 
 ## 3. 검증 결과와 범위
 
@@ -375,7 +376,7 @@ venv/bin/python -m pip check
 - 실패 원인이 형태소·검색 근거 부족인지 확인한 뒤 Sudachi와 RAG 개선을 비교한다.
 - Chroma는 보류한다. 현재 검색 방식은 Dense Vector가 아니라 TF-IDF + 키워드다.
 - 서버/기기형 양자화 모델은 별도로 재검증한다. 메모리에는 모델뿐 아니라 사전·검색 인덱스·캐시도 포함한다.
-- Swagger의 모델·수준 선택과 새 실험 API는 모델 검증 이후 통합한다. 계획했던 `/judgments` 계열 API는 아직 존재하지 않는다.
+- 저장형 `POST /utterances/{id}/judgment`와 `GET /utterances/{id}/judgments`를 별도 테이블로 구현했다. 임의 모델 선택은 노출하지 않고 D alias를 서버 설정으로 고정하며, `N5`/`N4` 수준만 요청할 수 있다. 라이브 스모크 이후에도 실제 STT shadow와 승격 승인 전까지 기능 플래그 기본값은 비활성이다.
 
 ### 측정 기준
 
@@ -561,4 +562,234 @@ venv/bin/python -m pip check
 - F 단독은 판단 115/120, 과교정 0/50, 재현율 46/50, 보류 19/20, 허용 교정문 43/50으로 더 높았지만 사전 규약의 주 판단기 선택 대상이 아니었으므로 사후 승격하지 않는다. 승격 비교에는 새 봉인 시험지가 필요하다.
 - D/F/게이트 모두 복합 오류 완전 교정은 0/10이다. 따라서 D는 운영 기본값이 아니라 `JUDGMENT_ENABLED=false` 기능 플래그와 실제 STT 50건 shadow 검증을 전제로 한 통합 후보로만 선택한다.
 - 원시 실행 JSONL은 Git에서 제외하고, 비교 JSON·Markdown과 원시·manifest·선택 감사 해시를 추적한다. `holdout_v0.3`은 소비 완료됐으며 모델 선택용으로 재실행하지 않는다.
-- 상세는 `training/judgment/V0.2_DF_HOLDOUT_V0.3_RESULT.md`와 `evaluation/judgment/holdout_v0.3.result.json`을 따른다. 다음은 결과 체크포인트 커밋 후 별도 판단 API의 기능 플래그 구현이다.
+- 상세는 `training/judgment/V0.2_DF_HOLDOUT_V0.3_RESULT.md`와 `evaluation/judgment/holdout_v0.3.result.json`을 따른다. 다음 단계에서 D 단독 판단 API를 기능 플래그 뒤에 구현했다.
+
+## 2026-10-01 D 단독 판단 API 기능 플래그 구현
+
+- 기존 `POST /utterances/{id}/analyze`와 `analyses` 테이블을 변경하지 않고 `POST /utterances/{id}/judgment`, `GET /utterances/{id}/judgments`, `judgment_results` 테이블을 추가했다.
+- `JUDGMENT_ENABLED=false`를 기본값으로 두고 holdout v0.3에서 선택한 D 어댑터 alias만 호출한다. D+F 게이트는 사전 추가 채택 기준을 실패했으므로 운영 경로에 넣지 않았다.
+- 모델은 `decision`, `corrected_text`, `error_types`, `reason_ko`만 생성하며 Unicode `edits`는 백엔드가 결정론적으로 재구성한다. 결과에는 모델·어댑터·선택 사유·계약 버전·지연시간을 기록하고 confidence 숫자는 사용하지 않는다.
+- 요청의 `learner_level`을 우선하고 없으면 연결 사용자 수준, 그것도 없으면 `N5`를 사용한다. 현재 허용 범위는 학습 범위인 `N5`, `N4`다.
+- 모델 연결 실패나 계약 위반은 HTTP 503으로 반환하고 `insufficient_evidence`로 위장하거나 DB에 저장하지 않는다.
+- 단위·라우트·DB·OpenAPI 테스트 11개와 전체 166개 회귀 테스트가 통과했다. 두 환경 `pip check`도 통과했다.
+
+## 2026-10-01 D 단독 라이브 Swagger 스모크
+
+- 실제 프로젝트 DB를 건드리지 않도록 `/tmp` SQLite에서 API를 8001로 실행하고, Qwen3-4B BF16과 D LoRA를 vLLM 0.28.0의 `judgment-v02d` alias로 1234에 올렸다.
+- `/health`, `/docs`, `/openapi.json`이 HTTP 200이었고 POST/GET 판단 경로가 OpenAPI에 노출됐다.
+- 정상 문장은 `acceptable`(884.569ms), 미완성 문장은 `insufficient_evidence`(866.341ms), 조사 오류는 `needs_correction`과 `を→に` edit(864.088ms)로 각각 HTTP 200 저장·조회됐다.
+- 없는 발화 조회는 404, 빈 발화 판단은 400, 기본 비활성 기능 플래그는 별도 8002 서버에서 503을 반환했다.
+- confidence는 응답에 없고 전략·모델·어댑터·선택 사유·계약 버전·수준·문맥·지연시간은 저장됐다.
+- 검증 후 8001·8002 API와 vLLM 서버를 종료했다. 이후 기존 분석을 대체하지 않는 실제 STT 50건 shadow를 실행했다.
+
+## 2026-10-01 실제 STT 50건 D 단독 shadow
+
+- 운영 SQLite를 읽기 전용으로 열고 최신 적격 일본어 발화 50건을 ID 내림차순으로 선택했다. 정확한 대화 문맥과 연결 수준을 복원할 수 없어 `context=null`, `learner_level=N5`로 실행했으며 입력은 모두 `stt_text`였다.
+- 성공 49건, 실패 1건으로 JSON/출력 계약 성공률은 98%다. 성공 출력 분포는 `acceptable` 35건, `insufficient_evidence` 9건, `needs_correction` 5건이다. 이는 정답 분포나 품질 지표가 아니다.
+- 성공 49건의 p50은 801.741ms, p95는 1237.647ms, 최대는 1427.521ms였다. D 단독 정책에 따라 E 호출과 fallback은 모두 0건이다.
+- 실패 1건은 모델이 `insufficient_evidence`를 선택하면서 원문의 일부를 삭제해 비교정 판단의 원문 보존 계약을 위반한 사례다. 서비스는 이를 정상 판단으로 저장하지 않고 실패 처리했다.
+- 운영 DB의 실행 전후 SHA-256은 `ef3b42b92516c5332f2ed1dcd63ffe1a9c2ff8a53650c24a32205a0161ff09c9`로 동일하고 `judgment_results`도 생성하지 않았다. 원문 포함 원시 파일은 Git에서 제외하고 집계·해시만 추적한다.
+- 사전 기준 99%에 미달했으므로 운영 기본값 승격을 보류한다. 공식 50건 결과를 맞추기 위한 재실행은 하지 않았다. 상세는 `training/judgment/JUDGMENT_D_SHADOW_V0.1_RESULT.md`를 따른다.
+
+## 2026-10-03 v0.2.1 원문 보존 프롬프트 실험·미채택
+
+- 기존 v0.2를 보존하고 비교정 판단에서 입력 `text`를 문자 단위로 복사하도록 강화한 `judgment-v0.2.1`을 별도 버전으로 추가했다. 자동 덮어쓰기나 파서 수리는 허용하지 않았다.
+- 같은 v0.2-D 어댑터·서버·72문항 개발셋에서 v0.2 대조군과 v0.2.1을 각각 실행했다. v0.2는 계약 71/72·판단 69/72·재현율 26/27·허용 교정 19/27, v0.2.1은 계약 69/72·판단 59/72·재현율 18/27·허용 교정 14/27이었다.
+- v0.2.1은 실제 shadow에서 발견한 비교정 원문 불일치를 제거하지 못했고 전반적인 판단·교정 성능도 후퇴해 미채택했다. 운영 서비스는 계속 v0.2를 사용하며 기능 플래그 기본 비활성을 유지한다.
+- 첫 vLLM 기동은 FlashInfer sampling JIT의 CUDA/CUB 호환 오류로 추론 전에 실패했다. 공식 환경 변수 `VLLM_USE_FLASHINFER_SAMPLER=0`으로 sampler만 비활성화하고 두 프롬프트를 동일 조건에서 비교했다.
+- 다음 보강은 실제 원문을 학습에 넣지 않고 동일 실패 구조의 합성 최소대립 예시를 추가하는 v0.2-G 데이터 실험이다. 상세는 `training/judgment/V0.2_1_PROMPT_HARDENING_RESULT.md`를 따른다.
+
+## 2026-10-03 v0.2-G 계약 보존 합성 보강·미채택
+
+- 실제 STT shadow 원문이나 출력은 사용하지 않고 v0.2-D 748문항에 결정론적 합성 108문항을 추가했다. 추가분은 정상 52, 보류 32, 교정 24이며 모두 `generated_validated`다.
+- 결합본은 856문항(train 675/dev 181)이다. 기존 평가·학습·RAG 정확 중복과 데이터셋 문자 3-gram Jaccard 0.85 이상 근접 중복은 0건이며 관측 최대값은 0.75다.
+- Qwen3-4B·seed 42·45-step으로 별도 G 어댑터를 학습했다. train loss 0.759328, 내부 dev loss 0.328817, 어댑터 SHA-256은 `c9d59a13ab1a909d87e2f59e20e7b0341865d2e46d179da1bb473be26d781e36`이다.
+- 같은 서버·프롬프트·생성 조건의 72문항 비교에서 D는 구조 72/72·판단 69/72·과교정 0/33·허용 교정 19/27, G는 구조 71/72·판단 67/72·과교정 1/33·허용 교정 17/27이었다.
+- G는 빈 입력 원문 보존 계약을 다시 위반했고 외국어 보류와 STT 표기 경계에서도 회귀했다. JSON/구조와 과교정 안전 기준을 모두 실패해 채택하지 않으며 새 holdout은 실행하지 않는다.
+- 단순 합성 템플릿 추가를 반복하지 않는다. 다음은 새 미사용 평가 cohort를 먼저 고정한 뒤 학습 샘플링/가중치 또는 결정론적 경계 처리 실험을 사전 설계하는 단계다. 상세는 `training/judgment/V0.2_G_TRAIN_AND_DEV72_RESULT.md`를 따른다.
+
+## 2026-10-04 holdout v0.4 봉인·v0.2-H 고정 노출 샘플링 미채택
+
+- 새 미사용 `holdout_v0.4` 120문항을 생성했다. 정상 50, 교정 50(복합 10), 보류 20이며 SHA-256은 `904ca090ccd0e209f95fa68a6a3e9fd762a0009c802f7eae7670838f9558221e`다.
+- 기존 평가·학습·RAG와 정규화 정확 중복 0건, 문자 3-gram Jaccard 0.85 이상 0건이며 관측 최대값은 0.75다. 상태는 `generated_validated`이고 사람·전문가 검수본이 아니다.
+- G와 같은 의미 소스를 사용하고 45-step의 720개 실제 노출만 고정한 H를 학습했다. 45/45 step, train loss 0.757448, 내부 dev loss 0.331039, 어댑터 SHA-256은 `9c97ad4ad0385156b7fcac03077d395c086112d7b5d94e26aaadfe5934000013`이다.
+- 같은 서버·프롬프트·생성 조건에서 D/G/H를 개발셋 72문항에 비교했다. H는 구조 71/72, 판단 68/72, 과교정 1/33, 보류 10/12, 허용 교정문 19/27, 복합 오류 0/4였다.
+- H는 사전 기준 중 구조, 과교정, 판단 정확도, 보류를 실패해 미채택했다. 빈 입력 `JG-049`에서 원문 대신 `い`를 생성했고, STT 표기 경계 `JG-068`을 과교정했다.
+- `holdout_v0.4`는 protocol을 만들지 않았고 모델 추론도 실행하지 않아 미사용 상태다. 다음은 빈 입력·비일본어·STT 표기 경계를 모델 밖의 결정론적 검증으로 분리하는 오프라인 설계다.
+- 상세는 `training/judgment/V0.2_H_TRAIN_AND_DEV72_RESULT.md`와 `evaluation/judgment/results/judgment-v02d-vs-v02g-vs-v02h-dev72-20261004.md`를 따른다.
+
+## 2026-10-04 결정론적 경계 게이트 v0.1 오프라인 replay
+
+- 빈 입력·공백·구두점·잡음만 있는 입력과 일본어 문자 증거가 없는 영어·한국어 입력을 모델 호출 없이 `insufficient_evidence`로 라우팅하는 독립 정책을 구현했다.
+- 한자만 있는 입력, 일본어·외국어 혼합, 내용이 있는 필러 발화는 모호성을 이유로 모델에 그대로 전달한다.
+- STT·전사 문맥의 `わ/は`, `お/を` 후보는 문법 교정과 분리된 `advisory_only`로 기록하며 오류 주체는 `unknown`으로 둔다. 후보와 정확히 같은 조사 교정만 분리할 수 있고 다른 수정은 덮어쓰지 않는다.
+- 기존 D/H 개발 run에 모델 재호출 없이 정책을 replay했다. D는 판단 69→70/72, 보류 11→12/12, 과교정 0/33을 유지했다. H는 구조 71→72/72, 판단 68→70/72, 보류 10→12/12로 개선됐지만 과교정 1/33은 남았다.
+- D/H 모두 빈 입력·잡음·비일본어 5건의 모델 호출을 피할 수 있었다. H의 `JG-068`은 모델 교정문이 안전 후보와 정확히 일치하지 않아 의도적으로 덮어쓰지 않았다.
+- 정책·replay 단위 테스트 8개가 통과했고 라우팅이 평가 ID·정답 라벨을 읽지 않는 것을 검증했다.
+- 운영 API·DB에는 연결하지 않았다. 다음은 실제 STT를 저장하거나 수정하지 않는 dry-run 집계이며 `holdout_v0.4`는 계속 모델 추론 0회로 유지한다.
+- 상세는 `training/judgment/DETERMINISTIC_BOUNDARY_GATE_V0.1_RESULT.md`를 따른다.
+
+## 2026-10-06 실제 저장 STT 경계 게이트 dry-run
+
+- 운영 SQLite의 적격 `language=ja` 발화 340건 전체를 읽기 전용으로 집계했다. 모델 호출, 행별 결과 파일, DB 쓰기는 수행하지 않았다.
+- 340건 모두 모델 경로를 유지했고 결정론적 bypass 0건, STT 표기 advisory 0건이었다. 현재 저장 표본에서는 정상 일본어를 규칙이 가로챈 징후가 없지만 호출 절감·품질 개선 효과도 관측되지 않았다.
+- DB SHA-256은 실행 전후 `ef3b42b92516c5332f2ed1dcd63ffe1a9c2ff8a53650c24a32205a0161ff09c9`로 동일하고 `judgment_results`는 0건을 유지했다.
+- 추적 결과에는 원문, 발화 ID, 사용자 식별자와 행별 출력이 없고 입력 집합 해시와 집계만 기록했다.
+- 골드 라벨과 음성 근거가 없어 문법 정확도·오탐률은 계산하지 않는다. 실익이 0건인 현재 분포에서는 운영 기능 플래그 통합 우선순위를 낮게 유지한다.
+- 당시 후속 후보는 adversarial 오탐 방지 테스트 확대였으나, 실제 340건에서 개입이 0건이어서 이후 운영 핵심 경로에서 후순위로 조정했다. `holdout_v0.4`는 계속 모델 추론 0회다.
+- 상세는 `training/judgment/DETERMINISTIC_BOUNDARY_GATE_V0.1_RESULT.md`와 `evaluation/judgment/boundary_dry_run_v0.1.result.json`을 따른다.
+
+## 2026-10-06 비중복 100건 계약 재시도 shadow 파일럿
+
+- 공개 API·DB 스키마를 바꾸지 않고 `acceptable` 또는 `insufficient_evidence`의 원문 보존 위반에만 1회 재시도하도록 판단 서비스 경계를 보강했다. 다른 계약 오류·전송 오류·타임아웃·빈 입력은 재시도하지 않으며 재실패는 503으로 차단한다.
+- 기존 공식 50건의 원시 snapshot SHA-256을 집계 파일과 대조한 뒤 동일 입력 지문을 제외하고 다음 실제 저장 STT 100건을 선택했다. 신규 입력 snapshot SHA-256은 `4ab2133b08bac958f537f44e07e04c582e102d3484f5ec99a5711731c189ddf3`이다.
+- 첫 시도와 최종 계약 성공은 모두 99/100이었다. 원문 보존 위반 1건에 재시도했지만 같은 오류로 실패해 회복은 0건이며, 정상 결과로 덮어쓰거나 저장하지 않았다.
+- 재시도율 1%, 성공 99건 p50 878.567ms·p95 1108.711ms·최대 1306.228ms다. DB SHA-256과 `judgment_results=0`은 실행 전후 동일하다.
+- 사전 기준은 충족해 v0.2-D를 제한적 staging/shadow 후보로 유지한다. 정답·오디오가 없어 언어 품질 승격 근거는 아니며 기능 플래그 기본 비활성, 운영 기본값과 학습자 노출 미승인을 유지한다.
+- `holdout_v0.4`는 120문항·SHA-256 `904ca090...`·모델 추론 0회 상태다. 다음 필수 단계는 라벨과 음성/STT 귀속을 분리한 최소 독립 품질 검수 표본 정의다. 상세는 `training/judgment/JUDGMENT_D_SHADOW_V0.2_RESULT.md`를 따른다.
+
+## 2026-10-06 실제 STT 30건 독립 품질 검수 표본 봉인
+
+- 기존 shadow v0.1 50건과 v0.2 100건의 인증된 입력 snapshot을 제외한 실제 저장 STT 190건에서 30건을 고정 SHA-256 순위로 층화 추출했다. 문장 내용·정답·모델 출력은 선택에 사용하지 않았다.
+- 5개 STT 모델을 모두 포함하며 분포는 `faster-whisper-small` 3, `faster-whisper-tiny` 2, `faster-whisper-tiny-tuned` 3, `whisper-tiny-lowskilled` 10, `whisper-tiny-tts` 12다.
+- 검수 JSONL에는 문장과 빈 라벨만 두고 발화 ID·STT 모델은 별도 Git 제외 매핑으로 분리했다. 개인 검수자 식별자 필드는 없으며 모델 추론은 0회다.
+- DB의 음성 경로 109건은 현재 서버에서 실제 파일 0건이므로 발음·STT 전사 귀속은 전 문항 `not_assessable_without_audio`로 잠갔다.
+- manifest SHA-256은 `dd9e28dadbe53ac8207c72acd51b77a525ce6e35ee85aef3927c75933f4d69ac`이다. 검수 파일 SHA-256은 `58e8b596ac5eb19410d744dd3e5fe898604d790985658439557e1329c589d7b9`, 입력 전용 SHA-256은 `8182c6e7b9fd8df3e849bc36c4019325bfffc56684f68ee3851884c03af43d2f`다.
+- 현재 30건은 모두 `pending`이며 완료 검증은 `QR-001 has an invalid grammar_decision`으로 의도대로 차단된다. 모든 라벨을 봉인하기 전에는 이 표본에 모델을 실행하지 않는다.
+- 다음 작업은 `evaluation/judgment/QUALITY_REVIEW_V0.1_GUIDE.md`에 따라 익명 텍스트 검수를 완료하는 것이다.
+
+
+## 2026-10-06 제한적 staging 자동 준비
+
+- 사용자 결정에 따라 음성·발음 평가와 추가 사람 검수는 후순위로 보류했다. 30건 품질 표본은 봉인·모델 추론 0회 상태를 유지하며 학습 데이터나 모델 선택에 사용하지 않는다.
+- 추가 학습은 현재 필수가 아니다. v0.2-D가 holdout v0.3 안전 기준과 비중복 100건 shadow 계약 기준을 통과했으므로 먼저 기능 플래그가 꺼진 제한적 staging의 실행 안전성을 확인한다.
+- `scripts/check_judgment_staging.py`를 추가해 고정 D alias·어댑터·로컬 endpoint·양수 timeout, SQLite 읽기 전용 snapshot, 모델/API health, OpenAPI 판단 경로를 fail-closed 방식으로 확인한다. 점검기는 DB를 변경하지 않는다.
+- `docs/JUDGMENT_STAGING_RUNBOOK.md`에 원본 DB 대신 `/tmp` 복제 DB를 사용하는 vLLM·FastAPI 기동, Swagger 확인, 원본 SHA-256 재확인, 종료·rollback 절차를 고정했다.
+- 실제 live 사전점검에서 모델·API health, `judgment-v02d` alias와 두 OpenAPI 경로가 모두 통과했다. 임시 DB 발화 1건의 POST/GET은 HTTP 200·`acceptable`·`d_only`였고 공개 응답에 confidence와 내부 재시도 정보가 없었다.
+- 판단 결과 1건은 임시 DB에만 저장됐다. 원본 DB는 SHA-256 `ef3b42b92516c5332f2ed1dcd63ffe1a9c2ff8a53650c24a32205a0161ff09c9`, `judgment_results=0`을 유지했고 8001·1234 서버는 종료했다.
+- 전체 203개 회귀 테스트와 프로젝트·Qwen3 PEFT 두 환경의 `pip check`가 통과했다.
+- 운영 기본값 `JUDGMENT_ENABLED=false`, 학습자 노출 미승인, `holdout_v0.4` 추론 0회는 그대로 유지한다.
+
+
+## 2026-10-06 staging 상태 집계 추가
+
+- `GET /health/judgment`를 추가해 프로세스 시작 이후의 판단 요청, 모델 호출, 성공·실패, 사전 거부, 결정 분포, 재시도·회복과 최근 1,000개 유효 지연시간의 p50/p95/max를 조회할 수 있게 했다.
+- 상태는 프로세스 로컬 메모리에만 보관하며 재시작 시 초기화된다. 원문, 발화 ID, 문맥, 교정문, 근거, 원시 모델 응답과 원시 오류 메시지는 저장하거나 반환하지 않는다.
+- 기능 플래그가 꺼져 있으면 `disabled`, 마지막 모델·저장 실패가 있으면 `degraded`, 그 외 활성 상태는 `ready`로 표시한다. 사전 404·400·비활성 503은 모델 실패와 분리한다.
+- 원문 보존 재시도 성공과 재실패, 계약·timeout·설정·연결·DB 저장 실패를 식별자 없는 범주로 집계한다. 다중 worker 통합 메트릭이나 영구 감사 로그를 대체하지 않는다.
+- OpenAPI와 staging 사전점검에 상태 경로를 포함했다. 모델 서버 없이 임시 DB API를 실행한 HTTP 스모크에서 200, `disabled`, 요청 0건, 개인정보 필드 없음과 OpenAPI 노출을 확인한 뒤 임시 파일과 서버를 제거했다.
+- 전체 215개 회귀 테스트와 프로젝트·Qwen3 PEFT 환경의 `pip check`, `git diff --check`가 통과했다. 운영 기본값 `JUDGMENT_ENABLED=false`와 학습자 노출 미승인은 유지한다.
+
+
+## 2026-10-06 커밋 보류 상태 체크포인트 감사
+
+- 사용자 결정에 따라 현재 변경사항은 커밋·푸시하지 않고 이후 승인된 학습 결과와 함께 묶기로 했다.
+- `scripts/audit_judgment_checkpoint.py`를 추가해 작업 트리 변경 경로를 내용 비노출 방식으로 검사한다. `evaluation/judgment/runs/`, DB·SQLite, 모델 가중치, 오디오, `.env`, 가상환경과 10MiB 초과 변경 파일이 커밋 후보에 나타나면 실패한다.
+- 현재 변경 경로는 76개이며 금지 경로 0개, 10MiB 초과 0개다. shadow 원시 출력과 비공개 품질 검수 파일 4개는 모두 Git 제외 상태다.
+- 원본 `stt_data.db` SHA-256 `ef3b42...`와 미사용 `holdout_v0.4` SHA-256 `904ca090...`을 보호 해시로 확인했다. 감사 도구는 파일 내용을 결과로 출력하거나 작업 트리를 변경하지 않는다.
+- 감사 테스트 3개를 추가해 현재 전체 회귀 테스트 기준은 215개다. 최종 커밋 직전에 같은 감사·전체 테스트·두 환경 `pip check`를 다시 실행한다.
+
+
+## 2026-10-06 staging 동시성·장애 주입
+
+- 실제 발화·DB·네트워크·모델을 사용하지 않고 프로세스 로컬 모니터에 합성 1,000이벤트를 16 worker로 기록했다. 요청 1,000·모델 호출 900·성공 700·실패 200·사전 거부 100·재시도 200·회복 100이 모두 기대값과 일치했다.
+- API 경계에 timeout과 원문 보존 재시도 재실패를 주입했을 때 HTTP 503, 판단 저장 0건, 각각 `timeout`과 `preservation_retry_failed` 익명 범주를 확인했다. 원시 오류 문자열은 상태에 노출되지 않았다.
+- 유효한 모델 결과 뒤 DB 저장 실패를 주입했을 때 성공은 증가하지 않았고 `persistence_failure=1`, `degraded`로 기록됐다.
+- 전용 테스트 4개를 추가해 전체 회귀 기준은 215개다. 이 결과는 모니터 thread safety와 장애 처리 경계 검증이며 실제 HTTP/vLLM 처리량·GPU 포화·문법 품질 벤치마크가 아니다.
+- 실제 HTTP 동시 부하는 운영 활성화 전에 별도 임시 DB·합성 입력 환경에서 수행한다. 기능 플래그 기본 비활성, 사람 검수 보류, `holdout_v0.4` 추론 0회를 유지한다. 상세는 `training/judgment/STAGING_RESILIENCE_RESULT.md`를 따른다.
+
+
+## 2026-10-06 staging FastAPI–vLLM 제한 실부하
+
+- 실제 Qwen3-4B BF16과 v0.2-D LoRA를 `--generation-config vllm`으로 고정하고, 새 `/tmp` SQLite와 합성 일본어 발화 6개를 사용하는 FastAPI 1 worker를 실행했다.
+- 2건 워밍업 뒤 동시성 1/2/4로 26건을 측정했다. 전부 HTTP 200과 `judgment-v0.2` 계약을 통과했으며 실패·재시도는 0건이었다.
+- 동시성별 p95/처리량은 1에서 849.186ms·1.303 req/s, 2에서 840.562ms·2.582 req/s, 4에서 867.775ms·4.786 req/s다.
+- 워밍업 포함 프로세스 집계 28건의 내부 p95는 845.624ms이고 임시 DB에 28건만 저장됐다. 원본 DB SHA-256 `ef3b42...`와 `judgment_results=0`은 유지됐다.
+- 8001·1234 서버는 검증 후 종료했다. 이는 최대 용량·장시간 soak·문법 품질 시험이 아니며 기능 플래그 기본 비활성, 학습자 노출 미승인, 사람·음성 검수 보류와 `holdout_v0.4` 추론 0회를 유지한다.
+- 전용 실행기 테스트 2개를 추가했다. 상세는 `training/judgment/STAGING_HTTP_LOAD_RESULT.md`를 따른다.
+
+## 2026-10-06 staging backpressure·readiness·종료 drain
+
+- 판단 경로에 프로세스별 동시 실행 상한을 추가했다. 기본 4, 슬롯 대기 기본 0초이며 포화 시 모델 호출·DB 저장 전에 HTTP 429와 `Retry-After: 1`로 차단한다.
+- `GET /ready/judgment`는 기능 플래그, 설정, 신규 수락 상태, 모델 health와 `judgment-v02d` alias를 확인한다. 비활성·설정 오류·종료 중·모델 장애·alias 누락은 503으로 fail-closed 처리한다.
+- 종료 시 신규 요청을 막고 진행 중 모델 호출과 DB 저장이 끝날 때까지 최대 30초 drain한다. 활성 요청 고정 테스트에서 종료 중 신규 예약 거부와 해제 전후 idle 상태를 검증했다.
+- 실제 상한 2, 동시성 8·16요청에서 2건만 HTTP 200·계약 성공했고 14건은 HTTP 429였다. timeout·5xx·계약 실패는 0건이며 임시 DB에는 성공 요청만 저장됐다.
+- 원본 DB와 `holdout_v0.4` 보호 해시는 유지했고 API·vLLM은 종료했다. 상세는 `training/judgment/STAGING_RUNTIME_SAFETY_RESULT.md`를 따른다.
+- 전체 회귀 테스트는 222개로 증가했고 모두 통과했다.
+
+## 2026-10-06 staging 단기 soak·readiness 자동 복구
+
+- 격리 SQLite·합성 입력 6개와 동시 판단 상한 2로 1건 워밍업 후 150건을 연속 실행했다. 150/150건이 HTTP 200·계약을 통과했고 실패·timeout·재시도는 0건이었다.
+- 57.519초 동안 처리량 2.608 req/s, HTTP p50 755.203ms, p95 850.022ms, 최대 895.077ms를 기록했다.
+- 같은 API 프로세스에서 vLLM만 중단하자 readiness가 `ready` 200에서 `model_unavailable` 503으로 전환됐다. 동일 설정으로 vLLM을 재기동하자 API 재시작 없이 `ready` 200으로 복구됐고 실제 판단 1건도 790.191ms에 성공했다.
+- 원본 DB와 `holdout_v0.4` 해시·상태는 불변이며 임시 DB와 합성 입력은 삭제했다. 기능 플래그 기본 비활성, 학습자 노출 미승인과 사람·음성 검수 보류를 유지한다.
+- 상세 수치와 한계는 `training/judgment/STAGING_SOAK_RECOVERY_RESULT.md`를 따른다.
+
+## 2026-10-08 staging systemd 배포 템플릿
+
+- sudo 권한 없이 vLLM과 FastAPI를 분리한 사용자 systemd unit, 비활성 환경 예시와 설치·중단 runbook을 추가하고 실제 로그인 세션에서 설치·수동 기동했다. root system unit은 미래 관리자 배포용 템플릿으로만 보존한다.
+- 두 서비스는 loopback에만 bind하고 API를 Uvicorn worker 1개로 고정했다. 프로세스 로컬 동시성 상한은 2이며 다중 worker·replica 확대 전 외부 전역 제한이 필요하다.
+- API는 격리 DB 디렉터리만 쓰며 시작 전 읽기 전용 사전점검을 통과해야 한다. 저장소 환경 예시는 `JUDGMENT_ENABLED=false`라 명시적 staging 활성화 전에는 fail-closed다.
+- 모델 장애 중 readiness 503과 자동 회복을 유지하도록 API는 모델 서비스에 강제 종료 종속되지 않는다. `systemd-analyze verify`와 템플릿 계약 테스트를 통과했다.
+- live 사전점검과 모델 장애 readiness 200→503→200 자동 복구를 확인했다. 합성 발화 1건은 HTTP 200, 840.146ms, 최소 교정 1개로 저장·조회됐으며 실패·재시도는 0이었다. 종료 후 두 서비스 inactive, private 환경 false, 격리 DB 해시와 판단 행 수 0, 포트·GPU 무사용을 확인했다.
+- 사용자 manager가 `Linger=no`이므로 로그아웃·재부팅 상시 운영 근거는 아니며 로그인 세션 staging에 한정한다.
+- 무권한 수명주기 관리기를 추가해 private 환경의 symlink·소유권·권한·중복 키를 검사하고, 모델→API 시작 및 전체 live 사전점검을 원자적 활성화와 묶었다. 실패 시 두 서비스를 중단하고 false로 rollback하며 stop은 API→모델 순서와 false 복원을 보장한다.
+- 관리기 실기동 start/status/stop을 통과했다. 검증 중 판단 요청은 0건이었고 종료 후 DB 해시·판단 결과 0건, 포트·GPU 정리 상태를 유지했다.
+- 기능 플래그 기본 비활성, 학습자 노출 미승인, 사람·음성 검수 보류, `holdout_v0.4` 추론 0회 상태는 유지한다.
+## 2026-10-08 기존 `/analyze` 판단 shadow 통합
+
+- 별도 `JUDGMENT_SHADOW_ENABLED=false` 플래그를 추가하고, 기존 분석 응답·분석 저장이 완료된 뒤에만 background 판단을 예약한다. 두 판단 플래그가 모두 true일 때만 동작한다.
+- shadow 판단은 `judgment_results`에 저장하지 않으며 성공·실패·결정·재시도·지연시간만 내용 없는 별도 집계에 기록한다. 모델·계약·과부하 실패는 기존 `/analyze` 응답을 변경하지 않는다.
+- 모니터 계약은 shadow 하위 집계를 포함하는 `judgment-monitor-v0.2`로 올렸다. 사용자 서비스 관리기의 `--shadow`만 명시적 활성화를 허용하고 stop·시작 실패 시 두 플래그를 false로 복원한다.
+- 격리 DB 합성 인사로 live 검증한 결과 `/analyze`는 HTTP 200·34.087ms에 기존 응답만 반환했다. background 판단은 742.162ms에 `acceptable`로 성공했고 `judgment_results=0`, 실패·재시도 0이었다.
+- 종료 후 서비스 inactive, 두 플래그 false, 격리 DB 원복·보호 해시 일치, 포트·GPU 무사용을 확인했다. 이는 배선 검증이며 일반 문장 품질 근거가 아니다.
+- 학습자 노출 미승인, 사람·음성 검수 보류와 `holdout_v0.4` 추론 0회를 유지한다.
+
+## 2026-10-08 `/analyze` shadow OFF/ON 제한 부하
+
+- 공개 `AnalysisResponse`의 JSON 문자열 필드에 맞게 부하 실행기 계약 검증을 수정했고, 시작 도중 `KeyboardInterrupt`가 발생해도 서비스와 두 기능 플래그를 false로 되돌리도록 관리기 rollback을 보강했다.
+- 동일 합성 인사 3건과 동일 입력 계획으로 shadow OFF/ON을 각각 26회 실행했다. 양쪽 모두 `/analyze` HTTP 200·기존 계약 26/26, `analyses` 26행 증가, `judgment_results` 증가 0행이었다.
+- shadow ON은 26건을 모두 예약했지만 동시 실행 상한 2·무대기 정책으로 모델 호출 성공 2건, `overloaded` 24건을 기록했다. 기존 응답은 모두 성공해 격리는 확인됐지만 대표성 있는 shadow 수집에는 부적합하다.
+- 동시성 4의 `/analyze` p95는 OFF 55.594ms, ON 75.651ms로 작은 표본에서 36.08% 증가했다. 성능 승인 근거로 사용하지 않는다.
+- 종료 후 사용자 서비스 inactive, 두 플래그 false, 원본·격리 DB SHA-256 `ef3b42...` 일치와 `judgment_results=0`을 확인했다. `holdout_v0.4`는 추론 0회다.
+- 다음은 모델 학습이나 사람 검수가 아니라, 제한 길이·만료·단일 소비·종료 drain·익명 drop 집계를 갖는 별도 shadow 큐/worker 설계다. 구현 전에는 shadow를 활성화하지 않는다. 상세는 `training/judgment/STAGING_ANALYZE_SHADOW_LOAD_RESULT.md`를 따른다.
+- 전체 회귀 테스트 242/242, 두 가상환경 `pip check`, 체크포인트 감사와 `git diff --check`가 통과했다.
+
+## 2026-10-08 제한 용량 `/analyze` shadow 큐
+
+- FastAPI background task의 즉시 모델 경쟁을 최대 64건·TTL 30초·단일 consumer의 프로세스 로컬 큐로 교체했다. `/analyze`는 응답 이후 enqueue만 수행하며 shadow 결과는 계속 저장하지 않는다.
+- 큐 포화·만료·worker 미가동·종료 유예 초과를 내용 없는 범주로 집계하고, shutdown grace 안에서 drain한 뒤 남은 항목만 폐기한다. 모니터 하위 계약은 `judgment-shadow-monitor-v0.2`로 올렸다.
+- 동일 합성 입력 OFF/ON 26건에서 양쪽 `/analyze` HTTP·계약 26/26, `analyses` 26행 증가, `judgment_results` 증가 0행을 확인했다. ON은 예약·enqueue·모델 성공 26/26, 실패·drop·만료 0건이었다.
+- 모델 p95는 653.229ms지만 단일 worker의 큐 대기 p95는 14877.508ms였다. 응답 비간섭과 소규모 burst 수집은 통과했으나 결과 신선도와 실제 입력률 안정성은 별도 검증이 필요하다.
+- 큐 포화, TTL 만료, 정상 drain과 개인정보 비노출 단위 테스트를 추가해 전체 회귀 테스트 248/248이 통과했다.
+- 종료 후 서비스 inactive, 두 기능 플래그 false, 원본·격리 DB 해시 일치와 판단 저장 0건을 확인했다. `holdout_v0.4`는 추론 0회다.
+- 다음은 모델 재학습이 아니라 합성 입력률별 rate probe다. 상세는 `training/judgment/STAGING_ANALYZE_SHADOW_QUEUE_RESULT.md`를 따른다.
+
+## 2026-10-08 `/analyze` shadow 입력률별 rate probe
+
+- 요청 내용을 기록하지 않는 rate probe 실행기를 추가하고 0.5·1·2·10 req/s의 도착률을 고정해 기본 큐 64건·TTL 30초를 실측했다.
+- 초기 표시 계산 오류와 누적 모니터 오염을 발견해 해당 결과를 폐기하고, 도착 시각 간격 계산으로 수정한 뒤 API 프로세스·DB를 초기화해 최종 실행을 확정했다.
+- 0.5 req/s 4건과 1 req/s 6건은 전송 종료 시 큐 0·drop 0이었다. 2 req/s 10건은 종료 시 큐 2였지만 모두 drain되어 drop 0이었다.
+- 10 req/s 80건은 기존 `/analyze` 80/80을 유지하면서 큐 64까지 상승했고 모델 성공 61, `queue_full` 3, TTL 만료 16으로 bounded drop됐다. 모든 구간의 `judgment_results` 증가는 0이었다.
+- 단기 기준 1 req/s는 안정, 2 req/s는 backlog 시작 경계로 본다. 지속 가능 처리율이나 실제 트래픽 대표성은 장기 soak와 실제 분포 없이 확정하지 않는다.
+- rate probe 테스트 3개를 추가해 전체 회귀 테스트 251/251이 통과했다. 서비스·플래그·격리 DB는 초기 상태로 복원했고 `holdout_v0.4` 추론 0회를 유지한다.
+- 다음은 큐 확장이 아니라 약 1 req/s의 내용·사용자 비의존 admission/token-bucket과 `sampled_out` 익명 집계다. 상세는 `training/judgment/STAGING_ANALYZE_SHADOW_RATE_RESULT.md`를 따른다.
+
+
+## 2026-10-08 `/analyze` shadow admission/token-bucket
+
+- 큐 앞에 요청 내용·사용자 ID와 무관한 프로세스 로컬 token bucket을 추가했다. 기본 1 req/s·burst 1이며 초과 입력은 실패/drop과 분리된 `sampled_out`으로만 익명 집계한다.
+- 정확히 1 req/s의 background scheduling 오차를 흡수하는 50ms 경계 지터 허용을 명시했다. 모니터 계약은 `judgment-shadow-monitor-v0.3`이며 admission 설정·남은 token·sampled out을 내용 없이 제공한다.
+- 동일 0.5·1·2·10 req/s, 총 100건 실측에서 `/analyze` HTTP·기존 계약 100/100, 판단 저장 0건이었다. 0.5·1 req/s는 10/10 전량 처리했고 2 req/s는 5/10, 10 req/s는 8/80만 모델에 전달했다.
+- 총 shadow 성공 23건, sampled out 77건, failure/drop/queue full/expired 0건이었다. 누적 queue wait p95는 0.609ms로 admission 전 10 req/s의 29.1초에서 크게 줄었다.
+- 격리 DB는 SHA-256 `ef3b42b92516c5332f2ed1dcd63ffe1a9c2ff8a53650c24a32205a0161ff09c9`, `judgment_results=0`으로 복원했고 서비스·플래그·포트·GPU도 초기 상태다. `holdout_v0.4` 추론 0회와 기능 플래그 기본 비활성을 유지한다.
+- 실측 전 253개, 최종 문서 반영 후 254개 회귀 테스트가 모두 통과했다. 두 가상환경 `pip check`, 변경 109경로 체크포인트 감사, `git diff --check`도 통과했다. 상세는 `training/judgment/STAGING_ANALYZE_SHADOW_ADMISSION_RESULT.md`를 따른다.
+
+## 2026-10-08 v0.2-I D+F 통제 학습·미채택
+
+- 새 정답 없이 v0.2-D 748문항에 F 보강분 120문항만 결합했다. 결합 868문항, train 고유 684·dev 184이며 D 안전 앵커 36개를 반복해 실제 train 노출을 720개로 고정했다.
+- Qwen3-4B, seed 42, 45-step, LoRA r16/alpha32/dropout0.05로 학습했다. train loss 0.743451, eval loss 0.327965, 학습 시간 299.232초이며 adapter SHA-256은 `936721f401c9adc6ac6b730a8cac5ad33a96956fc4fec082fe1d5ff84efd0ed5`다.
+- 동일 서버·프롬프트의 72문항 비교에서 D는 구조 72/72·과교정 0/33·판단 69/72·보류 11/12·허용 교정 19/27이었다. I는 구조 71/72·과교정 1/33·판단 67/72·보류 9/12·허용 교정 20/27이었다.
+- I는 복합 오류를 0/4에서 1/4로 개선했지만 사전 집중 대상 JG-040·046·048 중 완전 회복은 JG-048 한 건뿐이었다. 구조·과교정·판단·보류·집중 회복 기준을 실패해 미채택했다.
+- 운영 후보는 v0.2-D로 유지한다. 원시 실행과 가중치는 Git에서 제외하고 해시만 기록했으며 `holdout_v0.4`는 모델 추론 0회를 유지한다. 상세는 `training/judgment/V0.2_I_TRAIN_AND_DEV72_RESULT.md`를 따른다.
+- 전체 회귀 테스트 256/256과 프로젝트·실제 학습 환경의 `pip check`가 통과했다.

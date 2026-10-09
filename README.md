@@ -6,7 +6,7 @@
 
 ## 현재 개발 상태와 문서 안내
 
-기준일은 2026-09-30입니다. 기존 API 오류 수정과 Python 3.12.3 환경 재구성, 판단모델 데이터·실행기·채점기 및 D/E/F LoRA 실험을 완료했습니다. 사전 봉인한 `holdout_v0.3` 120문항을 D와 F에서 각각 정확히 한 번 실행한 결과, D는 구조 120/120·과교정 0/50·정밀도 97.73%·재현율 86%로 안전 기준을 모두 통과했습니다. D+F 게이트는 교정문 증가 0건과 D 대비 p95 2.06배로 추가 채택 기준을 실패했습니다. D 단독을 기능 플래그·shadow 통합 후보로 선택하되 실제 STT 파일럿 전에는 운영 기본값으로 승격하지 않습니다.
+기준일은 2026-10-08입니다. v0.2-D는 봉인된 `holdout_v0.3` 안전 기준을 통과했고, 기존 50건과 겹치지 않는 실제 저장 STT 100건 shadow에서도 최종 출력 계약 99/100, 재시도율 1%, 성공 99건 p95 1108.711ms로 제한적 staging/shadow 기준을 통과했습니다. 원문 보존 위반 1건은 1회 재시도 후에도 실패해 503 차단 대상으로 남았습니다. sudo 없는 사용자 systemd, 최대 64건·TTL 30초의 단일 consumer 큐와 1 req/s·burst 1의 비식별 admission을 구현했습니다. 합성 rate probe 100건에서 기존 `/analyze` 응답은 100/100 성공했고, shadow 성공 23건·`sampled_out` 77건·failure/drop 0건을 확인했습니다. 기능 플래그 기본 비활성, 운영 기본값·학습자 노출 미승인과 새 `holdout_v0.4` 모델 추론 0회를 유지합니다. 후속 v0.2-I 통제 학습은 교정문을 1건 개선했지만 구조·과교정·보류가 회귀해 미채택했습니다.
 
 현재 선택은 다음과 같습니다.
 
@@ -15,9 +15,9 @@
 - 고용량 정확도 상한 기준선: `Qwen/Qwen3-14B`
 - 운영 통합 후보: `Qwen3-4B + judgment-v0.2-D LoRA` 단독
 - 운영 기본값 승인 모델: 없음
-- 현재 단계: `holdout_v0.3` 소비 완료, D 단독의 기능 플래그·shadow API 통합 준비
+- 현재 단계: `/analyze` shadow 앞의 비식별 token-bucket admission 완료. 1 req/s 이하 전량 처리, 2·10 req/s 초과분은 `sampled_out`, queue failure/drop 0을 확인했다. 기능 플래그 기본 비활성 및 사람 검수·음성 평가 후순위는 유지
 
-현재 운영 `analyzer`는 기존 이진 분석 계약을 사용합니다. 평가에서 사용한 3단계 판단 계약과 선택 모델은 아직 Swagger 또는 운영 API에 통합하지 않았습니다.
+기존 `POST /utterances/{id}/analyze`의 이진 분석 계약은 그대로 유지합니다. 별도 `POST /utterances/{id}/judgment`는 3단계 판단 계약을 사용하며 `JUDGMENT_ENABLED=false`가 기본값입니다. 모델 서버가 없거나 출력 계약을 위반하면 판단 보류로 위장하지 않고 HTTP 503을 반환합니다.
 
 ### 작업 단계별 기준 문서
 
@@ -46,6 +46,26 @@
 | D 판단+F 교정 후보 게이트 | [`training/judgment/V0.2_DF_CANDIDATE_GATE_RESULT.md`](training/judgment/V0.2_DF_CANDIDATE_GATE_RESULT.md) | D 판단 잠금, 개발셋 교정문 +2와 조건부 지연시간 검증 |
 | holdout v0.3 실행 규약 | [`evaluation/judgment/holdout_v0.3.protocol.json`](evaluation/judgment/holdout_v0.3.protocol.json) | D/F 데이터·가중치·프롬프트·선택기·임계값과 단일 실행 정책 봉인 |
 | 소비된 holdout v0.3 최종 결과 | [`training/judgment/V0.2_DF_HOLDOUT_V0.3_RESULT.md`](training/judgment/V0.2_DF_HOLDOUT_V0.3_RESULT.md) | D 안전 기준 통과, D+F 게이트 탈락, D 단독 shadow 통합 결정 |
+| 실제 STT 50건 shadow 결과 | [`training/judgment/JUDGMENT_D_SHADOW_V0.1_RESULT.md`](training/judgment/JUDGMENT_D_SHADOW_V0.1_RESULT.md) | 49/50 계약 성공·실패 원인·지연시간·운영 승격 보류 근거 |
+| 비중복 실제 STT 100건 shadow 파일럿 | [`training/judgment/JUDGMENT_D_SHADOW_V0.2_RESULT.md`](training/judgment/JUDGMENT_D_SHADOW_V0.2_RESULT.md) | 원문 보존 위반 1회 재시도, 99/100 계약 성공·DB 무변경·제한적 staging 판단 |
+| 실제 STT 30건 독립 품질 검수 | [`evaluation/judgment/QUALITY_REVIEW_V0.1_GUIDE.md`](evaluation/judgment/QUALITY_REVIEW_V0.1_GUIDE.md) | 기존 150건 제외·예측 비노출 표본, 익명 라벨 작성법·오디오 귀속 금지·완료 검사 |
+| 판단모델 staging 실행·중단 절차 | [`docs/JUDGMENT_STAGING_RUNBOOK.md`](docs/JUDGMENT_STAGING_RUNBOOK.md) | 임시 DB, vLLM·API 기동, 읽기 전용 사전점검, Swagger 확인과 rollback |
+| 향후 커밋 전 체크포인트 감사 | [`scripts/audit_judgment_checkpoint.py`](scripts/audit_judgment_checkpoint.py) | 원시 실행·DB·가중치·오디오·대용량 파일 차단과 보호 해시·Git 제외 확인 |
+| staging 동시성·장애 주입 결과 | [`training/judgment/STAGING_RESILIENCE_RESULT.md`](training/judgment/STAGING_RESILIENCE_RESULT.md) | 합성 1,000이벤트 집계, timeout·재시도 재실패·DB 실패의 차단과 익명 집계 |
+| staging FastAPI–vLLM 실부하 결과 | [`training/judgment/STAGING_HTTP_LOAD_RESULT.md`](training/judgment/STAGING_HTTP_LOAD_RESULT.md) | 격리 DB·합성 입력 26건, 동시성 1/2/4의 HTTP 계약·지연시간·처리량 |
+| staging backpressure·readiness 결과 | [`training/judgment/STAGING_RUNTIME_SAFETY_RESULT.md`](training/judgment/STAGING_RUNTIME_SAFETY_RESULT.md) | 동시 실행 상한, 429 fail-fast, 모델 alias readiness와 종료 drain 검증 |
+| staging 단기 soak·복구 결과 | [`training/judgment/STAGING_SOAK_RECOVERY_RESULT.md`](training/judgment/STAGING_SOAK_RECOVERY_RESULT.md) | 동시성 2·150건 지속 부하와 readiness 200→503→200 자동 복구 |
+| staging systemd 배포 템플릿 | [`training/judgment/STAGING_DEPLOYMENT_TEMPLATE_RESULT.md`](training/judgment/STAGING_DEPLOYMENT_TEMPLATE_RESULT.md) | sudo 없는 사용자 서비스의 설치·fail-closed 관리·readiness 복구·합성 판단과 정리 결과 |
+| 기존 분석 경로 shadow 통합 | [`training/judgment/STAGING_ANALYZE_SHADOW_RESULT.md`](training/judgment/STAGING_ANALYZE_SHADOW_RESULT.md) | `/analyze` 응답 비간섭·판단 무저장 background 실행과 익명 집계 검증 |
+| `/analyze` shadow OFF/ON 제한 부하 | [`training/judgment/STAGING_ANALYZE_SHADOW_LOAD_RESULT.md`](training/judgment/STAGING_ANALYZE_SHADOW_LOAD_RESULT.md) | 기존 응답 26/26 격리 통과, shadow 24/26 과부하 차단과 별도 제한 큐 필요성 |
+| 제한 용량 shadow 큐 실기동 | [`training/judgment/STAGING_ANALYZE_SHADOW_QUEUE_RESULT.md`](training/judgment/STAGING_ANALYZE_SHADOW_QUEUE_RESULT.md) | 단일 worker·64건·TTL 30초, 동일 burst 처리 26/26·drop 0·큐 대기 p95 14.88초 |
+| shadow 입력률별 rate probe | [`training/judgment/STAGING_ANALYZE_SHADOW_RATE_RESULT.md`](training/judgment/STAGING_ANALYZE_SHADOW_RATE_RESULT.md) | admission 전 10 req/s에서 queue full·TTL bounded drop과 응답 100/100 보호 |
+| shadow admission 결과 | [`training/judgment/STAGING_ANALYZE_SHADOW_ADMISSION_RESULT.md`](training/judgment/STAGING_ANALYZE_SHADOW_ADMISSION_RESULT.md) | 1 req/s token bucket, 100/100 응답 보호, shadow 23건·sampled out 77건·failure/drop 0 |
+| v0.2.1 원문 보존 프롬프트 실험 | [`training/judgment/V0.2_1_PROMPT_HARDENING_RESULT.md`](training/judgment/V0.2_1_PROMPT_HARDENING_RESULT.md) | 동일 서버 v0.2 대조, 구조·판단·재현율 후퇴와 미채택 근거 |
+| v0.2-G 합성 계약 보강 실험 | [`training/judgment/V0.2_G_TRAIN_AND_DEV72_RESULT.md`](training/judgment/V0.2_G_TRAIN_AND_DEV72_RESULT.md) | 운영 원문 미사용 108문항, 45-step 학습과 D/G 개발셋 비교·미채택 근거 |
+| v0.2-H 고정 노출 샘플링 실험 | [`training/judgment/V0.2_H_TRAIN_AND_DEV72_RESULT.md`](training/judgment/V0.2_H_TRAIN_AND_DEV72_RESULT.md) | 같은 G 의미 소스의 720개 노출 고정, D/G/H 비교와 미채택·v0.4 미사용 근거 |
+| v0.2-I D+F 통제 학습 실험 | [`training/judgment/V0.2_I_TRAIN_AND_DEV72_RESULT.md`](training/judgment/V0.2_I_TRAIN_AND_DEV72_RESULT.md) | D에 F 보강분만 결합한 45-step 학습, 교정 소폭 개선과 안전성 회귀·미채택 근거 |
+| 결정론적 경계 게이트 v0.1 | [`training/judgment/DETERMINISTIC_BOUNDARY_GATE_V0.1_RESULT.md`](training/judgment/DETERMINISTIC_BOUNDARY_GATE_V0.1_RESULT.md) | 빈 입력·비일본어 사전 라우팅과 STT advisory 분리, D/H replay·운영 미통합 근거 |
 | 문법 판단 경계 정의 | [`evaluation/judgment/BOUNDARY_GUIDELINES.md`](evaluation/judgment/BOUNDARY_GUIDELINES.md) | 필러·문체·표기·STT·문맥 판단 원칙 |
 | 사람 검수 절차 | [`evaluation/judgment/REVIEW_PROCESS.md`](evaluation/judgment/REVIEW_PROCESS.md) | 사용자 검수와 전문가 검수의 구분 및 절차 |
 | 최종 검수 기준·주의 사례 | [`evaluation/judgment/FINAL_REVIEW_GUIDE.md`](evaluation/judgment/FINAL_REVIEW_GUIDE.md) | 추측 교정 금지, 번역·복구·스타일 분리 원칙 |
@@ -82,6 +102,7 @@
 - 로컬 OpenAI 호환 LLM을 통한 문장 교정
 - 분석 결과 저장 및 조회
 
+- 기능 플래그 기반 3단계 판단 실행 및 별도 이력 조회
 ## 디렉터리 구조
 
 ```text
@@ -103,7 +124,9 @@ stt_api/
 │   ├── example_retriever.py   # TF-IDF 기반 예문 검색
 │   ├── prompt_builder.py      # LLM 프롬프트 생성
 │   ├── llm_client.py          # OpenAI 호환 LLM 서버 호출
-│   └── llm_parser.py          # LLM 응답 JSON 파싱 및 후처리
+│   ├── llm_parser.py          # LLM 응답 JSON 파싱 및 후처리
+│   ├── judgment_service.py    # D 단독 3단계 판단 호출·계약 검증
+│   └── judgment_monitor.py    # 원문 없는 staging 운영 집계
 ├── rag_data/
 │   ├── vocab/
 │   │   ├── n5_raw.csv
@@ -297,6 +320,56 @@ GET /utterances/{utterance_id}/analysis
 
 특정 발화에 대해 수행된 분석 결과 목록을 최신순으로 반환합니다.
 
+### 판단모델 staging 상태 조회
+
+```http
+GET /health/judgment
+```
+
+프로세스 시작 이후의 요청·성공·실패·재시도·결정 분포와 최근 1,000건의 p50/p95 지연시간을 반환합니다. 원문, 발화 ID, 문맥, 원시 모델 응답과 오류 메시지는 기록하거나 반환하지 않습니다. 이 집계는 프로세스 로컬 메모리이며 재시작 시 초기화되므로 영구 감사 로그를 대신하지 않습니다.
+
+### 발화 판단모델 실행
+
+```http
+POST /utterances/{utterance_id}/judgment
+```
+
+선택 요청 본문:
+
+```json
+{
+  "context": "어제 무엇을 했는지 답하는 상황",
+  "learner_level": "N5"
+}
+```
+
+- 판단은 `acceptable`, `needs_correction`, `insufficient_evidence` 중 하나입니다.
+- 수준은 요청값, 연결된 사용자의 `N5`/`N4`, 기본 `N5` 순서로 정합니다.
+- 모델은 위치 없는 v0.2 계약을 생성하고, `edits`의 Unicode 위치는 백엔드가 원문과 교정문의 diff로 계산합니다.
+- 결과는 기존 `analyses`와 분리된 `judgment_results`에 저장합니다.
+- `confidence`는 생성하거나 저장하지 않습니다.
+- 기능 플래그 비활성, 모델 연결 실패, 출력 계약 위반은 HTTP 503입니다.
+
+판단 기능은 기본 비활성입니다. 라이브 모델 검증 시 다음 환경 변수를 설정합니다.
+
+```bash
+export JUDGMENT_ENABLED=true
+export JUDGMENT_ENDPOINT=http://127.0.0.1:1234/v1/chat/completions
+export JUDGMENT_MODEL=judgment-v02d
+export JUDGMENT_ADAPTER=judgment-qwen3-4b-failure-focus-v0.2-d
+export JUDGMENT_TIMEOUT_SECONDS=120
+```
+
+원본 DB를 직접 사용하지 않는 전체 실행 순서와 사전점검은 [판단모델 staging 실행 가이드](docs/JUDGMENT_STAGING_RUNBOOK.md)를 따릅니다.
+
+### 발화 판단 결과 조회
+
+```http
+GET /utterances/{utterance_id}/judgments
+```
+
+특정 발화의 판단 결과를 최신순으로 반환합니다.
+
 ## 데이터베이스 구조
 
 SQLite DB 파일은 다음 경로를 사용합니다.
@@ -379,6 +452,26 @@ STT 발화 데이터를 저장합니다.
 | `adapter_name` | 어댑터명 |
 | `confidence` | 신뢰도 |
 | `created_at` | 생성 시각 |
+### `judgment_results`
+
+3단계 판단 결과를 기존 이진 분석 결과와 분리해 저장합니다.
+
+| 컬럼 | 설명 |
+| --- | --- |
+| `id`, `utterance_id` | 판단 결과 ID와 대상 발화 ID |
+| `decision` | `acceptable`, `needs_correction`, `insufficient_evidence` |
+| `corrected_text` | 최소 교정문 또는 계약상 유지된 원문 |
+| `edits`, `error_types` | 백엔드 diff와 오류 유형을 JSON 문자열로 저장 |
+| `reason_ko` | 한국어 판단 근거 |
+| `classification_review_required` | diff와 오류 분류 불일치 검토 표시 |
+| `strategy` | 현재 `d_only` |
+| `model_name`, `adapter_name` | 사용 모델 alias와 D 어댑터 |
+| `selection_reason` | D 선택 근거 식별자 |
+| `contract_version` | 출력 계약 버전 |
+| `latency_ms` | 모델 요청 지연시간 |
+| `context`, `learner_level` | 요청 문맥과 적용 학습 수준 |
+| `created_at` | 생성 시각 |
+
 
 ## 분석 파이프라인
 

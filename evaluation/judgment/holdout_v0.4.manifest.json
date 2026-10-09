@@ -1,0 +1,65 @@
+{
+  "dataset": "evaluation/judgment/holdout_v0.4.jsonl",
+  "schema_version": "0.1",
+  "role": "sealed_blind_holdout",
+  "generator_seed": 20261004,
+  "records": 120,
+  "sha256": "904ca090ccd0e209f95fa68a6a3e9fd762a0009c802f7eae7670838f9558221e",
+  "decisions": {
+    "acceptable": 50,
+    "insufficient_evidence": 20,
+    "needs_correction": 50
+  },
+  "groups": {
+    "adjective_past_error_v4": 8,
+    "compound_particle_verb_error_v4": 10,
+    "conjugation_ok_v4": 11,
+    "destination_particle_error_v4": 8,
+    "existence_de_error_v4": 8,
+    "existence_ni_ok_v4": 8,
+    "filler_content_ok_v4": 5,
+    "foreign_language_boundary_v4": 6,
+    "incomplete_utterance_v4": 6,
+    "missing_audio_span_v4": 4,
+    "modifier_copula_error_v4": 8,
+    "no_proposition_v4": 4,
+    "route_wo_ok_v4": 8,
+    "short_colloquial_ok_v4": 10,
+    "stt_orthography_boundary_v4": 8,
+    "verb_conjugation_error_v4": 8
+  },
+  "compound_error_cases": 10,
+  "review_status": "generated_validated",
+  "human_reviewed": false,
+  "expert_reviewed": false,
+  "contamination_audit": {
+    "exact_normalized_matches": 0,
+    "near_dataset_matches_at_or_above_0_85": 0,
+    "max_dataset_character_3gram_jaccard": 0.75,
+    "max_dataset_character_3gram_pair": {
+      "id": "JH-0463",
+      "text": "先月の部屋は狭いかったです。",
+      "previous": "あの部屋は狭いかったです。",
+      "jaccard": 0.75
+    },
+    "source_sha256": {
+      "evaluation/judgment/holdout_v0.1.jsonl": "1694172cc8974aca1bf47ce37b0af9bca2cfb314ca9717d659959047f846ec26",
+      "evaluation/judgment/holdout_v0.2.jsonl": "a2ae7f655953f617e2f56219c2065ea5cc68118f95a7492fe048e23669b2736d",
+      "evaluation/judgment/holdout_v0.3.jsonl": "cb37c594d40478057ab65d98fff6dcaf7889db9fd799dc3ee414a455ff5cde4f",
+      "evaluation/judgment/seed_v0.1.jsonl": "f681ba026cfd6eeca86ebf531e1ac94ceed06525b43fca2b19729ef86ff0d12b",
+      "rag_data/errors/error_patterns.json": "8341f7058290d866599ab707593b5f1715c3112160807c459438e97a95af4a96",
+      "rag_data/examples/texts.json": "88e41bd429b70ad2098ff512597c3a04bfe398d3bad8bfff8f287c6fca6651ad",
+      "rag_data/grammar/grammar_rules.json": "6fe941c1e980ea31000c8a77153849ea9de06ab6b7de8a7958dd3c3c1eee8085",
+      "rag_data/vocab/word_db.json": "ef6bc83c3b85c3df6357e653110fca6f3a10df8f21caf3cc3b2f165c8fc98fff",
+      "training/judgment/data/failure_focus_v0.2_e.jsonl": "9ae2a902d13301ea042e3db3413d73ea6de8e95df20bf90b2de1cd1df7a23890",
+      "training/judgment/data/failure_focus_v0.2_f.jsonl": "53a48231439d78d534c51eee07d26b73266a4c7bd7f9aebea2d11cab414f24b8",
+      "training/judgment/data/pilot_v0.2_g.jsonl": "03d18efb9e1c3650fd87c65bb9d23abe7f4a27beaef09966b14cbd412ddead76"
+    },
+    "limitation": "Exact audit includes RAG; near audit covers canonical datasets. Semantic and pretraining overlap are not ruled out."
+  },
+  "execution_policy": {
+    "model_inference_count_before_protocol_freeze": 0,
+    "labels_must_not_be_used_for_training_or_selection": true,
+    "single_use_after_model_and_threshold_freeze": true
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "schema_version": "judgment-boundary-dry-run-v0.1",
+  "generated_at": "2026-10-06T00:30:53.699929+00:00",
+  "status": "aggregate_only_read_only_no_model_calls",
+  "policy": {
+    "version": "judgment-boundary-v0.1",
+    "sha256": "706480447c64c0356685405d4f208546e15fed34c7ed6f464a82720b63644335",
+    "stt_advisory_context_policy": "stored utterance is treated as STT-derived; no audio evidence"
+  },
+  "database": {
+    "path": "/home/cap-minsung/stt_api/stt_data.db",
+    "open_mode": "read_only",
+    "sha256_before": "ef3b42b92516c5332f2ed1dcd63ffe1a9c2ff8a53650c24a32205a0161ff09c9",
+    "sha256_after": "ef3b42b92516c5332f2ed1dcd63ffe1a9c2ff8a53650c24a32205a0161ff09c9",
+    "unchanged": true,
+    "counts_before": {
+      "utterances": 342,
+      "judgment_results": 0
+    },
+    "counts_after": {
+      "utterances": 342,
+      "judgment_results": 0
+    }
+  },
+  "selection": {
+    "policy": "eligible_language_ja_rows_by_descending_id_with_api_text_priority",
+    "available": 340,
+    "limit": null,
+    "selected": 340,
+    "input_snapshot_sha256": "4e6b67db6b01b618e47a4683528cbdd41df93f7eba7c3b016e23c2ac4b1e9294",
+    "text_source_counts": {
+      "stt_text": 340
+    },
+    "learner_level_counts": {
+      "N5": 340
+    },
+    "stt_model_counts": {
+      "faster-whisper-small": 9,
+      "faster-whisper-tiny": 2,
+      "faster-whisper-tiny-tuned": 29,
+      "whisper-tiny-lowskilled": 150,
+      "whisper-tiny-tts": 150
+    }
+  },
+  "routing": {
+    "counts": {
+      "model": 340
+    },
+    "boundary_type_counts": {},
+    "model_call_avoided_count": 0,
+    "model_call_avoided_rate": 0.0,
+    "model_call_required_count": 340
+  },
+  "advisories": {
+    "rows": 0,
+    "count": 0,
+    "kind_counts": {},
+    "attribution_policy": "unknown_no_audio_evidence",
+    "action_policy": "advisory_only_not_grammar_correction"
+  },
+  "privacy": {
+    "contains_utterance_text": false,
+    "contains_utterance_ids": false,
+    "contains_user_identifiers": false,
+    "per_row_output_created": false
+  },
+  "runtime": {
+    "model_calls": 0,
+    "database_writes": 0,
+    "judgment_results_written": 0
+  },
+  "interpretation": {
+    "quality_metrics_available": false,
+    "reason": "No gold labels or audio evidence are used; counts measure routing behavior only.",
+    "safe_for_operational_integration": false,
+    "next_gate": "review aggregate bypass rate and expand adversarial false-positive tests before any feature-flagged integration"
+  }
+}

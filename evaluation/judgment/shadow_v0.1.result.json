@@ -1,0 +1,61 @@
+{
+  "schema_version": "judgment-shadow-v0.1",
+  "generated_at": "2026-10-01T06:19:06.751442+00:00",
+  "status": "operational_shadow_without_gold_labels",
+  "database_write_policy": "read_only_no_judgment_persistence",
+  "selection": {
+    "policy": "latest_eligible_japanese_utterances_by_descending_id",
+    "requested": 50,
+    "selected": 50,
+    "context_policy": "null_exact_dialogue_context_unavailable",
+    "input_snapshot_sha256": "804f0d8f1ed698b5577d7a8d7ed4e51175884db6784296e53c22fb98b43a7eb3",
+    "text_source_counts": {
+      "stt_text": 50
+    },
+    "learner_level_counts": {
+      "N5": 50
+    },
+    "stt_model_counts": {
+      "faster-whisper-tiny-tuned": 26,
+      "whisper-tiny-lowskilled": 24
+    }
+  },
+  "runtime": {
+    "strategy": "d_only",
+    "model_name": "judgment-v02d",
+    "adapter_name": "judgment-qwen3-4b-failure-focus-v0.2-d",
+    "contract_version": "judgment-v0.2",
+    "e_calls": 0,
+    "fallback_count": 0
+  },
+  "results": {
+    "successes": 49,
+    "failures": 1,
+    "json_contract_success_rate": 0.98,
+    "decision_counts": {
+      "acceptable": 35,
+      "insufficient_evidence": 9,
+      "needs_correction": 5
+    },
+    "failure_counts": {
+      "JudgmentServiceError": 1
+    },
+    "latency_ms": {
+      "count": 49,
+      "p50": 801.741,
+      "p95": 1237.647,
+      "max": 1427.521
+    }
+  },
+  "artifacts": {
+    "raw_output": "evaluation/judgment/runs/shadow_v0.1/raw.jsonl",
+    "raw_sha256": "f4990f19603b8acf67153932f98059f7cf5ce90bb874d99bfd6236fa400e9ef8",
+    "raw_contains_private_text": true,
+    "raw_git_ignored": true
+  },
+  "interpretation": {
+    "quality_metrics_available": false,
+    "reason": "No gold labels or audio evidence are used in shadow mode.",
+    "pronunciation_or_stt_blame_assigned": false
+  }
+}

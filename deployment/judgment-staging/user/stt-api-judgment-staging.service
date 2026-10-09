@@ -1,0 +1,24 @@
+[Unit]
+Description=STT API judgment staging (user session, single worker)
+After=network-online.target judgment-vllm.service
+Wants=network-online.target judgment-vllm.service
+
+[Service]
+Type=simple
+EnvironmentFile=%h/.config/stt-api/judgment-staging.env
+Environment=PYTHONPATH=%h/stt_api
+StateDirectory=stt-api-judgment-staging
+StateDirectoryMode=0750
+WorkingDirectory=%S/stt-api-judgment-staging
+UMask=0027
+ExecStartPre=%h/stt_api/venv/bin/python -B -m scripts.check_judgment_staging --database %S/stt-api-judgment-staging/stt_data.db --skip-live
+ExecStart=%h/stt_api/venv/bin/uvicorn main:app --host 127.0.0.1 --port 8001 --workers 1
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=45
+KillSignal=SIGINT
+NoNewPrivileges=true
+PrivateTmp=true
+
+# Deliberately no [Install] section: staging is started manually and is not
+# enabled at login.

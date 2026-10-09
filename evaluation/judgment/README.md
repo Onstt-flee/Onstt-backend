@@ -1,6 +1,6 @@
 # 일본어 판단모델 최소 평가셋 v0.1
 
-상태: **72개 합성 문항의 익명 사용자 검수와 Qwen3-4B 판단 전용 LoRA 개발 실험 완료본**. 기존 60개에 경계 문항 12개를 추가했다. 11개 베이스 후보의 오프라인 비교 후 v0.2-D/E LoRA와 판단 잠금 후보 게이트까지 개발셋에서 검증했다. 일본어 전문가 검수와 운영 API 통합은 아직 완료하지 않았다.
+상태: **비중복 실제 STT 100건 계약 재시도 shadow까지 완료, 제한적 staging/shadow 기준 통과**. 최종 계약은 99/100이고 재시도 1건은 회복되지 않았다. 운영 기본값·학습자 노출은 미승인이며 일본어 전문가 검수와 라벨 있는 실제 발화 품질 검증은 아직 완료하지 않았다. 새 `holdout_v0.4`는 모델 추론 0회다.
 이 폴더는 운영 `analyzer` 및 DB와 분리된 오프라인 평가 도구와 결과 요약을 담는다.
 전체 11개 모델의 비교, 평가 기준과 최종 2개 후보 선정 근거는 [최종 모델 선정 문서](FINAL_MODEL_SELECTION.md)에 정리했다.
 
@@ -61,6 +61,20 @@ D는 구조 119/120, 과교정 2/50, 정밀도 95.83%, 재현율 92%, 명확 문
 
 후속 v0.2-F 학습 전에 새 `holdout_v0.3.jsonl` 120문항을 SHA-256 `cb37c594d40478057ab65d98fff6dcaf7889db9fd799dc3ee414a455ff5cde4f`로 봉인했다. 정상 50, 교정 50(복합 10), 보류 20이며 기존 데이터·소비된 시험지·RAG와 정확 중복 0건, 문자 3-gram Jaccard 0.85 이상 근접 중복 0건이다. 상태는 `generated_validated`이며 사람·전문가 검수본이 아니다. 체크포인트 `dc48d08` 이후 D/F를 각각 정확히 한 번 실행했다. D는 구조 120/120·과교정 0/50·정밀도 43/44·재현율 43/50으로 안전 기준을 통과했다. D+F 게이트는 교정문 증가 0건과 p95 비율 2.06배로 미채택하고 D 단독을 기능 플래그·shadow 통합 후보로 선택했다. 시험지는 소비 완료됐으며 재실행하지 않는다. 상세는 [최종 결과](../../training/judgment/V0.2_DF_HOLDOUT_V0.3_RESULT.md)를 따른다.
 
+실제 저장 STT의 런타임 안정성을 보기 위해 `scripts/run_judgment_shadow.py`로 최신 적격 일본어 발화 50건을 읽기 전용 실행했다. 49건이 계약을 통과했고 1건은 비교정 판단이 원문 일부를 삭제해 차단됐다. 정답 라벨과 음성 대조가 없으므로 이 실행에서 문법 정확도·과교정률·발음 또는 STT 오류 책임을 계산하지 않는다. 원문 포함 JSONL은 `evaluation/judgment/runs/` 아래에만 두고 Git에서 제외하며, 집계는 `shadow_v0.1.result.json`, 상세 해석은 [실제 STT shadow 결과](../../training/judgment/JUDGMENT_D_SHADOW_V0.1_RESULT.md)를 따른다.
+
+해당 원문 보존 실패를 프롬프트만으로 줄이기 위해 `judgment-v0.2.1`을 별도 실험 버전으로 추가했다. 동일 서버의 72문항 대조에서 기존 v0.2보다 계약 성공, 판단 정확도, 교정 재현율이 모두 감소해 미채택했다. 소비된 holdout이 고정한 `runner.py`는 변경하지 않고 실험 진입점을 `prompt_v021.py`에 격리했으며, 운영 서비스는 계속 `judgment-v0.2`를 사용한다. 상세는 [v0.2.1 프롬프트 실험](../../training/judgment/V0.2_1_PROMPT_HARDENING_RESULT.md)을 따른다.
+
+실제 shadow 원문을 사용하지 않고 같은 실패 구조의 합성 문항 108개를 v0.2-D에 추가한 v0.2-G도 실험했다. 동일 조건 개발셋에서 G는 구조 71/72, 과교정 1/33, 판단 67/72, 허용 교정문 17/27로 D의 72/72, 0/33, 69/72, 19/27보다 후퇴했다. G는 미채택했고 소비된 holdout은 재실행하지 않았다. 상세는 [v0.2-G 학습·비교](../../training/judgment/V0.2_G_TRAIN_AND_DEV72_RESULT.md)를 따른다.
+
+후속 실험을 위해 `holdout_v0.4.jsonl` 120문항을 SHA-256 `904ca090ccd0e209f95fa68a6a3e9fd762a0009c802f7eae7670838f9558221e`로 생성하고 기존 평가·학습·RAG와 정확 중복 0건, 문자 3-gram Jaccard 0.85 이상 0건을 확인했다. 같은 G 의미 소스에서 720개 노출만 고정한 v0.2-H를 학습했으나 개발셋에서 구조 71/72, 과교정 1/33, 판단 68/72, 보류 10/12로 사전 기준을 실패했다. H는 미채택했고 v0.4 protocol과 모델 실행은 수행하지 않았다. 상세는 [v0.2-H 결과](../../training/judgment/V0.2_H_TRAIN_AND_DEV72_RESULT.md)를 따른다.
+
+이어 D 원본에 F 보강분만 결합한 v0.2-I 통제 학습을 같은 seed 42·45-step으로 수행했다. I는 허용 교정문 20/27과 복합 오류 1/4로 D보다 각각 한 건 개선됐지만 구조 71/72, 과교정 1/33, 판단 67/72, 보류 9/12로 사전 안전 기준을 실패했다. I도 미채택했고 v0.4 모델 추론은 0회를 유지한다. 상세는 [v0.2-I 결과](../../training/judgment/V0.2_I_TRAIN_AND_DEV72_RESULT.md)를 따른다.
+
+빈 입력·잡음·명백한 비일본어를 모델 전에 처리하고 STT 표기 후보를 advisory로 분리하는 `judgment-boundary-v0.1`도 독립 오프라인 구현했다. 기존 D/H run replay에서 D는 판단 70/72·보류 12/12·과교정 0/33, H는 구조 72/72·판단 70/72·보류 12/12였지만 과교정 1/33이 남았다. 운영 API에는 연결하지 않았고 상세는 [경계 게이트 결과](../../training/judgment/DETERMINISTIC_BOUNDARY_GATE_V0.1_RESULT.md)를 따른다.
+
+실제 저장 STT 적격 340건 전체를 읽기 전용·무모델·비식별 방식으로 dry-run한 결과, 340건 모두 모델 경로를 유지했고 bypass와 advisory는 0건이었다. DB SHA-256과 `judgment_results=0`은 전후 동일했다. 현재 표본에서 오탐 징후는 없지만 실익도 관측되지 않아 운영 통합 우선순위를 낮게 유지한다.
+
 ## 3.1 기존 v0.1 출력 계약
 
 입력은 `text`, `context`(없으면 `null`), `learner_level`이다. 모델에 정답·그룹·검수 메타데이터를 전달하지 않는다.
@@ -98,6 +112,14 @@ D는 구조 119/120, 과교정 2/50, 정밀도 95.83%, 재현율 92%, 명확 문
 기존 API의 `is_correct`/`feedback_ko` 계약이나 파서는 변경하지 않았다.
 
 ## 4. 검증 명령
+
+기능 플래그 판단 API와 같은 입력 우선순위로 실제 DB를 읽되 결과를 DB에 쓰지 않는 shadow 실행 명령은 다음과 같다. 파일 경로 직접 실행이 아니라 저장소 루트에서 모듈로 실행한다.
+
+```bash
+venv/bin/python -m scripts.run_judgment_shadow --limit 50
+```
+
+동일한 공식 표본을 결과에 맞추기 위해 반복 실행하지 않는다. 새 실행 전에는 원시·집계 출력 경로와 표본 정책을 별도 버전으로 고정한다.
 
 저장소 루트(`/home/cap-minsung/stt_api`)에서 실행한다. 추가 패키지·모델·GPU·서버가 필요하지 않다.
 
@@ -237,3 +259,18 @@ RAG JSON이 바뀌면 다시 검사해야 한다. DB·음성·pickle·모델 가
 
 문법 범위 참고: [국제교류기금 Irodori 초급 1](https://www.irodori.jpf.go.jp/assets/data/elementary01/pdf/Y_all.pdf).
 참고 자료가 이 합성 시험지의 개별 정답이나 JLPT 태그를 인증하는 것은 아니다.
+
+## 실제 STT 비중복 100건 계약 재시도 파일럿
+
+기존 공식 50건의 인증된 입력 snapshot을 제외하고 실제 저장 STT 100건을 D 단독으로 실행했다. 비교정 원문 보존 위반에만 1회 재시도했으며 최종 계약 성공은 99/100, 재시도는 1건, 회복은 0건, 성공 99건 p95는 1108.711ms였다. DB는 읽기 전용이며 전후 SHA와 `judgment_results` 행 수가 동일했다. 원문 포함 원시 파일은 `evaluation/judgment/runs/shadow_v0.2/raw.jsonl`에 Git 제외 상태로 보관한다.
+
+이 결과는 제한적 staging/shadow 기준 통과이며 문법 정확도나 운영 기본값 승인을 뜻하지 않는다. 세부 조건·해시·한계는 [100건 shadow 결과](../../training/judgment/JUDGMENT_D_SHADOW_V0.2_RESULT.md)를 따른다. `holdout_v0.4`는 모델 추론 0회 상태로 유지한다.
+
+## 실제 STT 30건 독립 품질 검수 표본
+
+기존 shadow 150건과 겹치지 않는 실제 저장 STT 30건을 문장 내용과 모델 출력에 무관한 고정 SHA-256 순위로 층화 추출했다. 검수자용 JSONL과 DB 매핑은 모두 `evaluation/judgment/runs/quality_review_v0.1/` 아래 Git 제외 경로에 있고, 추적 manifest에는 해시와 집계만 기록한다. 현재 상태는 `sealed_awaiting_independent_text_review`, 모델 추론 0회다.
+
+실제 음성 파일이 없어 발음 정확도와 STT 전사 귀속은 평가하지 않는다. 검수 작성 규칙은 [독립 품질 검수 가이드](QUALITY_REVIEW_V0.1_GUIDE.md), 생성·완료 검사는 `build_quality_review_v0_1.py`와 `validate_quality_review_v0_1.py`를 따른다. 30건 라벨과 입력 해시를 봉인하기 전에는 모델을 실행하지 않는다.
+
+
+사람 검수와 음성 평가는 현재 후순위로 보류한다. 표본을 개발·재학습에 전용하지 않고 봉인 상태로 보존한다. 원본 DB와 분리된 제한적 staging live 점검과 개인정보 없는 프로세스 로컬 상태 집계까지 완료했다. 실행·중단 절차는 [staging 가이드](../../docs/JUDGMENT_STAGING_RUNBOOK.md)를 따른다.

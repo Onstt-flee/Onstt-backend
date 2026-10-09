@@ -141,3 +141,72 @@ def get_analyses_by_utterance(db: Session, utterance_id: int):
         .order_by(models.Analysis.created_at.desc())
         .all()
     )
+
+
+def get_learner_level_for_utterance(db: Session, utterance_id: int):
+    row = (
+        db.query(models.User.level)
+        .join(models.Session, models.Session.user_id == models.User.id)
+        .join(models.Utterance, models.Utterance.session_id == models.Session.id)
+        .filter(models.Utterance.id == utterance_id)
+        .first()
+    )
+    if row is None or row[0] not in {"N5", "N4"}:
+        return None
+    return row[0]
+
+
+def _judgment_to_response(db_judgment: models.JudgmentResult):
+    return {
+        "id": db_judgment.id,
+        "utterance_id": db_judgment.utterance_id,
+        "decision": db_judgment.decision,
+        "corrected_text": db_judgment.corrected_text,
+        "edits": json.loads(db_judgment.edits),
+        "error_types": json.loads(db_judgment.error_types),
+        "reason_ko": db_judgment.reason_ko,
+        "classification_review_required": db_judgment.classification_review_required,
+        "strategy": db_judgment.strategy,
+        "model_name": db_judgment.model_name,
+        "adapter_name": db_judgment.adapter_name,
+        "selection_reason": db_judgment.selection_reason,
+        "contract_version": db_judgment.contract_version,
+        "latency_ms": db_judgment.latency_ms,
+        "context": db_judgment.context,
+        "learner_level": db_judgment.learner_level,
+        "created_at": db_judgment.created_at,
+    }
+
+
+def create_judgment(db: Session, utterance_id: int, judgment_data: dict):
+    db_judgment = models.JudgmentResult(
+        utterance_id=utterance_id,
+        decision=judgment_data["decision"],
+        corrected_text=judgment_data["corrected_text"],
+        edits=json.dumps(judgment_data["edits"], ensure_ascii=False),
+        error_types=json.dumps(judgment_data["error_types"], ensure_ascii=False),
+        reason_ko=judgment_data["reason_ko"],
+        classification_review_required=judgment_data["classification_review_required"],
+        strategy=judgment_data["strategy"],
+        model_name=judgment_data["model_name"],
+        adapter_name=judgment_data["adapter_name"],
+        selection_reason=judgment_data["selection_reason"],
+        contract_version=judgment_data["contract_version"],
+        latency_ms=judgment_data.get("latency_ms"),
+        context=judgment_data.get("context"),
+        learner_level=judgment_data["learner_level"],
+    )
+    db.add(db_judgment)
+    db.commit()
+    db.refresh(db_judgment)
+    return _judgment_to_response(db_judgment)
+
+
+def get_judgments_by_utterance(db: Session, utterance_id: int):
+    rows = (
+        db.query(models.JudgmentResult)
+        .filter(models.JudgmentResult.utterance_id == utterance_id)
+        .order_by(models.JudgmentResult.created_at.desc(), models.JudgmentResult.id.desc())
+        .all()
+    )
+    return [_judgment_to_response(row) for row in rows]

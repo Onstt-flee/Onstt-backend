@@ -2,14 +2,14 @@
 
 ## 기존 GitHub 구조 대비 상세 설계서
 
-- 기준일: 2026-09-13
-- 현재 GitHub 평가 기준선: `origin/api`, commit `8779e0837124e5e0806b550310c4a466a920ab47`
-- 현재 상태: 평가셋·검수 자료·독립 실행기·채점기·11개 모델 기준선과 최신 아키텍처 문서를 갖췄으며, 다음 단계는 판단 전용 LoRA 학습 데이터 구축
-- 문서 성격: 앞으로 구현할 목표 구조와 단계적 전환안. 목표 구성요소가 현재 구현되었다는 뜻은 아님
+- 기준일: 2026-10-08
+- 현재 로컬 결과 체크포인트: `api`, commit `b580eaa` 위의 D 단독 판단 API 작업 트리
+- 현재 상태: v0.2-D의 기능 플래그 판단 API와 기존 `/analyze`용 제한 shadow 큐·1 req/s admission을 구현했고, 총 100건 응답 보호·shadow failure/drop 0건을 확인했다.
+- 문서 성격: 현재 구현 경계와 앞으로의 목표 구조·단계적 전환안을 함께 표시한다. 라이브 Swagger, 비중복 실제 STT 100건 shadow, 개인정보 없는 상태 집계, 제한 용량 큐와 비식별 admission을 완료했다. 계약 성공률은 99%이고 admission 실측은 100/100 기존 응답을 보호했지만 운영 기본값과 학습자 노출은 계속 보류한다.
 
 ## 1. 경영진 요약
 
-현재 시스템은 Raspberry Pi에서 생성한 STT 텍스트를 FastAPI가 받아 SQLite에 저장하고, 규칙 기반 분류와 네 종류의 로컬 검색 결과를 하나의 프롬프트에 넣어 `localhost:1234`의 고정 LLM을 호출하는 단일 백엔드 구조다. 작은 규모의 기능 검증에는 적합하지만 모델 자체 성능 측정, 세 단계 판단, 문맥·학습 수준 전달, 모델 버전 관리, 장애 의미 분리, 운영 관측과 점진 배포를 지원하지 않는다.
+현재 시스템은 기존 규칙·RAG 기반 이진 `/analyze` 경로를 유지하면서, v0.2-D를 호출하는 3단계 `/judgment` 경로를 별도 기능 플래그와 SQLite 테이블로 추가한 전환 단계다. 새 경로는 문맥·N5/N4 수준, 모델·어댑터·계약 버전, HTTP 503 장애 분리를 지원한다. 비중복 실제 STT 100건 shadow에서 99건이 계약을 통과했고 실패 1건은 503으로 차단했다. 기존 `/analyze`에는 최대 64건·TTL 30초·단일 consumer의 무저장 shadow 큐와 1 req/s·burst 1 admission을 연결했다. admission 후 입력률별 실측에서 기존 응답은 100/100 성공했고 0.5·1 req/s는 전량 처리, 2·10 req/s 초과분 77건은 `sampled_out`으로 분리됐으며 queue failure/drop은 0이었다. 독립 품질 검수를 보류했으므로 운영 기본값과 점진 배포는 승인하지 않는다.
 
 목표 시스템은 **실시간 서비스 경로**, **오프라인 모델 개발·평가 경로**, **사람 검수 경로**를 분리한다. 실시간 경로에서는 언어학 도구와 검색이 판단을 강제하지 않고 증거를 보조하며, 판단모델은 `acceptable / needs_correction / insufficient_evidence` 중 하나와 최소 교정을 반환한다. 시스템 장애는 판단 보류와 분리한다. 오프라인 경로에서는 정답 비노출 실행기와 고정 시험지로 가장 작은 유망 모델을 선정한 뒤 LoRA를 학습한다.
 
@@ -32,7 +32,7 @@
 
 ### 2.1 기존 GitHub 기준선
 
-현재 구현 기준은 원격 추적 브랜치 `origin/api`의 commit `8779e0837124e5e0806b550310c4a466a920ab47`이다. 이 커밋에는 API·SQLite·분석 파이프라인·RAG 자료와 함께 72문항 평가셋, 독립 실행기·채점기, 11개 모델의 재현 요약, 79개 회귀 테스트가 포함되어 있다.
+현재 구현 기준은 결과 체크포인트 `b580eaa` 위의 로컬 작업 트리다. 여기에는 기존 API·SQLite·RAG와 함께 독립 평가·학습 파이프라인, 소비된 holdout v0.2/v0.3 결과, D 단독 판단 API, 실제 STT shadow 실행기와 총 256개 회귀 테스트가 포함되어 있다. 아직 커밋·푸시된 운영 배포본은 아니다.
 
 GitHub 기준 주요 디렉터리는 다음과 같다.
 
@@ -40,7 +40,7 @@ GitHub 기준 주요 디렉터리는 다음과 같다.
 stt_api/
 ├── main.py                 # FastAPI 엔드포인트와 분석 실행
 ├── schemas.py              # Pydantic 요청·응답 모델
-├── models.py               # SQLAlchemy User/Session/Utterance/Analysis
+├── models.py               # SQLAlchemy User/Session/Utterance/Analysis/JudgmentResult
 ├── crud.py                 # DB 생성·조회·분석 저장
 ├── database.py             # sqlite:///./stt_data.db
 ├── analyzer/
@@ -53,16 +53,19 @@ stt_api/
 │   ├── prompt_builder.py
 │   ├── llm_client.py       # localhost:1234 OpenAI 호환 호출
 │   ├── llm_parser.py
-│   └── pipeline.py
+│   ├── pipeline.py
+│   ├── judgment_service.py # v0.2-D 호출·출력 검증·백엔드 diff
+│   ├── judgment_monitor.py # 원문 없는 프로세스 로컬 staging 집계
+│   └── judgment_shadow.py  # 제한 큐·TTL·단일 consumer·종료 drain
 ├── rag_data/               # 어휘·문법·예문 TF-IDF·오류 패턴
 ├── scripts/                # RAG 인덱스·단어 DB 생성
 ├── evaluation/judgment/     # 독립 평가셋·실행기·채점기·결과
-└── tests/                  # 전체 79개 회귀 테스트
+└── tests/                  # 전체 256개 회귀 테스트
 ```
 
 ### 2.2 현재 GitHub에 반영된 평가 기반
 
-`evaluation/judgment/`에는 72문항 평가셋과 검수 자료, 정답 비노출 실행기, 엄격 계약 채점기, 11개 모델의 결과 요약이 반영되어 있다. 72문항은 `user_reviewed`, 검수일은 `2026-09-04`이며 일본어 전문가 인증본은 아니다. 전체 회귀 테스트는 79개다. 평가 경로는 런타임 `analyzer`와 분리되어 있고 아직 운영 API에 연결되지 않았다.
+`evaluation/judgment/`에는 72문항 개발셋, 검수 자료, 정답 비노출 실행기, 엄격 채점기, 베이스·LoRA 결과와 봉인 시험지 실행 기록이 반영되어 있다. 72문항은 `user_reviewed`, 검수일은 `2026-09-04`이며 일본어 전문가 인증본은 아니다. 평가 경로는 계속 분리되어 있고, 그 출력 계약과 선택된 D alias만 새 런타임 판단 서비스가 재사용한다.
 
 | 항목 | 기존 런타임 | 현재 평가 기반 | 목표 시스템에서의 역할 |
 | --- | --- | --- | --- |
@@ -80,10 +83,10 @@ stt_api/
 | 구분 | 확인된 상태 | 해석 |
 | --- | --- | --- |
 | Python | 프로젝트 venv Python 3.12.3 | API 환경 정합성 확보 |
-| 코드 회귀 | 79개 통과 | 코드·데이터 구조 검증이며 언어 정확도 인증은 아님 |
+| 코드 회귀 | 256개 통과 | 판단 API·DB·OpenAPI·shadow admission 실행기 포함, 언어 정확도 인증은 아님 |
 | RAG 예문 | 3,003개 TF-IDF 자료 로딩·검색 확인 | 검색 동작만 확인 |
-| Swagger | 8001에서 과거 HTTP 200 확인 | 상시 서비스 구성은 아님 |
-| 실제 LLM | RTX A6000에서 11개 후보 평가 완료 | 모두 잠정 운영 목표 미달 |
+| Swagger | 라이브 D로 정상·교정·보류·404·400·503 확인 | 격리 DB 스모크이며 운영 배포는 아님 |
+| 실제 LLM | v0.2-D가 holdout v0.3 안전 기준 통과, STT shadow 49/50 계약 성공 | 98%로 99% 기준 미달, 운영 기본값 아님 |
 | 기존 LoRA | Qwen3 4B용 어댑터까지 평가 완료 | 엄격 계약 0/72로 판단모델 재사용 제외 |
 | 일본어 전문가 검수 | 미실시 | 사용자 검수와 구분해야 함 |
 
@@ -109,6 +112,7 @@ stt_api/
 | 메서드·경로 | 현재 역할 | 현재 제약 |
 | --- | --- | --- |
 | `GET /health` | API 프로세스 상태 | DB·RAG·LLM 준비 상태를 구분하지 않음 |
+| `GET /health/judgment` | 판단 요청·실패·재시도·결정·지연시간 집계 | 프로세스 로컬 메모리이며 재시작 시 초기화 |
 | `POST /users` | 사용자 생성 | 인증·중복 정책·수준 enum 검증 없음 |
 | `POST /sessions` | 회화 세션 생성 | 존재하지 않는 user 참조 정책 미흡 |
 | `GET /users/{id}/sessions` | 사용자 세션 조회 | 사용자 존재 여부와 빈 결과 구분 미흡 |
@@ -118,6 +122,8 @@ stt_api/
 | `POST /utterances/{id}/analyze` | 분석 실행·저장 | 동기 호출, 고정 모델, 세 단계 판단 미지원 |
 | `GET /utterances/{id}/analysis` | 분석 이력 조회 | 문자열 JSON 필드와 계약 버전 부재 |
 | `GET /sessions/{id}/utterances` | 세션 발화 조회 | 페이지네이션·권한·세션 존재 검증 없음 |
+| `POST /utterances/{id}/judgment` | D 단독 3단계 판단·별도 저장 | 기본 비활성, 동기 호출, N5/N4 한정 |
+| `GET /utterances/{id}/judgments` | 판단 이력 최신순 조회 | 페이지네이션·권한 없음 |
 
 ### 3.3 현재 데이터 구조
 
@@ -125,6 +131,7 @@ stt_api/
 - `Session`: 선택적 사용자 참조, 주제, 설명, 생성 시각
 - `Utterance`: 오디오 경로, STT 텍스트, 전처리 텍스트, 오디오 메타데이터
 - `Analysis`: 문장 분류, 이진 정오답, 교정문, 오류 유형 문자열, RAG 문맥 문자열, 모델명, 신뢰도
+- `JudgmentResult`: 3단계 판단, 최소 교정문, 백엔드 diff, 오류 유형, D 모델·어댑터·계약·지연시간, 문맥과 수준
 
 배열형 `candidate_types`, `error_types`, `tokens`는 SQLite Text에 JSON 문자열로 저장한다. `create_all`로 테이블을 생성하며 스키마 마이그레이션 체계는 없다. SQLite 외래키 선언은 존재하지만 연결별 강제 활성화와 상위 레코드 사전 검증이 충분하지 않다.
 
@@ -138,15 +145,15 @@ stt_api/
 
 ### 3.5 현재 구조의 핵심 한계
 
-- 운영 파이프라인과 모델 평가 경로가 결합되어 모델 자체 정확도를 측정할 수 없다.
-- `is_correct` 이진 값으로는 근거 부족과 시스템 실패를 표현할 수 없다.
-- 사용자 수준과 대화 문맥이 실제 판단 프롬프트에 연결되지 않는다.
+- 기존 `/analyze`는 여전히 이진 계약·규칙/RAG 경로이며 새 판단과 자동 합성하지 않는다.
+- 새 판단 경로는 비중복 실제 STT 100건 shadow에서 계약 성공률 99% 기준을 충족했다. sudo 없는 사용자 systemd에서 readiness 장애 복구를 통과했고, 기존 `/analyze`에는 응답 비간섭·판단 무저장 제한 큐를 연결해 동일 burst 26/26과 drop 0건을 확인했다. 독립 품질 검수와 입력률별 안정성 검증을 보류해 운영 기본값과 학습자 노출로는 승격하지 않았다.
+- 현재 운영 후보는 D 단독뿐이며 복합 오류 완전 교정 0/10이라는 한계가 있다.
 - 규칙 조기 반환이 모델 판단을 우회하며 단편 발화를 곧바로 오답으로 만들 수 있다.
 - 오류 유형 후처리가 일부 복합 오류 정보를 제거할 수 있다.
-- 모델 주소·이름·생성 설정이 코드에 고정되어 있다.
-- 모델·어댑터·프롬프트·데이터 리비전의 실행 이력이 없다.
+- 판단 모델 주소·alias·timeout은 환경 변수화했고 원문 보존 위반만 1회 재시도한다. 회로 차단과 외부 영구 메트릭 저장은 없다.
+- API 결과에는 모델·어댑터·계약을 기록하지만 데이터·가중치 SHA를 행별 저장하지 않는다.
 - 검색 근거의 출처·버전·신뢰도·사용 조건이 응답과 감사 로그에 연결되지 않는다.
-- 재시도, 회로 차단, idempotency, 큐, 부하 제어, readiness가 없다.
+- 프로세스 로컬 동시성 제한·fail-fast backpressure·readiness와 단일 consumer shadow 큐는 구현했지만 외부 전역 큐·분산 세마포어, idempotency와 회로 차단은 없다. 큐와 상태 집계, 사용자 systemd 실행은 단일 프로세스·로그인 세션 staging용이며 재시작 시 대기 항목이 보존되지 않는다.
 - 인증·권한·감사·개인정보·데이터 보존 정책이 없다.
 
 [PAGEBREAK]
@@ -533,30 +540,40 @@ stt_api/
 - 첫 LoRA 베이스는 Qwen3-4B, 보조 비교군은 Qwen3-8B, 고용량 상한은 Qwen3-14B로 정했다.
 - 72문항은 앞으로 개발 진단용 seed로만 사용하고, 학습·개발·미사용 시험 데이터는 별도로 구축한다.
 
-### 단계 3 — 판단 특화 LoRA: 다음 작업
+### 단계 3 — 판단 특화 LoRA·봉인 시험: 완료
 
-- dev 실패를 기준으로 train 3,000을 구성하고 선택된 한 모델만 학습한다.
-- 학습 전후를 동일 scorer로 비교한다.
-- 완료 기준: 데이터·코드·모델·adapter·prompt manifest와 재현 가능한 결과 보존.
+- Qwen3-4B에 v0.1부터 v0.2-F까지 판단 특화 LoRA를 학습하고 동일 실행기·채점기로 비교했다.
+- 소비된 holdout v0.2 실패 뒤 새 holdout v0.3을 먼저 봉인했고, D/F를 각각 한 번 실행했다.
+- v0.2-D는 안전 기준을 통과했고 D+F 게이트는 추가 채택 기준을 실패해 D 단독만 shadow 후보로 고정했다.
+- D에 F 보강분만 결합한 v0.2-I 통제 학습은 교정문·복합 오류를 각 1건 개선했지만 구조 71/72·과교정 1/33·보류 9/12로 회귀해 미채택했다. 보호 중인 holdout v0.4는 추론 0회다.
 
-### 단계 4 — 언어학·RAG ablation
+### 단계 4 — 언어학·RAG ablation: 보류
 
-- 모델 단독, +Sudachi, +RAG, +Sudachi+RAG를 dev에서 비교한다.
-- 개선된 조합만 고정 test에서 한 번 확인한다.
-- 완료 기준: 과교정 악화 없이 통계·사례 양쪽에서 개선이 확인된 구성만 채택.
+- D 단독이 안전 기준을 통과했으므로 Sudachi/ChromaDB를 선행 필수 구성으로 넣지 않는다.
+- shadow 실패 로그에서 특정 조사·활용 오류가 반복될 때만 모델 단독 대비 ablation을 수행한다.
+- 과교정 악화 없이 통계·사례 양쪽에서 개선된 구성만 후속 후보로 채택한다.
 
-### 단계 5 — 신규 judgment API와 DB 마이그레이션
+### 단계 5 — 신규 judgment API와 저장 경계: staging 범위 완료
 
-- domain contract, adapters, stateless `/api/v1/judgments`를 추가한다.
-- Alembic으로 judgment run·edit·advisory·evidence 저장 구조를 추가한다.
-- 기존 분석 endpoint는 호환 adapter로 유지한다.
-- 완료 기준: Swagger에서 정상·교정·보류·timeout·invalid JSON을 재현하고 DB 결과가 일치.
+- 기존 `/analyze`를 유지하고 저장형 `POST /utterances/{id}/judgment`와 조회 API를 별도 추가했다.
+- `judgment_results`에 D 결과·백엔드 diff·모델·어댑터·계약·지연시간을 저장한다. 현재는 기존 방식대로 `create_all`을 사용하며 Alembic은 아직 없다.
+- 기능 플래그, N5/N4 수준 우선순위, 503 장애 분리, OpenAPI와 메모리 DB 테스트를 완료했다. `GET /health/judgment`는 원문·ID·문맥·원시 오류 없이 요청·성공·실패·재시도·결정 분포와 최근 1,000건 지연시간을 프로세스 로컬로 집계한다.
+- 라이브 D 서버와 격리 SQLite에서 정상·교정·보류·404·400·비활성 503 및 저장·조회를 확인했다. Alembic 도입과 운영 DB 마이그레이션 정책은 남아 있다.
 
-### 단계 6 — Shadow와 제한 배포
+### 단계 6 — Shadow와 제한 배포: 사용자 systemd 실기동·복구 완료, 승격 보류
 
-- 기존 응답을 유지하면서 새 판단을 사용자에게 노출하지 않는 shadow 모드로 수집한다.
+- 기존 50건과 겹치지 않는 실제 STT 100건 shadow를 사용자에게 노출하지 않고 실행해 99건 계약 성공, 재시도율 1%, 성공 p95 1108.711ms를 확인했다.
+- 실패 1건은 `insufficient_evidence`가 원문을 보존하지 않은 계약 위반이며 정상 판단이나 fallback으로 위장하지 않았다.
+- 정답 라벨과 음성 대조가 없으므로 정확도·과교정·발음 또는 STT 책임은 판단하지 않는다.
+- 99% 구조 기준은 충족했지만 정답·음성 대조가 없는 계약 안정성 결과이므로 기능 플래그 기본 비활성과 운영 승격 보류를 유지한다.
 - 사용자 동의가 있는 표본만 수동 검수하고 과교정·오류율·latency를 비교한다.
 - 기준 충족 시 제한 사용자 canary, 이후 기본 alias를 전환한다.
+- 합성 1,000이벤트의 프로세스 로컬 집계와 timeout·재시도 재실패·저장 실패 주입은 통과했다. 이는 실제 HTTP/vLLM 부하 시험이 아니다.
+- 격리 SQLite·합성 입력의 실제 FastAPI–vLLM 경로는 동시성 1/2/4, 측정 26/26 계약 성공을 기록했다. 동시성 4 p95는 867.775ms, 처리량은 4.786 req/s였으며 최대 용량이나 장시간 soak 결과로 일반화하지 않는다.
+- 프로세스별 동시 판단 상한 4·대기 0초를 기본값으로 두고, 포화 시 429 fail-fast, 모델 health·alias readiness와 종료 drain을 구현했다. 상한 2의 live 동시성 8 실험에서는 2건 처리·14건 429로 모델 및 DB 유입을 제한했다.
+- 동시성 2의 150건 단기 soak는 150/150 계약 성공과 p95 850.022ms를 기록했다. vLLM 중단 시 readiness 503, 동일 alias 재기동 후 API 재시작 없는 200 복구와 실제 판단 성공도 확인했다.
+- 기존 `/analyze` shadow의 즉시 모델 경쟁은 최대 64건·TTL 30초·단일 consumer 큐로 교체했다. 동일 burst에서 응답 26/26, shadow 모델 성공 26/26, drop 0건을 확인했다.
+- 큐 앞에 1 req/s·burst 1의 내용·사용자 비의존 token bucket을 추가했다. 총 100건에서 기존 응답 100/100, shadow 성공 23건, sampled out 77건, failure/drop 0건과 queue wait p95 0.609ms를 확인했다.
 - 완료 기준: rollback, readiness, alert, 데이터 삭제 경로까지 운영 점검 완료.
 
 ### 단계 7 — 장치 최적화와 두 모델 체계
@@ -609,19 +626,24 @@ stt_api/
 
 ## 부록 A. 문서 근거
 
-- `origin/api` 평가 기준선 commit `8779e0837124e5e0806b550310c4a466a920ab47`의 Git tree
+- 결과 체크포인트 commit `b580eaa`와 현재 D 단독 판단 API 작업 트리
 - `main.py`, `schemas.py`, `models.py`, `crud.py`, `database.py`
 - `analyzer/`의 입력 검증·분류·검색·프롬프트·LLM·파서·파이프라인
 - `rag_data/`의 어휘·문법·예문 TF-IDF·오류 패턴 자료
 - 현재 진행 기준 `PROGRESS.md`
 - `evaluation/judgment/README.md`의 평가셋·실행기·채점기 사용법
 - `evaluation/judgment/FINAL_MODEL_SELECTION.md`의 11개 모델 결과와 최종 후보 선정 근거
+- `training/judgment/JUDGMENT_D_SHADOW_V0.1_RESULT.md`와 `JUDGMENT_D_SHADOW_V0.2_RESULT.md`의 50건·비중복 100건 shadow 결과
+- `training/judgment/STAGING_ANALYZE_SHADOW_QUEUE_RESULT.md`의 제한 큐 동일 burst 26/26·drop 0건 결과
+- `training/judgment/STAGING_ANALYZE_SHADOW_RATE_RESULT.md`의 admission 전 입력률·bounded drop 결과
+- `training/judgment/STAGING_ANALYZE_SHADOW_ADMISSION_RESULT.md`의 1 req/s token-bucket·익명 sampling 결과
+- `docs/JUDGMENT_STAGING_RUNBOOK.md`의 임시 DB·상태 집계·Swagger·rollback 절차
 - `evaluation/judgment/`의 72문항 계약·검수 자료·모델별 재현 요약
-- 현재 회귀 테스트 결과: 79개 통과
+- 현재 회귀 테스트 결과: 256개 통과
 
 ## 부록 B. 명시적 비범위
 
-- 베이스 모델 다운로드와 오프라인 기준선 평가는 완료했지만, 판단 전용 LoRA 학습과 운영 배포가 완료되었다고 주장하지 않는다.
+- 판단 전용 LoRA 학습, D 기능 플래그 API, 라이브 Swagger와 비중복 실제 STT 100건 shadow는 완료했지만 운영 기본값 승격이 완료되었다고 주장하지 않는다.
 - 72문항 사용자 검수는 일본어 전문가 인증이 아니다.
 - SudachiPy는 의존 관계와 문법 정답을 100% 보장하는 도구로 취급하지 않는다.
 - ChromaDB, Graph DB, 별도 평가모델은 초기 필수 구성요소가 아니다.

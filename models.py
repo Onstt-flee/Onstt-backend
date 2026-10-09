@@ -78,3 +78,28 @@ class Analysis(Base):
     confidence = Column(Float, nullable=True)
 
     created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+
+class JudgmentResult(Base):
+    __tablename__ = "judgment_results"
+
+    id = Column(Integer, primary_key=True, index=True)
+    utterance_id = Column(Integer, ForeignKey("utterances.id"), nullable=False, index=True)
+
+    decision = Column(String, nullable=False)
+    corrected_text = Column(Text, nullable=False)
+    edits = Column(Text, nullable=False)
+    error_types = Column(Text, nullable=False)
+    reason_ko = Column(Text, nullable=False)
+    classification_review_required = Column(Boolean, nullable=False, default=False)
+
+    strategy = Column(String, nullable=False)
+    model_name = Column(String, nullable=False)
+    adapter_name = Column(String, nullable=False)
+    selection_reason = Column(Text, nullable=False)
+    contract_version = Column(String, nullable=False)
+    latency_ms = Column(Float, nullable=True)
+
+    context = Column(Text, nullable=True)
+    learner_level = Column(String, nullable=False)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
