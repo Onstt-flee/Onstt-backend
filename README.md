@@ -68,6 +68,7 @@
 | v0.2-I D+F 통제 학습 실험 | [`training/judgment/V0.2_I_TRAIN_AND_DEV72_RESULT.md`](training/judgment/V0.2_I_TRAIN_AND_DEV72_RESULT.md) | D에 F 보강분만 결합한 45-step 학습, 교정 소폭 개선과 안전성 회귀·미채택 근거 |
 | holdout v0.4 D/F 단독 비교 규약 | [`training/judgment/V0.2_DF_HOLDOUT_V0.4_PROTOCOL.md`](training/judgment/V0.2_DF_HOLDOUT_V0.4_PROTOCOL.md) | D/F를 각 1회 비교하는 절대 안전 기준·F 승격 조건·재실행 금지 정책 |
 | 소비된 holdout v0.4 최종 결과 | [`training/judgment/V0.2_DF_HOLDOUT_V0.4_RESULT.md`](training/judgment/V0.2_DF_HOLDOUT_V0.4_RESULT.md) | D/F 모두 허용 교정문 80% 미달, 운영 승격 후보 없음과 다음 학습 분기 |
+| 최종 holdout v0.5 봉인 | [`training/judgment/HOLDOUT_V0.5_SEAL.md`](training/judgment/HOLDOUT_V0.5_SEAL.md) | J 학습 전 120문항·중복 감사·추론 0회 봉인과 구조적 독립성 한계 |
 | 결정론적 경계 게이트 v0.1 | [`training/judgment/DETERMINISTIC_BOUNDARY_GATE_V0.1_RESULT.md`](training/judgment/DETERMINISTIC_BOUNDARY_GATE_V0.1_RESULT.md) | 빈 입력·비일본어 사전 라우팅과 STT advisory 분리, D/H replay·운영 미통합 근거 |
 | 문법 판단 경계 정의 | [`evaluation/judgment/BOUNDARY_GUIDELINES.md`](evaluation/judgment/BOUNDARY_GUIDELINES.md) | 필러·문체·표기·STT·문맥 판단 원칙 |
 | 사람 검수 절차 | [`evaluation/judgment/REVIEW_PROCESS.md`](evaluation/judgment/REVIEW_PROCESS.md) | 사용자 검수와 전문가 검수의 구분 및 절차 |

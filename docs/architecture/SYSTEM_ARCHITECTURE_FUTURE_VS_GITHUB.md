@@ -32,7 +32,7 @@
 
 ### 2.1 기존 GitHub 기준선
 
-현재 구현 기준은 결과 체크포인트 `b580eaa` 위의 로컬 작업 트리다. 여기에는 기존 API·SQLite·RAG와 함께 독립 평가·학습 파이프라인, 소비된 holdout v0.2/v0.3 결과, D 단독 판단 API, 실제 STT shadow 실행기와 총 260개 회귀 테스트가 포함되어 있다. 아직 커밋·푸시된 운영 배포본은 아니다.
+현재 구현 기준은 결과 체크포인트 `b580eaa` 위의 로컬 작업 트리다. 여기에는 기존 API·SQLite·RAG와 함께 독립 평가·학습 파이프라인, 소비된 holdout v0.2/v0.3 결과, D 단독 판단 API, 실제 STT shadow 실행기와 총 262개 회귀 테스트가 포함되어 있다. 아직 커밋·푸시된 운영 배포본은 아니다.
 
 GitHub 기준 주요 디렉터리는 다음과 같다.
 
@@ -60,7 +60,7 @@ stt_api/
 ├── rag_data/               # 어휘·문법·예문 TF-IDF·오류 패턴
 ├── scripts/                # RAG 인덱스·단어 DB 생성
 ├── evaluation/judgment/     # 독립 평가셋·실행기·채점기·결과
-└── tests/                  # 전체 260개 회귀 테스트
+└── tests/                  # 전체 262개 회귀 테스트
 ```
 
 ### 2.2 현재 GitHub에 반영된 평가 기반
@@ -83,7 +83,7 @@ stt_api/
 | 구분 | 확인된 상태 | 해석 |
 | --- | --- | --- |
 | Python | 프로젝트 venv Python 3.12.3 | API 환경 정합성 확보 |
-| 코드 회귀 | 260개 통과 | 판단 API·DB·OpenAPI·shadow admission 실행기 포함, 언어 정확도 인증은 아님 |
+| 코드 회귀 | 262개 통과 | 판단 API·DB·OpenAPI·shadow admission 실행기 포함, 언어 정확도 인증은 아님 |
 | RAG 예문 | 3,003개 TF-IDF 자료 로딩·검색 확인 | 검색 동작만 확인 |
 | Swagger | 라이브 D로 정상·교정·보류·404·400·503 확인 | 격리 DB 스모크이며 운영 배포는 아님 |
 | 실제 LLM | v0.2-D가 holdout v0.3 안전 기준 통과, STT shadow 49/50 계약 성공 | 98%로 99% 기준 미달, 운영 기본값 아님 |
@@ -640,7 +640,7 @@ stt_api/
 - `training/judgment/STAGING_ANALYZE_SHADOW_ADMISSION_RESULT.md`의 1 req/s token-bucket·익명 sampling 결과
 - `docs/JUDGMENT_STAGING_RUNBOOK.md`의 임시 DB·상태 집계·Swagger·rollback 절차
 - `evaluation/judgment/`의 72문항 계약·검수 자료·모델별 재현 요약
-- 현재 회귀 테스트 결과: 260개 통과
+- 현재 회귀 테스트 결과: 262개 통과
 
 ## 부록 B. 명시적 비범위
 
