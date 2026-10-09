@@ -1,6 +1,6 @@
 # 일본어 문법 판단모델 기준선 총정리 및 최종 후보 선정
 
-기준일: 2026-10-09
+기준일: 2026-10-10
 평가셋: `judgment-seed-v0.1` 72문항
 데이터 SHA-256: `f681ba026cfd6eeca86ebf531e1ac94ceed06525b43fca2b19729ef86ff0d12b`
 프롬프트: `judgment-v0.1`
@@ -10,7 +10,7 @@
 
 현재 테스트한 기준선 중 **학습 없이 운영 API에 바로 투입할 수 있다고 판정한 모델은 없다.** 모든 모델이 사전에 정한 운영 후보 목표를 하나 이상 통과하지 못했다.
 
-후속 Qwen3-4B LoRA 실험에서는 v0.2-D가 봉인된 `holdout_v0.3`의 안전 기준을 통과했다. 기능 플래그 API와 실제 STT 50건 shadow에서는 출력 계약 49/50(98%)이었으나, 원문 보존 위반에만 1회 재시도하는 정책을 추가한 뒤 기존 표본과 비중복인 실제 STT 100건에서 최종 계약 99/100과 성공 99건 p95 1108.711ms로 제한적 staging/shadow 기준을 통과했다. 재시도 1건은 회복되지 않았고 503으로 차단됐다. 원문 보존 프롬프트 v0.2.1, 실제 운영 원문을 쓰지 않은 합성 보강 G, 같은 데이터의 노출 빈도만 고정한 H도 개발셋에서 D의 안전성을 넘지 못해 미채택했다. 따라서 베이스 모델 비교 결론은 유지한다. 이후 봉인된 `holdout_v0.4`에서 D/F 단독을 각각 한 번 비교했으나 허용 교정문이 D 32/50, F 36/50으로 사전 40/50 기준을 모두 실패했다. **최종 운영 승격 후보는 없으며 D는 기본 비활성 연구·staging 기준선으로만 유지한다.** v0.4는 소비 완료됐고 모델 선택용으로 재실행하지 않는다. 실제 STT 독립 품질 확인을 위해 기존 shadow 150건을 제외한 30건을 예측 비노출 상태로 봉인했으며 현재 익명 텍스트 라벨을 기다린다. 결정론적 경계 게이트 v0.1은 D 개발 replay에서 판단 70/72·보류 12/12를 기록했다. 실제 저장 STT 340건 dry-run에서는 bypass와 advisory가 모두 0건이어서 아직 운영 API에 연결하지 않았다. 상세는 [holdout v0.3 결과](../../training/judgment/V0.2_DF_HOLDOUT_V0.3_RESULT.md), [기존 50건 shadow 결과](../../training/judgment/JUDGMENT_D_SHADOW_V0.1_RESULT.md), [비중복 100건 shadow 결과](../../training/judgment/JUDGMENT_D_SHADOW_V0.2_RESULT.md), [v0.2-G 결과](../../training/judgment/V0.2_G_TRAIN_AND_DEV72_RESULT.md), [v0.2-H 결과](../../training/judgment/V0.2_H_TRAIN_AND_DEV72_RESULT.md), [경계 게이트 결과](../../training/judgment/DETERMINISTIC_BOUNDARY_GATE_V0.1_RESULT.md)를 따른다.
+후속 Qwen3-4B LoRA 실험에서는 v0.2-D가 봉인된 `holdout_v0.3`의 안전 기준을 통과했다. 기능 플래그 API와 실제 STT 50건 shadow에서는 출력 계약 49/50(98%)이었으나, 원문 보존 위반에만 1회 재시도하는 정책을 추가한 뒤 기존 표본과 비중복인 실제 STT 100건에서 최종 계약 99/100과 성공 99건 p95 1108.711ms로 제한적 staging/shadow 기준을 통과했다. 재시도 1건은 회복되지 않았고 503으로 차단됐다. 원문 보존 프롬프트 v0.2.1, 실제 운영 원문을 쓰지 않은 합성 보강 G, 같은 데이터의 노출 빈도만 고정한 H도 개발셋에서 D의 안전성을 넘지 못해 미채택했다. 따라서 베이스 모델 비교 결론은 유지한다. 이후 봉인된 `holdout_v0.4`에서 D/F 단독을 각각 한 번 비교했으나 허용 교정문이 D 32/50, F 36/50으로 사전 40/50 기준을 모두 실패했다. **최종 운영 승격 후보는 없으며 D는 기본 비활성 연구·staging 기준선으로만 유지한다.** v0.4는 소비 완료됐고 모델 선택용으로 재실행하지 않는다. 마지막 v0.2-J는 소비된 v0.4를 학습 전용으로 편입해 45-step 학습한 뒤, 새 v0.5에서 정확히 한 번 평가했다. J는 구조 120/120·재현율 92%·복합 오류 6/10을 기록했지만 과교정 3/50·정밀도 92%·허용 교정문 36/50으로 사전 기준을 실패했다. J도 미채택했고 v0.5를 소비 완료로 잠갔으며 이번 LoRA 반복을 종료했다. 실제 STT 독립 품질 확인을 위해 기존 shadow 150건을 제외한 30건을 예측 비노출 상태로 봉인했으며 현재 익명 텍스트 라벨을 기다린다. 결정론적 경계 게이트 v0.1은 D 개발 replay에서 판단 70/72·보류 12/12를 기록했다. 실제 저장 STT 340건 dry-run에서는 bypass와 advisory가 모두 0건이어서 아직 운영 API에 연결하지 않았다. 상세는 [holdout v0.3 결과](../../training/judgment/V0.2_DF_HOLDOUT_V0.3_RESULT.md), [기존 50건 shadow 결과](../../training/judgment/JUDGMENT_D_SHADOW_V0.1_RESULT.md), [비중복 100건 shadow 결과](../../training/judgment/JUDGMENT_D_SHADOW_V0.2_RESULT.md), [v0.2-G 결과](../../training/judgment/V0.2_G_TRAIN_AND_DEV72_RESULT.md), [v0.2-H 결과](../../training/judgment/V0.2_H_TRAIN_AND_DEV72_RESULT.md), [경계 게이트 결과](../../training/judgment/DETERMINISTIC_BOUNDARY_GATE_V0.1_RESULT.md), [v0.2-J 최종 결과](../../training/judgment/V0.2_J_HOLDOUT_V0.5_RESULT.md)를 따른다.
 
 다만 다음 판단 전용 LoRA 개발에 사용할 수 있는 모델은 아래 두 개로 좁힌다.
 
@@ -261,14 +261,12 @@ venv/bin/python -B -m evaluation.judgment.scorer \
 - RAG 검사는 정규화 문자열의 직접 일치만 찾으며 모델 사전학습 오염이나 의미상 유사 문장을 배제하지 못한다.
 - 자동 점수는 자연스러움, 의미 보존, 설명 품질을 완전히 평가하지 못한다.
 
-다음 판정 순서는 다음과 같다.
+현재 개발 주기의 최종 판정은 다음과 같다.
 
-1. Qwen3-4B용 별도 학습·개발 데이터를 만들고 평가셋 72문항은 학습에서 격리한다.
-2. 판단 계약, 최소 교정, 과교정 억제, 보류, Unicode edit 위치를 중심으로 LoRA를 학습한다.
-3. 같은 72문항으로 학습 전후 회귀를 확인하되 모델 선택을 위한 개발 진단으로만 사용한다.
-4. 필요할 때 같은 방식으로 Qwen3-8B를 학습해 4B 대비 실제 개선 폭을 확인한다.
-5. 학습된 4B·8B가 Qwen3-14B의 원시 판단·허용 교정문 수준에 도달하는지 비교한다.
-6. 별도의 미사용 고정 시험지와 일본어 전문가 검수본에서 최종 성능을 평가한다.
-7. 현재 잠정 목표와 추가 운영 기준을 모두 충족한 뒤에만 Swagger/운영 API 통합 후보로 승격한다.
+1. v0.2-J까지 계획된 Qwen3-4B LoRA 학습을 종료했다.
+2. v0.5 단일 실행에서 안전·품질 기준을 모두 충족한 모델이 없으므로 운영 API 기본 판단기로 승격하지 않는다.
+3. v0.2-D는 과거 staging/shadow 재현용 기준선, v0.2-J는 최종 연구 결과로만 보존한다. 둘 다 학습자 노출 기본값은 비활성이다.
+4. 사람 상세 검수와 음성·발음 평가는 사용자 결정에 따라 후순위로 유지한다.
+5. 향후 재개 시에는 v0.5를 재사용하지 않고, 새 데이터 계보와 새 미사용 시험지를 먼저 고정한 별도 개발 주기로 시작한다.
 
-최종 11개 비교 원본은 Git 제외 경로 `evaluation/judgment/runs/all-baselines-comparison-v02.json`과 `.md`에 보존하며, Git에는 모델별 재현 요약을 `evaluation/judgment/results/`에 유지한다.
+최종 11개 베이스 비교 원본은 Git 제외 경로 `evaluation/judgment/runs/all-baselines-comparison-v02.json`과 `.md`에 보존하며, Git에는 모델별 재현 요약과 v0.2-J 최종 결과를 `evaluation/judgment/results/`에 유지한다.

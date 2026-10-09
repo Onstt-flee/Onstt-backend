@@ -19,6 +19,11 @@ class HoldoutV05DecisionTests(unittest.TestCase):
  def test_any_failure_selects_none(self):
   x=report(); x['runs'][0]['metrics']['accepted_correction_rate_end_to_end']={'numerator':39,'denominator':50,'value':.78}
   r=decide(P,x); self.assertFalse(r['candidate']['eligible']); self.assertIsNone(r['selected_candidate'])
+
+ def test_observed_final_result_selects_none(self):
+  report=json.loads((ROOT/'evaluation/judgment/results/qwen3-4b-v02j-holdout-v05.json').read_text())
+  r=decide(P,report); self.assertFalse(r['candidate']['eligible']); self.assertIsNone(r['selected_candidate'])
+  self.assertFalse(r['candidate']['eligibility_checks']['overcorrection_rate']); self.assertFalse(r['candidate']['eligibility_checks']['correction_detection_precision']); self.assertFalse(r['candidate']['eligibility_checks']['accepted_correction_rate'])
  def test_wrong_report_model_is_rejected(self):
   x=report(); x['runs'][0]['run']['model']='other'
   with self.assertRaises(ValueError): decide(P,x)
