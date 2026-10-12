@@ -57,6 +57,7 @@
 | staging backpressure·readiness 결과 | [`training/judgment/STAGING_RUNTIME_SAFETY_RESULT.md`](training/judgment/STAGING_RUNTIME_SAFETY_RESULT.md) | 동시 실행 상한, 429 fail-fast, 모델 alias readiness와 종료 drain 검증 |
 | staging 단기 soak·복구 결과 | [`training/judgment/STAGING_SOAK_RECOVERY_RESULT.md`](training/judgment/STAGING_SOAK_RECOVERY_RESULT.md) | 동시성 2·150건 지속 부하와 readiness 200→503→200 자동 복구 |
 | staging systemd 배포 템플릿 | [`training/judgment/STAGING_DEPLOYMENT_TEMPLATE_RESULT.md`](training/judgment/STAGING_DEPLOYMENT_TEMPLATE_RESULT.md) | sudo 없는 사용자 서비스의 설치·fail-closed 관리·readiness 복구·합성 판단과 정리 결과 |
+| 판단모델 실행·보존 정책 | [`deployment/judgment-staging/MODEL_POLICY.md`](deployment/judgment-staging/MODEL_POLICY.md) | v0.2-D만 staging 실행, 나머지는 기록 전용, 가중치·원시 결과 Git 제외 원칙 |
 | 기존 분석 경로 shadow 통합 | [`training/judgment/STAGING_ANALYZE_SHADOW_RESULT.md`](training/judgment/STAGING_ANALYZE_SHADOW_RESULT.md) | `/analyze` 응답 비간섭·판단 무저장 background 실행과 익명 집계 검증 |
 | `/analyze` shadow OFF/ON 제한 부하 | [`training/judgment/STAGING_ANALYZE_SHADOW_LOAD_RESULT.md`](training/judgment/STAGING_ANALYZE_SHADOW_LOAD_RESULT.md) | 기존 응답 26/26 격리 통과, shadow 24/26 과부하 차단과 별도 제한 큐 필요성 |
 | 제한 용량 shadow 큐 실기동 | [`training/judgment/STAGING_ANALYZE_SHADOW_QUEUE_RESULT.md`](training/judgment/STAGING_ANALYZE_SHADOW_QUEUE_RESULT.md) | 단일 worker·64건·TTL 30초, 동일 burst 처리 26/26·drop 0·큐 대기 p95 14.88초 |

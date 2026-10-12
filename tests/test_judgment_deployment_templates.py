@@ -9,6 +9,35 @@ DEPLOYMENT = ROOT / "deployment" / "judgment-staging"
 
 
 class JudgmentDeploymentTemplateTests(unittest.TestCase):
+    def test_runtime_policy_allows_only_d_and_weights_are_ignored(self):
+        policy = (DEPLOYMENT / "MODEL_POLICY.md").read_text()
+        self.assertIn("Only the following model is permitted", policy)
+        self.assertIn("alias: `judgment-v02d`", policy)
+        self.assertIn("v0.2-A/B/C/E/F/G/H/I/J", policy)
+
+        ignore = (ROOT / ".gitignore").read_text()
+        for pattern in ("*.safetensors", "*.gguf", "*.ckpt", "*.pt", "*.pth"):
+            self.assertIn(pattern, ignore)
+
+        runtime_files = (
+            ROOT / "analyzer/judgment_service.py",
+            DEPLOYMENT / "judgment-staging.env.example",
+            DEPLOYMENT / "judgment-vllm.service",
+            DEPLOYMENT / "user/judgment-vllm.service",
+        )
+        for path in runtime_files:
+            content = path.read_text()
+            with self.subTest(path=path):
+                self.assertIn("judgment-v02d", content)
+                forbidden_aliases = (
+                    "judgment-v02e",
+                    "judgment-v02f",
+                    "judgment-v02i",
+                    "judgment-v02j",
+                )
+                for forbidden in forbidden_aliases:
+                    self.assertNotIn(forbidden, content)
+
     def test_checked_in_environment_is_disabled_and_content_free(self):
         content = (DEPLOYMENT / "judgment-staging.env.example").read_text()
         self.assertIn("JUDGMENT_ENABLED=false", content)

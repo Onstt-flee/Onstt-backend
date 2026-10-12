@@ -1,6 +1,6 @@
 # Judgment staging service templates
 
-This directory contains GPU-server-specific staging templates. They are not authorization to expose model output to learners. The checked-in environment example stays disabled.
+This directory contains GPU-server-specific staging templates. They are not authorization to expose model output to learners. The checked-in environment example stays disabled. Runtime model retention and exclusion rules are fixed in [`MODEL_POLICY.md`](MODEL_POLICY.md).
 
 - root-managed templates are retained for a future administrator-managed deployment;
 - `user/` contains the no-sudo user-service variant used for the current staging verification;
