@@ -1,0 +1,16 @@
+[Unit]
+Description=Synchronize Pi 5 STT/judgment outbox to the GPU API
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+EnvironmentFile=%h/.config/stt-api/judgment-pi5.env
+StateDirectory=stt-api-pi5
+StateDirectoryMode=0700
+WorkingDirectory=%h/stt_api
+UMask=0077
+ExecStart=%h/stt_api/deployment/judgment-pi5/run-edge-sync.sh
+NoNewPrivileges=true
+PrivateTmp=true
+

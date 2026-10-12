@@ -6,6 +6,7 @@ from sqlalchemy.orm import Session
 
 import models
 import schemas
+import edge_sync
 
 
 def create_user(db: Session, user: schemas.UserCreate):
@@ -25,8 +26,14 @@ def create_session(db: Session, session: schemas.SessionCreate):
         topic=session.topic,
         description=session.description
     )
-    db.add(db_session)
-    db.commit()
+    try:
+        db.add(db_session)
+        db.flush()
+        edge_sync.enqueue_session(db, db_session)
+        db.commit()
+    except Exception:
+        db.rollback()
+        raise
     db.refresh(db_session)
     return db_session
 
@@ -46,8 +53,14 @@ def create_utterance(db: Session, utterance: schemas.UtteranceCreate):
         audio_format=utterance.audio_format
     )
 
-    db.add(db_utterance)
-    db.commit()
+    try:
+        db.add(db_utterance)
+        db.flush()
+        edge_sync.enqueue_utterance(db, db_utterance)
+        db.commit()
+    except Exception:
+        db.rollback()
+        raise
     db.refresh(db_utterance)
     return db_utterance
 
@@ -196,8 +209,14 @@ def create_judgment(db: Session, utterance_id: int, judgment_data: dict):
         context=judgment_data.get("context"),
         learner_level=judgment_data["learner_level"],
     )
-    db.add(db_judgment)
-    db.commit()
+    try:
+        db.add(db_judgment)
+        db.flush()
+        edge_sync.enqueue_judgment(db, db_judgment, judgment_data)
+        db.commit()
+    except Exception:
+        db.rollback()
+        raise
     db.refresh(db_judgment)
     return _judgment_to_response(db_judgment)
 

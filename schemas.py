@@ -1,8 +1,9 @@
 # schemas.py
 
 from pydantic import BaseModel, Field
-from typing import Dict, Literal, Optional, List
+from typing import Any, Dict, Literal, Optional, List
 from datetime import datetime
+from uuid import UUID
 
 
 class UserCreate(BaseModel):
@@ -198,3 +199,28 @@ class JudgmentReadinessResponse(BaseModel):
     model_health: bool
     model_alias_present: bool
     contains_request_content: Literal[False]
+
+
+class EdgeSyncEvent(BaseModel):
+    event_id: UUID
+    event_type: Literal["session", "utterance", "judgment"]
+    payload_sha256: str = Field(..., pattern=r"^[0-9a-f]{64}$")
+    payload: Dict[str, Any]
+    created_at: Optional[datetime] = None
+
+
+class EdgeSyncRequest(BaseModel):
+    node_id: UUID
+    events: List[EdgeSyncEvent] = Field(..., min_length=1, max_length=100)
+
+
+class EdgeSyncEventResult(BaseModel):
+    event_id: UUID
+    status: Literal["accepted", "duplicate", "rejected"]
+    remote_id: Optional[int] = None
+    error: Optional[str] = None
+
+
+class EdgeSyncResponse(BaseModel):
+    node_id: UUID
+    results: List[EdgeSyncEventResult]

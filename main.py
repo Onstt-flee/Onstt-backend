@@ -3,13 +3,14 @@
 import asyncio
 import os
 
-from fastapi import FastAPI, BackgroundTasks, Depends, HTTPException, Response
+from fastapi import FastAPI, BackgroundTasks, Depends, Header, HTTPException, Response
 from sqlalchemy.orm import Session
 from typing import List
 
 import models
 import schemas
 import crud
+import edge_sync
 from database import engine, get_db
 from analyzer.pipeline import analyze as run_analysis
 from analyzer.judgment_service import (
@@ -42,9 +43,6 @@ from analyzer.judgment_runtime import (
     wait_for_idle,
 )
 
-models.Base.metadata.create_all(bind=engine)
-
-
 app = FastAPI(
     title="Japanese STT Conversation API",
     description="""
@@ -65,6 +63,26 @@ GPU 서버는 FastAPI를 통해 STT 결과 저장, 조회, 후속 분석을 담�
         "defaultModelsExpandDepth": -1
     }
 )
+
+
+def initialize_database():
+    tables = [
+        models.User.__table__, models.Session.__table__, models.Utterance.__table__,
+        models.Analysis.__table__, models.JudgmentResult.__table__,
+    ]
+    edge_local = os.getenv("EDGE_MODE", "false").strip().lower() in {
+        "1", "true", "yes", "on"
+    }
+    edge_remote = os.getenv("EDGE_SYNC_ENABLED", "false").strip().lower() in {
+        "1", "true", "yes", "on"
+    }
+    if edge_local:
+        tables.extend([
+            models.EdgeEntityIdentity.__table__, models.EdgeOutboxEvent.__table__,
+        ])
+    if edge_remote:
+        tables.append(models.EdgeSyncReceipt.__table__)
+    models.Base.metadata.create_all(bind=engine, tables=tables)
 
 
 @app.get(
@@ -107,6 +125,9 @@ def judgment_readiness_check(response: Response):
 
 @app.on_event("startup")
 def judgment_runtime_startup():
+    # Keep module imports and unit tests read-only. Schema creation belongs to
+    # an actual API process startup, where the configured database is explicit.
+    initialize_database()
     set_accepting(True)
     start_judgment_shadow_worker()
 
@@ -386,6 +407,49 @@ def read_utterance_judgments(
     if crud.get_utterance(db, utterance_id) is None:
         raise HTTPException(status_code=404, detail="Utterance not found")
     return crud.get_judgments_by_utterance(db, utterance_id)
+
+
+@app.post(
+    "/edge/v1/sync",
+    response_model=schemas.EdgeSyncResponse,
+    tags=["Edge Sync"],
+    summary="Pi 오프라인 이벤트 멱등 동기화",
+)
+def sync_edge_events(
+    data: schemas.EdgeSyncRequest,
+    authorization: str | None = Header(None),
+    db: Session = Depends(get_db),
+):
+    if os.getenv("EDGE_SYNC_ENABLED", "false").strip().lower() not in {
+        "1", "true", "yes", "on"
+    }:
+        raise HTTPException(status_code=503, detail="Edge synchronization is disabled")
+    try:
+        authorized = edge_sync.sync_token_valid(authorization)
+    except edge_sync.EdgeConfigurationError as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
+    if not authorized:
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid edge synchronization token",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+
+    node_id = str(data.node_id)
+    results = []
+    for event in data.events:
+        try:
+            results.append(edge_sync.process_sync_event(
+                db,
+                node_id=node_id,
+                event_id=str(event.event_id),
+                event_type=event.event_type,
+                claimed_sha256=event.payload_sha256,
+                payload=event.payload,
+            ))
+        except edge_sync.EdgePayloadConflict as exc:
+            raise HTTPException(status_code=409, detail=str(exc)) from exc
+    return {"node_id": node_id, "results": results}
 
 
 @app.get(

@@ -6,7 +6,7 @@
 
 ## 현재 개발 상태와 문서 안내
 
-기준일은 2026-10-10입니다. v0.2-D는 봉인된 `holdout_v0.3` 안전 기준을 통과했고, 기존 50건과 겹치지 않는 실제 저장 STT 100건 shadow에서도 최종 출력 계약 99/100, 재시도율 1%, 성공 99건 p95 1108.711ms로 제한적 staging/shadow 기준을 통과했습니다. 원문 보존 위반 1건은 1회 재시도 후에도 실패해 503 차단 대상으로 남았습니다. sudo 없는 사용자 systemd, 최대 64건·TTL 30초의 단일 consumer 큐와 1 req/s·burst 1의 비식별 admission을 구현했습니다. 합성 rate probe 100건에서 기존 `/analyze` 응답은 100/100 성공했고, shadow 성공 23건·`sampled_out` 77건·failure/drop 0건을 확인했습니다. 기능 플래그 기본 비활성과 학습자 노출 미승인을 유지합니다. 후속 v0.2-I는 안전성 회귀로 미채택했고, 봉인된 `holdout_v0.4`의 D/F 단독 1회 비교에서는 허용 교정문이 D 32/50·F 36/50으로 사전 40/50 기준을 모두 실패했습니다. v0.4는 소비 완료됐으며 최종 운영 승격 후보는 없습니다. 마지막 v0.2-J는 소비된 v0.4를 학습 전용으로 편입해 45-step 학습했고, v0.5에서 정확히 한 번 평가했습니다. 구조 120/120·재현율 92%·복합 오류 6/10은 개선됐지만 과교정 3/50·정밀도 92%·허용 교정문 36/50으로 사전 기준을 실패해 미채택했습니다. v0.5는 소비 완료됐고 LoRA 반복은 종료했습니다.
+기준일은 2026-10-12입니다. v0.2-D는 봉인된 `holdout_v0.3` 안전 기준을 통과했고, 기존 50건과 겹치지 않는 실제 저장 STT 100건 shadow에서도 최종 출력 계약 99/100, 재시도율 1%, 성공 99건 p95 1108.711ms로 제한적 staging/shadow 기준을 통과했습니다. 원문 보존 위반 1건은 1회 재시도 후에도 실패해 503 차단 대상으로 남았습니다. sudo 없는 사용자 systemd, 최대 64건·TTL 30초의 단일 consumer 큐와 1 req/s·burst 1의 비식별 admission을 구현했습니다. 합성 rate probe 100건에서 기존 `/analyze` 응답은 100/100 성공했고, shadow 성공 23건·`sampled_out` 77건·failure/drop 0건을 확인했습니다. 기능 플래그 기본 비활성과 학습자 노출 미승인을 유지합니다. 후속 v0.2-I는 안전성 회귀로 미채택했고, 봉인된 `holdout_v0.4`의 D/F 단독 1회 비교에서는 허용 교정문이 D 32/50·F 36/50으로 사전 40/50 기준을 모두 실패했습니다. v0.4는 소비 완료됐으며 최종 운영 승격 후보는 없습니다. 마지막 v0.2-J는 소비된 v0.4를 학습 전용으로 편입해 45-step 학습했고, v0.5에서 정확히 한 번 평가했습니다. 구조 120/120·재현율 92%·복합 오류 6/10은 개선됐지만 과교정 3/50·정밀도 92%·허용 교정문 36/50으로 사전 기준을 실패해 미채택했습니다. v0.5는 소비 완료됐고 LoRA 반복은 종료했습니다.
 
 현재 선택은 다음과 같습니다.
 
@@ -74,6 +74,7 @@
 | v0.2-J 학습 결과·v0.5 규약 | [`training/judgment/V0.2_J_TRAIN_RESULT.md`](training/judgment/V0.2_J_TRAIN_RESULT.md) | 45-step 손실·어댑터 해시, v0.5 단일 실행 절대 기준과 LoRA 종료 조건 |
 | v0.2-J·v0.5 최종 결과 | [`training/judgment/V0.2_J_HOLDOUT_V0.5_RESULT.md`](training/judgment/V0.2_J_HOLDOUT_V0.5_RESULT.md) | 단일 실행 수치·실패 유형·미채택 및 LoRA 반복 종료 결정 |
 | 결정론적 경계 게이트 v0.1 | [`training/judgment/DETERMINISTIC_BOUNDARY_GATE_V0.1_RESULT.md`](training/judgment/DETERMINISTIC_BOUNDARY_GATE_V0.1_RESULT.md) | 빈 입력·비일본어 사전 라우팅과 STT advisory 분리, D/H replay·운영 미통합 근거 |
+| Raspberry Pi 5 병행 배포 | [`deployment/judgment-pi5/README.md`](deployment/judgment-pi5/README.md) | GPU 원본 보존, Q4_K_M+LoRA 변환, Pi preflight, 수동 전환, 멱등 outbox 동기화와 성능 게이트 |
 | 문법 판단 경계 정의 | [`evaluation/judgment/BOUNDARY_GUIDELINES.md`](evaluation/judgment/BOUNDARY_GUIDELINES.md) | 필러·문체·표기·STT·문맥 판단 원칙 |
 | 사람 검수 절차 | [`evaluation/judgment/REVIEW_PROCESS.md`](evaluation/judgment/REVIEW_PROCESS.md) | 사용자 검수와 전문가 검수의 구분 및 절차 |
 | 최종 검수 기준·주의 사례 | [`evaluation/judgment/FINAL_REVIEW_GUIDE.md`](evaluation/judgment/FINAL_REVIEW_GUIDE.md) | 추측 교정 금지, 번역·복구·스타일 분리 원칙 |
@@ -378,6 +379,17 @@ GET /utterances/{utterance_id}/judgments
 
 특정 발화의 판단 결과를 최신순으로 반환합니다.
 
+### Pi 오프라인 이벤트 동기화
+
+```http
+POST /edge/v1/sync
+Authorization: Bearer <EDGE_SYNC_TOKEN>
+```
+
+이 private endpoint는 기본 비활성이고 `EDGE_SYNC_ENABLED=true`일 때만 사용합니다. Pi가 생성한 세션→발화→판단 UUID 이벤트를 최대 100개까지 순서대로 받으며, `(node_id, event_id)`와 payload SHA-256으로 재전송을 멱등 처리합니다. 같은 UUID의 내용이 바뀌면 HTTP 409, 인증 실패는 401, 기능 비활성은 503입니다. Pi 로컬 오디오 경로나 파일은 받지 않습니다. 공용 인터넷에 직접 노출하지 말고 private network/VPN과 호스트 방화벽을 사용합니다.
+
+전체 설치·전환·복구 절차는 [Raspberry Pi 5 병행 배포 가이드](deployment/judgment-pi5/README.md)를 따릅니다.
+
 ## 데이터베이스 구조
 
 SQLite DB 파일은 다음 경로를 사용합니다.
@@ -386,7 +398,7 @@ SQLite DB 파일은 다음 경로를 사용합니다.
 stt_api/stt_data.db
 ```
 
-연결 설정은 `database.py`의 `DATABASE_URL = "sqlite:///./stt_data.db"`에 정의되어 있습니다.
+기본 연결은 `sqlite:///./stt_data.db`이며, Pi 분리 DB에서는 `STT_DATABASE_URL` 환경 변수로 덮어씁니다.
 
 ### `users`
 
@@ -477,6 +489,12 @@ STT 발화 데이터를 저장합니다.
 | `selection_reason` | D 선택 근거 식별자 |
 | `contract_version` | 출력 계약 버전 |
 | `latency_ms` | 모델 요청 지연시간 |
+
+### Edge 동기화 테이블
+
+- `edge_entity_identities`, `edge_outbox_events`: `EDGE_MODE=true`인 Pi 로컬 DB에만 생성합니다.
+- `edge_sync_receipts`: `EDGE_SYNC_ENABLED=true`인 GPU DB에만 생성하며 멱등 수신과 원격 ID·GGUF provenance를 기록합니다.
+- 두 플래그가 모두 꺼진 기존 GPU API startup에서는 Edge 테이블을 만들지 않습니다.
 | `context`, `learner_level` | 요청 문맥과 적용 학습 수준 |
 | `created_at` | 생성 시각 |
 

@@ -1,4 +1,7 @@
-from sqlalchemy import Column, Integer, String, Text, Float, DateTime, ForeignKey, Boolean
+from sqlalchemy import (
+    Boolean, Column, DateTime, Float, ForeignKey, Integer, String, Text,
+    UniqueConstraint,
+)
 from sqlalchemy.sql import func
 from database import Base
 
@@ -102,4 +105,54 @@ class JudgmentResult(Base):
 
     context = Column(Text, nullable=True)
     learner_level = Column(String, nullable=False)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+
+class EdgeEntityIdentity(Base):
+    """Stable UUID assigned to a local SQLite entity on an edge node."""
+
+    __tablename__ = "edge_entity_identities"
+    __table_args__ = (
+        UniqueConstraint("entity_type", "local_id", name="uq_edge_entity_local"),
+    )
+
+    event_id = Column(String(36), primary_key=True)
+    entity_type = Column(String(16), nullable=False)
+    local_id = Column(Integer, nullable=False)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+
+class EdgeOutboxEvent(Base):
+    """Pi-local, content-bearing event waiting for explicit synchronization."""
+
+    __tablename__ = "edge_outbox_events"
+
+    event_id = Column(String(36), primary_key=True)
+    node_id = Column(String(36), nullable=False, index=True)
+    event_type = Column(String(16), nullable=False)
+    payload = Column(Text, nullable=False)
+    payload_sha256 = Column(String(64), nullable=False)
+    status = Column(String(16), nullable=False, default="pending", index=True)
+    attempts = Column(Integer, nullable=False, default=0)
+    last_error = Column(Text, nullable=True)
+    remote_id = Column(Integer, nullable=True)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    synced_at = Column(DateTime(timezone=True), nullable=True)
+
+
+class EdgeSyncReceipt(Base):
+    """GPU-side idempotency receipt and edge-to-server ID mapping."""
+
+    __tablename__ = "edge_sync_receipts"
+    __table_args__ = (
+        UniqueConstraint("node_id", "event_id", name="uq_edge_sync_node_event"),
+    )
+
+    id = Column(Integer, primary_key=True)
+    node_id = Column(String(36), nullable=False, index=True)
+    event_id = Column(String(36), nullable=False)
+    event_type = Column(String(16), nullable=False)
+    payload_sha256 = Column(String(64), nullable=False)
+    remote_id = Column(Integer, nullable=False)
+    provenance = Column(Text, nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())

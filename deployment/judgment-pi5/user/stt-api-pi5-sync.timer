@@ -1,0 +1,13 @@
+[Unit]
+Description=Periodic Pi 5 outbox synchronization
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=1min
+RandomizedDelaySec=10s
+Persistent=true
+Unit=stt-api-pi5-sync.service
+
+[Install]
+WantedBy=timers.target
+

@@ -1,0 +1,22 @@
+[Unit]
+Description=Pi 5 judgment llama.cpp server
+After=network.target
+
+[Service]
+Type=simple
+EnvironmentFile=%h/.config/stt-api/judgment-pi5.env
+WorkingDirectory=%h/stt_api
+UMask=0077
+ExecStart=%h/stt_api/deployment/judgment-pi5/run-llama-server.sh
+Restart=on-failure
+RestartSec=10
+TimeoutStartSec=600
+TimeoutStopSec=60
+KillSignal=SIGINT
+NoNewPrivileges=true
+PrivateTmp=true
+MemoryHigh=10G
+MemoryMax=12G
+
+# Started manually for the initial offline pilot; no [Install] section.
+

@@ -1,0 +1,22 @@
+[Unit]
+Description=Pi 5 local STT judgment API
+After=network.target judgment-pi5-llama.service
+Wants=judgment-pi5-llama.service
+
+[Service]
+Type=simple
+EnvironmentFile=%h/.config/stt-api/judgment-pi5.env
+StateDirectory=stt-api-pi5
+StateDirectoryMode=0700
+WorkingDirectory=%h/stt_api
+UMask=0077
+ExecStart=%h/stt_api/deployment/judgment-pi5/run-pi-api.sh
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=45
+KillSignal=SIGINT
+NoNewPrivileges=true
+PrivateTmp=true
+
+# Started manually for the initial offline pilot; no [Install] section.
+

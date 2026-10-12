@@ -1,5 +1,12 @@
 # STT API 진행사항 및 일본어 판단모델 개발 방향
 
+## 2026-10-12 Raspberry Pi 5 16GB 병행 실행 준비
+
+- 기존 GPU의 HF BF16 Qwen3-4B와 v0.2-D PEFT LoRA는 그대로 두고, Pi 전용 `Q4_K_M GGUF + F16 GGUF LoRA` 파생 경로를 추가했다. 가중치와 원시 실행 결과는 계속 Git에서 제외한다.
+- Pi OS Bookworm 64비트·NVMe·Python 3.12·능동 냉각을 검사하는 fail-closed preflight, llama.cpp 변환/manifest, loopback user systemd, GPU/Pi 수동 프로필을 추가했다.
+- `EDGE_MODE`에서 세션·발화·판단을 UUID outbox로 같은 트랜잭션에 기록한다. 비공개 `/edge/v1/sync`는 기본 비활성, Bearer 인증, `(node_id,event_id)` 멱등 처리, payload 충돌 409, 이벤트별 부분 실패를 지원한다. Pi 로컬 오디오 경로와 파일은 전송하지 않는다.
+- GPU BF16 dev72 대비 Q4 회귀 게이트와 Pi 50건 p95 45초·peak RSS 10GiB·throttling 0 게이트를 코드화했다. 실제 GGUF 변환과 Pi 실측은 Pi 하드웨어에서 수행하기 전이므로 아직 통과로 기록하지 않는다.
+
 기준일: 2026-10-12
 
 이 문서는 실제로 완료한 작업, 검증 범위, 미해결 문제, 앞으로의 개발 방향을 구분한다.
@@ -11,7 +18,7 @@
 | --- | --- |
 | 우선 처리한 오류 4개 | 수정 완료 |
 | 프로젝트 Python 환경 | 3.12.3으로 재구성 완료 |
-| 코드 회귀 테스트 | 273개 통과 예정(D-only 실행·가중치 제외 정책 테스트 포함, 전체 검증 후 확정) |
+| 코드 회귀 테스트 | 290개 통과(Pi outbox·멱등 sync·배포·양자화 게이트 포함) |
 | 설치 의존성 검사 | `pip check` 통과 |
 | 실제 RAG 예문 검색 | 3,003개 자료 로딩·검색 확인 |
 | API 통합 검증 | D 단독 POST/GET 판단 API를 메모리 DB·모의 모델과 라이브 vLLM·격리 SQLite 양쪽에서 확인 |

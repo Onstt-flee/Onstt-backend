@@ -10,11 +10,15 @@ import main
 class JudgmentShadowLifecycleTests(unittest.TestCase):
     def test_startup_opens_runtime_before_starting_shadow_worker(self):
         order = []
-        with patch.object(main, "set_accepting", side_effect=lambda value: order.append(("runtime", value))), patch.object(
+        with patch.object(main, "initialize_database", side_effect=lambda: order.append(("database", True))), patch.object(
+            main, "set_accepting", side_effect=lambda value: order.append(("runtime", value))
+        ), patch.object(
             main, "start_judgment_shadow_worker", side_effect=lambda: order.append(("shadow", True))
         ):
             main.judgment_runtime_startup()
-        self.assertEqual(order, [("runtime", True), ("shadow", True)])
+        self.assertEqual(order, [
+            ("database", True), ("runtime", True), ("shadow", True)
+        ])
 
     def test_shutdown_drains_shadow_before_closing_runtime_capacity(self):
         order = []

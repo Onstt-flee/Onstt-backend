@@ -28,3 +28,8 @@ evaluation/judgment/runs/
 *.ckpt
 *.pt
 *.pth
+
+# Raspberry Pi local state and content-bearing benchmark runs.
+deployment/judgment-pi5/*.env
+deployment/judgment-pi5/results/
+pi5-evaluation/
