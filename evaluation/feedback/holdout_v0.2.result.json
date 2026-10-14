@@ -1,0 +1,37 @@
+{
+  "adapter_deployment_artifact_sha256": "efbbc9d2cf2bed81e6ce24da6070c25d7bc0755c213875224cfa204d58a22630",
+  "contract_failures": [
+    {
+      "error": "recommended non-correction must preserve input text",
+      "id": "FVH-02-025"
+    },
+    {
+      "error": "issue_codes must be unique allowed values",
+      "id": "FVH-02-102"
+    }
+  ],
+  "decision": "rejected",
+  "holdout_sha256": "44a8dec5f4cf49a730c85c9d8be8c04e8be7013d43ba2ecc742c129059282358",
+  "metrics": {
+    "accepted_correction_rate": 0.2926829268292683,
+    "contract_success_rate": 0.9833333333333333,
+    "disagreement_precision": 0.8160919540229885,
+    "disagreement_recall": 0.797752808988764,
+    "false_disagreement_rate": 0.5161290322580645,
+    "p95_latency_seconds": 2.6921720000000002,
+    "recommended_decision_accuracy": 0.5730337078651685,
+    "records": 120,
+    "source_metric_gap_pp": 6.666666666666665,
+    "transport_success_rate": 1.0
+  },
+  "passed_thresholds": [
+    "p95_latency_seconds"
+  ],
+  "reason": "Reasoning parsing fixed the wrapper failure, but the verifier failed every quality threshold and the strict contract threshold.",
+  "result_manifest_sha256": "494fd429502f8d695026ff9225b21ccfb4bb487dc0f3395ea25f1cf16777602f",
+  "result_sha256": "f99683b072177f70472ec17a8d188e8c73a21fbf6180c3acde6b4721bf9332c5",
+  "schema_version": "feedback-holdout-result-v0.2",
+  "score_sha256": "d55273426cd5d82b3a56143954c98810156db60d3c0e5d7e1edc310386052358",
+  "shadow_authorized": false,
+  "source_stratum_is_simulated": true
+}

@@ -1,10 +1,16 @@
 {
   "adapter_sha256": "efbbc9d2cf2bed81e6ce24da6070c25d7bc0755c213875224cfa204d58a22630",
-  "consumed": false,
+  "consumed": true,
   "contract_version": "feedback-v0.1",
   "dataset_sha256": "44a8dec5f4cf49a730c85c9d8be8c04e8be7013d43ba2ecc742c129059282358",
   "max_tokens": 512,
   "model": "feedback-qwen3-8b-v01",
+  "official_run": {
+    "executed_at": "2026-10-15",
+    "result_manifest_sha256": "494fd429502f8d695026ff9225b21ccfb4bb487dc0f3395ea25f1cf16777602f",
+    "result_sha256": "f99683b072177f70472ec17a8d188e8c73a21fbf6180c3acde6b4721bf9332c5",
+    "score_sha256": "d55273426cd5d82b3a56143954c98810156db60d3c0e5d7e1edc310386052358"
+  },
   "schema_version": "feedback-holdout-protocol-v0.2",
   "serving": {
     "engine": "vllm",

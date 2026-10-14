@@ -28,8 +28,14 @@ def main():
     assert len({row["source_judgment_id"] for row in rows}) == 120
     assert manifest["source_counts"] == {"gpu_bf16": 60, "pi_gguf": 60}
     assert manifest["source_stratum_kind"] == "simulated_balance_only"
-    assert manifest["model_inference_count"] == 0
-    assert protocol["consumed"] is False
+    assert manifest["model_inference_count"] == 120
+    assert protocol["consumed"] is True
+    assert protocol["official_run"] == {
+        "executed_at": "2026-10-15",
+        "result_manifest_sha256": "494fd429502f8d695026ff9225b21ccfb4bb487dc0f3395ea25f1cf16777602f",
+        "result_sha256": "f99683b072177f70472ec17a8d188e8c73a21fbf6180c3acde6b4721bf9332c5",
+        "score_sha256": "d55273426cd5d82b3a56143954c98810156db60d3c0e5d7e1edc310386052358",
+    }
     for row in rows:
         assert row["review_status"] == "generated_validated"
         assert row["source_stratum_kind"] == "simulated_balance_only"

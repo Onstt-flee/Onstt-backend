@@ -25,7 +25,7 @@
     "원문은 판단모델 평가에 사용된 judgment holdout v0.5에서 파생되어 외부 독립 코퍼스가 아닙니다.",
     "source_stratum은 실제 GPU/Pi 출력이 아니라 균형 검사용 모의 표식입니다."
   ],
-  "model_inference_count": 0,
+  "model_inference_count": 120,
   "records": 120,
   "review_status": "generated_validated",
   "schema_version": "feedback-holdout-manifest-v0.2",

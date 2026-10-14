@@ -142,6 +142,10 @@ def input_fingerprint(row):
 
 
 def main():
+    if PROTOCOL.exists():
+        existing_protocol = json.loads(PROTOCOL.read_text(encoding="utf-8"))
+        if existing_protocol.get("single_use") and existing_protocol.get("consumed"):
+            raise SystemExit("refusing to regenerate consumed feedback holdout v0.2")
     rows = build_rows()
     OUTPUT.write_text("".join(canonical(row) + "\n" for row in rows), encoding="utf-8")
     training = [json.loads(line) for line in TRAINING.read_text(encoding="utf-8").splitlines() if line]

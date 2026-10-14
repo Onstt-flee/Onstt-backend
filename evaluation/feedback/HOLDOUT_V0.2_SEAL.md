@@ -5,12 +5,12 @@
 - 레코드: 120
 - 데이터 SHA-256: `44a8dec5f4cf49a730c85c9d8be8c04e8be7013d43ba2ecc742c129059282358`
 - 검수 상태: `generated_validated`
-- 모델 추론 횟수: 0
-- 프로토콜 상태: 미소비(`consumed=false`), 단일사용
+- 모델 추론 횟수: 120
+- 프로토콜 상태: 소비 완료(`consumed=true`), 재실행 금지
 
-이 파일과 데이터·manifest·protocol은 첫 추론 전에 고정한다. 추론 결과를 본 뒤
-정답, 후보 판단, 프롬프트, 임계값을 수정하지 않는다. 실행기는 소비된 프로토콜과
-SHA-256 불일치를 거부한다.
+데이터와 임계값은 로컬 커밋 `5ff3393`으로 첫 추론 전에 고정했다. 2026-10-15에
+LoRA를 정확히 한 번 실행했으며 이후 정답, 후보 판단, 프롬프트, 임계값은 수정하지
+않았다. 실행기는 이제 소비된 프로토콜과 SHA-256 불일치를 거부한다.
 
 ## 구성과 격리
 
@@ -38,8 +38,9 @@ SHA-256 불일치를 거부한다.
 - max tokens: 512
 - strict JSON-only `feedback-v0.1` 계약
 
-먼저 홀드아웃에 없는 입력으로 reasoning parser가 `message.content`에 JSON만
-전달하는지 smoke test한다. 성공한 경우에만 이 홀드아웃을 정확히 한 번 실행한다.
+홀드아웃에 없는 학습 입력 1건으로 reasoning parser가 `message.content`에 JSON만
+전달하는지 확인한 뒤 실행했다. 공식 결과는
+`training/feedback/FEEDBACK_V0.2_RESULT.md`를 따른다.
 
 ## 해석 한계
 
