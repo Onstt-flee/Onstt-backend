@@ -42,12 +42,16 @@ def read_os_release(text: str) -> dict[str, str]:
     return result
 
 
-def load_manifest(path: Path) -> dict:
+def load_manifest(
+    path: Path,
+    allowed_quantizations: frozenset[str] = frozenset({"Q4_K_M"}),
+) -> dict:
     value = json.loads(path.read_text(encoding="utf-8"))
     if value.get("schema_version") != "pi5-judgment-model-manifest-v0.1":
         raise ValueError("Unsupported model manifest")
-    if value.get("quantization") != "Q4_K_M":
-        raise ValueError("Manifest quantization must be Q4_K_M")
+    if value.get("quantization") not in allowed_quantizations:
+        allowed = ", ".join(sorted(allowed_quantizations))
+        raise ValueError(f"Manifest quantization must be one of: {allowed}")
     return value
 
 
@@ -63,6 +67,11 @@ def main() -> int:
     parser.add_argument("--model-dir", type=Path, required=True)
     parser.add_argument("--llama-server", type=Path, required=True)
     parser.add_argument("--live-endpoint")
+    parser.add_argument(
+        "--allow-candidate-q5",
+        action="store_true",
+        help="allow Q5_K_M only for an explicit candidate benchmark",
+    )
     args = parser.parse_args()
     checks: dict[str, object] = {}
     errors: list[str] = []
@@ -107,7 +116,10 @@ def main() -> int:
     checks["llama_server"] = str(args.llama_server)
 
     try:
-        manifest = load_manifest(args.manifest)
+        allowed_quantizations = frozenset(
+            {"Q4_K_M", "Q5_K_M"} if args.allow_candidate_q5 else {"Q4_K_M"}
+        )
+        manifest = load_manifest(args.manifest, allowed_quantizations)
         for role in ("model", "adapter"):
             entry = manifest["files"][role]
             artifact = args.model_dir / entry["name"]

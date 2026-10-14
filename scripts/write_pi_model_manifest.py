@@ -23,6 +23,9 @@ def main() -> int:
     parser.add_argument("--llama-commit", required=True)
     parser.add_argument("--model", type=Path, required=True)
     parser.add_argument("--adapter", type=Path, required=True)
+    parser.add_argument(
+        "--quantization", choices=("Q4_K_M", "Q5_K_M"), default="Q4_K_M"
+    )
     args = parser.parse_args()
     if len(args.llama_commit) != 40 or any(c not in "0123456789abcdef" for c in args.llama_commit):
         parser.error("--llama-commit must be a full lowercase Git commit")
@@ -35,7 +38,7 @@ def main() -> int:
         "llama_cpp_commit": args.llama_commit,
         "base_model": "Qwen3-4B-Instruct-2507",
         "adapter": "judgment-qwen3-4b-failure-focus-v0.2-d",
-        "quantization": "Q4_K_M",
+        "quantization": args.quantization,
         "files": {
             "model": {"name": args.model.name, "size": args.model.stat().st_size,
                       "sha256": digest(args.model)},

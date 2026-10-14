@@ -1,0 +1,20 @@
+{
+  "schema_version": "pi5-judgment-model-manifest-v0.1",
+  "created_at": "2026-10-12T10:20:34.810197+00:00",
+  "llama_cpp_commit": "77757a34672a888845a09ab45728b8d34aa475ff",
+  "base_model": "Qwen3-4B-Instruct-2507",
+  "adapter": "judgment-qwen3-4b-failure-focus-v0.2-d",
+  "quantization": "Q4_K_M",
+  "files": {
+    "model": {
+      "name": "Qwen3-4B-Instruct-2507-Q4_K_M.gguf",
+      "size": 2497278976,
+      "sha256": "e6be9e75aa4a4bbf13c3a7b86ac16c53a76f993a649190df3063a7edc1c0de11"
+    },
+    "adapter": {
+      "name": "judgment-v0.2-d-f16.gguf",
+      "size": 66095616,
+      "sha256": "e513c35c51b02f19ece2890337dde242e019fed1b8ccff8a9b5d1a027b4749d2"
+    }
+  }
+}

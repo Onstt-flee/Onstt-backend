@@ -19,6 +19,7 @@ import models
 
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 EVENT_TYPES = {"session", "utterance", "judgment"}
+ALLOWED_EDGE_QUANTIZATIONS = frozenset({"Q4_K_M", "Q5_K_M"})
 ERROR_TYPES = {
     "particle_misuse", "verb_conjugation", "adjective_conjugation",
     "copula_conjugation", "modifier_connection", "tense_mismatch",
@@ -55,6 +56,14 @@ def configured_node_id() -> str:
         return str(UUID(raw))
     except (ValueError, AttributeError) as exc:
         raise EdgeConfigurationError("EDGE_NODE_ID must be a UUID when EDGE_MODE=true") from exc
+
+
+def configured_quantization() -> str:
+    value = os.getenv("EDGE_QUANTIZATION", "Q4_K_M").strip()
+    if value not in ALLOWED_EDGE_QUANTIZATIONS:
+        allowed = ", ".join(sorted(ALLOWED_EDGE_QUANTIZATIONS))
+        raise EdgeConfigurationError(f"EDGE_QUANTIZATION must be one of: {allowed}")
+    return value
 
 
 def sync_token_valid(authorization: str | None) -> bool:
@@ -156,7 +165,7 @@ def enqueue_judgment(
         "latency_ms": judgment.latency_ms,
         "context": judgment.context,
         "learner_level": judgment.learner_level,
-        "quantization": "Q4_K_M",
+        "quantization": configured_quantization(),
         "model_sha256": model_hash,
         "adapter_sha256": adapter_hash,
     })
@@ -323,8 +332,9 @@ def _create_remote_entity(
         raise EdgeEventRejected("contract_version must be judgment-v0.2")
     if payload.get("learner_level") not in {"N5", "N4"}:
         raise EdgeEventRejected("learner_level must be N5 or N4")
-    if payload.get("quantization") != "Q4_K_M":
-        raise EdgeEventRejected("quantization must be Q4_K_M")
+    if payload.get("quantization") not in ALLOWED_EDGE_QUANTIZATIONS:
+        allowed = ", ".join(sorted(ALLOWED_EDGE_QUANTIZATIONS))
+        raise EdgeEventRejected(f"quantization must be one of: {allowed}")
     for field in ("model_sha256", "adapter_sha256"):
         if not isinstance(payload.get(field), str) or not SHA256_RE.fullmatch(payload[field]):
             raise EdgeEventRejected(f"{field} must be lowercase SHA-256")

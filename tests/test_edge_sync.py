@@ -39,6 +39,7 @@ class EdgeSyncTests(unittest.TestCase):
             "EDGE_NODE_ID": NODE_ID,
             "EDGE_MODEL_SHA256": HASH_A,
             "EDGE_ADAPTER_SHA256": HASH_B,
+            "EDGE_QUANTIZATION": "Q4_K_M",
             "EDGE_SYNC_ENABLED": "true",
             "EDGE_SYNC_TOKEN": TOKEN,
         }, clear=False)
@@ -115,6 +116,23 @@ class EdgeSyncTests(unittest.TestCase):
         again = main.sync_edge_events(request, f"Bearer {TOKEN}", self.remote)
         self.assertEqual({item["status"] for item in again["results"]}, {"duplicate"})
         self.assertEqual(self.remote.query(models.JudgmentResult).count(), 1)
+
+    def test_q5_candidate_provenance_is_preserved(self):
+        with patch.dict(os.environ, {"EDGE_QUANTIZATION": "Q5_K_M"}, clear=False):
+            self.create_local_bundle()
+            request, events = self.request()
+            self.assertEqual(events[2]["payload"]["quantization"], "Q5_K_M")
+            response = main.sync_edge_events(request, f"Bearer {TOKEN}", self.remote)
+        self.assertEqual(response["results"][2]["status"], "accepted")
+        receipt = self.remote.query(models.EdgeSyncReceipt).filter_by(
+            event_type="judgment"
+        ).one()
+        self.assertEqual(json.loads(receipt.provenance)["quantization"], "Q5_K_M")
+
+    def test_invalid_edge_quantization_fails_closed(self):
+        with patch.dict(os.environ, {"EDGE_QUANTIZATION": "Q6_K"}, clear=False):
+            with self.assertRaisesRegex(edge_sync.EdgeConfigurationError, "Q4_K_M"):
+                self.create_local_bundle()
 
     def test_same_event_with_different_payload_is_conflict(self):
         self.create_local_bundle()

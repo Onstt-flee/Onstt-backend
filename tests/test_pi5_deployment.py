@@ -33,6 +33,18 @@ class Pi5DeploymentTests(unittest.TestCase):
             }), encoding="utf-8")
             self.assertEqual(load_manifest(manifest)["quantization"], "Q4_K_M")
             manifest.write_text(json.dumps({
+                "schema_version": "pi5-judgment-model-manifest-v0.1",
+                "quantization": "Q5_K_M",
+            }), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "Q4_K_M"):
+                load_manifest(manifest)
+            self.assertEqual(
+                load_manifest(manifest, frozenset({"Q4_K_M", "Q5_K_M"}))[
+                    "quantization"
+                ],
+                "Q5_K_M",
+            )
+            manifest.write_text(json.dumps({
                 "schema_version": "wrong", "quantization": "Q4_K_M"
             }), encoding="utf-8")
             with self.assertRaises(ValueError):

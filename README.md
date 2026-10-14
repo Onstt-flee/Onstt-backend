@@ -6,7 +6,9 @@
 
 ## 현재 개발 상태와 문서 안내
 
-기준일은 2026-10-12입니다. v0.2-D는 봉인된 `holdout_v0.3` 안전 기준을 통과했고, 기존 50건과 겹치지 않는 실제 저장 STT 100건 shadow에서도 최종 출력 계약 99/100, 재시도율 1%, 성공 99건 p95 1108.711ms로 제한적 staging/shadow 기준을 통과했습니다. 원문 보존 위반 1건은 1회 재시도 후에도 실패해 503 차단 대상으로 남았습니다. sudo 없는 사용자 systemd, 최대 64건·TTL 30초의 단일 consumer 큐와 1 req/s·burst 1의 비식별 admission을 구현했습니다. 합성 rate probe 100건에서 기존 `/analyze` 응답은 100/100 성공했고, shadow 성공 23건·`sampled_out` 77건·failure/drop 0건을 확인했습니다. 기능 플래그 기본 비활성과 학습자 노출 미승인을 유지합니다. 후속 v0.2-I는 안전성 회귀로 미채택했고, 봉인된 `holdout_v0.4`의 D/F 단독 1회 비교에서는 허용 교정문이 D 32/50·F 36/50으로 사전 40/50 기준을 모두 실패했습니다. v0.4는 소비 완료됐으며 최종 운영 승격 후보는 없습니다. 마지막 v0.2-J는 소비된 v0.4를 학습 전용으로 편입해 45-step 학습했고, v0.5에서 정확히 한 번 평가했습니다. 구조 120/120·재현율 92%·복합 오류 6/10은 개선됐지만 과교정 3/50·정밀도 92%·허용 교정문 36/50으로 사전 기준을 실패해 미채택했습니다. v0.5는 소비 완료됐고 LoRA 반복은 종료했습니다.
+기준일은 2026-10-13입니다. v0.2-D는 봉인된 `holdout_v0.3` 안전 기준을 통과했고, 기존 50건과 겹치지 않는 실제 저장 STT 100건 shadow에서도 최종 출력 계약 99/100, 재시도율 1%, 성공 99건 p95 1108.711ms로 제한적 staging/shadow 기준을 통과했습니다. 원문 보존 위반 1건은 1회 재시도 후에도 실패해 503 차단 대상으로 남았습니다. sudo 없는 사용자 systemd, 최대 64건·TTL 30초의 단일 consumer 큐와 1 req/s·burst 1의 비식별 admission을 구현했습니다. 합성 rate probe 100건에서 기존 `/analyze` 응답은 100/100 성공했고, shadow 성공 23건·`sampled_out` 77건·failure/drop 0건을 확인했습니다. 기능 플래그 기본 비활성과 학습자 노출 미승인을 유지합니다. 후속 v0.2-I는 안전성 회귀로 미채택했고, 봉인된 `holdout_v0.4`의 D/F 단독 1회 비교에서는 허용 교정문이 D 32/50·F 36/50으로 사전 40/50 기준을 모두 실패했습니다. v0.4는 소비 완료됐으며 최종 운영 승격 후보는 없습니다. 마지막 v0.2-J는 소비된 v0.4를 학습 전용으로 편입해 45-step 학습했고, v0.5에서 정확히 한 번 평가했습니다. 구조 120/120·재현율 92%·복합 오류 6/10은 개선됐지만 과교정 3/50·정밀도 92%·허용 교정문 36/50으로 사전 기준을 실패해 미채택했습니다. Pi용 Q4_K_M+GGUF LoRA 변환과 로딩은 성공했지만 dev72 구조 계약이 71/72로 필수 72/72 기준에 한 건 미달해 Pi 50건 성능 게이트는 보류했습니다. v0.5는 소비 완료됐고 LoRA 반복은 종료했습니다.
+
+후속 Q5_K_M 후보는 동일 dev72에서 구조 계약과 GPU BF16 판단 일치 72/72로 양자화 회귀 게이트를 통과했습니다. 다만 Pi 5 실장비의 50건 p95·RSS·발열 시험 전이므로 Q4 배포 기본값은 유지하고 Q5는 명시적 벤치마크 후보로만 관리합니다.
 
 현재 선택은 다음과 같습니다.
 
@@ -74,7 +76,8 @@
 | v0.2-J 학습 결과·v0.5 규약 | [`training/judgment/V0.2_J_TRAIN_RESULT.md`](training/judgment/V0.2_J_TRAIN_RESULT.md) | 45-step 손실·어댑터 해시, v0.5 단일 실행 절대 기준과 LoRA 종료 조건 |
 | v0.2-J·v0.5 최종 결과 | [`training/judgment/V0.2_J_HOLDOUT_V0.5_RESULT.md`](training/judgment/V0.2_J_HOLDOUT_V0.5_RESULT.md) | 단일 실행 수치·실패 유형·미채택 및 LoRA 반복 종료 결정 |
 | 결정론적 경계 게이트 v0.1 | [`training/judgment/DETERMINISTIC_BOUNDARY_GATE_V0.1_RESULT.md`](training/judgment/DETERMINISTIC_BOUNDARY_GATE_V0.1_RESULT.md) | 빈 입력·비일본어 사전 라우팅과 STT advisory 분리, D/H replay·운영 미통합 근거 |
-| Raspberry Pi 5 병행 배포 | [`deployment/judgment-pi5/README.md`](deployment/judgment-pi5/README.md) | GPU 원본 보존, Q4_K_M+LoRA 변환, Pi preflight, 수동 전환, 멱등 outbox 동기화와 성능 게이트 |
+| Raspberry Pi 5 병행 배포 | [`deployment/judgment-pi5/README.md`](deployment/judgment-pi5/README.md) | GPU 원본 보존, Q4 기본값·Q5 명시적 후보, Pi preflight, 수동 전환, 멱등 outbox 동기화와 성능 게이트 |
+| Pi Q4/Q5 GGUF·dev72 결과 | [`deployment/judgment-pi5/GPU_CONVERSION_AND_DEV72_RESULT.md`](deployment/judgment-pi5/GPU_CONVERSION_AND_DEV72_RESULT.md) | Q4 계약 1건 미달, Q5 구조·GPU 판단 72/72 통과, Pi 성능시험 후보와 해시 |
 | 문법 판단 경계 정의 | [`evaluation/judgment/BOUNDARY_GUIDELINES.md`](evaluation/judgment/BOUNDARY_GUIDELINES.md) | 필러·문체·표기·STT·문맥 판단 원칙 |
 | 사람 검수 절차 | [`evaluation/judgment/REVIEW_PROCESS.md`](evaluation/judgment/REVIEW_PROCESS.md) | 사용자 검수와 전문가 검수의 구분 및 절차 |
 | 최종 검수 기준·주의 사례 | [`evaluation/judgment/FINAL_REVIEW_GUIDE.md`](evaluation/judgment/FINAL_REVIEW_GUIDE.md) | 추측 교정 금지, 번역·복구·스타일 분리 원칙 |

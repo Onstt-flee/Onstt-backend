@@ -29,12 +29,16 @@ class Pi5DeploymentTemplateTests(unittest.TestCase):
 
     def test_examples_are_placeholder_only_and_gpu_remains_default(self):
         pi = (DEPLOY / "pi5.env.example").read_text()
+        q5 = (DEPLOY / "pi5-q5-candidate.env.example").read_text()
         gpu = (DEPLOY / "gpu-sync.env.example").read_text()
         self.assertIn("EDGE_MODE=true", pi)
+        self.assertIn("EDGE_QUANTIZATION=Q4_K_M", pi)
+        self.assertIn("EDGE_QUANTIZATION=Q5_K_M", q5)
+        self.assertIn("Qwen3-4B-Instruct-2507-Q5_K_M.gguf", q5)
         self.assertIn("EDGE_SYNC_ENABLED=true", gpu)
         self.assertIn("EDGE_MODE=false", gpu)
-        self.assertIn("CHANGE_ME", pi + gpu)
-        self.assertNotIn("BEGIN PRIVATE KEY", pi + gpu)
+        self.assertIn("CHANGE_ME", pi + q5 + gpu)
+        self.assertNotIn("BEGIN PRIVATE KEY", pi + q5 + gpu)
 
     def test_model_and_api_units_are_manual_but_sync_timer_is_explicit(self):
         model = (DEPLOY / "user/judgment-pi5-llama.service").read_text()
@@ -46,6 +50,13 @@ class Pi5DeploymentTemplateTests(unittest.TestCase):
         installer = (DEPLOY / "install-user-services.sh").read_text()
         self.assertNotIn("enable --now", installer)
         self.assertNotIn("systemctl --user start", installer)
+
+    def test_regression_and_benchmark_outputs_follow_active_quantization(self):
+        for name in ("run-dev72-regression.sh", "run-benchmark-50.sh"):
+            script = (DEPLOY / name).read_text()
+            self.assertIn('quantization="${EDGE_QUANTIZATION:-Q4_K_M}"', script)
+            self.assertIn('Q5_K_M) quantization_slug="q5"', script)
+            self.assertIn("${quantization_slug}", script)
 
 
 if __name__ == "__main__":

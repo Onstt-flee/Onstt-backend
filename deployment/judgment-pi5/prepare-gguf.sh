@@ -25,7 +25,7 @@ quantize_bin="${LLAMA_QUANTIZE_BIN:-$LLAMA_CPP_DIR/build/bin/llama-quantize}"
   "$LORA_DIR" --base "$BASE_MODEL_DIR" --outfile "$adapter" --outtype f16
 "$python_bin" -B -m scripts.write_pi_model_manifest \
   --output "$OUTPUT_DIR/pi5-model-manifest.json" \
-  --llama-commit "$llama_commit" --model "$q4" --adapter "$adapter"
+  --llama-commit "$llama_commit" --model "$q4" --adapter "$adapter" \
+  --quantization Q4_K_M
 
 echo "GGUF conversion completed; original HF and PEFT directories were not modified."
-

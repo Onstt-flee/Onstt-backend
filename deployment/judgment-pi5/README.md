@@ -1,9 +1,11 @@
 # Raspberry Pi 5 16GB 판단모델 병행 배포
 
+> 2026-10-13 현재: Q4는 dev72 구조 계약 71/72로 실패했다. 별도 Q5_K_M 후보는 구조·GPU 판단 일치 72/72로 양자화 회귀 게이트를 통과했지만 Pi 실측 전이므로 배포 기본값은 Q4로 유지한다. 실제 해시와 비교는 [Q4/Q5 변환·dev72 결과](GPU_CONVERSION_AND_DEV72_RESULT.md)를 따른다.
+
 ## 안전 경계
 
 - GPU의 HF BF16 베이스와 PEFT v0.2-D 어댑터는 수정하거나 덮어쓰지 않는다.
-- Pi는 `Q4_K_M GGUF + F16 GGUF LoRA` 파생본만 사용한다.
+- Pi 기본값은 `Q4_K_M GGUF + F16 GGUF LoRA`이며, Q5는 명시적 후보 환경과 preflight 옵션으로만 시험한다.
 - GPU API가 최종 데이터 원본이며, Pi 전환은 자동 failover가 아니라 수동 프로필 선택이다.
 - 이 구성은 기존의 “제한적 staging/shadow 후보” 상태를 운영 승인으로 바꾸지 않는다.
 - 모델·어댑터·원시 실행 JSONL·Pi SQLite는 Git에 올리지 않는다.
@@ -52,6 +54,19 @@ uv pip install --python venv/bin/python -r requirements.txt
 ```
 
 GPU 산출물을 `/mnt/nvme/judgment-models/qwen3-4b-v02d/`에 복사한다. rsync 또는 scp 전송 후 반드시 manifest로 다시 검증한다.
+
+Q5 후보는 GPU 서버에서 다음 세 파일만 Pi로 전송한다. `<PI_HOST>`는 실제 private/VPN 주소로 바꾼다. 모델과 원시 평가 결과는 Git을 거치지 않는다.
+
+```bash
+ssh <PI_HOST> 'mkdir -p /mnt/nvme/judgment-models/qwen3-4b-v02d-q5'
+rsync -avP \
+  /home/cap-minsung/lora-adapter-bank/pi5/qwen3-4b-v02d-q5/Qwen3-4B-Instruct-2507-Q5_K_M.gguf \
+  /home/cap-minsung/lora-adapter-bank/pi5/qwen3-4b-v02d/judgment-v0.2-d-f16.gguf \
+  deployment/judgment-pi5/model-manifest.q5-candidate.json \
+  <PI_HOST>:/mnt/nvme/judgment-models/qwen3-4b-v02d-q5/
+```
+
+Pi에서 manifest 이름을 그대로 사용해 검사하며, 파일을 임의로 재명명하지 않는다.
 
 ## 3. 환경과 preflight
 
@@ -105,6 +120,30 @@ deployment/judgment-pi5/run-benchmark-50.sh "$HOME/pi5-evaluation/benchmark50"
 
 dev72 게이트는 구조 99%, GPU 판단 일치 95%, 신규 과교정 최대 1건, 허용 교정 감소 최대 2건, 보류→교정 0건을 검사한다. 50건 게이트는 계약 50/50, p95 45초, peak RSS 10GiB 이하, throttling 0을 요구한다. 원시 JSONL은 문장을 포함하므로 Git에 넣지 않는다.
 
+Q5 후보를 Pi에서 시험할 때는 `model-manifest.q5-candidate.json`과 Q5 모델 파일을 같은 NVMe 디렉터리에 둔다. 기본 preflight는 Q5를 거부하므로 후보 시험임을 다음처럼 명시해야 한다.
+
+Q5 시험 환경은 `pi5-q5-candidate.env.example`을 복사해 사용한다. 이 파일은 실제 Q5/LoRA 해시와 `EDGE_QUANTIZATION=Q5_K_M`을 함께 고정해 outbox 출처가 Q4로 잘못 기록되는 것을 막는다.
+
+```bash
+source "$HOME/.config/stt-api/judgment-pi5.env"
+venv/bin/python -B -m scripts.check_pi5_deployment \
+  --manifest "$PI_MODEL_DIR/model-manifest.q5-candidate.json" \
+  --model-dir "$PI_MODEL_DIR" \
+  --llama-server "$HOME/.local/bin/llama-server" \
+  --allow-candidate-q5
+```
+
+Q5가 Pi 50건 게이트를 통과하기 전에는 Q4 기본 환경 예제와 서비스 기본 모델 파일을 Q5로 변경하지 않는다.
+
+50건 시험은 활성 환경을 현재 셸에 불러온 뒤 실행한다. 요약 JSON에는 Q4/Q5 구분, 모델·어댑터·원시 실행 SHA-256, p50/p95, peak RSS와 throttling 전후 값만 남고 문장 내용은 포함되지 않는다.
+
+```bash
+set -a
+source "$HOME/.config/stt-api/judgment-pi5.env"
+set +a
+deployment/judgment-pi5/run-benchmark-50.sh "$HOME/pi5-evaluation/benchmark50"
+```
+
 ## 6. GPU 동기화 활성화
 
 GPU API 환경에 `gpu-sync.env.example`의 값을 반영하고 API를 재시작한다. 새 테이블은 기존 테이블을 변경하지 않고 `create_all`로 추가된다.
@@ -137,4 +176,3 @@ systemctl --user stop stt-api-pi5-sync.timer stt-api-pi5.service judgment-pi5-ll
 ```
 
 STT 클라이언트를 `gpu.env`로 되돌린다. Pi DB와 모델은 삭제하지 않는다. GPU의 기존 vLLM unit, HF 모델, PEFT LoRA, `/analyze`와 `/judgment` 계약에는 롤백 변경이 없다.
-
