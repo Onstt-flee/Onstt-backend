@@ -1,5 +1,16 @@
 # STT API 진행사항 및 일본어 판단모델 개발 방향
 
+## 2026-10-14 GPU 피드백 검수모델 기반 구현
+
+- 기존 판단을 변경하지 않는 `feedback-v0.1` 엄격 계약과 source-blind 입력을 구현했다.
+- GPU/Pi provenance, 영속 audit job, audit 결과 테이블과 원자적 enqueue를 추가했다.
+- 별도 worker의 lease와 1분→5분→30분 최대 3회 재시도, 내용 없는 실패 범주를 구현했다.
+- Bearer 보호 관리자 audit·issue 집계·retry·health·실제 모델 alias readiness API를 추가했다.
+- Qwen3-4B 0.30 + Qwen3-8B 0.50 듀얼 vLLM 및 worker systemd 템플릿을 추가했으며 기본 비활성이다.
+- feedback holdout 120건을 SHA-256 `21f23d97...1a1eb1`로 추론 0회 봉인했다.
+- 별도 자동검증 학습쌍 600건(train 540/eval 60)을 만들었고 holdout 원문 중복은 0건이다.
+- 전체 회귀 테스트 311개를 통과했다. 피드백 8B 기준선, LoRA 학습, 독립 평가와 200건 shadow는 아직 실행하지 않았다.
+
 ## 2026-10-13 Pi용 Q4 실패·Q5 양자화 회귀 통과
 
 - llama.cpp `77757a3`으로 Qwen3-4B-Instruct-2507을 Q4_K_M GGUF(2,497,278,976바이트, SHA-256 `e6be9e75...de11`)로, v0.2-D를 F16 GGUF LoRA(66,095,616바이트, SHA-256 `e513c35c...49d2`)로 변환했다. HF BF16·PEFT 원본은 변경하지 않았다.

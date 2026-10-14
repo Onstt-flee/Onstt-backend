@@ -7,6 +7,7 @@ from sqlalchemy.orm import Session
 import models
 import schemas
 import edge_sync
+from analyzer import feedback_store
 
 
 def create_user(db: Session, user: schemas.UserCreate):
@@ -212,6 +213,7 @@ def create_judgment(db: Session, utterance_id: int, judgment_data: dict):
     try:
         db.add(db_judgment)
         db.flush()
+        feedback_store.record_gpu_judgment(db, db_judgment, judgment_data)
         edge_sync.enqueue_judgment(db, db_judgment, judgment_data)
         db.commit()
     except Exception:

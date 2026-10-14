@@ -15,6 +15,7 @@ from sqlalchemy import case
 from sqlalchemy.orm import Session
 
 import models
+from analyzer import feedback_store
 
 
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
@@ -358,6 +359,7 @@ def _create_remote_entity(
     )
     db.add(row)
     db.flush()
+    feedback_store.record_edge_judgment(db, row, node_id, payload)
     provenance = {
         "quantization": payload["quantization"],
         "model_sha256": payload["model_sha256"],

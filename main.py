@@ -1,6 +1,7 @@
 # main.py
 
 import asyncio
+import hmac
 import os
 
 from fastapi import FastAPI, BackgroundTasks, Depends, Header, HTTPException, Response
@@ -11,6 +12,8 @@ import models
 import schemas
 import crud
 import edge_sync
+from analyzer import feedback_admin, feedback_store
+from analyzer.feedback_runtime import readiness_snapshot as feedback_readiness_snapshot
 from database import engine, get_db
 from analyzer.pipeline import analyze as run_analysis
 from analyzer.judgment_service import (
@@ -82,6 +85,11 @@ def initialize_database():
         ])
     if edge_remote:
         tables.append(models.EdgeSyncReceipt.__table__)
+    if not edge_local:
+        tables.extend([
+            models.JudgmentProvenance.__table__, models.FeedbackAuditJob.__table__,
+            models.FeedbackAudit.__table__,
+        ])
     models.Base.metadata.create_all(bind=engine, tables=tables)
 
 
@@ -96,6 +104,61 @@ def health_check():
         "status": "ok",
         "message": "STT API server is running"
     }
+
+
+def require_feedback_admin(authorization: str | None = Header(None)):
+    token = os.getenv("FEEDBACK_ADMIN_TOKEN", "")
+    if len(token) < 32:
+        raise HTTPException(status_code=503, detail="Feedback admin token is not configured")
+    supplied = authorization.removeprefix("Bearer ") if authorization else ""
+    if not authorization or not authorization.startswith("Bearer ") or not hmac.compare_digest(supplied, token):
+        raise HTTPException(status_code=401, detail="Invalid feedback admin token",
+                            headers={"WWW-Authenticate": "Bearer"})
+    if not feedback_store.feedback_enabled():
+        raise HTTPException(status_code=503, detail="Feedback audit is disabled")
+    error = feedback_store.configuration_error()
+    if error:
+        raise HTTPException(status_code=503, detail=f"Feedback configuration error: {error}")
+
+
+@app.get("/health/feedback", tags=["Feedback Admin"], summary="피드백 검수 집계 상태")
+def feedback_health(_: None = Depends(require_feedback_admin), db: Session = Depends(get_db)):
+    return feedback_admin.monitoring_snapshot(db)
+
+
+@app.get("/ready/feedback", tags=["Feedback Admin"], summary="피드백 검수 readiness")
+def feedback_readiness(response: Response, _: None = Depends(require_feedback_admin)):
+    result = feedback_readiness_snapshot()
+    if not result["ready"]:
+        response.status_code = 503
+    return result
+
+
+@app.get("/admin/feedback/audits", tags=["Feedback Admin"])
+def feedback_audits(limit: int = 100, _: None = Depends(require_feedback_admin), db: Session = Depends(get_db)):
+    if not 1 <= limit <= 500:
+        raise HTTPException(status_code=422, detail="limit must be between 1 and 500")
+    return feedback_admin.list_audits(db, limit=limit)
+
+
+@app.get("/admin/feedback/audits/{judgment_id}", tags=["Feedback Admin"])
+def feedback_audit_detail(judgment_id: int, _: None = Depends(require_feedback_admin), db: Session = Depends(get_db)):
+    result = feedback_admin.audit_detail(db, judgment_id)
+    if result is None:
+        raise HTTPException(status_code=404, detail="Feedback audit not found")
+    return result
+
+
+@app.get("/admin/feedback/issues", tags=["Feedback Admin"])
+def feedback_issues(_: None = Depends(require_feedback_admin), db: Session = Depends(get_db)):
+    return feedback_admin.issue_groups(db)
+
+
+@app.post("/admin/feedback/audits/{judgment_id}/retry", tags=["Feedback Admin"])
+def retry_feedback_audit(judgment_id: int, _: None = Depends(require_feedback_admin), db: Session = Depends(get_db)):
+    if not feedback_admin.retry_job(db, judgment_id):
+        raise HTTPException(status_code=409, detail="Audit job is absent or already succeeded")
+    return {"judgment_id": judgment_id, "status": "pending"}
 
 
 @app.get(

@@ -108,6 +108,69 @@ class JudgmentResult(Base):
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
 
+class JudgmentProvenance(Base):
+    """Runtime provenance kept separate from the immutable judgment result."""
+
+    __tablename__ = "judgment_provenance"
+
+    judgment_id = Column(Integer, ForeignKey("judgment_results.id"), primary_key=True)
+    runtime = Column(String(16), nullable=False)
+    node_id = Column(String(36), nullable=True)
+    quantization = Column(String(32), nullable=True)
+    judgment_model = Column(Text, nullable=False)
+    judgment_adapter = Column(Text, nullable=False)
+    model_sha256 = Column(String(64), nullable=True)
+    adapter_sha256 = Column(String(64), nullable=True)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+
+class FeedbackAuditJob(Base):
+    """Persistent, lease-based queue for source-blind feedback audits."""
+
+    __tablename__ = "feedback_audit_jobs"
+    __table_args__ = (
+        UniqueConstraint("judgment_id", "feedback_model_hash", "contract_version", name="uq_feedback_job_version"),
+    )
+
+    id = Column(Integer, primary_key=True)
+    judgment_id = Column(Integer, ForeignKey("judgment_results.id"), nullable=False, index=True)
+    feedback_model = Column(Text, nullable=False)
+    feedback_adapter = Column(Text, nullable=False)
+    feedback_model_hash = Column(String(64), nullable=False)
+    contract_version = Column(String(32), nullable=False)
+    status = Column(String(16), nullable=False, default="pending", index=True)
+    attempts = Column(Integer, nullable=False, default=0)
+    lease_expires_at = Column(DateTime(timezone=True), nullable=True)
+    next_attempt_at = Column(DateTime(timezone=True), nullable=False)
+    error_category = Column(String(32), nullable=True)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
+
+
+class FeedbackAudit(Base):
+    """Verifier output; never overwrites its linked judgment."""
+
+    __tablename__ = "feedback_audits"
+    __table_args__ = (
+        UniqueConstraint("judgment_id", "feedback_model_hash", "contract_version", name="uq_feedback_audit_version"),
+    )
+
+    id = Column(Integer, primary_key=True)
+    judgment_id = Column(Integer, ForeignKey("judgment_results.id"), nullable=False, index=True)
+    verdict = Column(String(16), nullable=False, index=True)
+    issue_codes = Column(Text, nullable=False)
+    recommended_judgment = Column(Text, nullable=True)
+    recommended_edits = Column(Text, nullable=False)
+    review_reason_ko = Column(Text, nullable=False)
+    feedback_model = Column(Text, nullable=False)
+    feedback_adapter = Column(Text, nullable=False)
+    feedback_model_hash = Column(String(64), nullable=False)
+    contract_version = Column(String(32), nullable=False)
+    provenance_snapshot = Column(Text, nullable=False)
+    latency_ms = Column(Float, nullable=True)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+
 class EdgeEntityIdentity(Base):
     """Stable UUID assigned to a local SQLite entity on an edge node."""
 

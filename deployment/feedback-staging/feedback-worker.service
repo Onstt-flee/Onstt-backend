@@ -1,0 +1,22 @@
+[Unit]
+Description=Persistent feedback audit worker
+After=feedback-vllm.service
+Requires=feedback-vllm.service
+
+[Service]
+Type=simple
+User=cap-minsung
+Group=cap-minsung
+WorkingDirectory=/home/cap-minsung/stt_api
+EnvironmentFile=/etc/stt-api/feedback-staging.env
+ExecStart=/home/cap-minsung/stt_api/venv/bin/python /home/cap-minsung/stt_api/scripts/run_feedback_worker.py
+UMask=0077
+Restart=on-failure
+RestartSec=10
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=read-only
+ProtectSystem=full
+
+[Install]
+WantedBy=multi-user.target

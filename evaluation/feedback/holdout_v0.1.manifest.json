@@ -1,0 +1,12 @@
+{
+  "dataset": "holdout_v0.1.jsonl",
+  "model_inference_count": 0,
+  "records": 120,
+  "review_status": "generated_validated",
+  "schema_version": "feedback-holdout-manifest-v0.1",
+  "sha256": "21f23d97b141652d6f53dff3d02b68ad0b3ffc902660ffe88b1b7212599a1eb1",
+  "source_counts": {
+    "gpu_bf16": 60,
+    "pi_gguf": 60
+  }
+}

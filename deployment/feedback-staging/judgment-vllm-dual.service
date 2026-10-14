@@ -1,0 +1,24 @@
+[Unit]
+Description=Judgment Qwen3-4B vLLM server for dual-model staging
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=cap-minsung
+Group=cap-minsung
+Environment=VLLM_USE_FLASHINFER_SAMPLER=0
+ExecStart=/home/cap-minsung/lora-adapter-bank/envs/qwen3-peft/bin/vllm serve /home/cap-minsung/lora-adapter-bank/base-models/qwen3-4b-instruct-2507-hf --host 127.0.0.1 --port 1234 --dtype bfloat16 --max-model-len 4096 --gpu-memory-utilization 0.30 --generation-config vllm --enable-lora --lora-modules judgment-v02d=/home/cap-minsung/lora-adapter-bank/adapters/judgment-qwen3-4b-failure-focus-v0.2-d
+UMask=0027
+Restart=on-failure
+RestartSec=10
+TimeoutStartSec=600
+TimeoutStopSec=90
+KillSignal=SIGINT
+NoNewPrivileges=true
+PrivateDevices=false
+ProtectHome=read-only
+ProtectSystem=full
+
+[Install]
+WantedBy=multi-user.target

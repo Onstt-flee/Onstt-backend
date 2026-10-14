@@ -1,0 +1,11 @@
+{
+  "eval_records": 60,
+  "eval_sha256": "1acb17bce521866e29f7b58f83c124ec0de1bfa96f0b04adbc69c471fcff15b8",
+  "holdout_used": false,
+  "records": 600,
+  "review_status": "generated_validated",
+  "schema_version": "feedback-training-manifest-v0.1",
+  "source_sha256": "2f39a7988912733cdff88877c55702fb3eb8c01eadab38907c10428a6629006f",
+  "train_records": 540,
+  "train_sha256": "c51f4e8dd211d2b7cd0f615ceb62d7218ec12de9d0dcd0bbe37f1fcda05397f0"
+}

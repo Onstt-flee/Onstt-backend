@@ -1,0 +1,28 @@
+[Unit]
+Description=Feedback verifier Qwen3-8B vLLM server
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=cap-minsung
+Group=cap-minsung
+Environment=VLLM_USE_FLASHINFER_SAMPLER=0
+Environment=XDG_CACHE_HOME=/var/cache/stt-api-feedback-vllm
+Environment=CUDA_CACHE_PATH=/var/cache/stt-api-feedback-vllm/cuda
+ExecStart=/home/cap-minsung/lora-adapter-bank/envs/qwen3-peft/bin/vllm serve /home/cap-minsung/lora-adapter-bank/base-models/qwen3-8b-hf --host 127.0.0.1 --port 1235 --dtype bfloat16 --max-model-len 4096 --gpu-memory-utilization 0.50 --max-num-seqs 1 --generation-config vllm --enable-lora --lora-modules feedback-qwen3-8b-v01=/home/cap-minsung/lora-adapter-bank/adapters/feedback-verifier-v0.1
+CacheDirectory=stt-api-feedback-vllm
+CacheDirectoryMode=0750
+UMask=0027
+Restart=on-failure
+RestartSec=10
+TimeoutStartSec=600
+TimeoutStopSec=90
+KillSignal=SIGINT
+NoNewPrivileges=true
+PrivateDevices=false
+ProtectHome=read-only
+ProtectSystem=full
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,19 @@
+{
+  "consumed": false,
+  "contract_version": "feedback-v0.1",
+  "dataset_sha256": "21f23d97b141652d6f53dff3d02b68ad0b3ffc902660ffe88b1b7212599a1eb1",
+  "max_tokens": 512,
+  "schema_version": "feedback-holdout-protocol-v0.1",
+  "single_use": true,
+  "temperature": 0.0,
+  "thresholds": {
+    "accepted_correction_rate_min": 0.8,
+    "contract_success_rate_min": 0.99,
+    "disagreement_precision_min": 0.95,
+    "disagreement_recall_min": 0.8,
+    "false_disagreement_rate_max": 0.02,
+    "p95_latency_seconds_max": 5.0,
+    "recommended_decision_accuracy_min": 0.9,
+    "source_metric_gap_pp_max": 5.0
+  }
+}

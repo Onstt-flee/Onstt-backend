@@ -43,6 +43,7 @@ def load_config(path: Path) -> dict:
         raise ValueError(f"Invalid config keys; missing={missing}, extra={extra}")
     if config["status"] not in {
         "experimental_provisional", "user_reviewed", "reviewed_with_generated",
+        "generated_validated",
     }:
         raise ValueError(
             "status must be experimental_provisional, user_reviewed, "
@@ -79,11 +80,16 @@ def load_chatml(path: Path) -> list[dict]:
                 expected = json.loads(messages[2]["content"])
             except (TypeError, json.JSONDecodeError) as exc:
                 raise ValueError(f"{path}:{line_number}: content must be JSON") from exc
-            if set(model_input) != {"context", "learner_level", "text"}:
+            valid_inputs = [
+                {"context", "learner_level", "text"},
+                {"context", "judgment", "learner_level", "text"},
+            ]
+            if set(model_input) not in valid_inputs:
                 raise ValueError(f"{path}:{line_number}: invalid model input")
             valid_v01 = {"corrected_text", "decision", "edits", "reason_ko"}
             valid_v02 = {"corrected_text", "decision", "error_types", "reason_ko"}
-            if frozenset(expected) not in {frozenset(valid_v01), frozenset(valid_v02)}:
+            valid_feedback = {"verdict", "issue_codes", "recommended_judgment", "review_reason_ko"}
+            if frozenset(expected) not in {frozenset(valid_v01), frozenset(valid_v02), frozenset(valid_feedback)}:
                 raise ValueError(f"{path}:{line_number}: invalid expected output")
             records.append(row)
     if not records:
@@ -110,6 +116,7 @@ def validate_inputs(config: dict) -> dict:
         "experimental_provisional": {"provisional"},
         "user_reviewed": {"user_reviewed"},
         "reviewed_with_generated": {"user_reviewed", "generated_validated"},
+        "generated_validated": {"generated_validated"},
     }[config["status"]]
     if source_statuses != expected_statuses:
         raise ValueError(

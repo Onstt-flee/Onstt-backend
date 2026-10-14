@@ -6,6 +6,8 @@
 
 ## 현재 개발 상태와 문서 안내
 
+2026-10-14에 GPU 전용 Qwen3-8B 피드백 검수모델의 비동기 듀얼모델 기반을 추가했습니다. 기존 판단을 덮어쓰지 않는 provenance·영속 audit queue·결과 테이블, 엄격한 `feedback-v0.1` 계약, 보호된 관리자 조회, 별도 worker와 0.30/0.50 듀얼 vLLM 배포 프로필을 구현했습니다. 120건 미사용 holdout은 추론 0회로 봉인했고, holdout과 정확 중복이 없는 자동검증 학습쌍 600건을 만들었습니다. 기능 플래그는 기본 비활성이며 피드백 LoRA 학습·평가·200건 shadow는 아직 실행하지 않았습니다. 상세 설계는 [`docs/FEEDBACK_DUAL_MODEL_DESIGN.md`](docs/FEEDBACK_DUAL_MODEL_DESIGN.md)를 참고합니다.
+
 기준일은 2026-10-13입니다. v0.2-D는 봉인된 `holdout_v0.3` 안전 기준을 통과했고, 기존 50건과 겹치지 않는 실제 저장 STT 100건 shadow에서도 최종 출력 계약 99/100, 재시도율 1%, 성공 99건 p95 1108.711ms로 제한적 staging/shadow 기준을 통과했습니다. 원문 보존 위반 1건은 1회 재시도 후에도 실패해 503 차단 대상으로 남았습니다. sudo 없는 사용자 systemd, 최대 64건·TTL 30초의 단일 consumer 큐와 1 req/s·burst 1의 비식별 admission을 구현했습니다. 합성 rate probe 100건에서 기존 `/analyze` 응답은 100/100 성공했고, shadow 성공 23건·`sampled_out` 77건·failure/drop 0건을 확인했습니다. 기능 플래그 기본 비활성과 학습자 노출 미승인을 유지합니다. 후속 v0.2-I는 안전성 회귀로 미채택했고, 봉인된 `holdout_v0.4`의 D/F 단독 1회 비교에서는 허용 교정문이 D 32/50·F 36/50으로 사전 40/50 기준을 모두 실패했습니다. v0.4는 소비 완료됐으며 최종 운영 승격 후보는 없습니다. 마지막 v0.2-J는 소비된 v0.4를 학습 전용으로 편입해 45-step 학습했고, v0.5에서 정확히 한 번 평가했습니다. 구조 120/120·재현율 92%·복합 오류 6/10은 개선됐지만 과교정 3/50·정밀도 92%·허용 교정문 36/50으로 사전 기준을 실패해 미채택했습니다. Pi용 Q4_K_M+GGUF LoRA 변환과 로딩은 성공했지만 dev72 구조 계약이 71/72로 필수 72/72 기준에 한 건 미달해 Pi 50건 성능 게이트는 보류했습니다. v0.5는 소비 완료됐고 LoRA 반복은 종료했습니다.
 
 후속 Q5_K_M 후보는 동일 dev72에서 구조 계약과 GPU BF16 판단 일치 72/72로 양자화 회귀 게이트를 통과했습니다. 다만 Pi 5 실장비의 50건 p95·RSS·발열 시험 전이므로 Q4 배포 기본값은 유지하고 Q5는 명시적 벤치마크 후보로만 관리합니다.
@@ -27,6 +29,8 @@
 | 작업 과정 | 우선 참고할 Markdown | 용도 |
 | --- | --- | --- |
 | 전체 진행 현황·완료/미완료 구분 | [`PROGRESS.md`](PROGRESS.md) | 매 작업 후 계속 갱신하는 단일 진행 현황 문서 |
+| GPU 피드백 듀얼모델 설계·구현 | [`docs/FEEDBACK_DUAL_MODEL_DESIGN.md`](docs/FEEDBACK_DUAL_MODEL_DESIGN.md) | 검수 계약, DB·worker·관리 API 경계, 봉인 데이터와 다음 실행 순서 |
+| 피드백 staging 배포 | [`deployment/feedback-staging/README.md`](deployment/feedback-staging/README.md) | A6000 듀얼 vLLM 자원 배분, 비활성 기본값, 서비스 시작·장애 처리 |
 | 평가셋 구성·실행기·채점기 사용법 | [`evaluation/judgment/README.md`](evaluation/judgment/README.md) | 72문항, 출력 계약, 재현 명령과 평가 이력 |
 | LoRA 파일럿 데이터·검수·내보내기 | [`training/judgment/README.md`](training/judgment/README.md) | 300문항 구성, 생성 근거, 검증 명령과 검수 승인 게이트 |
 | provisional LoRA 실험 결과 | [`training/judgment/PILOT_V0.1_RESULT.md`](training/judgment/PILOT_V0.1_RESULT.md) | Qwen3-4B provisional 학습 조건, 실패 분석과 해시 |
