@@ -40,6 +40,13 @@ class FeedbackHoldoutV02Tests(unittest.TestCase):
         protocol["consumed"] = True
         with self.assertRaisesRegex(ValueError, "already been consumed"):
             validate_sealed_run(protocol, "a" * 64)
+        with self.assertRaisesRegex(ValueError, "not ready for inference"):
+            validate_sealed_run({
+                "ready_for_inference": False,
+                "single_use": True,
+                "consumed": False,
+                "dataset_sha256": "a" * 64,
+            }, "a" * 64)
 
 
 if __name__ == "__main__":

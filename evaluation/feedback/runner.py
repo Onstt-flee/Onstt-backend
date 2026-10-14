@@ -15,6 +15,8 @@ def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
 def validate_sealed_run(protocol, dataset_sha256):
+    if protocol.get("ready_for_inference") is False:
+        raise ValueError("sealed protocol is not ready for inference")
     if protocol.get("single_use") and protocol.get("consumed"):
         raise ValueError("sealed protocol has already been consumed")
     if dataset_sha256 != protocol["dataset_sha256"]:

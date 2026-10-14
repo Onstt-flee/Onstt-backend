@@ -1,0 +1,46 @@
+{
+  "candidate_decision_counts": {
+    "acceptable": 43,
+    "insufficient_evidence": 13,
+    "needs_correction": 64
+  },
+  "case_type_counts": {
+    "agree": 32,
+    "audio_required_unreviewable": 8,
+    "false_negative": 12,
+    "false_positive": 11,
+    "invented_correction": 7,
+    "reason_mismatch": 11,
+    "should_abstain": 7,
+    "unnecessary_abstention": 7,
+    "wrong_correction": 10,
+    "wrong_error_type": 15
+  },
+  "dataset": "holdout_v0.3.jsonl",
+  "exact_input_overlap": {
+    "feedback_holdout_v0.1": 0,
+    "feedback_holdout_v0.2": 0,
+    "feedback_training_v0.1": 0
+  },
+  "limitations": [
+    "자동 생성·검증 내부 모델 선택용 데이터이며 운영 자격 시험이 아닙니다.",
+    "실제 Pi 출력과 외부 독립 사람 라벨이 없어 GPU/Pi 격차나 실제 품질을 주장할 수 없습니다."
+  ],
+  "missing_qualification_inputs": [
+    "actual_pi_gguf_judgments",
+    "external_independent_human_labels"
+  ],
+  "model_inference_count": 0,
+  "qualification_scope": "internal_model_selection_only",
+  "records": 120,
+  "review_status": "generated_validated",
+  "schema_version": "feedback-holdout-manifest-v0.3",
+  "sha256": "fbb6d1f53f31467f3fb2fb295cb1b9ebcbabd2ed6e64859e425222bbe70d8313",
+  "source_judgment_dataset": "evaluation/judgment/holdout_v0.4.jsonl",
+  "source_judgment_sha256": "904ca090ccd0e209f95fa68a6a3e9fd762a0009c802f7eae7670838f9558221e",
+  "verdict_counts": {
+    "agree": 32,
+    "disagree": 80,
+    "unreviewable": 8
+  }
+}

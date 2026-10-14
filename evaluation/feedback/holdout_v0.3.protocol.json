@@ -1,0 +1,30 @@
+{
+  "adapter_sha256": null,
+  "candidate_family": "feedback-v0.2",
+  "consumed": false,
+  "contract_version": "feedback-v0.1",
+  "dataset_sha256": "fbb6d1f53f31467f3fb2fb295cb1b9ebcbabd2ed6e64859e425222bbe70d8313",
+  "max_tokens": 512,
+  "operational_qualification": "blocked_missing_actual_pi_and_external_labels",
+  "ready_for_inference": false,
+  "schema_version": "feedback-holdout-protocol-v0.3",
+  "serving": {
+    "engine": "vllm",
+    "flashinfer_sampler": false,
+    "reasoning_parser": "qwen3",
+    "version": "0.28.0"
+  },
+  "single_use": true,
+  "temperature": 0.0,
+  "thresholds": {
+    "accepted_correction_rate_min": 0.8,
+    "contract_success_rate_min": 0.99,
+    "disagreement_precision_min": 0.95,
+    "disagreement_recall_min": 0.8,
+    "false_disagreement_rate_max": 0.02,
+    "p95_latency_seconds_max": 5.0,
+    "recommended_decision_accuracy_min": 0.9
+  },
+  "training_config_sha256": null,
+  "training_data_sha256": null
+}
