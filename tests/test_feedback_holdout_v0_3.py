@@ -30,12 +30,11 @@ class FeedbackHoldoutV03Tests(unittest.TestCase):
             parsed, error = parse_output(json.dumps(row["expected"], ensure_ascii=False), row["text"])
             self.assertIsNotNone(parsed, (row["id"], error))
 
-    def test_protocol_is_blocked_until_candidate_hashes_are_fixed(self):
+    def test_protocol_is_ready_only_after_candidate_hashes_are_fixed(self):
         protocol = json.loads((HERE / "holdout_v0.3.protocol.json").read_text(encoding="utf-8"))
-        self.assertFalse(protocol["ready_for_inference"])
-        self.assertIsNone(protocol["adapter_sha256"])
-        with self.assertRaisesRegex(ValueError, "not ready for inference"):
-            validate_sealed_run(protocol, protocol["dataset_sha256"])
+        self.assertTrue(protocol["ready_for_inference"])
+        self.assertEqual(protocol["adapter_sha256"], "9b4fc64f1ce8ea5ac0f4a41be61ca407df6be866b67623727d2f003807c2f427")
+        validate_sealed_run(protocol, protocol["dataset_sha256"])
 
 
 if __name__ == "__main__":

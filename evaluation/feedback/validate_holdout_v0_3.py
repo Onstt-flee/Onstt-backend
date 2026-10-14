@@ -26,9 +26,11 @@ def main():
     assert len(rows) == len({row["id"] for row in rows}) == 120
     assert len({row["source_judgment_id"] for row in rows}) == 120
     assert manifest["model_inference_count"] == 0
-    assert protocol["ready_for_inference"] is False
+    assert protocol["ready_for_inference"] is True
     assert protocol["consumed"] is False
-    assert protocol["adapter_sha256"] is None
+    assert protocol["adapter_sha256"] == "9b4fc64f1ce8ea5ac0f4a41be61ca407df6be866b67623727d2f003807c2f427"
+    assert protocol["training_data_sha256"] == "e16ba93aa9ba2b4abc098d478a9a66ea9cf94fc7f3e0b6b5815a5afc83da9ff8"
+    assert protocol["training_config_sha256"] == "e1aae512ed5f0e3e2b5ecc88494bd8f311f27640fd6fc2c522083cc39fc4350b"
     assert manifest["exact_input_overlap"] == {
         "feedback_holdout_v0.1": 0,
         "feedback_holdout_v0.2": 0,

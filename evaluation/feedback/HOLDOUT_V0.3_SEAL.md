@@ -7,11 +7,11 @@
 - 정답 분포: agree 32, disagree 80, unreviewable 8
 - 검수 상태: `generated_validated`
 - 모델 추론 횟수: 0
-- 프로토콜: `ready_for_inference=false`, `consumed=false`
+- 프로토콜: `ready_for_inference=true`, `consumed=false`
 
-새 feedback-v0.2 학습보다 먼저 데이터와 기준을 고정했다. 어댑터, 학습 데이터,
-학습 설정의 SHA-256을 프로토콜에 기록하고 별도 추론 전 커밋을 만들기 전에는
-실행기가 이 시험지를 거부한다.
+새 feedback-v0.2 학습보다 먼저 데이터와 기준을 고정했다. 학습 완료 후 어댑터,
+학습 데이터, 학습 설정의 SHA-256을 프로토콜에 기록했다. 이 변경을 별도 추론 전
+커밋으로 고정한 뒤에만 한 번 실행한다.
 
 ## 격리와 범위
 
@@ -27,8 +27,6 @@
 
 ## 다음 단계
 
-1. v0.2 실패 유형을 보강한 feedback-v0.2 학습 데이터와 설정을 생성한다.
-2. 데이터·설정·어댑터 해시를 고정하고 `ready_for_inference=true`로 전환한다.
-3. Qwen3-8B + feedback-v0.2 LoRA를 이 시험지에서 정확히 한 번 실행한다.
-4. 필수 품질 기준을 통과해도 실제 Pi 출력과 독립 라벨이 확보되기 전에는
+1. Qwen3-8B + feedback-v0.2 LoRA를 이 시험지에서 정확히 한 번 실행한다.
+2. 필수 품질 기준을 통과해도 실제 Pi 출력과 독립 라벨이 확보되기 전에는
    운영 worker, 관리자 경고, 200건 shadow를 활성화하지 않는다.

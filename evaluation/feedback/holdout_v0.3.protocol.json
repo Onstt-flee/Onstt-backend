@@ -1,12 +1,12 @@
 {
-  "adapter_sha256": null,
+  "adapter_sha256": "9b4fc64f1ce8ea5ac0f4a41be61ca407df6be866b67623727d2f003807c2f427",
   "candidate_family": "feedback-v0.2",
   "consumed": false,
   "contract_version": "feedback-v0.1",
   "dataset_sha256": "fbb6d1f53f31467f3fb2fb295cb1b9ebcbabd2ed6e64859e425222bbe70d8313",
   "max_tokens": 512,
   "operational_qualification": "blocked_missing_actual_pi_and_external_labels",
-  "ready_for_inference": false,
+  "ready_for_inference": true,
   "schema_version": "feedback-holdout-protocol-v0.3",
   "serving": {
     "engine": "vllm",
@@ -25,6 +25,15 @@
     "p95_latency_seconds_max": 5.0,
     "recommended_decision_accuracy_min": 0.9
   },
-  "training_config_sha256": null,
-  "training_data_sha256": null
+  "training_config_sha256": "e1aae512ed5f0e3e2b5ecc88494bd8f311f27640fd6fc2c522083cc39fc4350b",
+  "training_data_sha256": "e16ba93aa9ba2b4abc098d478a9a66ea9cf94fc7f3e0b6b5815a5afc83da9ff8",
+  "training_run": {
+    "adapter_config_sha256": "ee488c11bb745d50de77695fc521ca74a8abe186f2c4591d3e4d989f75c944cb",
+    "adapter_model_bytes": 174655536,
+    "elapsed_seconds": 984.752,
+    "eval_loss": 0.009780044667422771,
+    "run_manifest_sha256": "125827959070847841c6384cbbea7f34eea490b27f417ae70fbe551e12edf038",
+    "train_loss": 0.2145529915912213,
+    "train_steps": 178
+  }
 }
