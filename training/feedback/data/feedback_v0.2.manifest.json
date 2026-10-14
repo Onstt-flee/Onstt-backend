@@ -1,0 +1,33 @@
+{
+  "case_type_counts": {
+    "agree_anchor": 747,
+    "audio_required_unreviewable": 26,
+    "false_negative": 96,
+    "false_positive": 115,
+    "invented_correction": 88,
+    "reason_mismatch": 113,
+    "should_abstain": 88,
+    "unnecessary_abstention": 114,
+    "wrong_correction": 97,
+    "wrong_error_type": 98
+  },
+  "eval_records": 158,
+  "eval_sha256": "ff8dfb8987d0cef66326465150bbf37af1ed0d271e52fcbc89cdcda8c73ab063",
+  "holdout_used": false,
+  "holdout_v0.3_exact_input_overlap": 0,
+  "records": 1582,
+  "review_status": "generated_validated",
+  "schema_version": "feedback-training-manifest-v0.2",
+  "source_judgment_dataset": "training/judgment/data/pilot_v0.2_d.jsonl",
+  "source_judgment_records_excluded_for_holdout_text_overlap": 1,
+  "source_judgment_records_used": 747,
+  "source_judgment_sha256": "e9667e0b1555c260bdb95ab77736a8b51b9e5fa1dedf18a0d2e23cfce9a2e638",
+  "source_sha256": "e16ba93aa9ba2b4abc098d478a9a66ea9cf94fc7f3e0b6b5815a5afc83da9ff8",
+  "train_records": 1424,
+  "train_sha256": "0339d0b8809779e77cc67358ab38a79f4dc3f66b01d6807c9b89a613a8b466d6",
+  "verdict_counts": {
+    "agree": 747,
+    "disagree": 809,
+    "unreviewable": 26
+  }
+}
