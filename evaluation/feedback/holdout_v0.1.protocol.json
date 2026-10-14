@@ -1,5 +1,20 @@
 {
-  "consumed": false,
+  "consumed": true,
+  "consumed_at": "2026-10-14",
+  "executions": [
+    {
+      "model": "feedback-qwen3-8b-base-v01",
+      "records": 120,
+      "result_sha256": "20da48fbcda6200b0ecc6a1302b28d11d789122c3ceb5cc35587b1688c94ad79",
+      "role": "baseline"
+    },
+    {
+      "model": "feedback-qwen3-8b-v01",
+      "records": 120,
+      "result_sha256": "8c23fa0fbb4da68fe4f8cab8d4db669b619078be316297ffc9cfcd14dc99fac1",
+      "role": "lora"
+    }
+  ],
   "contract_version": "feedback-v0.1",
   "dataset_sha256": "21f23d97b141652d6f53dff3d02b68ad0b3ffc902660ffe88b1b7212599a1eb1",
   "max_tokens": 512,

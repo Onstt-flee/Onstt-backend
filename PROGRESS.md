@@ -10,6 +10,7 @@
 - feedback holdout 120건을 SHA-256 `21f23d97...1a1eb1`로 추론 0회 봉인했다.
 - 별도 자동검증 학습쌍 600건(train 540/eval 60)을 만들었고 holdout 원문 중복은 0건이다.
 - 전체 회귀 테스트 311개를 통과했다. 피드백 8B 기준선, LoRA 학습, 독립 평가와 200건 shadow는 아직 실행하지 않았다.
+- 이후 8B 베이스와 feedback-v0.1 LoRA를 봉인 holdout에서 각 1회 실행했다. 두 모델 모두 strict 계약 0/120으로 실패했다. LoRA는 빈 think 래퍼 제거 진단에서만 120/120이었으므로 미채택이며 200건 shadow는 실행하지 않는다. 새 구조 독립 holdout v0.2와 reasoning parser 검증이 다음 단계다.
 
 ## 2026-10-13 Pi용 Q4 실패·Q5 양자화 회귀 통과
 

@@ -1,6 +1,6 @@
 {
   "dataset": "holdout_v0.1.jsonl",
-  "model_inference_count": 0,
+  "model_inference_count": 240,
   "records": 120,
   "review_status": "generated_validated",
   "schema_version": "feedback-holdout-manifest-v0.1",

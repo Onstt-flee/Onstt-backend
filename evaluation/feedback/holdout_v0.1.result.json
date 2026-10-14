@@ -1,0 +1,41 @@
+{
+  "adapter": {
+    "adapter_config_sha256": "02fe06af057254d4887412e56949605c04579bda53410f6d18c1712c8fbf1d8a",
+    "adapter_model_sha256": "e52050a6e06d724604820201d1a4efdf678f6e2c0c534920ea9dec87525d2aa1",
+    "deployment_artifact_sha256": "efbbc9d2cf2bed81e6ce24da6070c25d7bc0755c213875224cfa204d58a22630",
+    "run_manifest_sha256": "0d841ff70ea69acaf5ce169197bb7e46fab5198f5d83a5387d51bd097183a6cf"
+  },
+  "baseline": {
+    "contract_success": 0,
+    "p95_latency_seconds": 12.230169,
+    "records": 120,
+    "result_sha256": "20da48fbcda6200b0ecc6a1302b28d11d789122c3ceb5cc35587b1688c94ad79"
+  },
+  "decision": "rejected",
+  "diagnostic_replay_not_official": {
+    "accepted_correction_rate": 1.0,
+    "contract_success_rate": 1.0,
+    "disagreement_precision": 1.0,
+    "disagreement_recall": 1.0,
+    "false_disagreement_rate": 0.0,
+    "method": "removed only the exact empty Qwen think wrapper from already-generated LoRA outputs; no model recall",
+    "p95_latency_seconds": 2.48799,
+    "recommended_decision_accuracy": 1.0,
+    "source_metric_gap_pp": 0.0
+  },
+  "holdout_sha256": "21f23d97b141652d6f53dff3d02b68ad0b3ffc902660ffe88b1b7212599a1eb1",
+  "limitations": [
+    "Strict output contract failed for every baseline and LoRA response.",
+    "The training and holdout generators share structural templates, so diagnostic quality is not an independent generalization claim.",
+    "The diagnostic replay is not an accepted result and cannot activate worker, alerts, shadow, or automated training."
+  ],
+  "lora": {
+    "contract_success": 0,
+    "p95_latency_seconds": 2.48799,
+    "records": 120,
+    "result_sha256": "8c23fa0fbb4da68fe4f8cab8d4db669b619078be316297ffc9cfcd14dc99fac1"
+  },
+  "reason": "Every OpenAI content string began with an empty <think></think> wrapper, violating the JSON-only feedback-v0.1 contract.",
+  "schema_version": "feedback-holdout-result-v0.1",
+  "shadow_authorized": false
+}

@@ -41,7 +41,7 @@ Pi edge sync ─┘       ├─ judgment_provenance
 - 학습 원천 SHA-256: `2f39a7988912733cdff88877c55702fb3eb8c01eadab38907c10428a6629006f`
 - 사람·전문가 검수로 표시하지 않으며 모두 `generated_validated`다.
 - holdout과 학습 원문의 정확 중복은 0건이다.
-- holdout은 아직 추론 0회이며 베이스와 LoRA를 각각 정확히 한 번 평가하기 전까지 소비하지 않는다.
+- holdout v0.1은 베이스와 LoRA 각 120건 실행으로 소비 완료됐다. 둘 다 strict 계약 0/120으로 미채택이며 상세는 `training/feedback/FEEDBACK_V0.1_RESULT.md`를 따른다.
 
 필수 통과 기준은 계약 99%, 허위 불일치 2% 이하, 불일치 정밀도 95%,
 재현율 80%, 권장 decision 90%, 허용 교정문 80%, 출처 차이 5%p 이하,
@@ -50,12 +50,10 @@ A6000 p95 5초 이하다. LoRA가 8B 베이스를 실질적으로 개선하지 �
 
 ## 실행 순서
 
-1. 이 변경을 검증하고 체크포인트 커밋한다.
-2. 8B 베이스를 별도 vLLM에서 띄워 봉인 holdout을 한 번 실행한다.
-3. `training/feedback/config_v0.1.json`으로 rank 16, alpha 32, dropout
-   0.05, seed 42 LoRA를 학습한다.
-4. LoRA를 같은 holdout에서 한 번 실행하고 동일 scorer로 비교한다.
-5. 기준 통과 시에만 worker와 관리자 경고를 staging에서 활성화한다.
+1. v0.1 기반 구현·학습·단일 평가는 완료됐지만 strict 계약 실패로 미채택이다.
+2. reasoning parser를 고정한 뒤 구조적으로 독립적인 새 holdout v0.2를 먼저 봉인한다.
+3. v0.1 LoRA를 새 holdout에서 한 번만 평가한다.
+4. 기준 통과 시에만 worker와 관리자 경고를 staging에서 활성화한다.
 6. GPU 100건, Pi 50건 이상을 포함한 총 200건 shadow에서 판단 변경 0,
    job 유실·중복 0을 확인한다.
 7. 반복 문제 자동 학습 후보 생성은 이후 단계이며 운영 alias 변경은 항상

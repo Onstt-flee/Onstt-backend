@@ -27,6 +27,11 @@ operator; repository changes never activate them.
 The admin token must contain at least 32 characters. List APIs exclude source
 text; the detail API is privileged and intended only for investigation.
 
+The service config separates Qwen reasoning from OpenAI `content` with
+`--reasoning-parser qwen3`. This was added after the consumed v0.1 holdout found
+an empty think wrapper in every content string. It is not retroactively applied
+to that result and must be validated once on a new sealed holdout before use.
+
 ## Failure semantics
 
 Audit transport/contract failures are retried after 1, 5, and 30 minutes, at
