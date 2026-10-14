@@ -1,0 +1,44 @@
+{
+  "case_type_counts": {
+    "agree": 31,
+    "false_negative": 14,
+    "false_positive": 13,
+    "invented_correction": 7,
+    "reason_mismatch": 12,
+    "should_abstain": 5,
+    "unnecessary_abstention": 11,
+    "wrong_correction": 14,
+    "wrong_error_type": 13
+  },
+  "dataset": "holdout_v0.2.jsonl",
+  "decision_counts": {
+    "acceptable": 45,
+    "insufficient_evidence": 19,
+    "needs_correction": 56
+  },
+  "exact_input_overlap": {
+    "feedback_holdout_v0.1": 0,
+    "feedback_training_v0.1": 0
+  },
+  "limitations": [
+    "자동 생성·검증 데이터이며 사람 또는 일본어 전문가 검수 데이터가 아닙니다.",
+    "원문은 판단모델 평가에 사용된 judgment holdout v0.5에서 파생되어 외부 독립 코퍼스가 아닙니다.",
+    "source_stratum은 실제 GPU/Pi 출력이 아니라 균형 검사용 모의 표식입니다."
+  ],
+  "model_inference_count": 0,
+  "records": 120,
+  "review_status": "generated_validated",
+  "schema_version": "feedback-holdout-manifest-v0.2",
+  "sha256": "44a8dec5f4cf49a730c85c9d8be8c04e8be7013d43ba2ecc742c129059282358",
+  "source_counts": {
+    "gpu_bf16": 60,
+    "pi_gguf": 60
+  },
+  "source_judgment_dataset": "evaluation/judgment/holdout_v0.5.jsonl",
+  "source_judgment_sha256": "b4b7ed63ccbd9008a7fa5544a3a494af20843e3accb4f6917700504b32ae6963",
+  "source_stratum_kind": "simulated_balance_only",
+  "verdict_counts": {
+    "agree": 31,
+    "disagree": 89
+  }
+}

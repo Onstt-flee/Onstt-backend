@@ -14,6 +14,13 @@ from evaluation.judgment.runner import call_endpoint
 def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def validate_sealed_run(protocol, dataset_sha256):
+    if protocol.get("single_use") and protocol.get("consumed"):
+        raise ValueError("sealed protocol has already been consumed")
+    if dataset_sha256 != protocol["dataset_sha256"]:
+        raise ValueError("sealed dataset SHA-256 mismatch")
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--dataset", type=Path, required=True)
@@ -25,8 +32,10 @@ def main():
     parser.add_argument("--timeout", type=float, default=120)
     args = parser.parse_args()
     protocol = json.loads(args.protocol.read_text(encoding="utf-8"))
-    if sha(args.dataset) != protocol["dataset_sha256"]:
-        raise SystemExit("sealed dataset SHA-256 mismatch")
+    try:
+        validate_sealed_run(protocol, sha(args.dataset))
+    except ValueError as exc:
+        raise SystemExit(str(exc)) from exc
     if args.output.exists():
         raise SystemExit("refusing to overwrite an existing run")
     rows = [json.loads(line) for line in args.dataset.read_text(encoding="utf-8").splitlines() if line]

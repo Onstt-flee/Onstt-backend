@@ -1,0 +1,26 @@
+{
+  "adapter_sha256": "efbbc9d2cf2bed81e6ce24da6070c25d7bc0755c213875224cfa204d58a22630",
+  "consumed": false,
+  "contract_version": "feedback-v0.1",
+  "dataset_sha256": "44a8dec5f4cf49a730c85c9d8be8c04e8be7013d43ba2ecc742c129059282358",
+  "max_tokens": 512,
+  "model": "feedback-qwen3-8b-v01",
+  "schema_version": "feedback-holdout-protocol-v0.2",
+  "serving": {
+    "engine": "vllm",
+    "reasoning_parser": "qwen3",
+    "version": "0.28.0"
+  },
+  "single_use": true,
+  "temperature": 0.0,
+  "thresholds": {
+    "accepted_correction_rate_min": 0.8,
+    "contract_success_rate_min": 0.99,
+    "disagreement_precision_min": 0.95,
+    "disagreement_recall_min": 0.8,
+    "false_disagreement_rate_max": 0.02,
+    "p95_latency_seconds_max": 5.0,
+    "recommended_decision_accuracy_min": 0.9,
+    "source_metric_gap_pp_max": 5.0
+  }
+}
