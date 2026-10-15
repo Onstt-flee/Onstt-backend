@@ -32,6 +32,7 @@
 | GPU 피드백 듀얼모델 설계·구현 | [`docs/FEEDBACK_DUAL_MODEL_DESIGN.md`](docs/FEEDBACK_DUAL_MODEL_DESIGN.md) | 검수 계약, DB·worker·관리 API 경계, 봉인 데이터와 다음 실행 순서 |
 | 피드백 staging 배포 | [`deployment/feedback-staging/README.md`](deployment/feedback-staging/README.md) | A6000 듀얼 vLLM 자원 배분, 비활성 기본값, 서비스 시작·장애 처리 |
 | feedback-v0.2 최종 내부 평가 | [`training/feedback/FEEDBACK_V0.2_HOLDOUT_V0.3_RESULT.md`](training/feedback/FEEDBACK_V0.2_HOLDOUT_V0.3_RESULT.md) | 단일 실행 지표, 반복 허위 불일치 6건과 미채택 근거 |
+| 실제 GPU/Pi 피드백 입력 수집 | [`evaluation/feedback/RUNTIME_PAIR_INTAKE.md`](evaluation/feedback/RUNTIME_PAIR_INTAKE.md) | 동일 50건 실행, Pi 증빙·해시 검증, 개인정보 없는 집계와 다음 holdout 차단 조건 |
 | 평가셋 구성·실행기·채점기 사용법 | [`evaluation/judgment/README.md`](evaluation/judgment/README.md) | 72문항, 출력 계약, 재현 명령과 평가 이력 |
 | LoRA 파일럿 데이터·검수·내보내기 | [`training/judgment/README.md`](training/judgment/README.md) | 300문항 구성, 생성 근거, 검증 명령과 검수 승인 게이트 |
 | provisional LoRA 실험 결과 | [`training/judgment/PILOT_V0.1_RESULT.md`](training/judgment/PILOT_V0.1_RESULT.md) | Qwen3-4B provisional 학습 조건, 실패 분석과 해시 |

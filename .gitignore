@@ -19,6 +19,7 @@ input/
 # Local model-evaluation outputs can include large raw responses.
 evaluation/judgment/runs/
 evaluation/feedback/runs/
+evaluation/feedback/intake/
 
 # Model weights and partial downloads stay outside Git. Track only configs,
 # aggregate reports, manifests, and SHA-256 references.
