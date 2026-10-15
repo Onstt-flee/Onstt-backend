@@ -30,11 +30,24 @@ class FeedbackHoldoutV03Tests(unittest.TestCase):
             parsed, error = parse_output(json.dumps(row["expected"], ensure_ascii=False), row["text"])
             self.assertIsNotNone(parsed, (row["id"], error))
 
-    def test_protocol_is_ready_only_after_candidate_hashes_are_fixed(self):
+    def test_consumed_protocol_rejects_another_inference(self):
         protocol = json.loads((HERE / "holdout_v0.3.protocol.json").read_text(encoding="utf-8"))
         self.assertTrue(protocol["ready_for_inference"])
+        self.assertTrue(protocol["consumed"])
         self.assertEqual(protocol["adapter_sha256"], "9b4fc64f1ce8ea5ac0f4a41be61ca407df6be866b67623727d2f003807c2f427")
-        validate_sealed_run(protocol, protocol["dataset_sha256"])
+        with self.assertRaisesRegex(ValueError, "already been consumed"):
+            validate_sealed_run(protocol, protocol["dataset_sha256"])
+
+    def test_official_result_matches_protocol(self):
+        protocol = json.loads((HERE / "holdout_v0.3.protocol.json").read_text(encoding="utf-8"))
+        result = json.loads((HERE / "holdout_v0.3.result.json").read_text(encoding="utf-8"))
+        self.assertEqual(result["decision"], "rejected")
+        self.assertFalse(result["shadow_authorized"])
+        self.assertEqual(result["holdout_sha256"], protocol["dataset_sha256"])
+        self.assertEqual(result["adapter_sha256"], protocol["adapter_sha256"])
+        self.assertEqual(result["result_sha256"], protocol["official_run"]["result_sha256"])
+        self.assertEqual(result["score_sha256"], protocol["official_run"]["score_sha256"])
+        self.assertEqual(len(result["false_disagreement_ids"]), 6)
 
 
 if __name__ == "__main__":

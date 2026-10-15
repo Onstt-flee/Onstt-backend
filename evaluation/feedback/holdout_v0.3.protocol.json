@@ -1,10 +1,11 @@
 {
   "adapter_sha256": "9b4fc64f1ce8ea5ac0f4a41be61ca407df6be866b67623727d2f003807c2f427",
   "candidate_family": "feedback-v0.2",
-  "consumed": false,
+  "consumed": true,
   "contract_version": "feedback-v0.1",
   "dataset_sha256": "fbb6d1f53f31467f3fb2fb295cb1b9ebcbabd2ed6e64859e425222bbe70d8313",
   "max_tokens": 512,
+  "model": "feedback-qwen3-8b-v02",
   "operational_qualification": "blocked_missing_actual_pi_and_external_labels",
   "ready_for_inference": true,
   "schema_version": "feedback-holdout-protocol-v0.3",
@@ -15,6 +16,13 @@
     "version": "0.28.0"
   },
   "single_use": true,
+  "official_run": {
+    "executed_at": "2026-10-15",
+    "model_inference_count": 120,
+    "result_manifest_sha256": "882a3ac232f8cff5adf6ba58c57d7016008dbf36578f49fe498dc82b6bbe19a4",
+    "result_sha256": "947177dc05167662f3bca9b63e9316722c4bb7993b7ccd492bdf544b44e07b9d",
+    "score_sha256": "50aab0aba7e0a6aa8a7201529d419f1b39aec86086c3ed45aaf351aa49d1adc5"
+  },
   "temperature": 0.0,
   "thresholds": {
     "accepted_correction_rate_min": 0.8,

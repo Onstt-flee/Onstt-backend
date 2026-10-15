@@ -1,0 +1,40 @@
+{
+  "adapter_sha256": "9b4fc64f1ce8ea5ac0f4a41be61ca407df6be866b67623727d2f003807c2f427",
+  "decision": "rejected",
+  "false_disagreement_ids": [
+    "FVH-03-042",
+    "FVH-03-043",
+    "FVH-03-068",
+    "FVH-03-079",
+    "FVH-03-102",
+    "FVH-03-115"
+  ],
+  "holdout_sha256": "fbb6d1f53f31467f3fb2fb295cb1b9ebcbabd2ed6e64859e425222bbe70d8313",
+  "metrics": {
+    "accepted_correction_rate": 0.9459459459459459,
+    "contract_success_rate": 1.0,
+    "disagreement_precision": 0.9302325581395349,
+    "disagreement_recall": 1.0,
+    "false_disagreement_rate": 0.15,
+    "p95_latency_seconds": 2.869683,
+    "recommended_decision_accuracy": 0.975,
+    "records": 120,
+    "source_metric_gap_pp": null,
+    "transport_success_rate": 1.0
+  },
+  "operational_qualification": "blocked_missing_actual_pi_and_external_labels",
+  "passed_thresholds": [
+    "contract_success_rate",
+    "disagreement_recall",
+    "recommended_decision_accuracy",
+    "accepted_correction_rate",
+    "p95_latency_seconds"
+  ],
+  "reason": "The candidate produced six false disagreements on valid Japanese sentences, failing the false-disagreement and precision safety thresholds.",
+  "result_manifest_sha256": "882a3ac232f8cff5adf6ba58c57d7016008dbf36578f49fe498dc82b6bbe19a4",
+  "result_sha256": "947177dc05167662f3bca9b63e9316722c4bb7993b7ccd492bdf544b44e07b9d",
+  "schema_version": "feedback-holdout-result-v0.3",
+  "score_sha256": "50aab0aba7e0a6aa8a7201529d419f1b39aec86086c3ed45aaf351aa49d1adc5",
+  "shadow_authorized": false,
+  "source_metric_status": "not_measured_no_actual_pi_outputs"
+}

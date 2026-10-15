@@ -18,16 +18,20 @@ def score(gold_rows, result_rows):
     results = {row["id"]: row for row in result_rows}
     total = len(gold_rows); contract = false_disagree = tp = fp = fn = 0
     recommendation_correct = correction_correct = correction_total = 0
-    source = {name: {"total": 0, "correct": 0} for name in ("gpu_bf16", "pi_gguf")}
+    source_names = sorted({row.get("source_stratum") for row in gold_rows
+                           if row.get("source_stratum")})
+    source = {name: {"total": 0, "correct": 0} for name in source_names}
     latencies = []
     for gold in gold_rows:
         result = results.get(gold["id"], {}); parsed = result.get("parsed")
         expected_disagree = gold["expected"]["verdict"] == "disagree"
         predicted_disagree = bool(parsed and parsed["verdict"] == "disagree")
         if result.get("contract_success"): contract += 1
-        if parsed and parsed["verdict"] == gold["expected"]["verdict"]:
-            source[gold["source_stratum"]]["correct"] += 1
-        source[gold["source_stratum"]]["total"] += 1
+        source_name = gold.get("source_stratum")
+        if source_name:
+            if parsed and parsed["verdict"] == gold["expected"]["verdict"]:
+                source[source_name]["correct"] += 1
+            source[source_name]["total"] += 1
         if not expected_disagree and predicted_disagree: false_disagree += 1
         tp += int(expected_disagree and predicted_disagree)
         fp += int(not expected_disagree and predicted_disagree)
@@ -42,16 +46,18 @@ def score(gold_rows, result_rows):
                 if predicted_rec and predicted_rec["corrected_text"] == expected_rec["corrected_text"]:
                     correction_correct += 1
         if isinstance(result.get("latency_ms"), (int, float)): latencies.append(result["latency_ms"])
-    expected_agree = sum(row["expected"]["verdict"] == "agree" for row in gold_rows)
-    expected_disagreements = total - expected_agree
+    expected_non_disagree = sum(row["expected"]["verdict"] != "disagree" for row in gold_rows)
+    expected_recommendations = sum(row["expected"]["recommended_judgment"] is not None
+                                   for row in gold_rows)
     metrics = {"records": total, "contract_success_rate": ratio(contract, total),
-               "false_disagreement_rate": ratio(false_disagree, expected_agree),
+               "false_disagreement_rate": ratio(false_disagree, expected_non_disagree),
                "disagreement_precision": ratio(tp, tp + fp), "disagreement_recall": ratio(tp, tp + fn),
-               "recommended_decision_accuracy": ratio(recommendation_correct, expected_disagreements),
+               "recommended_decision_accuracy": ratio(recommendation_correct, expected_recommendations),
                "accepted_correction_rate": ratio(correction_correct, correction_total),
                "p95_latency_seconds": (percentile(latencies, .95) or 0) / 1000}
     accuracies = [ratio(value["correct"], value["total"]) for value in source.values()]
-    metrics["source_metric_gap_pp"] = abs(accuracies[0] - accuracies[1]) * 100
+    metrics["source_metric_gap_pp"] = ((max(accuracies) - min(accuracies)) * 100
+                                        if len(accuracies) >= 2 else None)
     return metrics
 
 
