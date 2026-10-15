@@ -57,6 +57,21 @@ def prepare(root: Path, gpu_rows: list[dict], pi_rows: list[dict]) -> dict:
 
 
 class FeedbackRuntimePairTests(unittest.TestCase):
+    def test_tracked_gpu_half_is_content_free_and_still_blocked(self):
+        path = Path(__file__).resolve().parents[1] / "evaluation/feedback/runtime_pairs_v0.1.gpu.json"
+        summary = json.loads(path.read_text(encoding="utf-8"))
+        self.assertEqual(summary["records"], 50)
+        self.assertEqual(summary["transport_success_count"], 50)
+        self.assertEqual(summary["contract_valid_count"], 50)
+        self.assertEqual(summary["pi_pair_count"], 0)
+        self.assertFalse(summary["contains_request_content"])
+        self.assertFalse(summary["source_gap_analysis_ready"])
+        self.assertFalse(summary["feedback_holdout_ready"])
+        self.assertIn("missing_actual_pi_run", summary["blocking_reasons"])
+        encoded = json.dumps(summary, ensure_ascii=False)
+        self.assertNotIn("JG-", encoded)
+        self.assertNotIn("text", encoded)
+
     def test_fifty_attested_pairs_produce_content_free_summary_only(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory); rows = [make_row(i) for i in range(50)]

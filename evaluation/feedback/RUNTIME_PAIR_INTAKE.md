@@ -6,8 +6,9 @@
 
 feedback-v0.2는 내부 시험지에서 허위 불일치 안전 기준을 실패했다. 다음 모델을 바로
 재학습하지 않고 실제 GPU BF16과 Pi GGUF가 같은 입력에 만든 판단쌍을 먼저 확보한다.
-현재 실제 Pi 산출물이 없으므로 수집 건수는 0이며 새 feedback holdout과 학습은
-차단된 상태다.
+GPU 절반은 2026-10-15에 50/50 전송·계약 성공으로 완료했다. 실제 Pi 산출물이
+아직 없으므로 완성된 판단쌍은 0이며 새 feedback holdout과 학습은 차단된 상태다.
+비식별 GPU 요약은 `runtime_pairs_v0.1.gpu.json`에 기록했다.
 
 `scripts/prepare_feedback_runtime_pairs.py`는 다음만 수행한다.
 

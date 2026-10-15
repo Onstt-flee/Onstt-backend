@@ -1,0 +1,33 @@
+{
+  "blocking_reasons": [
+    "missing_actual_pi_run",
+    "missing_independent_feedback_labels"
+  ],
+  "contains_request_content": false,
+  "contract_valid_count": 50,
+  "dataset_sha256": "f681ba026cfd6eeca86ebf531e1ac94ceed06525b43fca2b19729ef86ff0d12b",
+  "feedback_holdout_ready": false,
+  "generation": {
+    "max_tokens": 512,
+    "temperature": 0.0,
+    "top_p": 1.0
+  },
+  "gpu_adapter_sha256": "2e758256afe68c3005b595f9f664b5f76734606b923dbb2c7bc858e81e9e55c6",
+  "gpu_model_manifest_sha256": "86cf6cbe487216982ba0cc0adafa649925d1f2e61d86b2fc63cfe34f99f91013",
+  "input_set_sha256": "9fa6d161137f11963271a3989f375c632a17a28eb275674fdf2110c455d075a1",
+  "limitations": [
+    "This file records the GPU half only and is not a GPU/Pi comparison.",
+    "Contract validity is not linguistic correctness."
+  ],
+  "model": "judgment-v02d",
+  "pi_pair_count": 0,
+  "prompt_sha256": "9252477191ce2af588d7ab0e754ef9d1a5df7ea541b636c8a0b15b8292865f0e",
+  "records": 50,
+  "run_completed_at": "2026-10-15T01:46:43.729346+00:00",
+  "run_manifest_sha256": "b850475e0ab7ec30b7607d6e132cefc4f615c86765e149ac80fd39942a3ab682",
+  "run_sha256": "229a0ea96b62e312b60368f2be12802efdd4121ec41e1d232144dd553a111e7c",
+  "schema_version": "feedback-runtime-pair-gpu-half-v0.1",
+  "source_gap_analysis_ready": false,
+  "status": "waiting_for_actual_pi_run",
+  "transport_success_count": 50
+}
