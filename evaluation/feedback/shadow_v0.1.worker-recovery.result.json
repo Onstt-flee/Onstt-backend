@@ -1,0 +1,36 @@
+{
+  "schema_version": "feedback-worker-recovery-drill-v0.1",
+  "scope": "isolated_synthetic_database_copy",
+  "quality_claim_allowed": false,
+  "source_database_sha256": "e3f6e1090fbf8b29927647344adad2e143e07576aced7c26daf8f5e25d5f7ec1",
+  "working_database_sha256": "152256694a147861bef5cb91d4fb6c78cc7570ab32c07bde08f420ef157b93ce",
+  "judgments_unchanged": true,
+  "judgment_snapshot_before_sha256": "862aa09a18ba24bd227a6e4d588f37e89485f98cb8cf84c46ca50ab9540e2d47",
+  "judgment_snapshot_after_sha256": "862aa09a18ba24bd227a6e4d588f37e89485f98cb8cf84c46ca50ab9540e2d47",
+  "baseline": {
+    "job_count": 200,
+    "audit_count": 200
+  },
+  "final": {
+    "job_count": 203,
+    "audit_count": 202
+  },
+  "expired_lease": {
+    "status": "succeeded",
+    "attempts": 1,
+    "audit_count": 1
+  },
+  "retry_recovery": {
+    "status": "succeeded",
+    "attempts": 2,
+    "audit_count": 1
+  },
+  "terminal_failure": {
+    "status": "failed",
+    "attempts": 3,
+    "error_category": "transport",
+    "audit_count": 0
+  },
+  "duplicate_drill_audit_count": 0,
+  "contains_request_content": false
+}

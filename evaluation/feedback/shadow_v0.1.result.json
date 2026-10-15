@@ -1,0 +1,74 @@
+{
+  "schema_version": "synthetic-feedback-shadow-result-v0.1",
+  "scope": "synthetic_operational_shadow_only",
+  "quality_claim_allowed": false,
+  "source_runtime": "gpu_bf16",
+  "input_count": 200,
+  "inputs_sha256": "495a2c2b07a542422161b76b3377733ad12cb301283402b7aec97444cce03d27",
+  "raw_judgment_path": "/home/cap-minsung/lora-adapter-bank/runs/feedback-v0.3/synthetic-shadow-v0.1/judgment.jsonl",
+  "raw_judgment_sha256": "d2a581992f4efb1a7129883a5c220dac3d7e69bdab8728c565e53fe5c296106c",
+  "isolated_database_path": "/home/cap-minsung/lora-adapter-bank/runs/feedback-v0.3/synthetic-shadow-v0.1.sqlite3",
+  "judgment": {
+    "model": "judgment-v02d",
+    "adapter": "judgment-qwen3-4b-failure-focus-v0.2-d",
+    "transport_success": 200,
+    "contract_valid": 200,
+    "contract_invalid": 0,
+    "decision_counts": {
+      "acceptable": 75,
+      "insufficient_evidence": 24,
+      "needs_correction": 101
+    },
+    "latency_ms": {
+      "p50": 823.454,
+      "p95": 961.58
+    },
+    "adapter_sha256": "2e758256afe68c3005b595f9f664b5f76734606b923dbb2c7bc858e81e9e55c6"
+  },
+  "feedback": {
+    "model": "feedback-qwen3-8b-v03",
+    "adapter": "feedback-verifier-v0.3",
+    "queued": 200,
+    "attempted_once": 200,
+    "job_status_counts": {
+      "succeeded": 200
+    },
+    "audit_count": 200,
+    "verdict_counts": {
+      "agree": 199,
+      "disagree": 1
+    },
+    "issue_counts": {
+      "false_negative": 1
+    },
+    "stratum_verdict_counts": {
+      "acceptable_like": {
+        "agree": 80
+      },
+      "boundary_like": {
+        "agree": 20
+      },
+      "correction_like": {
+        "agree": 79,
+        "disagree": 1
+      },
+      "insufficient_like": {
+        "agree": 20
+      }
+    },
+    "latency_ms": {
+      "p50": 1193.853,
+      "p95": 1195.256
+    },
+    "adapter_sha256": "3bcbc80d1559dacf60a84c708a8ab4c51ee4bd33532acf2ab134394aa2dcd1ad"
+  },
+  "integrity": {
+    "judgment_snapshot_before_sha256": "862aa09a18ba24bd227a6e4d588f37e89485f98cb8cf84c46ca50ab9540e2d47",
+    "judgment_snapshot_after_sha256": "862aa09a18ba24bd227a6e4d588f37e89485f98cb8cf84c46ca50ab9540e2d47",
+    "judgments_unchanged": true,
+    "duplicate_job_count": 0,
+    "duplicate_audit_count": 0,
+    "feedback_input_excludes_runtime_and_model_identity": true
+  },
+  "isolated_database_sha256": "e3f6e1090fbf8b29927647344adad2e143e07576aced7c26daf8f5e25d5f7ec1"
+}

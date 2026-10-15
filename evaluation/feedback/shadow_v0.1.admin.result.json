@@ -1,0 +1,36 @@
+{
+  "schema_version": "feedback-admin-shadow-verification-v0.1",
+  "scope": "synthetic_operational_shadow_only",
+  "quality_claim_allowed": false,
+  "database_sha256_before": "e3f6e1090fbf8b29927647344adad2e143e07576aced7c26daf8f5e25d5f7ec1",
+  "database_sha256_after": "e3f6e1090fbf8b29927647344adad2e143e07576aced7c26daf8f5e25d5f7ec1",
+  "database_unchanged": true,
+  "health": {
+    "job_counts": {
+      "pending": 0,
+      "running": 0,
+      "succeeded": 200,
+      "failed": 0
+    },
+    "audit_count": 200,
+    "disagreement_count": 1,
+    "unreviewable_count": 0,
+    "contains_request_content": false
+  },
+  "admin_projections": {
+    "list_count": 200,
+    "list_contains_content_keys": false,
+    "detail_resolvable_count": 200,
+    "succeeded_retryable_count": 0,
+    "issue_group_count": 1,
+    "issue_counts": {
+      "false_negative": 1
+    },
+    "issue_status_counts": {
+      "emerging": 1
+    },
+    "runtime_counts": {
+      "gpu_bf16": 1
+    }
+  }
+}

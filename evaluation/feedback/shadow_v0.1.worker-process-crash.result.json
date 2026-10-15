@@ -1,0 +1,29 @@
+{
+  "schema_version": "feedback-worker-process-crash-drill-v0.1",
+  "scope": "isolated_synthetic_database_copy",
+  "quality_claim_allowed": false,
+  "source_database_sha256_before": "e3f6e1090fbf8b29927647344adad2e143e07576aced7c26daf8f5e25d5f7ec1",
+  "source_database_sha256_after": "e3f6e1090fbf8b29927647344adad2e143e07576aced7c26daf8f5e25d5f7ec1",
+  "source_database_unchanged": true,
+  "working_database_sha256": "57212cc2a7df7db4894e516c13f6e41532f6b2948ce7799b81ffc19d155feb40",
+  "first_worker": {
+    "terminated_by_signal": true,
+    "exit_code": -9,
+    "job_status_after_crash": "running",
+    "attempts_after_crash": 1,
+    "lease_present_after_crash": true
+  },
+  "restarted_worker": {
+    "exit_code": -15,
+    "final_job_status": "succeeded",
+    "final_attempts": 2
+  },
+  "stub_request_count": 2,
+  "recovery_audit_count": 1,
+  "duplicate_recovery_audit_count": 0,
+  "audit_count_delta": 1,
+  "judgments_unchanged": true,
+  "judgment_snapshot_before_sha256": "862aa09a18ba24bd227a6e4d588f37e89485f98cb8cf84c46ca50ab9540e2d47",
+  "judgment_snapshot_after_sha256": "862aa09a18ba24bd227a6e4d588f37e89485f98cb8cf84c46ca50ab9540e2d47",
+  "contains_request_content": false
+}

@@ -1,0 +1,64 @@
+{
+  "case_type_counts": {
+    "agree_abstention": 10,
+    "agree_correction": 15,
+    "agree_valid_japanese": 15,
+    "audio_required_unreviewable": 10,
+    "false_negative": 15,
+    "false_positive": 10,
+    "foreign_language_not_correction": 5,
+    "reason_mismatch": 5,
+    "should_abstain": 5,
+    "valid_japanese_not_foreign": 10,
+    "wrong_correction": 10,
+    "wrong_error_type": 10
+  },
+  "dataset": "holdout_v0.4.jsonl",
+  "exact_input_overlap": {
+    "feedback_holdout_v0.1": 0,
+    "feedback_holdout_v0.2": 0,
+    "feedback_holdout_v0.3": 0,
+    "feedback_training_v0.1": 0,
+    "feedback_training_v0.2": 0
+  },
+  "expert_reviewed": false,
+  "family_counts": {
+    "adjective_conjugation_error": 10,
+    "destination_particle_error": 10,
+    "existence_de_error": 10,
+    "existence_ni_ok": 10,
+    "foreign_language_boundary": 5,
+    "incomplete_utterance": 10,
+    "missing_or_noise_span": 5,
+    "modifier_connection_error": 10,
+    "ordinary_japanese_ok": 10,
+    "predicate_form_ok": 10,
+    "route_wo_ok": 10,
+    "stt_orthography_boundary": 10,
+    "verb_conjugation_error": 10
+  },
+  "human_reviewed": false,
+  "limitations": [
+    "자동 생성·계약 검증 데이터이며 사람 또는 일본어 전문가 검수 데이터가 아닙니다.",
+    "GPU 전용 내부 후보 비교용이며 운영 품질이나 실제 학습자 품질을 증명하지 않습니다.",
+    "Pi 런타임 격차 평가는 이번 시험 범위에서 제외했습니다."
+  ],
+  "model_inference_count": 0,
+  "qualification_scope": "gpu_internal_model_selection_only",
+  "records": 120,
+  "review_status": "generated_validated",
+  "schema_version": "feedback-holdout-manifest-v0.4",
+  "sha256": "c22c5ddb0153c60d7087ef1e26580e669ea974e2bdafb0e65142f9eaeed60802",
+  "text_overlap": {
+    "feedback_holdout_v0.1": 0,
+    "feedback_holdout_v0.2": 0,
+    "feedback_holdout_v0.3": 0,
+    "feedback_training_v0.1": 0,
+    "feedback_training_v0.2": 0
+  },
+  "verdict_counts": {
+    "agree": 40,
+    "disagree": 70,
+    "unreviewable": 10
+  }
+}

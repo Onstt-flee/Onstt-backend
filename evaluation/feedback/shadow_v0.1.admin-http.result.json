@@ -1,0 +1,27 @@
+{
+  "schema_version": "feedback-admin-http-shadow-v0.1",
+  "scope": "synthetic_operational_shadow_only",
+  "quality_claim_allowed": false,
+  "database_sha256_before": "e3f6e1090fbf8b29927647344adad2e143e07576aced7c26daf8f5e25d5f7ec1",
+  "database_sha256_after": "e3f6e1090fbf8b29927647344adad2e143e07576aced7c26daf8f5e25d5f7ec1",
+  "database_unchanged": true,
+  "http": {
+    "unauthenticated_audit_list_status": 401,
+    "authenticated_health_status": 200,
+    "authenticated_audit_list_status": 200,
+    "authenticated_issue_list_status": 200,
+    "authenticated_detail_status": 200,
+    "succeeded_job_retry_status": 409,
+    "model_stopped_readiness_status": 503,
+    "model_stopped_readiness_reason": "model_unavailable"
+  },
+  "projections": {
+    "audit_list_count": 200,
+    "audit_list_contains_content_keys": false,
+    "health_contains_request_content": false,
+    "issue_group_count": 1,
+    "issue_status": "emerging",
+    "detail_contains_source_text": false
+  },
+  "limitations": "Synthetic wiring and access-control evidence only; not a language-quality or production-approval claim."
+}

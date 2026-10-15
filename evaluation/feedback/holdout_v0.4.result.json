@@ -1,0 +1,41 @@
+{
+  "adapter_sha256": "3bcbc80d1559dacf60a84c708a8ab4c51ee4bd33532acf2ab134394aa2dcd1ad",
+  "candidate": "feedback-qwen3-8b-v03",
+  "contract_failure_ids": [
+    "FVH-04-113"
+  ],
+  "decision": "passed_internal_gpu_evaluation",
+  "executed_at": "2026-10-15",
+  "failed_correction_ids": [
+    "FVH-04-069",
+    "FVH-04-072",
+    "FVH-04-073",
+    "FVH-04-074",
+    "FVH-04-075"
+  ],
+  "failed_recommended_decision_ids": [
+    "FVH-04-069",
+    "FVH-04-111",
+    "FVH-04-112"
+  ],
+  "gpu_only_shadow_ready": true,
+  "holdout_sha256": "c22c5ddb0153c60d7087ef1e26580e669ea974e2bdafb0e65142f9eaeed60802",
+  "metrics": {
+    "accepted_correction_rate": 0.8571428571428571,
+    "contract_success_rate": 0.9916666666666667,
+    "disagreement_precision": 1.0,
+    "disagreement_recall": 0.9857142857142858,
+    "false_disagreement_rate": 0.0,
+    "p95_latency_seconds": 2.6172109999999997,
+    "recommended_decision_accuracy": 0.9428571428571428,
+    "records": 120,
+    "source_metric_gap_pp": null
+  },
+  "model_inference_count": 120,
+  "operational_approved": false,
+  "raw_result_sha256": "6d3fe9032251403e05d2c8ab970ee7bd7f1ddb11c6f9c5d2afa9e1aeab4abf32",
+  "run_manifest_sha256": "7cc1926812fbc1c0ef7f4f2e846d90e23cc51397db996b0cbba46c77b6dbd5ef",
+  "score_sha256": "f63b05fedd4b3e60107c43258bad0aa1d19c5711f8c21be0c1ff2079d0ab2bd5",
+  "shadow_authorization_scope": "gpu_judgments_only_no_learner_exposure",
+  "verdict_mismatch_ids": []
+}

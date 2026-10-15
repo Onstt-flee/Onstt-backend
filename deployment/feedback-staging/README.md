@@ -4,10 +4,14 @@ This profile keeps the judgment response synchronous and moves verification to
 a persistent DB-backed worker. It is disabled by default and does not expose
 feedback to learners or overwrite `judgment_results`.
 
+The selected verifier is `feedback-verifier-v0.3`. It passed the generated-validated
+GPU internal holdout but is authorized only for GPU-judgment shadow with no
+learner exposure. Pi intake is deferred.
+
 ## Resource envelope
 
 - judgment Qwen3-4B + v0.2-D: port 1234, GPU reservation 0.30
-- feedback Qwen3-8B + feedback-v0.1: port 1235, reservation 0.50
+- feedback Qwen3-8B + feedback-v0.3: port 1235, reservation 0.50
 - total configured reservation: 0.80; feedback concurrency: one
 - Qwen3-14B remains an offline upper-bound model only
 
@@ -21,7 +25,7 @@ operator; repository changes never activate them.
 1. Verify all model/adapter SHA-256 values and write a mode-0600 environment file.
 2. Start both vLLM services and verify their aliases through `/v1/models`.
 3. Run contract smoke tests while `FEEDBACK_AUDIT_ENABLED=false`.
-4. Start `feedback-worker.service`, then enable audit enqueue only in staging.
+4. Start `feedback-worker.service`, then enable audit enqueue only in staging. The worker entrypoint resolves the repository root explicitly so direct script execution from systemd does not depend on an inherited `PYTHONPATH`.
 5. Check protected `/ready/feedback`, `/health/feedback`, audits, and issue groups.
 
 The admin token must contain at least 32 characters. List APIs exclude source

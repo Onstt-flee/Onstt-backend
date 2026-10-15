@@ -1,0 +1,23 @@
+{
+  "schema_version": "synthetic-feedback-shadow-v0.1",
+  "purpose": "label_free_operational_shadow_only",
+  "quality_claim_allowed": false,
+  "input_count": 200,
+  "unique_id_count": 200,
+  "stratum_counts": {
+    "acceptable_like": 80,
+    "correction_like": 80,
+    "insufficient_like": 20,
+    "boundary_like": 20
+  },
+  "inputs_sha256": "495a2c2b07a542422161b76b3377733ad12cb301283402b7aec97444cce03d27",
+  "model_visibility": [
+    "text",
+    "context",
+    "learner_level"
+  ],
+  "hidden_metadata": [
+    "id",
+    "stratum"
+  ]
+}

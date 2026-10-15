@@ -1,6 +1,14 @@
 #!/usr/bin/env python3
 """Run the persistent feedback audit worker as a separate service."""
 
+from pathlib import Path
+import sys
+
+
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
 from database import SessionLocal
 from analyzer.feedback_store import configuration_error, feedback_enabled
 from analyzer.feedback_worker import run_forever

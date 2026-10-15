@@ -9,7 +9,7 @@
 - Qwen3-4B 0.30 + Qwen3-8B 0.50 듀얼 vLLM 및 worker systemd 템플릿을 추가했으며 기본 비활성이다.
 - feedback holdout 120건을 SHA-256 `21f23d97...1a1eb1`로 추론 0회 봉인했다.
 - 별도 자동검증 학습쌍 600건(train 540/eval 60)을 만들었고 holdout 원문 중복은 0건이다.
-- 피드백 v0.2 평가와 실제 GPU/Pi 판단쌍 intake·GPU 50건 요약을 포함한 전체 회귀 테스트 327개를 통과했다.
+- 피드백 v0.2 평가와 실제 GPU/Pi 판단쌍 intake·단일 명령 인계를 포함한 전체 회귀 테스트 338개를 통과했다.
 - 이후 8B 베이스와 feedback-v0.1 LoRA를 봉인 holdout에서 각 1회 실행했다. 두 모델 모두 strict 계약 0/120으로 실패했다. LoRA는 빈 think 래퍼 제거 진단에서만 120/120이었으므로 미채택이며 200건 shadow는 실행하지 않는다. 새 구조 독립 holdout v0.2와 reasoning parser 검증이 다음 단계다.
 - judgment holdout v0.5의 다양한 120개 원문에서 피드백 후보를 새로 파생한 holdout v0.2를 SHA-256 `44a8dec5...282358`, 추론 0회로 봉인했다. 피드백 학습 600건 및 v0.1 시험 입력과 완전 동일 중복은 0건이다. 단, 원문 코퍼스 자체는 내부 판단 평가에 사용된 자료이고 GPU/Pi 층화는 모의 표식이므로 외부 독립 인증이나 실제 런타임 비교로 해석하지 않는다.
 - reasoning parser smoke test 후 v0.2를 정확히 한 번 실행했다. 전송 120/120, strict 계약 118/120, 정밀도 81.61%, 재현율 79.78%, 허위 불일치 51.61%, 권장 decision 57.30%, 교정문 29.27%, p95 2.692초였다. 지연시간 외 모든 핵심 품질 기준을 실패해 미채택했으며 v0.2는 소비 완료, 200건 shadow는 미실행 상태다.
@@ -17,8 +17,12 @@
 - feedback-v0.2 재학습 데이터는 pilot v0.2-D의 다양한 747개 원문에서 올바른 동의 anchor와 실패 유형 반례를 같은 split에 묶어 1,582건(train 1,424/eval 158)으로 만들었다. 분포는 agree 747, disagree 809, unreviewable 26이며 v0.3 원문·완전 입력 중복은 0건이다. rank 16/alpha 32/seed 42는 유지하고 반복 템플릿 과적합을 줄이기 위해 1 epoch로 설정했다.
 - Qwen3-8B feedback-v0.2 LoRA를 1 epoch/178 step으로 학습했다. 984.752초, train loss 0.214553, 내부 eval loss 0.009780이며 어댑터 SHA-256은 `9b4fc64f...c2f427`이다. 가중치는 Git 제외 경로에 보존했고 데이터·설정·어댑터·run manifest 해시를 v0.3 프로토콜에 고정했다.
 - feedback-v0.2를 봉인된 v0.3 120건에서 정확히 한 번 실행했다. 계약 120/120, 재현율 100%, 권장 decision 97.50%, 교정문 94.59%, p95 2.870초는 통과했으나 정상 일본어 6건을 모두 `일본어가 아닌 발화`로 오인했다. 허위 불일치 15%와 정밀도 93.02%로 필수 안전 기준을 실패해 미채택했으며, v0.3은 소비 완료, 기능 플래그·worker·관리자 경고·200건 shadow는 비활성 상태다.
+- Pi 경로는 후속 단계로 보류하고 GPU 전용 feedback-v0.3 준비를 시작했다. 신규 미사용 holdout v0.4 120건을 SHA-256 `c22c5ddb...60802`, 추론 0회로 봉인했고 기존 feedback 학습·holdout과 원문 중복은 0건이다. v0.2 실패를 일반화한 정상 일본어·보류 경계·최소 교정 대조쌍 200건을 더해 총 1,782건(train 1,604/eval 178)의 v0.3 데이터를 만들었으며 holdout v0.4와 원문·완전 입력 중복은 모두 0건이다.
+- Qwen3-8B feedback-v0.3 LoRA를 seed 42, 1 epoch, 201 step으로 학습했다. train loss 0.20346, eval loss 0.01094이며 어댑터 SHA-256은 `3bcbc80d...dcd1ad`, run manifest SHA-256은 `64781b80...000b2`다. holdout v0.4는 어댑터·데이터·설정 해시와 결합해 단일 추론 준비 상태지만 아직 추론 0회이며 모델 채택·worker 활성화는 하지 않았다.
+- feedback-v0.3을 봉인 holdout v0.4 120건에서 정확히 한 번 실행했다. 계약 119/120, 허위 불일치 0%, 정밀도 100%, 재현율 98.57%, 권장 decision 94.29%, 교정문 85.71%, p95 2.617초로 모든 내부 기준을 통과했다. 자동검증 내부 시험이므로 운영 승인은 아니며 GPU 판단 200건의 비노출 shadow만 다음 단계로 허용한다. holdout은 소비 완료로 잠갔고 임시 vLLM은 종료했다.
 - 다음 재학습 전에 실제 GPU/Pi 동일 입력 50건을 수집하는 fail-closed intake를 추가했다. 양쪽 입력 SHA 집합, 원시 응답 재파싱, GPU run manifest와 Pi 벤치마크의 원시 실행·모델·어댑터·양자화 해시를 모두 검증하고 문장·ID 없는 요약만 허용한다. 실제 Pi 파일은 아직 0건이며, 50쌍이 모여도 독립 라벨 없이는 새 holdout과 feedback-v0.3 학습을 차단한다.
 - 판단쌍의 GPU BF16 절반 50건을 `judgment-v02d`, temperature 0, top-p 1로 실행했다. 전송·계약은 50/50이고 원시 응답 재파싱도 통과했다. 내용 포함 JSONL과 manifest는 Git 제외 경로에 두고 실행 SHA-256 `229a0ea9...11e7c`, manifest SHA-256 `b850475e...ab682`, 입력 집합 SHA-256 `9fa6d161...075a1`만 기록했다. 임시 vLLM은 종료했으며 실제 Pi 실행을 기다린다.
+- Pi의 Q5 해시·환경 권한·manifest·live alias를 확인한 뒤 50건을 실행하는 `run-feedback-pairs-50.sh`와, GPU 서버에서 두 Pi 파일을 고정 GPU 결과와 대조하는 `finalize-runtime-pairs.sh`를 추가했다. 서비스 자동 시작·공개 전송·Git 추가는 수행하지 않으며 실제 Pi 산출물이 없으면 계속 차단된다.
 
 ## 2026-10-13 Pi용 Q4 실패·Q5 양자화 회귀 통과
 
@@ -49,7 +53,7 @@
 | --- | --- |
 | 우선 처리한 오류 4개 | 수정 완료 |
 | 프로젝트 Python 환경 | 3.12.3으로 재구성 완료 |
-| 코드 회귀 테스트 | 327개 통과(Pi Q4/Q5, feedback-v0.2 평가와 실제 runtime-pair intake 포함) |
+| 코드 회귀 테스트 | 338개 통과(Pi Q4/Q5, feedback-v0.2 평가와 실제 runtime-pair intake 포함) |
 | 설치 의존성 검사 | `pip check` 통과 |
 | 실제 RAG 예문 검색 | 3,003개 자료 로딩·검색 확인 |
 | API 통합 검증 | D 단독 POST/GET 판단 API를 메모리 DB·모의 모델과 라이브 vLLM·격리 SQLite 양쪽에서 확인 |
@@ -888,3 +892,48 @@ venv/bin/python -m pip check
 - v0.1과 v0.2-A/B/C/E/F/G/H/I/J 및 베이스 비교 모델은 운영 연결에서 제외하고 데이터 계보·설정·요약 JSON·Markdown·SHA-256 기록만 유지한다. 기존 커밋 이력은 삭제하거나 재작성하지 않는다.
 - `*.safetensors`, `*.gguf`, partial download와 일반 학습 checkpoint 확장자를 `.gitignore`로 차단했다. 원시 모델 실행 JSONL도 기존처럼 Git에서 제외한다.
 - 정책은 `deployment/judgment-staging/MODEL_POLICY.md`에 고정하고 배포 템플릿 회귀 테스트가 D 이외 alias의 운영 참조를 거부하도록 했다.
+
+
+
+## 2026-10-15 feedback-v0.3 합성 비노출 shadow
+
+- 실제 저장 판단 결과가 0건인 상태에서 사용자 데이터 대신 정답 없는 합성 입력 200건을 생성했다. 생성 strata와 ID는 모델 입력에서 제외했고 실제 사용자·오디오 정보는 사용하지 않았다.
+- GPU BF16 `judgment-v02d`는 전송·계약 200/200, GPU BF16 `feedback-qwen3-8b-v03` worker는 작업·계약·audit 저장 200/200을 완료했다.
+- 피드백 결과는 동의 199건, 불일치 후보 1건이었다. 정답 라벨이 없으므로 이 비율을 정확도나 불일치 탐지 성능으로 해석하지 않는다.
+- audit job·결과 중복은 0건이고 판단 snapshot 전후 SHA-256이 일치해 피드백모델이 기존 판단을 변경하지 않았음을 확인했다.
+- 판단 p95는 961.580ms, 피드백 p95는 1195.256ms였다. 원시 실행과 격리 DB는 Git 제외 경로에 두고 집계·해시만 추적한다.
+- 기능 플래그 기본 비활성, 운영 승인·학습자 노출 금지를 유지한다. 다음 품질 단계는 실제 신규 GPU 판단이 쌓인 후 최소 200건 비노출 shadow이며, 합성 결과는 자동 학습 데이터로 사용하지 않는다.
+
+
+## 2026-10-15 feedback 관리자 API 합성 shadow
+
+- 합성 200건 격리 SQLite를 읽기 전용으로 연결해 관리자 projection과 실제 로컬 HTTP 경로를 검증했다.
+- 무토큰 audit 목록은 401, 보호된 health·목록·issue·상세는 200, 이미 성공한 작업 retry는 409였다.
+- 피드백 모델 서버를 종료한 상태에서 readiness는 503 `model_unavailable`로 fail-closed했다.
+- audit 목록 200행과 health·issue 집계에는 원문·교정문·검수 근거가 없었고, 상세 응답도 원문/STT 텍스트를 포함하지 않았다.
+- 검사 전후 격리 DB SHA-256이 일치했고 임시 FastAPI를 종료했다. 기능 플래그 기본 비활성·학습자 노출 금지와 품질 주장 금지를 유지한다.
+
+
+## 2026-10-15 feedback worker 장애 복구 훈련
+
+- 합성 200건 DB의 별도 복사본에서 새 session마다 worker 재시작 경계를 모사했다.
+- 만료된 running lease는 1회에 회수·성공했고, 최초 계약 실패 작업은 다음 실행의 2번째 시도에 성공했다.
+- 전송 실패 작업은 정확히 3회 시도 후 `failed`로 격리됐으며 audit을 생성하지 않았다. 성공한 두 작업만 각각 audit 1건을 만들었고 중복은 0건이다.
+- 기존 판단 snapshot 전후 SHA-256이 일치했고 원본 합성 DB도 변경되지 않았다. 결과에는 입력·판단·추천 내용을 기록하지 않았다.
+- 이는 queue 복구와 DB 무결성 근거이며 실제 강제 종료 부하나 언어 품질 근거는 아니다. 기능 플래그 기본 비활성과 학습자 노출 금지를 유지한다.
+
+
+## 2026-10-15 feedback worker 프로세스 강제 종료 복구
+
+- 실제 별도 worker 프로세스를 stub HTTP 요청 도중 SIGKILL(-9)로 종료했다. 작업은 `running`, attempts 1, lease 보유 상태로 남았다.
+- 격리 DB에서 lease를 만료시킨 뒤 새 worker를 시작하자 attempts 2에서 성공했고 audit은 정확히 1건만 생성됐다. 판단 snapshot과 원본 합성 DB 해시는 변하지 않았다.
+- 훈련 준비 중 systemd의 직접 스크립트 실행 방식에서 `ModuleNotFoundError: database`가 발생하는 진입점 결함을 발견했다. worker 스크립트가 프로젝트 루트를 명시적으로 추가하도록 수정하고 다른 작업 디렉터리 실행 회귀 테스트를 추가했다.
+- 실제 모델 대신 계약형 로컬 stub을 사용했고 lease 180초를 기다리지 않고 복사 DB에서 만료를 앞당겼다. 기능 플래그 기본 비활성과 품질 주장 금지를 유지한다.
+
+
+## 2026-10-15 feedback-v0.3 체크포인트 감사
+
+- 전용 감사기로 전체 변경을 feedback-v0.3 체크포인트 후보와 Pi 보류 변경으로 fail-closed 분류했다.
+- 1차 실행에서 변경 54개는 체크포인트 50개·Pi 보류 4개·미분류 0개였다. 스테이징, 금지 파일, 10MiB 초과, 대표 비밀키 패턴, 핵심 내외부 해시 불일치가 모두 0건이었다.
+- Pi 보류 4개는 작업 트리에 유지하되 다음 feedback 체크포인트의 staged 목록에서 제외하도록 보고서에 고정했다. 가중치·원시 run·SQLite는 계속 Git 밖에 둔다.
+- 사용자 지시에 따라 스테이징·커밋·푸시는 수행하지 않았다. 최종 커밋 직전 동일 감사를 다시 실행해야 한다.

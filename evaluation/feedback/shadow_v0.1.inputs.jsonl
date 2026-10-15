@@ -1,0 +1,200 @@
+{"id":"FSS-0001","input":{"context":null,"learner_level":"N5","text":"明日は学校に行きます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0002","input":{"context":null,"learner_level":"N5","text":"明日は病院に行きます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0003","input":{"context":null,"learner_level":"N5","text":"明日は図書館に行きます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0004","input":{"context":null,"learner_level":"N5","text":"明日は駅に行きます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0005","input":{"context":null,"learner_level":"N5","text":"明日は公園に行きます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0006","input":{"context":null,"learner_level":"N5","text":"明日は会社に行きます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0007","input":{"context":null,"learner_level":"N5","text":"明日は大学に行きます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0008","input":{"context":null,"learner_level":"N5","text":"明日は銀行に行きます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0009","input":{"context":null,"learner_level":"N5","text":"来週は学校に行きます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0010","input":{"context":null,"learner_level":"N5","text":"来週は病院に行きます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0011","input":{"context":null,"learner_level":"N5","text":"来週は図書館に行きます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0012","input":{"context":null,"learner_level":"N5","text":"来週は駅に行きます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0013","input":{"context":null,"learner_level":"N5","text":"来週は公園に行きます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0014","input":{"context":null,"learner_level":"N5","text":"来週は会社に行きます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0015","input":{"context":null,"learner_level":"N5","text":"来週は大学に行きます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0016","input":{"context":null,"learner_level":"N5","text":"来週は銀行に行きます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0017","input":{"context":null,"learner_level":"N5","text":"今日は学校に行きます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0018","input":{"context":null,"learner_level":"N5","text":"今日は病院に行きます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0019","input":{"context":null,"learner_level":"N5","text":"今日は図書館に行きます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0020","input":{"context":null,"learner_level":"N5","text":"今日は駅に行きます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0021","input":{"context":null,"learner_level":"N5","text":"今日は公園に行きます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0022","input":{"context":null,"learner_level":"N5","text":"今日は会社に行きます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0023","input":{"context":null,"learner_level":"N5","text":"今日は大学に行きます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0024","input":{"context":null,"learner_level":"N5","text":"今日は銀行に行きます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0025","input":{"context":null,"learner_level":"N5","text":"土曜日は学校に行きます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0026","input":{"context":null,"learner_level":"N5","text":"土曜日は病院に行きます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0027","input":{"context":null,"learner_level":"N5","text":"土曜日は図書館に行きます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0028","input":{"context":null,"learner_level":"N5","text":"土曜日は駅に行きます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0029","input":{"context":null,"learner_level":"N5","text":"土曜日は公園に行きます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0030","input":{"context":null,"learner_level":"N5","text":"土曜日は会社に行きます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0031","input":{"context":null,"learner_level":"N5","text":"土曜日は大学に行きます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0032","input":{"context":null,"learner_level":"N5","text":"土曜日は銀行に行きます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0033","input":{"context":null,"learner_level":"N5","text":"来月は学校に行きます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0034","input":{"context":null,"learner_level":"N5","text":"来月は病院に行きます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0035","input":{"context":null,"learner_level":"N5","text":"来月は図書館に行きます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0036","input":{"context":null,"learner_level":"N5","text":"来月は駅に行きます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0037","input":{"context":null,"learner_level":"N5","text":"来月は公園に行きます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0038","input":{"context":null,"learner_level":"N5","text":"来月は会社に行きます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0039","input":{"context":null,"learner_level":"N5","text":"来月は大学に行きます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0040","input":{"context":null,"learner_level":"N5","text":"来月は銀行に行きます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0041","input":{"context":null,"learner_level":"N5","text":"昨日は図書館で本を読みます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0042","input":{"context":null,"learner_level":"N5","text":"昨日は図書館で昼ご飯を食べます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0043","input":{"context":null,"learner_level":"N5","text":"昨日は図書館で友達と話します。"},"stratum":"acceptable_like"}
+{"id":"FSS-0044","input":{"context":null,"learner_level":"N5","text":"昨日は図書館で日本語を勉強します。"},"stratum":"acceptable_like"}
+{"id":"FSS-0045","input":{"context":null,"learner_level":"N4","text":"昨日は図書館で写真を撮りました。"},"stratum":"acceptable_like"}
+{"id":"FSS-0046","input":{"context":null,"learner_level":"N4","text":"昨日は図書館で音楽を聞きました。"},"stratum":"acceptable_like"}
+{"id":"FSS-0047","input":{"context":null,"learner_level":"N5","text":"昨日は図書館で宿題をしました。"},"stratum":"acceptable_like"}
+{"id":"FSS-0048","input":{"context":null,"learner_level":"N5","text":"昨日は図書館で少し休みました。"},"stratum":"acceptable_like"}
+{"id":"FSS-0049","input":{"context":null,"learner_level":"N5","text":"昨日は食堂で本を読みます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0050","input":{"context":null,"learner_level":"N5","text":"昨日は食堂で昼ご飯を食べます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0051","input":{"context":null,"learner_level":"N5","text":"昨日は食堂で友達と話します。"},"stratum":"acceptable_like"}
+{"id":"FSS-0052","input":{"context":null,"learner_level":"N5","text":"昨日は食堂で日本語を勉強します。"},"stratum":"acceptable_like"}
+{"id":"FSS-0053","input":{"context":null,"learner_level":"N4","text":"昨日は食堂で写真を撮りました。"},"stratum":"acceptable_like"}
+{"id":"FSS-0054","input":{"context":null,"learner_level":"N4","text":"昨日は食堂で音楽を聞きました。"},"stratum":"acceptable_like"}
+{"id":"FSS-0055","input":{"context":null,"learner_level":"N5","text":"昨日は食堂で宿題をしました。"},"stratum":"acceptable_like"}
+{"id":"FSS-0056","input":{"context":null,"learner_level":"N5","text":"昨日は食堂で少し休みました。"},"stratum":"acceptable_like"}
+{"id":"FSS-0057","input":{"context":null,"learner_level":"N5","text":"昨日は公園で本を読みます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0058","input":{"context":null,"learner_level":"N5","text":"昨日は公園で昼ご飯を食べます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0059","input":{"context":null,"learner_level":"N5","text":"昨日は公園で友達と話します。"},"stratum":"acceptable_like"}
+{"id":"FSS-0060","input":{"context":null,"learner_level":"N5","text":"昨日は公園で日本語を勉強します。"},"stratum":"acceptable_like"}
+{"id":"FSS-0061","input":{"context":null,"learner_level":"N4","text":"昨日は公園で写真を撮りました。"},"stratum":"acceptable_like"}
+{"id":"FSS-0062","input":{"context":null,"learner_level":"N4","text":"昨日は公園で音楽を聞きました。"},"stratum":"acceptable_like"}
+{"id":"FSS-0063","input":{"context":null,"learner_level":"N5","text":"昨日は公園で宿題をしました。"},"stratum":"acceptable_like"}
+{"id":"FSS-0064","input":{"context":null,"learner_level":"N5","text":"昨日は公園で少し休みました。"},"stratum":"acceptable_like"}
+{"id":"FSS-0065","input":{"context":null,"learner_level":"N5","text":"昨日は教室で本を読みます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0066","input":{"context":null,"learner_level":"N5","text":"昨日は教室で昼ご飯を食べます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0067","input":{"context":null,"learner_level":"N5","text":"昨日は教室で友達と話します。"},"stratum":"acceptable_like"}
+{"id":"FSS-0068","input":{"context":null,"learner_level":"N5","text":"昨日は教室で日本語を勉強します。"},"stratum":"acceptable_like"}
+{"id":"FSS-0069","input":{"context":null,"learner_level":"N4","text":"昨日は教室で写真を撮りました。"},"stratum":"acceptable_like"}
+{"id":"FSS-0070","input":{"context":null,"learner_level":"N4","text":"昨日は教室で音楽を聞きました。"},"stratum":"acceptable_like"}
+{"id":"FSS-0071","input":{"context":null,"learner_level":"N5","text":"昨日は教室で宿題をしました。"},"stratum":"acceptable_like"}
+{"id":"FSS-0072","input":{"context":null,"learner_level":"N5","text":"昨日は教室で少し休みました。"},"stratum":"acceptable_like"}
+{"id":"FSS-0073","input":{"context":null,"learner_level":"N5","text":"昨日は家で本を読みます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0074","input":{"context":null,"learner_level":"N5","text":"昨日は家で昼ご飯を食べます。"},"stratum":"acceptable_like"}
+{"id":"FSS-0075","input":{"context":null,"learner_level":"N5","text":"昨日は家で友達と話します。"},"stratum":"acceptable_like"}
+{"id":"FSS-0076","input":{"context":null,"learner_level":"N5","text":"昨日は家で日本語を勉強します。"},"stratum":"acceptable_like"}
+{"id":"FSS-0077","input":{"context":null,"learner_level":"N4","text":"昨日は家で写真を撮りました。"},"stratum":"acceptable_like"}
+{"id":"FSS-0078","input":{"context":null,"learner_level":"N4","text":"昨日は家で音楽を聞きました。"},"stratum":"acceptable_like"}
+{"id":"FSS-0079","input":{"context":null,"learner_level":"N5","text":"昨日は家で宿題をしました。"},"stratum":"acceptable_like"}
+{"id":"FSS-0080","input":{"context":null,"learner_level":"N5","text":"昨日は家で少し休みました。"},"stratum":"acceptable_like"}
+{"id":"FSS-0081","input":{"context":null,"learner_level":"N5","text":"明日は学校を行きます。"},"stratum":"correction_like"}
+{"id":"FSS-0082","input":{"context":null,"learner_level":"N5","text":"明日は病院を行きます。"},"stratum":"correction_like"}
+{"id":"FSS-0083","input":{"context":null,"learner_level":"N5","text":"明日は図書館を行きます。"},"stratum":"correction_like"}
+{"id":"FSS-0084","input":{"context":null,"learner_level":"N5","text":"明日は駅を行きます。"},"stratum":"correction_like"}
+{"id":"FSS-0085","input":{"context":null,"learner_level":"N5","text":"明日は公園を行きます。"},"stratum":"correction_like"}
+{"id":"FSS-0086","input":{"context":null,"learner_level":"N5","text":"明日は会社を行きます。"},"stratum":"correction_like"}
+{"id":"FSS-0087","input":{"context":null,"learner_level":"N5","text":"明日は大学を行きます。"},"stratum":"correction_like"}
+{"id":"FSS-0088","input":{"context":null,"learner_level":"N5","text":"明日は銀行を行きます。"},"stratum":"correction_like"}
+{"id":"FSS-0089","input":{"context":null,"learner_level":"N5","text":"来週は学校を行きます。"},"stratum":"correction_like"}
+{"id":"FSS-0090","input":{"context":null,"learner_level":"N5","text":"来週は病院を行きます。"},"stratum":"correction_like"}
+{"id":"FSS-0091","input":{"context":null,"learner_level":"N5","text":"来週は図書館を行きます。"},"stratum":"correction_like"}
+{"id":"FSS-0092","input":{"context":null,"learner_level":"N5","text":"来週は駅を行きます。"},"stratum":"correction_like"}
+{"id":"FSS-0093","input":{"context":null,"learner_level":"N5","text":"来週は公園を行きます。"},"stratum":"correction_like"}
+{"id":"FSS-0094","input":{"context":null,"learner_level":"N5","text":"来週は会社を行きます。"},"stratum":"correction_like"}
+{"id":"FSS-0095","input":{"context":null,"learner_level":"N5","text":"来週は大学を行きます。"},"stratum":"correction_like"}
+{"id":"FSS-0096","input":{"context":null,"learner_level":"N5","text":"来週は銀行を行きます。"},"stratum":"correction_like"}
+{"id":"FSS-0097","input":{"context":null,"learner_level":"N5","text":"今日は学校を行きます。"},"stratum":"correction_like"}
+{"id":"FSS-0098","input":{"context":null,"learner_level":"N5","text":"今日は病院を行きます。"},"stratum":"correction_like"}
+{"id":"FSS-0099","input":{"context":null,"learner_level":"N5","text":"今日は図書館を行きます。"},"stratum":"correction_like"}
+{"id":"FSS-0100","input":{"context":null,"learner_level":"N5","text":"今日は駅を行きます。"},"stratum":"correction_like"}
+{"id":"FSS-0101","input":{"context":null,"learner_level":"N5","text":"今日は公園を行きます。"},"stratum":"correction_like"}
+{"id":"FSS-0102","input":{"context":null,"learner_level":"N5","text":"今日は会社を行きます。"},"stratum":"correction_like"}
+{"id":"FSS-0103","input":{"context":null,"learner_level":"N5","text":"今日は大学を行きます。"},"stratum":"correction_like"}
+{"id":"FSS-0104","input":{"context":null,"learner_level":"N5","text":"今日は銀行を行きます。"},"stratum":"correction_like"}
+{"id":"FSS-0105","input":{"context":null,"learner_level":"N5","text":"土曜日は学校を行きます。"},"stratum":"correction_like"}
+{"id":"FSS-0106","input":{"context":null,"learner_level":"N5","text":"土曜日は病院を行きます。"},"stratum":"correction_like"}
+{"id":"FSS-0107","input":{"context":null,"learner_level":"N5","text":"土曜日は図書館を行きます。"},"stratum":"correction_like"}
+{"id":"FSS-0108","input":{"context":null,"learner_level":"N5","text":"土曜日は駅を行きます。"},"stratum":"correction_like"}
+{"id":"FSS-0109","input":{"context":null,"learner_level":"N5","text":"土曜日は公園を行きます。"},"stratum":"correction_like"}
+{"id":"FSS-0110","input":{"context":null,"learner_level":"N5","text":"土曜日は会社を行きます。"},"stratum":"correction_like"}
+{"id":"FSS-0111","input":{"context":null,"learner_level":"N5","text":"土曜日は大学を行きます。"},"stratum":"correction_like"}
+{"id":"FSS-0112","input":{"context":null,"learner_level":"N5","text":"土曜日は銀行を行きます。"},"stratum":"correction_like"}
+{"id":"FSS-0113","input":{"context":null,"learner_level":"N5","text":"来月は学校を行きます。"},"stratum":"correction_like"}
+{"id":"FSS-0114","input":{"context":null,"learner_level":"N5","text":"来月は病院を行きます。"},"stratum":"correction_like"}
+{"id":"FSS-0115","input":{"context":null,"learner_level":"N5","text":"来月は図書館を行きます。"},"stratum":"correction_like"}
+{"id":"FSS-0116","input":{"context":null,"learner_level":"N5","text":"来月は駅を行きます。"},"stratum":"correction_like"}
+{"id":"FSS-0117","input":{"context":null,"learner_level":"N5","text":"来月は公園を行きます。"},"stratum":"correction_like"}
+{"id":"FSS-0118","input":{"context":null,"learner_level":"N5","text":"来月は会社を行きます。"},"stratum":"correction_like"}
+{"id":"FSS-0119","input":{"context":null,"learner_level":"N5","text":"来月は大学を行きます。"},"stratum":"correction_like"}
+{"id":"FSS-0120","input":{"context":null,"learner_level":"N5","text":"来月は銀行を行きます。"},"stratum":"correction_like"}
+{"id":"FSS-0121","input":{"context":null,"learner_level":"N5","text":"毎朝、顔を洗うます。"},"stratum":"correction_like"}
+{"id":"FSS-0122","input":{"context":null,"learner_level":"N5","text":"昨日、本を読むました。"},"stratum":"correction_like"}
+{"id":"FSS-0123","input":{"context":null,"learner_level":"N5","text":"ここで少し待つてください。"},"stratum":"correction_like"}
+{"id":"FSS-0124","input":{"context":null,"learner_level":"N5","text":"駅で友達に会いてください。"},"stratum":"correction_like"}
+{"id":"FSS-0125","input":{"context":null,"learner_level":"N5","text":"このスープは熱いかったです。"},"stratum":"correction_like"}
+{"id":"FSS-0126","input":{"context":null,"learner_level":"N5","text":"このかばんは重いくないです。"},"stratum":"correction_like"}
+{"id":"FSS-0127","input":{"context":null,"learner_level":"N5","text":"ここは静かなです。"},"stratum":"correction_like"}
+{"id":"FSS-0128","input":{"context":null,"learner_level":"N5","text":"きれい部屋に住んでいます。"},"stratum":"correction_like"}
+{"id":"FSS-0129","input":{"context":null,"learner_level":"N5","text":"安いな時計を買いました。"},"stratum":"correction_like"}
+{"id":"FSS-0130","input":{"context":null,"learner_level":"N5","text":"今日は寒いだです。"},"stratum":"correction_like"}
+{"id":"FSS-0131","input":{"context":null,"learner_level":"N5","text":"ええと、毎朝、顔を洗うます。"},"stratum":"correction_like"}
+{"id":"FSS-0132","input":{"context":null,"learner_level":"N5","text":"ええと、昨日、本を読むました。"},"stratum":"correction_like"}
+{"id":"FSS-0133","input":{"context":null,"learner_level":"N5","text":"ええと、ここで少し待つてください。"},"stratum":"correction_like"}
+{"id":"FSS-0134","input":{"context":null,"learner_level":"N5","text":"ええと、駅で友達に会いてください。"},"stratum":"correction_like"}
+{"id":"FSS-0135","input":{"context":null,"learner_level":"N5","text":"ええと、このスープは熱いかったです。"},"stratum":"correction_like"}
+{"id":"FSS-0136","input":{"context":null,"learner_level":"N5","text":"ええと、このかばんは重いくないです。"},"stratum":"correction_like"}
+{"id":"FSS-0137","input":{"context":null,"learner_level":"N5","text":"ええと、ここは静かなです。"},"stratum":"correction_like"}
+{"id":"FSS-0138","input":{"context":null,"learner_level":"N5","text":"ええと、きれい部屋に住んでいます。"},"stratum":"correction_like"}
+{"id":"FSS-0139","input":{"context":null,"learner_level":"N5","text":"ええと、安いな時計を買いました。"},"stratum":"correction_like"}
+{"id":"FSS-0140","input":{"context":null,"learner_level":"N5","text":"ええと、今日は寒いだです。"},"stratum":"correction_like"}
+{"id":"FSS-0141","input":{"context":null,"learner_level":"N5","text":"先生、毎朝、顔を洗うます。"},"stratum":"correction_like"}
+{"id":"FSS-0142","input":{"context":null,"learner_level":"N5","text":"先生、昨日、本を読むました。"},"stratum":"correction_like"}
+{"id":"FSS-0143","input":{"context":null,"learner_level":"N5","text":"先生、ここで少し待つてください。"},"stratum":"correction_like"}
+{"id":"FSS-0144","input":{"context":null,"learner_level":"N5","text":"先生、駅で友達に会いてください。"},"stratum":"correction_like"}
+{"id":"FSS-0145","input":{"context":null,"learner_level":"N5","text":"先生、このスープは熱いかったです。"},"stratum":"correction_like"}
+{"id":"FSS-0146","input":{"context":null,"learner_level":"N5","text":"先生、このかばんは重いくないです。"},"stratum":"correction_like"}
+{"id":"FSS-0147","input":{"context":null,"learner_level":"N5","text":"先生、ここは静かなです。"},"stratum":"correction_like"}
+{"id":"FSS-0148","input":{"context":null,"learner_level":"N5","text":"先生、きれい部屋に住んでいます。"},"stratum":"correction_like"}
+{"id":"FSS-0149","input":{"context":null,"learner_level":"N5","text":"先生、安いな時計を買いました。"},"stratum":"correction_like"}
+{"id":"FSS-0150","input":{"context":null,"learner_level":"N5","text":"先生、今日は寒いだです。"},"stratum":"correction_like"}
+{"id":"FSS-0151","input":{"context":null,"learner_level":"N5","text":"旅行では、毎朝、顔を洗うます。"},"stratum":"correction_like"}
+{"id":"FSS-0152","input":{"context":null,"learner_level":"N5","text":"旅行では、昨日、本を読むました。"},"stratum":"correction_like"}
+{"id":"FSS-0153","input":{"context":null,"learner_level":"N5","text":"旅行では、ここで少し待つてください。"},"stratum":"correction_like"}
+{"id":"FSS-0154","input":{"context":null,"learner_level":"N5","text":"旅行では、駅で友達に会いてください。"},"stratum":"correction_like"}
+{"id":"FSS-0155","input":{"context":null,"learner_level":"N5","text":"旅行では、このスープは熱いかったです。"},"stratum":"correction_like"}
+{"id":"FSS-0156","input":{"context":null,"learner_level":"N5","text":"旅行では、このかばんは重いくないです。"},"stratum":"correction_like"}
+{"id":"FSS-0157","input":{"context":null,"learner_level":"N5","text":"旅行では、ここは静かなです。"},"stratum":"correction_like"}
+{"id":"FSS-0158","input":{"context":null,"learner_level":"N5","text":"旅行では、きれい部屋に住んでいます。"},"stratum":"correction_like"}
+{"id":"FSS-0159","input":{"context":null,"learner_level":"N5","text":"旅行では、安いな時計を買いました。"},"stratum":"correction_like"}
+{"id":"FSS-0160","input":{"context":null,"learner_level":"N5","text":"旅行では、今日は寒いだです。"},"stratum":"correction_like"}
+{"id":"FSS-0161","input":{"context":null,"learner_level":"N5","text":"昨日、駅で友達に"},"stratum":"insufficient_like"}
+{"id":"FSS-0162","input":{"context":"일본어 회화 연습 중인 학습자 발화","learner_level":"N5","text":"昨日、駅で友達に"},"stratum":"insufficient_like"}
+{"id":"FSS-0163","input":{"context":null,"learner_level":"N4","text":"もし明日雨が降ったら"},"stratum":"insufficient_like"}
+{"id":"FSS-0164","input":{"context":"일본어 회화 연습 중인 학습자 발화","learner_level":"N4","text":"もし明日雨が降ったら"},"stratum":"insufficient_like"}
+{"id":"FSS-0165","input":{"context":null,"learner_level":"N5","text":"この本を読んだのは"},"stratum":"insufficient_like"}
+{"id":"FSS-0166","input":{"context":"일본어 회화 연습 중인 학습자 발화","learner_level":"N5","text":"この本を読んだのは"},"stratum":"insufficient_like"}
+{"id":"FSS-0167","input":{"context":null,"learner_level":"N4","text":"私は昨日、病院に……"},"stratum":"insufficient_like"}
+{"id":"FSS-0168","input":{"context":"일본어 회화 연습 중인 학습자 발화","learner_level":"N4","text":"私は昨日、病院に……"},"stratum":"insufficient_like"}
+{"id":"FSS-0169","input":{"context":null,"learner_level":"N5","text":"明日は［聞き取れない］に行きます。"},"stratum":"insufficient_like"}
+{"id":"FSS-0170","input":{"context":"일본어 회화 연습 중인 학습자 발화","learner_level":"N5","text":"明日は［聞き取れない］に行きます。"},"stratum":"insufficient_like"}
+{"id":"FSS-0171","input":{"context":null,"learner_level":"N4","text":"今日は［聞き取れない］かったです。"},"stratum":"insufficient_like"}
+{"id":"FSS-0172","input":{"context":"일본어 회화 연습 중인 학습자 발화","learner_level":"N4","text":"今日は［聞き取れない］かったです。"},"stratum":"insufficient_like"}
+{"id":"FSS-0173","input":{"context":null,"learner_level":"N5","text":"［雑音のみ］"},"stratum":"insufficient_like"}
+{"id":"FSS-0174","input":{"context":"일본어 회화 연습 중인 학습자 발화","learner_level":"N5","text":"［雑音のみ］"},"stratum":"insufficient_like"}
+{"id":"FSS-0175","input":{"context":null,"learner_level":"N4","text":"……"},"stratum":"insufficient_like"}
+{"id":"FSS-0176","input":{"context":"일본어 회화 연습 중인 학습자 발화","learner_level":"N4","text":"……"},"stratum":"insufficient_like"}
+{"id":"FSS-0177","input":{"context":null,"learner_level":"N5","text":"あの、ええと……"},"stratum":"insufficient_like"}
+{"id":"FSS-0178","input":{"context":"일본어 회화 연습 중인 학습자 발화","learner_level":"N5","text":"あの、ええと……"},"stratum":"insufficient_like"}
+{"id":"FSS-0179","input":{"context":null,"learner_level":"N4","text":"I went to the station yesterday."},"stratum":"insufficient_like"}
+{"id":"FSS-0180","input":{"context":"일본어 회화 연습 중인 학습자 발화","learner_level":"N4","text":"I went to the station yesterday."},"stratum":"insufficient_like"}
+{"id":"FSS-0181","input":{"context":null,"learner_level":"N5","text":"あのう、来週は大阪に行きます。"},"stratum":"boundary_like"}
+{"id":"FSS-0182","input":{"context":null,"learner_level":"N4","text":"あのう、来週は大阪に行きます。"},"stratum":"boundary_like"}
+{"id":"FSS-0183","input":{"context":"친구에게 묻는 상황","learner_level":"N5","text":"なんか飲む？"},"stratum":"boundary_like"}
+{"id":"FSS-0184","input":{"context":"친구에게 묻는 상황","learner_level":"N4","text":"なんか飲む？"},"stratum":"boundary_like"}
+{"id":"FSS-0185","input":{"context":"친구와의 일상 대화","learner_level":"N5","text":"昨日は図書館に行きました。そして本を読んだ。"},"stratum":"boundary_like"}
+{"id":"FSS-0186","input":{"context":"친구와의 일상 대화","learner_level":"N4","text":"昨日は図書館に行きました。そして本を読んだ。"},"stratum":"boundary_like"}
+{"id":"FSS-0187","input":{"context":"면접에서 정중하게 답하는 상황","learner_level":"N5","text":"昨日は図書館に行きました。そして本を読んだ。"},"stratum":"boundary_like"}
+{"id":"FSS-0188","input":{"context":"면접에서 정중하게 답하는 상황","learner_level":"N4","text":"昨日は図書館に行きました。そして本を読んだ。"},"stratum":"boundary_like"}
+{"id":"FSS-0189","input":{"context":"음성 인식 전사이며 원음은 제공되지 않음","learner_level":"N5","text":"わたしわ大学生です。"},"stratum":"boundary_like"}
+{"id":"FSS-0190","input":{"context":"음성 인식 전사이며 원음은 제공되지 않음","learner_level":"N4","text":"わたしわ大学生です。"},"stratum":"boundary_like"}
+{"id":"FSS-0191","input":{"context":"음성 인식 전사이며 원음은 제공되지 않음","learner_level":"N5","text":"本お読みます。"},"stratum":"boundary_like"}
+{"id":"FSS-0192","input":{"context":"음성 인식 전사이며 원음은 제공되지 않음","learner_level":"N4","text":"本お読みます。"},"stratum":"boundary_like"}
+{"id":"FSS-0193","input":{"context":"어디로 여행 가나요?","learner_level":"N5","text":"京都です。"},"stratum":"boundary_like"}
+{"id":"FSS-0194","input":{"context":"어디로 여행 가나요?","learner_level":"N4","text":"京都です。"},"stratum":"boundary_like"}
+{"id":"FSS-0195","input":{"context":"무슨 과일을 좋아하나요?","learner_level":"N5","text":"京都です。"},"stratum":"boundary_like"}
+{"id":"FSS-0196","input":{"context":"무슨 과일을 좋아하나요?","learner_level":"N4","text":"京都です。"},"stratum":"boundary_like"}
+{"id":"FSS-0197","input":{"context":"친구와 대화","learner_level":"N5","text":"パン、もう買ったよ。"},"stratum":"boundary_like"}
+{"id":"FSS-0198","input":{"context":"친구와 대화","learner_level":"N4","text":"パン、もう買ったよ。"},"stratum":"boundary_like"}
+{"id":"FSS-0199","input":{"context":"친구와 대화","learner_level":"N5","text":"今、何してる？"},"stratum":"boundary_like"}
+{"id":"FSS-0200","input":{"context":"친구와 대화","learner_level":"N4","text":"今、何してる？"},"stratum":"boundary_like"}
