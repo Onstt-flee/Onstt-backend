@@ -61,6 +61,30 @@ See
 `training/feedback/FEEDBACK_V0.3_ACTUAL_STT_SHADOW_RESULT.md` for the fixed
 result and limitations.
 
+## Actual admin HTTP and Swagger smoke
+
+Use the fixed actual-shadow SQLite only through a temporary copy. The verifier
+starts loopback FastAPI processes, checks Swagger/OpenAPI, authentication,
+content-free projections, retry rejection, model-unavailable readiness and the
+disabled feature state, then terminates both processes.
+
+```bash
+venv/bin/python scripts/verify_feedback_admin_http.py \
+  --database /home/cap-minsung/lora-adapter-bank/runs/feedback-v0.3/actual-shadow-v0.1.sqlite3 \
+  --output evaluation/feedback/actual_shadow_v0.1.admin-http.result.json \
+  --port 18001 \
+  --overwrite
+```
+
+Ports 18001 and 18002 must be free. The script generates an ephemeral admin
+token, never writes it to the result, and verifies that the source database and
+temporary database copy remain byte-identical. It records only HTTP statuses,
+counts, booleans and SHA-256 values.
+
+A passing result is access-control and wiring evidence only. It does not approve
+learner exposure, language quality, automatic retraining or production-default
+activation.
+
 ## Persisted GPU judgment audit
 
 `scripts/run_feedback_actual_shadow.py` is the supported handoff when 200

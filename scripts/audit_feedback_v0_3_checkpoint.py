@@ -39,6 +39,7 @@ CHECKPOINT_PREFIXES = (
     "scripts/run_feedback_worker_process_crash_drill.py",
     "scripts/run_feedback_worker_recovery_drill.py",
     "scripts/verify_feedback_admin_shadow.py",
+    "scripts/verify_feedback_admin_http.py",
     "tests/test_feedback_",
     "training/feedback/FEEDBACK_V0.3_",
     "training/feedback/config_v0.3.json",
@@ -67,6 +68,7 @@ KEY_HASHES = {
     "evaluation/feedback/actual_shadow_v0.1.inputs.manifest.json": "a19f97f42cf2c510fe055b183104bdc464519adb8e89ddeb5b5ab3cd3cb9643f",
     "evaluation/feedback/actual_shadow_v0.1.result.json": "c05d498ba42dc18a54bdfb7c1b6b5be9011b1740de2bb49f139bae1305e0af46",
     "evaluation/feedback/actual_shadow_v0.1.admin.result.json": "bfa9cab1cbe7fe34412bfa2bcda52b1d167bdb0f7537e71d349fac40f2d96a0c",
+    "evaluation/feedback/actual_shadow_v0.1.admin-http.result.json": "e0cf27040c809325ac5924e5fa8239a9e0b496888b53147edfa78534a9535d6b",
 }
 EXTERNAL_HASHES = {
     "/home/cap-minsung/lora-adapter-bank/adapters/feedback-verifier-v0.3/adapter_model.safetensors": "3bcbc80d1559dacf60a84c708a8ab4c51ee4bd33532acf2ab134394aa2dcd1ad",

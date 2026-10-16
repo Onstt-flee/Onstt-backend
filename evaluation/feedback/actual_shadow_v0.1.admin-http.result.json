@@ -1,0 +1,55 @@
+{
+  "schema_version": "feedback-admin-http-shadow-v0.2",
+  "scope": "actual_stored_stt_operational_shadow_only",
+  "quality_claim_allowed": false,
+  "database_sha256_before": "988f21db29cd5c3720f879e378e99386649ad198b4b387f2a5b40db9360f29db",
+  "database_sha256_after": "988f21db29cd5c3720f879e378e99386649ad198b4b387f2a5b40db9360f29db",
+  "database_unchanged": true,
+  "checks": {
+    "docs_200": true,
+    "openapi_200": true,
+    "admin_paths_present": true,
+    "unauthenticated_is_401": true,
+    "health_200": true,
+    "audit_list_200": true,
+    "issues_200": true,
+    "detail_200": true,
+    "succeeded_retry_is_409": true,
+    "stopped_model_readiness_is_503": true,
+    "disabled_feature_is_503": true,
+    "audit_list_content_free": true,
+    "detail_excludes_source_text": true,
+    "health_content_free": true,
+    "source_database_unchanged": true,
+    "temporary_copy_unchanged": true
+  },
+  "http": {
+    "docs_status": 200,
+    "openapi_status": 200,
+    "unauthenticated_audit_list_status": 401,
+    "authenticated_health_status": 200,
+    "authenticated_audit_list_status": 200,
+    "authenticated_issue_list_status": 200,
+    "authenticated_detail_status": 200,
+    "succeeded_job_retry_status": 409,
+    "model_stopped_readiness_status": 503,
+    "model_stopped_readiness_reason": "model_unavailable",
+    "disabled_health_status": 503
+  },
+  "projections": {
+    "audit_list_count": 197,
+    "audit_list_contains_content_keys": false,
+    "health_contains_request_content": false,
+    "issue_group_count": 8,
+    "issue_status_counts": {
+      "emerging": 6,
+      "recurrent": 2
+    },
+    "issue_kind_member_counts": {
+      "audit_failure": 1,
+      "model_disagreement": 14
+    },
+    "detail_contains_source_text": false
+  },
+  "limitations": "Actual stored-STT operational wiring and access-control evidence only; not a language-quality or production-approval claim."
+}

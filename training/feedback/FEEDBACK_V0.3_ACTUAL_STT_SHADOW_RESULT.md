@@ -84,10 +84,11 @@ GPU `judgment-v0.2-D`와 `feedback-verifier-v0.3`의 실제 저장 STT 200건 �
 | 최종 격리 SQLite | `988f21db29cd5c3720f879e378e99386649ad198b4b387f2a5b40db9360f29db` |
 | 추적 결과 JSON | `c05d498ba42dc18a54bdfb7c1b6b5be9011b1740de2bb49f139bae1305e0af46` |
 | 관리자 집계 JSON | `bfa9cab1cbe7fe34412bfa2bcda52b1d167bdb0f7537e71d349fac40f2d96a0c` |
+| 관리자 HTTP JSON | `e0cf27040c809325ac5924e5fa8239a9e0b496888b53147edfa78534a9535d6b` |
 
 ## 검증
 
-- 전체 회귀 테스트: 359/359
+- 전체 회귀 테스트: 360/360
 - 프로젝트 가상환경 `pip check`: 통과
 - Qwen3 PEFT 가상환경 `pip check`: 통과
 - 체크포인트 감사: 미분류·금지 파일·비밀 패턴·스테이징 0건
@@ -108,6 +109,22 @@ GPU `judgment-v0.2-D`와 `feedback-verifier-v0.3`의 실제 저장 STT 200건 �
 반복 상태는 audit 행 수가 아니라 고유 `judgment_id` 수로 계산한다. 여러 피드백모델
 버전이 같은 판단을 다시 검수해도 반복 횟수를 부풀리지 않는다. 원문·교정문·사용자 ID는
 집계 결과에 포함하지 않으며, 정답 라벨이 없으므로 반복 그룹을 실제 오류로 확정하지 않는다.
+
+## 관리자 HTTP·Swagger 스모크
+
+실제 격리 SQLite의 임시 복사본으로 loopback API를 실행했다. `/docs`와
+`/openapi.json`은 200이었고 관리자 경로 6개가 OpenAPI에 포함됐다.
+
+- 무인증 audit 목록: 401
+- 인증된 health/list/issues/detail: 200
+- 성공 작업 retry: 409
+- 피드백 모델 중단 readiness: 503 `model_unavailable`
+- 기능 플래그 비활성 health: 503
+- 목록·health·상세 원문 노출: 없음
+- 원본 DB와 임시 복사본: 실행 전후 SHA-256 동일
+
+임시 관리자 토큰은 결과에 저장하지 않았고 테스트 API 프로세스는 모두 종료했다.
+이 검증도 접근 제어·운영 배선 근거일 뿐 언어 품질이나 운영 기본 활성 근거가 아니다.
 
 ## 다음 단계
 
