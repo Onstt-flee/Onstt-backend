@@ -1,4 +1,4 @@
-"""Fail-closed audit for the uncommitted feedback-v0.3 checkpoint."""
+"""Fail-closed audit for feedback-v0.3 and its operational-shadow follow-up."""
 
 from __future__ import annotations
 
@@ -23,12 +23,16 @@ DEFERRED_PI_PATHS = {
 CHECKPOINT_ROOT_FILES = {"README.md", "PROGRESS.md"}
 CHECKPOINT_PREFIXES = (
     "deployment/feedback-staging/",
+    "docs/MODEL_SYSTEM_STATUS_2026-10-15.md",
     "evaluation/feedback/HOLDOUT_V0.4_SEAL.md",
     "evaluation/feedback/build_holdout_v0_4.py",
     "evaluation/feedback/build_synthetic_shadow_v0_1.py",
     "evaluation/feedback/holdout_v0.4",
+    "evaluation/feedback/actual_shadow_v0.1",
     "evaluation/feedback/shadow_v0.1",
     "scripts/audit_feedback_v0_3_checkpoint.py",
+    "scripts/build_feedback_actual_inputs.py",
+    "scripts/run_feedback_actual_shadow.py",
     "scripts/run_feedback_synthetic_shadow.py",
     "scripts/run_feedback_worker.py",
     "scripts/run_feedback_worker_process_crash_drill.py",

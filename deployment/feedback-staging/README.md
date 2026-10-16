@@ -42,3 +42,62 @@ Audit transport/contract failures are retried after 1, 5, and 30 minutes, at
 most three attempts. Failed audits remain visible to administrators. They do
 not modify or fail the judgment response. Pi judgments enter the same queue
 only after an idempotent GPU edge-sync transaction succeeds.
+
+## Actual stored STT operational shadow
+
+The completed 200-item operational run used
+`scripts/build_feedback_actual_inputs.py` to create a private, content-bearing
+snapshot from stored Japanese STT. It then used
+`scripts/run_feedback_synthetic_shadow.py` with
+`actual_stored_stt_operational_shadow_only` scope to run judgment and feedback
+inside an isolated database.
+
+The judgment path applies exactly one retry only for non-correction
+text-preservation violations. The tracked result contains aggregates and hashes
+only. This run is label-free operational evidence, not a language-quality
+evaluation.
+
+See
+`training/feedback/FEEDBACK_V0.3_ACTUAL_STT_SHADOW_RESULT.md` for the fixed
+result and limitations.
+
+## Persisted GPU judgment audit
+
+`scripts/run_feedback_actual_shadow.py` is the supported handoff when 200
+eligible GPU judgments already exist in the source database. It opens the source
+SQLite database in read-only mode and copies exactly 200 eligible `gpu_bf16`,
+`judgment-v02d`, `judgment-v0.2-D` records into a private isolated database.
+The feedback model is run against the copy, never against the source DB.
+
+Prerequisites:
+
+- both source tables and judgment provenance are present;
+- 200 eligible judgments exist after the explicit cursor;
+- feedback vLLM alias `feedback-qwen3-8b-v03` is ready on loopback;
+- the content-bearing isolated DB is outside the Git workspace;
+- the tracked summary path does not already exist unless `--overwrite` is
+  explicitly intended.
+
+Example:
+
+```bash
+set -a
+source /home/cap-minsung/.config/stt-api/feedback-staging.env
+set +a
+
+FEEDBACK_AUDIT_ENABLED=true venv/bin/python scripts/run_feedback_actual_shadow.py \
+  --source-database /home/cap-minsung/stt_api/stt_data.db \
+  --isolated-database /home/cap-minsung/lora-adapter-bank/runs/feedback-v0.3/actual-shadow-v0.1.sqlite3 \
+  --summary evaluation/feedback/actual_shadow_v0.1.result.json \
+  --after-judgment-id 0
+```
+
+Change the cursor only from a previously fixed run record. The script fails
+closed when fewer than 200 eligible rows exist, when provenance is missing, or
+when the source DB, selected judgment snapshot, isolated judgments, queue, or
+audit uniqueness checks do not remain consistent.
+
+The summary contains counts, aggregate latency and hashes only. The isolated DB
+contains source text and must remain outside Git. Even a passing run is
+label-free operational evidence and cannot be reported as grammar accuracy or
+used to enable learner-visible warnings.

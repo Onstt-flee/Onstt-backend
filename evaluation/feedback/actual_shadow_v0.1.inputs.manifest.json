@@ -1,0 +1,14 @@
+{
+  "schema_version": "actual-feedback-shadow-inputs-v0.1",
+  "purpose": "label_free_operational_shadow_only",
+  "quality_claim_allowed": false,
+  "input_count": 200,
+  "source_policy": "latest_eligible_japanese_stt",
+  "context_policy": "null_exact_dialogue_context_unavailable",
+  "source_database_sha256": "ef3b42b92516c5332f2ed1dcd63ffe1a9c2ff8a53650c24a32205a0161ff09c9",
+  "private_inputs_sha256": "667b0b3c6a074ac9e9a1f46e5a520408dd367f2c79becfe1a7d53b08e9de1330",
+  "source_id_set_sha256": "fa087a7ad6e3b1b0ad2580df8275e2e623bc7038418b4a201f705b86ec6333a6",
+  "contains_source_text": false,
+  "contains_user_ids": false,
+  "private_input_path_tracked": false
+}

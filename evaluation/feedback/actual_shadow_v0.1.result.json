@@ -1,0 +1,103 @@
+{
+  "schema_version": "actual-stored-stt-feedback-shadow-result-v0.1",
+  "scope": "actual_stored_stt_operational_shadow_only",
+  "quality_claim_allowed": false,
+  "source_runtime": "gpu_bf16",
+  "input_count": 200,
+  "inputs_sha256": "667b0b3c6a074ac9e9a1f46e5a520408dd367f2c79becfe1a7d53b08e9de1330",
+  "raw_judgment_path": "/home/cap-minsung/lora-adapter-bank/runs/feedback-v0.3/actual-shadow-v0.1/judgment.jsonl",
+  "raw_judgment_sha256": "cfea98563a13bd8d9e11c8797a6217b04eb8b89e2e4b042b437a76bfe6cf1e16",
+  "isolated_database_path": "/home/cap-minsung/lora-adapter-bank/runs/feedback-v0.3/actual-shadow-v0.1.sqlite3",
+  "judgment": {
+    "model": "judgment-v02d",
+    "adapter": "judgment-qwen3-4b-failure-focus-v0.2-d",
+    "adapter_sha256": "2e758256afe68c3005b595f9f664b5f76734606b923dbb2c7bc858e81e9e55c6",
+    "strategy": "d_only_with_single_preservation_retry",
+    "model_calls": 205,
+    "transport_success": 200,
+    "contract_valid": 198,
+    "contract_invalid": 2,
+    "retry_attempts": 5,
+    "retry_recoveries": 3,
+    "retry_failures": 2,
+    "retry_rate": 0.025,
+    "decision_counts": {
+      "acceptable": 157,
+      "insufficient_evidence": 25,
+      "needs_correction": 16
+    },
+    "latency_ms": {
+      "p50": 858.611,
+      "p95": 1230.975
+    }
+  },
+  "feedback": {
+    "model": "feedback-qwen3-8b-v03",
+    "adapter": "feedback-verifier-v0.3",
+    "adapter_sha256": "3bcbc80d1559dacf60a84c708a8ab4c51ee4bd33532acf2ab134394aa2dcd1ad",
+    "queued": 198,
+    "attempted_once": 198,
+    "job_status_counts": {
+      "pending": 1,
+      "succeeded": 197
+    },
+    "audit_count": 197,
+    "verdict_counts": {
+      "agree": 188,
+      "disagree": 9
+    },
+    "issue_counts": {
+      "reason_mismatch": 2,
+      "should_abstain": 4,
+      "unnecessary_abstention": 1,
+      "wrong_decision": 5,
+      "wrong_error_type": 2
+    },
+    "stratum_verdict_counts": {
+      "stored_stt_unlabeled": {
+        "agree": 188,
+        "disagree": 9
+      }
+    },
+    "latency_ms": {
+      "p50": 1192.721,
+      "p95": 1269.438
+    }
+  },
+  "integrity": {
+    "judgment_snapshot_before_sha256": "2a011b5fa8a540677153d90b69dab22f10b40b9873352e4b81ffa009e1ad7600",
+    "judgment_snapshot_after_sha256": "2a011b5fa8a540677153d90b69dab22f10b40b9873352e4b81ffa009e1ad7600",
+    "judgments_unchanged": true,
+    "duplicate_job_count": 0,
+    "duplicate_audit_count": 0,
+    "feedback_input_excludes_runtime_and_model_identity": true
+  },
+  "post_run_finalization": {
+    "feedback_attempts_total": 200,
+    "job_status_counts": {
+      "failed": 1,
+      "succeeded": 197
+    },
+    "audit_count": 197,
+    "failed_job_count": 1,
+    "failed_job_attempts": 3,
+    "failed_job_error_category": "contract",
+    "failed_job_was_safely_isolated": true,
+    "isolated_database_sha256": "988f21db29cd5c3720f879e378e99386649ad198b4b387f2a5b40db9360f29db"
+  },
+  "operational_acceptance": {
+    "checks": {
+      "judgment_contract_at_least_99_percent": true,
+      "judgment_retry_rate_at_most_5_percent": true,
+      "judgment_p95_at_most_2500_ms": true,
+      "feedback_audit_coverage_at_least_99_percent": true,
+      "feedback_failure_safely_tracked": true,
+      "judgments_unchanged": true,
+      "duplicate_jobs_zero": true,
+      "duplicate_audits_zero": true
+    },
+    "passed": true,
+    "quality_claim_allowed": false,
+    "learner_exposure_approved": false
+  }
+}

@@ -16,12 +16,20 @@ import statistics
 import sys
 from typing import Any
 
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 import models
 from analyzer.feedback_store import configuration_error, record_gpu_judgment
 from analyzer.feedback_worker import process_one
+from analyzer.judgment_service import (
+    PRESERVATION_CONTRACT_ERROR,
+    RETRY_INSTRUCTION,
+)
 from database import Base
 from evaluation.judgment.runner import (
     PROMPT_VERSION_V2, build_request, call_endpoint, parse_model_output,
@@ -72,6 +80,12 @@ def judgment_snapshot(db: Any) -> str:
 
 
 def run(args: argparse.Namespace) -> dict[str, Any]:
+    scope = getattr(args, "scope", "synthetic_operational_shadow_only")
+    if scope not in {
+        "synthetic_operational_shadow_only",
+        "actual_stored_stt_operational_shadow_only",
+    }:
+        raise ValueError("unsupported shadow scope")
     inputs_path = args.inputs.resolve()
     raw_dir = args.raw_dir.resolve()
     database_path = args.database.resolve()
@@ -97,10 +111,11 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     judgment_transport = judgment_contract = 0
     judgment_latencies: list[float] = []
     judgment_decisions: Counter[str] = Counter()
+    retry_attempts = retry_recoveries = retry_failures = 0
     strata_by_utterance: dict[int, str] = {}
     session = None
     with SessionLocal() as db, judgment_raw_path.open("w", encoding="utf-8") as raw:
-        session = models.Session(topic="synthetic-feedback-shadow-v0.1")
+        session = models.Session(topic=scope)
         db.add(session); db.flush()
         for index, row in enumerate(rows, 1):
             request = build_request(
@@ -112,15 +127,54 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                 timeout=args.timeout, api_key=None,
             )
             parsed = None; contract_error = "transport_failed"
+            retry_used = False
+            first_contract_error = None
             if response["transport_success"]:
                 judgment_transport += 1
                 parsed, contract_error = parse_model_output(
                     response["raw_text"], row["input"]["text"], PROMPT_VERSION_V2,
                 )
+            if parsed is None and contract_error == PRESERVATION_CONTRACT_ERROR:
+                retry_used = True
+                retry_attempts += 1
+                first_contract_error = contract_error
+                retry_request = {
+                    **request,
+                    "messages": [dict(message) for message in request["messages"]],
+                }
+                retry_request["messages"][0]["content"] += RETRY_INSTRUCTION
+                retry_response = call_endpoint(
+                    endpoint=args.judgment_endpoint,
+                    request_body=retry_request,
+                    timeout=args.timeout,
+                    api_key=None,
+                )
+                first_latency = response.get("latency_ms")
+                retry_latency = retry_response.get("latency_ms")
+                if isinstance(first_latency, (int, float)) and isinstance(
+                    retry_latency, (int, float)
+                ):
+                    retry_response["latency_ms"] = first_latency + retry_latency
+                response = retry_response
+                if response["transport_success"]:
+                    parsed, contract_error = parse_model_output(
+                        response["raw_text"],
+                        row["input"]["text"],
+                        PROMPT_VERSION_V2,
+                    )
+                else:
+                    contract_error = "transport_failed"
+                if parsed is not None:
+                    retry_recoveries += 1
+                else:
+                    retry_failures += 1
             raw_record = {
                 "id": row["id"], "input": row["input"], "stratum": row["stratum"],
                 "response": response, "contract_valid": parsed is not None,
                 "contract_error": contract_error, "parsed_judgment": parsed,
+                "attempt_count": 2 if retry_used else 1,
+                "retry_used": retry_used,
+                "first_contract_error": first_contract_error,
             }
             raw.write(canonical(raw_record) + "\n"); raw.flush()
             if parsed is not None:
@@ -130,7 +184,11 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                     judgment_latencies.append(float(response["latency_ms"]))
                 utterance = models.Utterance(
                     session_id=session.id, stt_text=row["input"]["text"],
-                    language="ja", stt_model="synthetic",
+                    language="ja",
+                    stt_model=(
+                        "synthetic" if scope == "synthetic_operational_shadow_only"
+                        else "stored-stt-private-snapshot"
+                    ),
                 )
                 db.add(utterance); db.flush()
                 strata_by_utterance[utterance.id] = row["stratum"]
@@ -143,7 +201,11 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                     classification_review_required=parsed["classification_review_required"],
                     strategy="d_only", model_name=args.judgment_model,
                     adapter_name=args.judgment_adapter,
-                    selection_reason="synthetic_shadow_d_only",
+                    selection_reason=(
+                        "synthetic_shadow_d_only"
+                        if scope == "synthetic_operational_shadow_only"
+                        else "actual_stored_stt_shadow_d_only"
+                    ),
                     contract_version=PROMPT_VERSION_V2,
                     latency_ms=response.get("latency_ms"),
                     context=row["input"]["context"],
@@ -192,8 +254,12 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
 
     raw_bytes = judgment_raw_path.read_bytes()
     summary = {
-        "schema_version": "synthetic-feedback-shadow-result-v0.1",
-        "scope": "synthetic_operational_shadow_only",
+        "schema_version": (
+            "synthetic-feedback-shadow-result-v0.1"
+            if scope == "synthetic_operational_shadow_only"
+            else "actual-stored-stt-feedback-shadow-result-v0.1"
+        ),
+        "scope": scope,
         "quality_claim_allowed": False,
         "source_runtime": "gpu_bf16",
         "input_count": len(rows),
@@ -204,9 +270,15 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "judgment": {
             "model": args.judgment_model, "adapter": args.judgment_adapter,
             "adapter_sha256": args.judgment_adapter_sha256,
+            "strategy": "d_only_with_single_preservation_retry",
+            "model_calls": len(rows) + retry_attempts,
             "transport_success": judgment_transport,
             "contract_valid": judgment_contract,
             "contract_invalid": len(rows) - judgment_contract,
+            "retry_attempts": retry_attempts,
+            "retry_recoveries": retry_recoveries,
+            "retry_failures": retry_failures,
+            "retry_rate": round(retry_attempts / len(rows), 6),
             "decision_counts": dict(sorted(judgment_decisions.items())),
             "latency_ms": {
                 "p50": round(statistics.median(judgment_latencies), 3) if judgment_latencies else None,
@@ -256,6 +328,14 @@ def main() -> int:
     parser.add_argument("--judgment-model-sha256")
     parser.add_argument("--judgment-adapter-sha256")
     parser.add_argument("--timeout", type=float, default=120.0)
+    parser.add_argument(
+        "--scope",
+        choices=(
+            "synthetic_operational_shadow_only",
+            "actual_stored_stt_operational_shadow_only",
+        ),
+        default="synthetic_operational_shadow_only",
+    )
     parser.add_argument("--overwrite", action="store_true")
     args = parser.parse_args()
     try:
