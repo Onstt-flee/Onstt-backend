@@ -1,5 +1,21 @@
 # STT API 진행사항 및 일본어 판단모델 개발 방향
 
+## 2026-10-16 실제 STT 관리자 반복 이슈 집계 검증
+
+- 실제 저장 STT 200건 shadow의 격리 SQLite를 read-only로 열어 관리자
+  health/list/detail/issues 투영을 다시 검증했다.
+- 동일 판단을 여러 피드백모델 버전이 재검수해도 반복 건수가 늘지 않도록
+  judgment_id 고유 개수로 emerging/recurrent/systemic 상태를 계산한다.
+- disagree뿐 아니라 unreviewable과 최종 실패 audit job도 내용 없는 운영 경고로
+  /admin/feedback/issues에 포함한다.
+- 실제 결과는 이슈 그룹 8개, emerging 6개, recurrent 2개이며 모델 불일치
+  멤버십 14건과 contract 실패 1건을 기록했다. 원문·교정문·사용자 ID는 집계에
+  포함하지 않았고 격리 DB SHA-256은 실행 전후 동일했다.
+- 이 집계는 반복 패턴 관찰용이며 정답 라벨이 없어 모델 정확도나 오류 확정 근거로
+  사용하지 않는다. 학습자 노출과 자동 재학습은 계속 금지한다.
+- 전체 회귀 테스트 359/359, 프로젝트 및 Qwen3 PEFT 환경 pip check,
+  체크포인트 해시 감사와 git diff --check가 통과했다.
+
 ## 2026-10-15 판단·피드백모델 문서 통합
 
 - 현재 사용 모델, 검증 단계, 승인·금지 범위, 핵심 해시와 다음 작업을

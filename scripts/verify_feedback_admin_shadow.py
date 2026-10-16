@@ -13,6 +13,10 @@ from pathlib import Path
 import sys
 from typing import Any
 
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
@@ -34,7 +38,7 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
-def verify(database: Path) -> dict[str, Any]:
+def verify(database: Path, *, scope: str = "synthetic_operational_shadow_only") -> dict[str, Any]:
     database = database.resolve()
     before_hash = sha256_file(database)
     url = f"sqlite:///file:{database}?mode=ro&uri=true"
@@ -74,14 +78,24 @@ def verify(database: Path) -> dict[str, Any]:
     issue_counts: dict[str, int] = {}
     statuses: dict[str, int] = {}
     runtimes: dict[str, int] = {}
+    kinds: dict[str, int] = {}
+    failure_categories: dict[str, int] = {}
     for issue in issues:
-        issue_counts[issue["issue_code"]] = issue_counts.get(issue["issue_code"], 0) + issue["count"]
+        code = issue.get("issue_code")
+        if code is not None:
+            issue_counts[code] = issue_counts.get(code, 0) + issue["count"]
         statuses[issue["status"]] = statuses.get(issue["status"], 0) + 1
         runtimes[issue["runtime"]] = runtimes.get(issue["runtime"], 0) + issue["count"]
+        kinds[issue["kind"]] = kinds.get(issue["kind"], 0) + issue["count"]
+        category = issue.get("error_category")
+        if category is not None:
+            failure_categories[category] = (
+                failure_categories.get(category, 0) + issue["count"]
+            )
 
     return {
         "schema_version": "feedback-admin-shadow-verification-v0.1",
-        "scope": "synthetic_operational_shadow_only",
+        "scope": scope,
         "quality_claim_allowed": False,
         "database_sha256_before": before_hash,
         "database_sha256_after": after_hash,
@@ -100,6 +114,8 @@ def verify(database: Path) -> dict[str, Any]:
             "succeeded_retryable_count": retryable_succeeded,
             "issue_group_count": len(issues),
             "issue_counts": dict(sorted(issue_counts.items())),
+            "issue_kind_counts": dict(sorted(kinds.items())),
+            "failure_category_counts": dict(sorted(failure_categories.items())),
             "issue_status_counts": dict(sorted(statuses.items())),
             "runtime_counts": dict(sorted(runtimes.items())),
         },
@@ -111,12 +127,17 @@ def main() -> int:
     parser.add_argument("--database", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--overwrite", action="store_true")
+    parser.add_argument(
+        "--scope",
+        choices=("synthetic_operational_shadow_only", "actual_stored_stt_operational_shadow_only"),
+        default="synthetic_operational_shadow_only",
+    )
     args = parser.parse_args()
     if args.output.exists() and not args.overwrite:
         print(f"refusing to overwrite {args.output}", file=sys.stderr)
         return 1
     try:
-        result = verify(args.database)
+        result = verify(args.database, scope=args.scope)
         args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_text(
             json.dumps(result, ensure_ascii=False, indent=2) + "\n",

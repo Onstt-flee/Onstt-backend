@@ -1,0 +1,48 @@
+{
+  "schema_version": "feedback-admin-shadow-verification-v0.1",
+  "scope": "actual_stored_stt_operational_shadow_only",
+  "quality_claim_allowed": false,
+  "database_sha256_before": "988f21db29cd5c3720f879e378e99386649ad198b4b387f2a5b40db9360f29db",
+  "database_sha256_after": "988f21db29cd5c3720f879e378e99386649ad198b4b387f2a5b40db9360f29db",
+  "database_unchanged": true,
+  "health": {
+    "job_counts": {
+      "pending": 0,
+      "running": 0,
+      "succeeded": 197,
+      "failed": 1
+    },
+    "audit_count": 197,
+    "disagreement_count": 9,
+    "unreviewable_count": 0,
+    "contains_request_content": false
+  },
+  "admin_projections": {
+    "list_count": 197,
+    "list_contains_content_keys": false,
+    "detail_resolvable_count": 197,
+    "succeeded_retryable_count": 0,
+    "issue_group_count": 8,
+    "issue_counts": {
+      "reason_mismatch": 2,
+      "should_abstain": 4,
+      "unnecessary_abstention": 1,
+      "wrong_decision": 5,
+      "wrong_error_type": 2
+    },
+    "issue_kind_counts": {
+      "audit_failure": 1,
+      "model_disagreement": 14
+    },
+    "failure_category_counts": {
+      "contract": 1
+    },
+    "issue_status_counts": {
+      "emerging": 6,
+      "recurrent": 2
+    },
+    "runtime_counts": {
+      "gpu_bf16": 15
+    }
+  }
+}

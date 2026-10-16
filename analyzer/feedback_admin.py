@@ -2,13 +2,14 @@
 
 from __future__ import annotations
 
-from collections import defaultdict
+import hashlib
 from datetime import datetime, timezone
 import json
 
 from sqlalchemy.orm import Session
 
 import models
+from analyzer.feedback_contract import canonical_json
 from analyzer.feedback_store import issue_group_key
 
 
@@ -44,26 +45,71 @@ def audit_detail(db: Session, judgment_id: int) -> dict | None:
     }
 
 
+def _status(count: int) -> str:
+    return "emerging" if count <= 2 else "recurrent" if count <= 9 else "systemic"
+
+
+def _operational_group_key(kind: str, **values: object) -> str:
+    payload = {"kind": kind, **values}
+    return hashlib.sha256(canonical_json(payload).encode("utf-8")).hexdigest()
+
+
 def issue_groups(db: Session) -> list[dict]:
     grouped: dict[str, dict] = {}
-    audits = db.query(models.FeedbackAudit).filter(models.FeedbackAudit.verdict == "disagree").all()
+    audits = db.query(models.FeedbackAudit).filter(
+        models.FeedbackAudit.verdict.in_(("disagree", "unreviewable")),
+    ).all()
     for audit in audits:
         judgment = db.get(models.JudgmentResult, audit.judgment_id)
-        recommendation = json.loads(audit.recommended_judgment)
-        recommendation["edits"] = json.loads(audit.recommended_edits)
         runtime = json.loads(audit.provenance_snapshot).get("runtime", "unknown")
-        for code in json.loads(audit.issue_codes):
-            key = issue_group_key(code, judgment, recommendation, runtime)
+        if audit.verdict == "disagree":
+            recommendation = json.loads(audit.recommended_judgment)
+            recommendation["edits"] = json.loads(audit.recommended_edits)
+            for code in json.loads(audit.issue_codes):
+                key = issue_group_key(code, judgment, recommendation, runtime)
+                entry = grouped.setdefault(key, {
+                    "group_key": key, "kind": "model_disagreement",
+                    "issue_code": code, "error_category": None, "runtime": runtime,
+                    "existing_decision": judgment.decision,
+                    "recommended_decision": recommendation["decision"],
+                    "count": 0, "judgment_ids": set(),
+                })
+                entry["judgment_ids"].add(judgment.id)
+        else:
+            key = _operational_group_key(
+                "unreviewable", decision=judgment.decision,
+                error_types=sorted(json.loads(judgment.error_types)), runtime=runtime,
+            )
             entry = grouped.setdefault(key, {
-                "group_key": key, "issue_code": code, "runtime": runtime,
-                "existing_decision": judgment.decision,
-                "recommended_decision": recommendation["decision"],
-                "count": 0, "judgment_ids": [],
+                "group_key": key, "kind": "unreviewable",
+                "issue_code": None, "error_category": None, "runtime": runtime,
+                "existing_decision": judgment.decision, "recommended_decision": None,
+                "count": 0, "judgment_ids": set(),
             })
-            entry["count"] += 1; entry["judgment_ids"].append(judgment.id)
+            entry["judgment_ids"].add(judgment.id)
+
+    failed_jobs = db.query(models.FeedbackAuditJob).filter_by(status="failed").all()
+    for job in failed_jobs:
+        judgment = db.get(models.JudgmentResult, job.judgment_id)
+        provenance = db.get(models.JudgmentProvenance, job.judgment_id)
+        runtime = provenance.runtime if provenance is not None else "unknown"
+        error_category = job.error_category or "unknown"
+        key = _operational_group_key(
+            "audit_failure", error_category=error_category, runtime=runtime,
+            feedback_model_hash=job.feedback_model_hash,
+        )
+        entry = grouped.setdefault(key, {
+            "group_key": key, "kind": "audit_failure",
+            "issue_code": None, "error_category": error_category, "runtime": runtime,
+            "existing_decision": None,
+            "recommended_decision": None, "count": 0, "judgment_ids": set(),
+        })
+        entry["judgment_ids"].add(job.judgment_id)
+
     for entry in grouped.values():
-        count = entry["count"]
-        entry["status"] = "emerging" if count <= 2 else "recurrent" if count <= 9 else "systemic"
+        entry["judgment_ids"] = sorted(entry["judgment_ids"])
+        entry["count"] = len(entry["judgment_ids"])
+        entry["status"] = _status(entry["count"])
     return sorted(grouped.values(), key=lambda item: (-item["count"], item["group_key"]))
 
 

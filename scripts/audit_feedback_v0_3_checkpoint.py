@@ -22,6 +22,7 @@ DEFERRED_PI_PATHS = {
 }
 CHECKPOINT_ROOT_FILES = {"README.md", "PROGRESS.md"}
 CHECKPOINT_PREFIXES = (
+    "analyzer/feedback_admin.py",
     "deployment/feedback-staging/",
     "docs/MODEL_SYSTEM_STATUS_2026-10-15.md",
     "evaluation/feedback/HOLDOUT_V0.4_SEAL.md",
@@ -63,12 +64,18 @@ KEY_HASHES = {
     "evaluation/feedback/shadow_v0.1.admin-http.result.json": "5b96156811f88948e3431c8b47281ba8670ed1e01781e626d5de6f8bccc4ef72",
     "evaluation/feedback/shadow_v0.1.worker-recovery.result.json": "3bdfadb9cfb0aefe18f4b540ca6089a2aafdd7d6b0cfe74d0042485640b60213",
     "evaluation/feedback/shadow_v0.1.worker-process-crash.result.json": "9aebca946465ed31d8a124e63bdbc774896b92097bfb857b201cc5dbd8c8cb16",
+    "evaluation/feedback/actual_shadow_v0.1.inputs.manifest.json": "a19f97f42cf2c510fe055b183104bdc464519adb8e89ddeb5b5ab3cd3cb9643f",
+    "evaluation/feedback/actual_shadow_v0.1.result.json": "c05d498ba42dc18a54bdfb7c1b6b5be9011b1740de2bb49f139bae1305e0af46",
+    "evaluation/feedback/actual_shadow_v0.1.admin.result.json": "bfa9cab1cbe7fe34412bfa2bcda52b1d167bdb0f7537e71d349fac40f2d96a0c",
 }
 EXTERNAL_HASHES = {
     "/home/cap-minsung/lora-adapter-bank/adapters/feedback-verifier-v0.3/adapter_model.safetensors": "3bcbc80d1559dacf60a84c708a8ab4c51ee4bd33532acf2ab134394aa2dcd1ad",
     "/home/cap-minsung/lora-adapter-bank/runs/feedback-v0.3/holdout-v0.4.jsonl": "6d3fe9032251403e05d2c8ab970ee7bd7f1ddb11c6f9c5d2afa9e1aeab4abf32",
     "/home/cap-minsung/lora-adapter-bank/runs/feedback-v0.3/synthetic-shadow-v0.1/judgment.jsonl": "d2a581992f4efb1a7129883a5c220dac3d7e69bdab8728c565e53fe5c296106c",
     "/home/cap-minsung/lora-adapter-bank/runs/feedback-v0.3/synthetic-shadow-v0.1.sqlite3": "e3f6e1090fbf8b29927647344adad2e143e07576aced7c26daf8f5e25d5f7ec1",
+    "/home/cap-minsung/lora-adapter-bank/runs/feedback-v0.3/actual-shadow-v0.1.inputs.jsonl": "667b0b3c6a074ac9e9a1f46e5a520408dd367f2c79becfe1a7d53b08e9de1330",
+    "/home/cap-minsung/lora-adapter-bank/runs/feedback-v0.3/actual-shadow-v0.1/judgment.jsonl": "cfea98563a13bd8d9e11c8797a6217b04eb8b89e2e4b042b437a76bfe6cf1e16",
+    "/home/cap-minsung/lora-adapter-bank/runs/feedback-v0.3/actual-shadow-v0.1.sqlite3": "988f21db29cd5c3720f879e378e99386649ad198b4b387f2a5b40db9360f29db",
 }
 SECRET_PATTERNS = {
     "private_key": re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"),
