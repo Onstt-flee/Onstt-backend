@@ -14,11 +14,25 @@ from evaluation.judgment.runner import call_endpoint
 def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def validate_sealed_run(protocol, dataset_sha256):
+def validate_sealed_run(
+    protocol,
+    dataset_sha256,
+    *,
+    role=None,
+    retrospective_baseline=False,
+):
     if protocol.get("ready_for_inference") is False:
         raise ValueError("sealed protocol is not ready for inference")
     if protocol.get("single_use") and protocol.get("consumed"):
-        raise ValueError("sealed protocol has already been consumed")
+        official_run = protocol.get("official_run") or {}
+        baseline_comparison_allowed = (
+            retrospective_baseline
+            and role == "baseline"
+            and official_run.get("model_inference_count", 0) > 0
+            and bool(official_run.get("result_sha256"))
+        )
+        if not baseline_comparison_allowed:
+            raise ValueError("sealed protocol has already been consumed")
     if dataset_sha256 != protocol["dataset_sha256"]:
         raise ValueError("sealed dataset SHA-256 mismatch")
 
@@ -32,10 +46,23 @@ def main():
     parser.add_argument("--role", choices=("baseline", "lora"), required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--timeout", type=float, default=120)
+    parser.add_argument(
+        "--retrospective-baseline",
+        action="store_true",
+        help=(
+            "Allow one comparison-only baseline run after the official LoRA run. "
+            "This never reopens the holdout for LoRA selection or retraining."
+        ),
+    )
     args = parser.parse_args()
     protocol = json.loads(args.protocol.read_text(encoding="utf-8"))
     try:
-        validate_sealed_run(protocol, sha(args.dataset))
+        validate_sealed_run(
+            protocol,
+            sha(args.dataset),
+            role=args.role,
+            retrospective_baseline=args.retrospective_baseline,
+        )
     except ValueError as exc:
         raise SystemExit(str(exc)) from exc
     if args.output.exists():
@@ -59,7 +86,9 @@ def main():
     partial.rename(args.output)
     manifest = {"schema_version": "feedback-run-manifest-v0.1", "role": args.role,
                 "model": args.model, "dataset_sha256": protocol["dataset_sha256"],
-                "records": len(rows), "result_sha256": sha(args.output)}
+                "records": len(rows), "result_sha256": sha(args.output),
+                "retrospective_baseline": args.retrospective_baseline,
+                "comparison_only": bool(args.retrospective_baseline)}
     args.output.with_suffix(args.output.suffix + ".manifest.json").write_text(
         json.dumps(manifest, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 

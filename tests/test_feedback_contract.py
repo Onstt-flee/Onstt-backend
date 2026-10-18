@@ -87,6 +87,28 @@ class FeedbackContractTests(unittest.TestCase):
         }, ensure_ascii=False), TEXT)
         self.assertIn("preserve input", error)
 
+    def test_issue_codes_require_semantically_consistent_recommendations(self):
+        cases = [
+            ("false_negative", "acceptable", TEXT, [], "false_negative requires"),
+            ("false_positive", "needs_correction", "学校に行きます。", ["particle_misuse"], "false_positive requires"),
+            ("should_abstain", "acceptable", TEXT, [], "should_abstain requires"),
+            ("unnecessary_abstention", "insufficient_evidence", TEXT, [], "unnecessary_abstention requires"),
+        ]
+        for issue, decision, corrected, error_types, expected_error in cases:
+            with self.subTest(issue=issue):
+                _, error = parse_output(json.dumps({
+                    "verdict": "disagree",
+                    "issue_codes": [issue],
+                    "recommended_judgment": {
+                        "decision": decision,
+                        "corrected_text": corrected,
+                        "error_types": error_types,
+                        "reason_ko": "권장 판단입니다.",
+                    },
+                    "review_reason_ko": "기존 판단과 다릅니다.",
+                }, ensure_ascii=False), TEXT)
+                self.assertIn(expected_error, error)
+
 
 if __name__ == "__main__":
     unittest.main()

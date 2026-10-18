@@ -1,0 +1,18 @@
+{
+  "built_after_gate": true,
+  "dataset_sha256": "d08058fc74c5b53fddf730e5f6a9bb11affb4a595e0df4738252bdd82519bafa",
+  "gate_version": "feedback-particle-risk-v0.1",
+  "independent_model_selection_evidence": false,
+  "limitations": [
+    "관문 구현 후 설계한 개발 진단셋이므로 홀드아웃이나 운영 승인 근거가 아닙니다.",
+    "자동 생성·검증 자료이며 사람 또는 일본어 전문가 검수 자료가 아닙니다.",
+    "표면 패턴 신호만 평가하며 문법 교정 정확도를 평가하지 않습니다."
+  ],
+  "purpose": "development_adversarial_not_holdout",
+  "schema_version": "feedback-particle-risk-adversarial-protocol-v0.1",
+  "thresholds": {
+    "false_signal_rate_max": 0.05,
+    "signal_precision_min": 0.95,
+    "signal_recall_min": 0.95
+  }
+}

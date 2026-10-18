@@ -8,6 +8,12 @@ The selected verifier is `feedback-verifier-v0.3`. It passed the generated-valid
 GPU internal holdout but is authorized only for GPU-judgment shadow with no
 learner exposure. Pi intake is deferred.
 
+The machine-readable freeze policy is `model-policy.json`. Run
+`venv/bin/python scripts/validate_feedback_model_policy.py` from the repository
+root before any staging start. The policy records that no feedback model is
+approved for production, v0.4/v0.5 are rejected research artifacts, and the
+particle-risk gate is offline research only.
+
 ## Resource envelope
 
 - judgment Qwen3-4B + v0.2-D: port 1234, GPU reservation 0.30

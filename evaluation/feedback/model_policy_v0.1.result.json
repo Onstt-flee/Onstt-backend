@@ -1,0 +1,28 @@
+{
+  "checks": {
+    "default_disabled": true,
+    "diagnostic_overfit_forbidden": true,
+    "new_holdout_required": true,
+    "next_experiment_not_authorized": true,
+    "no_automatic_retraining": true,
+    "no_learner_exposure": true,
+    "no_production_model": true,
+    "particle_gate_offline": true,
+    "shadow_adapter_matches_env": true,
+    "shadow_alias_matches_env": true,
+    "shadow_hash_matches_env": true,
+    "shadow_service_is_pinned": true,
+    "v04_rejected": true,
+    "v05_rejected": true
+  },
+  "content_free": true,
+  "failures": [],
+  "learner_exposure_allowed": false,
+  "next_experiment_authorized": false,
+  "particle_result_sha256": "f77600502b4e05ea87c1e9cbb1fb03da7c2698a867353c54cb229dfb0e9128a6",
+  "passed": true,
+  "policy_sha256": "f94aff6d91f050b437abdc9d4bd22856f681e6d712ea170f83a0fb369972822e",
+  "production_model": null,
+  "schema_version": "feedback-model-policy-validation-v0.1",
+  "shadow_model_alias": "feedback-qwen3-8b-v03"
+}

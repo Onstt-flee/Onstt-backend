@@ -5,6 +5,7 @@ import unittest
 
 from analyzer.feedback_contract import parse_output, validate_input
 from evaluation.feedback.build_holdout_v0_4 import build_rows
+from evaluation.feedback.runner import validate_sealed_run
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -43,6 +44,24 @@ class FeedbackHoldoutV04Tests(unittest.TestCase):
         self.assertEqual(result["raw_result_sha256"], protocol["official_run"]["result_sha256"])
         self.assertGreaterEqual(result["metrics"]["contract_success_rate"], protocol["thresholds"]["contract_success_rate_min"])
         self.assertLessEqual(result["metrics"]["false_disagreement_rate"], protocol["thresholds"]["false_disagreement_rate_max"])
+
+    def test_consumed_holdout_allows_only_explicit_retrospective_baseline(self):
+        protocol = json.loads((HERE / "holdout_v0.4.protocol.json").read_text(encoding="utf-8"))
+        with self.assertRaisesRegex(ValueError, "already been consumed"):
+            validate_sealed_run(protocol, protocol["dataset_sha256"])
+        validate_sealed_run(
+            protocol,
+            protocol["dataset_sha256"],
+            role="baseline",
+            retrospective_baseline=True,
+        )
+        with self.assertRaisesRegex(ValueError, "already been consumed"):
+            validate_sealed_run(
+                protocol,
+                protocol["dataset_sha256"],
+                role="lora",
+                retrospective_baseline=True,
+            )
 
     def test_every_input_and_expected_output_obeys_contract(self):
         for row in build_rows():

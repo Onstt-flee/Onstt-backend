@@ -59,7 +59,19 @@ tense_mismatch입니다.
 4. acceptable/insufficient_evidence 권장은 원문을 그대로 보존하고 error_types를 비우세요.
 5. needs_correction 권장은 실제로 달라지는 최소 교정과 하나 이상의 오류 유형이 필요합니다.
 6. 수정 위치는 출력하지 마세요. 백엔드가 결정론적으로 계산합니다.
-7. 숫자 confidence, Markdown, 코드 펜스, 추가 필드, JSON 밖 설명을 출력하지 마세요."""
+7. false_negative이면 권장 decision은 needs_correction이어야 합니다.
+8. false_positive이면 권장 decision은 acceptable이어야 합니다.
+9. should_abstain이면 권장 decision은 insufficient_evidence여야 합니다.
+10. unnecessary_abstention이면 권장 decision은 insufficient_evidence가 아니어야 합니다.
+11. 숫자 confidence, Markdown, 코드 펜스, 추가 필드, JSON 밖 설명을 출력하지 마세요."""
+
+
+ISSUE_DECISION_RULES = {
+    "false_negative": {"needs_correction"},
+    "false_positive": {"acceptable"},
+    "should_abstain": {"insufficient_evidence"},
+    "unnecessary_abstention": {"acceptable", "needs_correction"},
+}
 
 
 def canonical_json(value: Any) -> str:
@@ -208,6 +220,13 @@ def parse_output(raw_text: str, original_text: str) -> tuple[dict[str, Any] | No
             if not issue_codes or not isinstance(recommended, dict):
                 raise ValueError("disagree requires issues and recommended_judgment")
             normalized = _normalize_judgment(recommended, original_text)
+            decision = normalized["decision"]
+            for issue_code, allowed_decisions in ISSUE_DECISION_RULES.items():
+                if issue_code in issue_codes and decision not in allowed_decisions:
+                    allowed = ", ".join(sorted(allowed_decisions))
+                    raise ValueError(
+                        f"{issue_code} requires recommended decision in: {allowed}"
+                    )
         return {**value, "recommended_judgment": normalized}, None
     except (json.JSONDecodeError, TypeError, ValueError) as exc:
         return None, str(exc)

@@ -1,0 +1,20 @@
+{
+  "schema_version": "feedback-existence-particle-diagnostic-result-v0.2",
+  "decision": "hardened_prompt_insufficient_retraining_required",
+  "operational_activation_allowed": false,
+  "next_action": "train_feedback_v0.4_before_new_unseen_evaluation",
+  "dataset_sha256": "60f884018586b4ccfcbb7786f85fa37f90d62bd6ab5d7ef13ada8b40110ce6d8",
+  "model": "feedback-qwen3-8b-v03",
+  "contract_success": 33,
+  "semantic_contract_rejections": 7,
+  "raw_run_sha256": "6317612d05720d5d6de25ec8febf862571156fbfd2e75a09ef7bd4eed90c012a",
+  "accepted_correction_rate": 0.7,
+  "contract_success_rate": 0.825,
+  "disagreement_precision": 1.0,
+  "disagreement_recall": 0.75,
+  "false_disagreement_rate": 0.0,
+  "p95_latency_seconds": 2.6180120000000002,
+  "recommended_decision_accuracy": 0.7,
+  "records": 40,
+  "source_metric_gap_pp": null
+}

@@ -1,0 +1,15 @@
+{
+  "candidate_family": "feedback-v0.3-hardened-prompt",
+  "consumed": true,
+  "dataset_sha256": "60f884018586b4ccfcbb7786f85fa37f90d62bd6ab5d7ef13ada8b40110ce6d8",
+  "max_tokens": 512,
+  "purpose": "hardened_prompt_regression_diagnostic_only",
+  "ready_for_inference": false,
+  "result_manifest_sha256": "1c9996e96bfbb2b8d9ed15cfdade8ae045f474545a79600b025ec371383518f4",
+  "result_sha256": "6317612d05720d5d6de25ec8febf862571156fbfd2e75a09ef7bd4eed90c012a",
+  "score_sha256": "1ecc9e77cb2d96aa689ecd2a239c0d7287b3e5b8019a42ae5441e58132e6b897",
+  "schema_version": "feedback-existence-particle-diagnostic-protocol-v0.2",
+  "single_use": true,
+  "temperature": 0.0,
+  "top_p": 1.0
+}

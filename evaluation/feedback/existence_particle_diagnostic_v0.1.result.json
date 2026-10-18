@@ -1,0 +1,47 @@
+{
+  "schema_version": "feedback-existence-particle-diagnostic-result-v0.1",
+  "decision": "failed_boundary_diagnostic",
+  "operational_activation_allowed": false,
+  "dataset_sha256": "74f2d76f96c79ad942dd682157cd6520287b0cfc78c4a7aa490ca8d02d0dcd9e",
+  "model": "feedback-qwen3-8b-v03",
+  "records": 40,
+  "original_parse": {
+    "contract_success": 40,
+    "false_disagreement_rate": 1.0,
+    "disagreement_precision": 0.5,
+    "disagreement_recall": 1.0,
+    "recommended_decision_accuracy": 1.0,
+    "canonical_correction_rate": 0.9,
+    "p95_latency_seconds": 2.564918
+  },
+  "hardened_parse": {
+    "contract_success": 20,
+    "false_disagreement_rate": 0.0,
+    "disagreement_precision": 1.0,
+    "disagreement_recall": 1.0,
+    "recommended_decision_accuracy": 1.0,
+    "canonical_correction_rate": 0.9,
+    "p95_latency_seconds": 2.564918
+  },
+  "family_results": {
+    "existence_de_false_negative": {"records": 10, "detected": 10, "canonical_correction": 9},
+    "existence_ni_agree": {"records": 10, "original_false_disagreements": 10, "hardened_contract_rejections": 10},
+    "action_de_agree": {"records": 10, "original_false_disagreements": 10, "hardened_contract_rejections": 10},
+    "destination_wo_false_negative": {"records": 10, "detected": 10, "canonical_correction": 9, "accepted_alternative_correction": 1}
+  },
+  "failure_ids": {
+    "semantic_contract_conflicts": [
+      "FVD-EP-01-011", "FVD-EP-01-012", "FVD-EP-01-013", "FVD-EP-01-014", "FVD-EP-01-015",
+      "FVD-EP-01-016", "FVD-EP-01-017", "FVD-EP-01-018", "FVD-EP-01-019", "FVD-EP-01-020",
+      "FVD-EP-01-021", "FVD-EP-01-022", "FVD-EP-01-023", "FVD-EP-01-024", "FVD-EP-01-025",
+      "FVD-EP-01-026", "FVD-EP-01-027", "FVD-EP-01-028", "FVD-EP-01-029", "FVD-EP-01-030"
+    ],
+    "nonminimal_or_wrong_correction": ["FVD-EP-01-010"],
+    "accepted_alternative_not_canonical": ["FVD-EP-01-037"]
+  },
+  "limitations": [
+    "자동 생성·계약 검증 진단이며 사람 또는 일본어 전문가 검수 결과가 아닙니다.",
+    "모델 선택용 holdout이 아니라 선택 후 경계 회귀 진단입니다.",
+    "강화 프롬프트 효과는 이 소비된 진단을 재실행하지 않고 새 미사용 진단에서 확인해야 합니다."
+  ]
+}

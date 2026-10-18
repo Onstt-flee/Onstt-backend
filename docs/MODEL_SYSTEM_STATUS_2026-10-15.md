@@ -1,6 +1,6 @@
 # 일본어 판단·피드백 듀얼모델 통합 현황
 
-기준일: 2026-10-16
+기준일: 2026-10-17
 대상 브랜치: `api`
 기준 체크포인트: 실제 shadow `758f345` 이후 관리자 집계 후속 체크포인트
 
@@ -11,21 +11,56 @@
 
 GPU 서버에서 `Qwen3-4B + judgment-v0.2-D`가 먼저 판단하고,
 `Qwen3-8B + feedback-verifier-v0.3`이 비동기로 그 결과를 검수하는 구조까지 구현·시험했다.
-현재는 **GPU 전용 비노출 shadow 후보**이며 운영 기본 활성, 학습자 노출, 자동 교체·자동 배포는
-승인하지 않았다. Raspberry Pi 경로는 현재 범위에서 제외하고 후속 작업으로 보존한다.
+후속 v0.5까지 학습했지만 독립 시험의 필수 기준 세 항목을 실패해 **승인된 피드백모델은 없다**.
+운영 기본 활성, 학습자 노출, 자동 교체·자동 배포는 승인하지 않았다. Raspberry Pi 경로는
+현재 범위에서 제외하고 후속 작업으로 보존한다.
 
 ## 2. 현재 모델 선택
 
 | 역할 | 현재 모델 | 상태 | 사용 범위 |
 | --- | --- | --- | --- |
 | 1차 문법 판단 | Qwen3-4B-Instruct-2507 + `judgment-v0.2-D` LoRA | 제한적 staging/shadow 기준선 | GPU, 기능 플래그 기본 OFF |
-| 2차 결과 검수 | Qwen3-8B + `feedback-verifier-v0.3` LoRA | 내부 평가 통과, 합성 shadow 통과 | GPU 비동기 worker, 기능 플래그 기본 OFF |
+| 2차 결과 검수 | Qwen3-8B + `feedback-verifier-v0.3` LoRA | 내부 holdout 통과 후 조사 경계 진단 실패 | GPU 비동기 연구용, 기능 플래그 기본 OFF |
+| 2차 후속 검수 | Qwen3-8B + `feedback-verifier-v0.4` LoRA | 독립 holdout 필수 기준 2개 실패 | 연구 기록만 유지, 운영 연결 금지 |
+| 2차 최종 검수 후보 | Qwen3-8B + `feedback-verifier-v0.5` LoRA | 독립 holdout 필수 기준 3개 실패 | 연구 기록만 유지, 운영 연결 금지 |
 | 판단 후속 LoRA | v0.2-F/I/J 등 | 미채택 | 비교 기록만 유지 |
 | Pi 판단 | Q4_K_M/Q5_K_M GGUF + v0.2-D LoRA | 보류 | 이번 피드백모델 단계에서 제외 |
 | 고용량 상한 비교 | Qwen3-14B | 오프라인 기준선 | 온라인 서비스 미사용 |
 
 `v0.2-D`는 현재 가장 안정적인 판단 기준선이지만 최종 운영 승인 모델은 아니다.
 피드백 v0.3도 판단 결과를 덮어쓰지 않으며 별도 audit으로만 저장한다.
+
+### feedback-v0.4 최종 결과
+
+- 총 2,082건으로 234 step 학습했으며 어댑터 SHA-256은 `2af21a82...c78a`다.
+- 봉인 holdout v0.5에서 베이스/LoRA를 각각 한 번 실행했다.
+- LoRA는 계약 96.67%, 허위 불일치 1.67%, 정밀도 98.18%, 재현율 90%, 권장 decision 90%, 허용 교정문 70%, p95 2.413초였다.
+- 계약 99%와 허용 교정문 80% 기준을 실패해 미채택했으며 v0.5는 소비 완료로 잠갔다.
+- 상세는 `training/feedback/FEEDBACK_V0.4_RESULT.md`를 따른다.
+
+### feedback-v0.5 최종 결과
+
+- 총 2,322건으로 261 step 학습했으며 어댑터 SHA-256은 `f6896ab2...52d95`다.
+- 학습 전에 봉인한 holdout v0.6에서 베이스/LoRA를 각각 정확히 한 번 실행했다.
+- LoRA는 계약 98.33%, 허위 불일치 0%, 정밀도 100%, 재현율 80%, 권장 decision 76.67%, 허용 교정문 53.33%, p95 2.462초였다.
+- 계약 99%, 권장 decision 90%, 허용 교정문 80% 기준을 실패해 미채택했으며 v0.6은 소비 완료로 잠갔다.
+- 상세는 `training/feedback/FEEDBACK_V0.5_RESULT.md`를 따른다.
+
+### 제한적 조사 위험 게이트
+
+- v0.4/v0.5에서 반복된 존재 장소와 목적지 조사 실패만 `secondary_review_only`로 표시하는 오프라인 감지기를 추가했다.
+- 소비된 v0.6 후향 진단에서는 원문 위험 50/50, 위험 외 신호 0/70, v0.5 조사 실패 14/14를 표시했다.
+- 이미 소비한 시험지의 후향 결과이고 표면 패턴 예외 목록에 의존하므로 운영 승인 근거가 아니다.
+- 후속 80문항 adversarial 개발 진단에서는 TP 30, FP 10, FN 0, TN 40으로 재현율 100%였지만 정밀도 75%, 정상문장 오신호율 20%였다.
+- 오신호는 모두 목록에 없던 정상 사건 발생 표현이었다. 사전 정밀도 95%·오신호율 5% 기준을 실패해 기존 판단·피드백·DB를 바꾸지 않으며 worker에 연결하지 않는다.
+
+### 피드백 연구 동결
+
+- 기계 판독 정책에서 운영 승인 모델을 `null`, 기능 플래그 기본 비활성, 학습자 노출·자동 재학습 금지로 고정했다.
+- `feedback-verifier-v0.3`만 관리자용 GPU 비노출 shadow에 허용한다. 이는 언어 품질이나 운영 기본값 승인이 아니다.
+- v0.4/v0.5는 미채택, 조사 위험 게이트는 오프라인 연구 전용이다.
+- 다음 실험은 신규 후보·학습 전 미사용 평가셋 봉인·사전 임계값 고정 없이는 승인되지 않는다.
+- 정책 검증 14/14 항목이 통과했다. 상세는 `training/feedback/FEEDBACK_RESEARCH_FREEZE_2026-10-18.md`를 따른다.
 
 ## 3. 실행 구조
 
@@ -102,6 +137,33 @@ STT 텍스트
 남은 실패는 계약 1건, 권장 decision 3건, 허용 교정문 5건이다. 소비된 holdout은 재튜닝이나
 모델 재선택에 다시 사용하지 않는다.
 
+### Qwen3-8B 베이스라인 대비 LoRA 효과
+
+공식 LoRA 실행 뒤 누락된 베이스라인을 같은 조건으로 비교 전용 1회 실행했다. 베이스 대비
+LoRA의 계약 성공률은 41.67%→99.17%, 불일치 재현율은 18.57%→98.57%, 권장 decision은
+18.57%→94.29%, 허용 교정문은 20.00%→85.71%로 개선됐다. p95는 12.252초→2.617초다.
+핵심 판단·권장 결과 기준으로 79건을 회복하고 `FVH-04-069` 한 건이 회귀했다.
+
+이는 소비된 자동 생성 시험지의 후향적 내부 비교다. 베이스 단독 대신 v0.3 LoRA를 유지할
+근거는 되지만 운영 승인이나 외부 품질 인증은 아니다.
+
+### 후속 조사 경계 진단
+
+기존 데이터와 중복되지 않는 존재·동작·목적지 조사 40건에서는 오류 20건을 모두 찾았지만,
+정상 판단 20건도 모두 disagree로 표시했다. 특히 권장 decision은 `acceptable`이면서
+issue code는 `false_negative`인 의미 모순이었다. 파서와 프롬프트에 issue/decision
+일관성 규칙을 추가해 이 출력은 이제 계약 실패로 차단한다.
+
+강화 재파싱의 계약 성공률은 20/40이므로, 앞선 내부 holdout 통과만으로 현재 피드백 모델을
+활성화할 수 없다. 새 미사용 진단에서 강화 프롬프트를 확인하고, 회복되지 않으면 v0.4 LoRA
+재학습이 필요하다.
+
+강화 프롬프트를 적용한 별도 미사용 v0.2 진단 40건에서는 계약 33/40(82.5%), 정밀도 100%,
+재현율 75%, 권장 decision·허용 교정문 정확도 각 70%, p95 2.618초였다. 저장 가능한 허위
+불일치는 0건이지만 의미 모순 7건을 계약에서 차단했고, 존재 장소 오류 누락 5건과 목적지
+오류 오보류 1건이 남았다. 프롬프트만으로는 충분하지 않으므로 기능 플래그 OFF를 유지하고
+다음 후보는 정상 근거 다양화와 의미 일관성 반례를 학습하는 feedback-v0.4 LoRA로 제한한다.
+
 ## 6. 듀얼모델 배선·운영 안전 검증
 
 ### 합성 비노출 shadow 200건
@@ -146,7 +208,7 @@ STT 텍스트
 | 항목 | 상태 |
 | --- | --- |
 | 판단·피드백 코드 및 DB 구조 | 구현 완료 |
-| feedback-v0.3 내부 GPU 평가 | 통과 |
+| feedback-v0.3 내부 GPU 평가 | 광범위 holdout 통과, 후속 조사 경계 진단 실패 |
 | 실모델 합성 200건 배선 검증 | 통과 |
 | 관리자 API 인증·장애 검증 | 통과 |
 | worker lease·재시도·강제 종료 복구 | 통과 |
@@ -171,7 +233,7 @@ STT 텍스트
 
 - 로컬 기준점: 실제 shadow `758f345`와 후속 관리자 집계 체크포인트
 - 브랜치 상태: 로컬 `api` 변경은 원격에 아직 푸시하지 않음
-- 전체 회귀 테스트: `360/360` 통과
+- 전체 회귀 테스트: `393/393` 통과
 - 프로젝트·Qwen3 PEFT 두 환경 `pip check`: 통과
 - 가중치, 원시 모델 출력, 임시 SQLite, 음성은 Git에 넣지 않는다.
 - 추적 문서에는 집계와 SHA-256만 남긴다.
@@ -185,14 +247,19 @@ STT 텍스트
 | feedback-v0.3 어댑터 | `3bcbc80d1559dacf60a84c708a8ab4c51ee4bd33532acf2ab134394aa2dcd1ad` |
 | holdout v0.4 데이터 | `c22c5ddb0153c60d7087ef1e26580e669ea974e2bdafb0e65142f9eaeed60802` |
 | holdout v0.4 원시 실행 | `6d3fe9032251403e05d2c8ab970ee7bd7f1ddb11c6f9c5d2afa9e1aeab4abf32` |
-
 | 실제 관리자 HTTP 결과 | `e0cf27040c809325ac5924e5fa8239a9e0b496888b53147edfa78534a9535d6b` |
+| holdout v0.4 베이스 원시 실행 | `c2951a96421ca24db5a20d81d93b4aee59184eb70e6dc7988b344ab3d243be1c` |
+| 베이스↔LoRA 비교 결과 | `8d402b24478793bf3d782129763e10428914fafefa3b370d838c85aedb0494ac` |
+| 조사 경계 진단 데이터 | `74f2d76f96c79ad942dd682157cd6520287b0cfc78c4a7aa490ca8d02d0dcd9e` |
+| 조사 경계 진단 결과 | `91196f37c27ae009eeed88d04b44f3f0da99c79b6da29d17049f9056e76fe523` |
+| 강화 프롬프트 조사 진단 v0.2 데이터 | `60f884018586b4ccfcbb7786f85fa37f90d62bd6ab5d7ef13ada8b40110ce6d8` |
+| 강화 프롬프트 조사 진단 v0.2 결과 | `c04c0f08b44688524c1d5efac8cbd17234bdf89e33a6fba4afe3e0490e9b19e7` |
 체크포인트에 포함하지 않은 Pi 후속 변경 4개는 작업 트리에 따로 남긴다. HTTP/Swagger
 후속 변경은 로컬 체크포인트로 묶고 원격 푸시는 보류한다.
 
 ## 9. 다음 작업 순서
 
-1. 기능 플래그 OFF와 학습자 비노출 상태를 유지한다.
+1. 기능 플래그 OFF와 학습자 비노출 상태를 유지한다. 조사 위험 게이트도 오프라인 연구용으로만 둔다.
 2. 관리자 반복 이슈 집계는 검증 완료 상태로 유지하고 새 staging 데이터만 누적 관찰한다.
 3. 사람 상세 검수는 보류하되 학습자 경고나 자동 재학습 전에 최소 독립 품질 검수를 요구한다.
 4. 정답 라벨 없는 실제 shadow 결과를 학습 데이터나 정확도 주장에 사용하지 않는다.
@@ -213,6 +280,8 @@ STT 텍스트
 | worker 논리 복구 시험 | [`../training/feedback/FEEDBACK_V0.3_WORKER_RECOVERY_RESULT.md`](../training/feedback/FEEDBACK_V0.3_WORKER_RECOVERY_RESULT.md) |
 | worker 실제 프로세스 종료 시험 | [`../training/feedback/FEEDBACK_V0.3_WORKER_PROCESS_CRASH_RESULT.md`](../training/feedback/FEEDBACK_V0.3_WORKER_PROCESS_CRASH_RESULT.md) |
 | 체크포인트 안전 감사 | [`../training/feedback/FEEDBACK_V0.3_CHECKPOINT_AUDIT.md`](../training/feedback/FEEDBACK_V0.3_CHECKPOINT_AUDIT.md) |
+| 조사 위험 게이트 adversarial 진단 | [`../training/feedback/FEEDBACK_PARTICLE_RISK_ADVERSARIAL_V0.1_RESULT.md`](../training/feedback/FEEDBACK_PARTICLE_RISK_ADVERSARIAL_V0.1_RESULT.md) |
+| 피드백 연구 동결 정책 | [`../training/feedback/FEEDBACK_RESEARCH_FREEZE_2026-10-18.md`](../training/feedback/FEEDBACK_RESEARCH_FREEZE_2026-10-18.md) |
 | 판단모델 정책 | [`../deployment/judgment-staging/MODEL_POLICY.md`](../deployment/judgment-staging/MODEL_POLICY.md) |
 | 판단 v0.2-D 최종 선택 근거 | [`../training/judgment/V0.2_DF_HOLDOUT_V0.3_RESULT.md`](../training/judgment/V0.2_DF_HOLDOUT_V0.3_RESULT.md) |
 | Pi 보류 경로 | [`../deployment/judgment-pi5/README.md`](../deployment/judgment-pi5/README.md) |

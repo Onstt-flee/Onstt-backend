@@ -1,0 +1,49 @@
+{
+  "expert_reviewed": false,
+  "family_counts": {
+    "action_de_agree": 10,
+    "destination_wo_false_negative": 10,
+    "existence_de_false_negative": 10,
+    "existence_ni_agree": 10
+  },
+  "human_reviewed": false,
+  "overlap": {
+    "evaluation/feedback/holdout_v0.1.jsonl": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "evaluation/feedback/holdout_v0.2.jsonl": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "evaluation/feedback/holdout_v0.3.jsonl": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "evaluation/feedback/holdout_v0.4.jsonl": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "training/feedback/data/feedback_v0.1.jsonl": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "training/feedback/data/feedback_v0.2.jsonl": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "training/feedback/data/feedback_v0.3.jsonl": {
+      "exact_input": 0,
+      "text": 0
+    }
+  },
+  "qualification_scope": "post_selection_regression_diagnostic_only",
+  "records": 40,
+  "review_status": "generated_validated",
+  "schema_version": "feedback-existence-particle-diagnostic-manifest-v0.1",
+  "sha256": "74f2d76f96c79ad942dd682157cd6520287b0cfc78c4a7aa490ca8d02d0dcd9e",
+  "verdict_counts": {
+    "agree": 20,
+    "disagree": 20
+  }
+}

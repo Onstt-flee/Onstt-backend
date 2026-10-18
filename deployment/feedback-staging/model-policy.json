@@ -1,0 +1,43 @@
+{
+  "schema_version": "feedback-model-policy-v0.1",
+  "as_of": "2026-10-18",
+  "production": {
+    "approved_model": null,
+    "audit_enabled_by_default": false,
+    "learner_exposure_allowed": false,
+    "automatic_retraining_allowed": false
+  },
+  "shadow": {
+    "authorized": true,
+    "runtime": "gpu_bf16",
+    "model_alias": "feedback-qwen3-8b-v03",
+    "adapter": "feedback-verifier-v0.3",
+    "adapter_sha256": "3bcbc80d1559dacf60a84c708a8ab4c51ee4bd33532acf2ab134394aa2dcd1ad",
+    "scope": "gpu_judgment_admin_only_non_learner_shadow"
+  },
+  "research_artifacts": [
+    {
+      "name": "feedback-verifier-v0.4",
+      "status": "rejected",
+      "reason": "failed_contract_and_allowed_correction_thresholds"
+    },
+    {
+      "name": "feedback-verifier-v0.5",
+      "status": "rejected",
+      "reason": "failed_contract_recommended_decision_and_allowed_correction_thresholds"
+    },
+    {
+      "name": "feedback-particle-risk-v0.1",
+      "status": "offline_research_only",
+      "reason": "failed_adversarial_precision_and_false_signal_thresholds"
+    }
+  ],
+  "next_experiment": {
+    "authorized": false,
+    "requires_new_candidate": true,
+    "requires_presealed_unused_evaluation_set": true,
+    "requires_frozen_thresholds_before_training": true,
+    "may_reuse_consumed_holdouts_for_selection": false,
+    "may_tune_exception_list_to_particle_adversarial_v0_1": false
+  }
+}

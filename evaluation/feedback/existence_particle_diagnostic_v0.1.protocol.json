@@ -1,0 +1,22 @@
+{
+  "candidate_family": "feedback-v0.3",
+  "consumed": true,
+  "dataset_sha256": "74f2d76f96c79ad942dd682157cd6520287b0cfc78c4a7aa490ca8d02d0dcd9e",
+  "max_tokens": 512,
+  "official_run": {
+    "executed_at": "2026-10-17",
+    "model_inference_count": 40,
+    "raw_result_sha256": "49fcbbb59fcbec53e1ec0014220e411aab58bf72e8de0452c45a4e27f5acfb95",
+    "run_manifest_sha256": "798d6b85f3bb4cee95bf5921a15b1e9cfad2cdac8b6a31198f3ed2aecaab99cb",
+    "score_sha256": "12e00f5d778513fa105b0fec37d8640e04c694ab5cd5b895514c15c4ea32e4f6",
+    "hardened_result_sha256": "cab9fb7c6ec2dd00712dd508936a957555fa2ac9d10616794fb5fff5b3c02072",
+    "hardened_manifest_sha256": "e1a485eb8caee607a1281027c030994a58265c179d933ff0628b63c7d27fe5d4",
+    "hardened_score_sha256": "a5aeeb6bff62d587c227712aad9b980b45ba4d833b6892f5123da199fab447a0"
+  },
+  "purpose": "post_selection_regression_diagnostic_only",
+  "ready_for_inference": true,
+  "schema_version": "feedback-existence-particle-diagnostic-protocol-v0.1",
+  "single_use": true,
+  "temperature": 0.0,
+  "top_p": 1.0
+}

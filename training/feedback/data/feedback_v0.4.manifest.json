@@ -1,0 +1,60 @@
+{
+  "base_dataset": "training/feedback/data/feedback_v0.3.jsonl",
+  "base_dataset_sha256": "fca3ba047ffc5c19b2af5a3c515538bfda22ae92e50b0d5c3d611ee643a8d196",
+  "case_type_counts": {
+    "agree_anchor": 747,
+    "agree_reason_diversity": 100,
+    "audio_required_unreviewable": 26,
+    "boundary_abstention_agree": 20,
+    "boundary_should_abstain": 20,
+    "correction_agree": 20,
+    "correction_false_negative": 20,
+    "false_negative": 96,
+    "false_negative_consistent": 75,
+    "false_positive": 115,
+    "false_positive_consistent": 75,
+    "invented_correction": 88,
+    "reason_mismatch": 113,
+    "should_abstain": 88,
+    "unnecessary_abstention": 114,
+    "unnecessary_abstention_consistent": 50,
+    "valid_japanese_agree": 60,
+    "valid_japanese_not_foreign": 60,
+    "wrong_correction": 97,
+    "wrong_error_type": 98
+  },
+  "eval_records": 214,
+  "eval_sha256": "249fcc0c62c5cfb63d94fecd512954d45d09b771909c77f205550e64938c24d7",
+  "holdout_used": false,
+  "limitations": [
+    "자동 생성·계약 검증 데이터이며 사람 또는 일본어 전문가 검수 데이터가 아닙니다.",
+    "소비된 조사 진단 문장은 포함하지 않고 실패 유형만 새 템플릿으로 일반화했습니다.",
+    "봉인된 holdout v0.5는 학습에 사용하지 않았습니다."
+  ],
+  "protected_overlap": {
+    "diagnostic_v0.1": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "diagnostic_v0.2": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "holdout_v0.5": {
+      "exact_input": 0,
+      "text": 0
+    }
+  },
+  "records": 2082,
+  "review_status": "generated_validated",
+  "schema_version": "feedback-training-manifest-v0.4",
+  "source_sha256": "b9bee0df8d341e83d96d1475e07a15c095cd3ef89ae9ef009f56669cc008cd8c",
+  "targeted_records": 300,
+  "train_records": 1868,
+  "train_sha256": "e85bfa7e2f1fbf0479f609b66b77d4cda186f179f40a93ff5ab7a456b20c048b",
+  "verdict_counts": {
+    "agree": 947,
+    "disagree": 1109,
+    "unreviewable": 26
+  }
+}

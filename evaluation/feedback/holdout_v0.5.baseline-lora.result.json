@@ -1,0 +1,55 @@
+{
+  "base_metrics": {
+    "accepted_correction_rate": 0.0,
+    "contract_success_rate": 0.48333333333333334,
+    "disagreement_precision": 1.0,
+    "disagreement_recall": 0.18333333333333332,
+    "false_disagreement_rate": 0.0,
+    "p95_latency_seconds": 12.264085999999999,
+    "recommended_decision_accuracy": 0.18333333333333332,
+    "records": 120,
+    "source_metric_gap_pp": null
+  },
+  "baseline_result_sha256": "6de71acdd4564c2066210677e58482ca2fb134e455a6b2fab4864e260606165e",
+  "comparison_scope": "prospective_internal_generated_validation",
+  "core_match": {
+    "baseline": 41,
+    "improved_count": 72,
+    "lora": 109,
+    "regressed_count": 4,
+    "regressed_ids": [
+      "FVH-05-014",
+      "FVH-05-036",
+      "FVH-05-069",
+      "FVH-05-091"
+    ]
+  },
+  "dataset_sha256": "b41e4ee0553e57051c7381c95151a885ffb41979a408078e8923f723352d59fc",
+  "limitations": [
+    "자동 생성·검증 시험지이며 사람 또는 일본어 전문가 검수 결과가 아닙니다.",
+    "베이스라인과 LoRA를 사전 계획에 따라 각각 한 번 실행했습니다.",
+    "운영 승인이나 실제 학습자 품질의 근거로 단독 사용하지 않습니다."
+  ],
+  "lora_metrics": {
+    "accepted_correction_rate": 0.7,
+    "contract_success_rate": 0.9666666666666667,
+    "disagreement_precision": 0.9818181818181818,
+    "disagreement_recall": 0.9,
+    "false_disagreement_rate": 0.016666666666666666,
+    "p95_latency_seconds": 2.413214,
+    "recommended_decision_accuracy": 0.9,
+    "records": 120,
+    "source_metric_gap_pp": null
+  },
+  "lora_result_sha256": "57851676e541b0daddcf474e1465a589ffe51189a0f23613506bf2b1d3303219",
+  "metric_deltas_lora_minus_base": {
+    "accepted_correction_rate": 0.7,
+    "contract_success_rate": 0.48333333333333334,
+    "disagreement_precision": -0.018181818181818188,
+    "disagreement_recall": 0.7166666666666667,
+    "false_disagreement_rate": 0.016666666666666666,
+    "p95_latency_seconds": -9.850871999999999,
+    "recommended_decision_accuracy": 0.7166666666666667
+  },
+  "schema_version": "feedback-baseline-lora-comparison-v0.1"
+}

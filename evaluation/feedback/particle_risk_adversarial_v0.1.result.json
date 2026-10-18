@@ -1,0 +1,64 @@
+{
+  "built_after_gate": true,
+  "checks": {
+    "false_signal_rate": false,
+    "signal_precision": false,
+    "signal_recall": true
+  },
+  "confusion": {
+    "fn": 0,
+    "fp": 10,
+    "tn": 40,
+    "tp": 30
+  },
+  "content_free": true,
+  "dataset_sha256": "d08058fc74c5b53fddf730e5f6a9bb11affb4a595e0df4738252bdd82519bafa",
+  "decision": "failed_development_diagnostic",
+  "evaluation_scope": "development_adversarial_not_holdout",
+  "gate_version": "feedback-particle-risk-v0.1",
+  "limitations": [
+    "관문 구현 뒤 설계한 개발 진단이며 독립 홀드아웃이 아닙니다.",
+    "통과하더라도 운영 활성화나 문법 품질을 승인하지 않습니다.",
+    "결과에는 원문, 교정문, 사용자 식별자를 저장하지 않습니다."
+  ],
+  "metrics": {
+    "false_signal_rate": 0.2,
+    "signal_precision": 0.75,
+    "signal_recall": 1.0
+  },
+  "operational_activation_allowed": false,
+  "protocol_sha256": "6c7febb9ab5aaafaed76f509c5c78880c95bcdbbfce5e486986f14030aeda68e",
+  "schema_version": "feedback-particle-risk-adversarial-result-v0.1",
+  "strata": {
+    "action_de_valid": {
+      "tn": 10
+    },
+    "animate_existence_error": {
+      "tp": 10
+    },
+    "destination_wo_error": {
+      "tp": 10
+    },
+    "existence_ni_valid": {
+      "tn": 10
+    },
+    "inanimate_existence_error": {
+      "tp": 10
+    },
+    "known_occurrence_valid": {
+      "tn": 10
+    },
+    "route_wo_valid": {
+      "tn": 10
+    },
+    "unseen_occurrence_valid": {
+      "fp": 10
+    }
+  },
+  "thresholds": {
+    "false_signal_rate_max": 0.05,
+    "signal_precision_min": 0.95,
+    "signal_recall_min": 0.95
+  },
+  "total": 80
+}

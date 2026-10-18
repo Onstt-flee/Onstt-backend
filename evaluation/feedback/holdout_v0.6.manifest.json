@@ -1,0 +1,91 @@
+{
+  "case_type_counts": {
+    "agree_correction": 20,
+    "agree_reason_variant": 30,
+    "audio_required_unreviewable": 10,
+    "false_negative_semantic_lock": 30,
+    "false_positive_semantic_lock": 20,
+    "reason_mismatch": 5,
+    "unnecessary_abstention": 5
+  },
+  "dataset": "holdout_v0.6.jsonl",
+  "expert_reviewed": false,
+  "family_counts": {
+    "acceptable_reason_mismatch": 5,
+    "action_de_false_positive": 10,
+    "animate_existence_de_correct_audit": 10,
+    "animate_existence_de_false_negative": 10,
+    "animate_existence_ni_agree": 10,
+    "destination_ni_agree": 10,
+    "destination_wo_correct_audit": 10,
+    "destination_wo_false_negative": 10,
+    "inanimate_existence_de_false_negative": 10,
+    "inanimate_existence_ni_agree": 10,
+    "inanimate_existence_ni_false_positive": 10,
+    "stt_orthography_unreviewable": 10,
+    "valid_japanese_unnecessary_abstention": 5
+  },
+  "human_reviewed": false,
+  "limitations": [
+    "자동 생성·계약 검증 데이터이며 사람 또는 일본어 전문가 검수 데이터가 아닙니다.",
+    "feedback-v0.5 학습 전에 봉인하며 소비 후 재튜닝에 사용하지 않습니다.",
+    "기존 학습·holdout·조사 진단 문장을 포함하지 않습니다."
+  ],
+  "model_inference_count": 0,
+  "overlap": {
+    "diagnostic_v0.1": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "diagnostic_v0.2": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "holdout_v0.1": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "holdout_v0.2": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "holdout_v0.3": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "holdout_v0.4": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "holdout_v0.5": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "training_v0.1": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "training_v0.2": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "training_v0.3": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "training_v0.4": {
+      "exact_input": 0,
+      "text": 0
+    }
+  },
+  "qualification_scope": "gpu_internal_model_selection_only",
+  "records": 120,
+  "review_status": "generated_validated",
+  "schema_version": "feedback-holdout-manifest-v0.6",
+  "sha256": "104e0811b89843debb8d9e2e9b3be337cbf528918f85606a88b17b622bef1581",
+  "verdict_counts": {
+    "agree": 50,
+    "disagree": 60,
+    "unreviewable": 10
+  }
+}

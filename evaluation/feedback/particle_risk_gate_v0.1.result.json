@@ -1,0 +1,20 @@
+{
+  "covered_model_target_failures": 14,
+  "gate_version": "feedback-particle-risk-v0.1",
+  "gold_sha256": "104e0811b89843debb8d9e2e9b3be337cbf528918f85606a88b17b622bef1581",
+  "limitations": [
+    "소비 완료된 시험지의 후향 진단이며 모델 선택이나 운영 승인 근거가 아닙니다.",
+    "표면 패턴 위험 신호일 뿐 문법 정답이나 자동 교정이 아닙니다.",
+    "원문, 교정문, 사용자 식별자는 결과 요약에 저장하지 않습니다."
+  ],
+  "model_target_failures": 14,
+  "non_risk_signals": 0,
+  "result_sha256": "b8af7b90cd69e1d452463f8cfeacbdc9df428cd1d80bac0e30f048cc00dd9a61",
+  "retrospective_only": true,
+  "risk_coverage": 50,
+  "risk_rows": 50,
+  "schema_version": "feedback-particle-risk-diagnostic-v0.1",
+  "signaled_rows": 50,
+  "total": 120,
+  "verifier_particle_review_rows": 30
+}

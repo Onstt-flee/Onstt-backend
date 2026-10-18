@@ -1,0 +1,69 @@
+{
+  "adapter_sha256": "2af21a821c1f3ad816fc28035479d3525f7aa22eac70c028b1e8a752cdebc78a",
+  "candidate_family": "feedback-v0.4",
+  "consumed": true,
+  "consumed_at": "2026-10-17",
+  "contract_version": "feedback-v0.1",
+  "dataset_sha256": "b41e4ee0553e57051c7381c95151a885ffb41979a408078e8923f723352d59fc",
+  "max_tokens": 512,
+  "official_run": {
+    "baseline": {
+      "manifest_sha256": "c88021138ecdc3ed02873d8656fad920dd81693553ade40b3fbc989958e78062",
+      "result_sha256": "6de71acdd4564c2066210677e58482ca2fb134e455a6b2fab4864e260606165e",
+      "score_sha256": "26c1ac0558be039c5ccbdf65cff98054ca68e68143fac89398d640f7781355f5"
+    },
+    "comparison_sha256": "ca8a1a5bde8e235bea7b6ad3fc6fb6259a32e39787cc5749895b8802b0825d38",
+    "decision": "failed_required_thresholds",
+    "failed_thresholds": [
+      "contract_success_rate",
+      "accepted_correction_rate"
+    ],
+    "lora": {
+      "manifest_sha256": "1a274cf7b97784872ff02de1824ea3bbbd190c9a7a77d7518cd9bffbab61b33b",
+      "result_sha256": "57851676e541b0daddcf474e1465a589ffe51189a0f23613506bf2b1d3303219",
+      "score_sha256": "42c0fbb23553de942860de797918adf4ebf7f0967d53f7afba3a7eacd3e2bcef"
+    },
+    "model_inference_count": 2
+  },
+  "operational_qualification": "failed_internal_generated_validation_not_approved",
+  "planned_runs": [
+    {
+      "max_runs": 1,
+      "model": "feedback-qwen3-8b-base",
+      "role": "baseline"
+    },
+    {
+      "max_runs": 1,
+      "model": "feedback-qwen3-8b-v04",
+      "role": "lora"
+    }
+  ],
+  "ready_for_inference": true,
+  "schema_version": "feedback-holdout-protocol-v0.5",
+  "serving": {
+    "engine": "vllm",
+    "flashinfer_sampler": false,
+    "reasoning_parser": "qwen3"
+  },
+  "single_use": true,
+  "temperature": 0.0,
+  "thresholds": {
+    "accepted_correction_rate_min": 0.8,
+    "contract_success_rate_min": 0.99,
+    "disagreement_precision_min": 0.95,
+    "disagreement_recall_min": 0.8,
+    "false_disagreement_rate_max": 0.02,
+    "p95_latency_seconds_max": 5.0,
+    "recommended_decision_accuracy_min": 0.9
+  },
+  "top_p": 1.0,
+  "training_config_sha256": "bc09eed0b73265a610cb5ac291109248fff59f6de6dd8a458246f20b1c8e3e53",
+  "training_data_sha256": "b9bee0df8d341e83d96d1475e07a15c095cd3ef89ae9ef009f56669cc008cd8c",
+  "training_run": {
+    "adapter_config_sha256": "4f2279d22200ba5d64990982f0ce5361f825acbf4d4059526aa8ffad55889765",
+    "eval_loss": 0.00603330135345459,
+    "manifest_sha256": "62f7ac5bd0863ca77e5b9b681835d65f6f3a812833de184b9f4ee7d087290d09",
+    "steps": 234,
+    "train_loss": 0.1764722679220299
+  }
+}

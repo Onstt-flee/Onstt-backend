@@ -6,10 +6,38 @@
 
 ## 현재 개발 상태와 문서 안내
 
-2026-10-16 기준 GPU 전용 듀얼모델의 실제 저장 STT 200건 비노출 shadow까지 완료했습니다. `Qwen3-4B + judgment-v0.2-D`는 운영과 동일한 원문보존 1회 재시도 적용 후 최종 계약 198/200(99.0%), 재시도율 2.5%, p95 1230.975ms였습니다. 계약 유효 198건을 `Qwen3-8B + feedback-verifier-v0.3`이 비동기 검수해 audit 197건을 저장했고, 1건은 3회 계약 실패 후 안전하게 격리했습니다. 중복 job/audit과 기존 판단 변경은 0건입니다. 이 결과는 운영 안정성 근거이며 일본어 정확도나 전문가 인증 근거가 아닙니다. 기능 플래그 기본 비활성, 학습자 비노출, 자동 재학습 보류를 유지합니다. 상세는 [`training/feedback/FEEDBACK_V0.3_ACTUAL_STT_SHADOW_RESULT.md`](training/feedback/FEEDBACK_V0.3_ACTUAL_STT_SHADOW_RESULT.md)를 참고합니다.
+2026-10-17 기준 GPU 전용 듀얼모델 배선과 실제 저장 STT 200건 비노출 shadow를 완료했고,
+후속 `feedback-v0.5`까지 학습·독립 평가했습니다. v0.5는 Qwen3-8B 베이스보다 크게 개선됐지만
+봉인 holdout v0.6에서 계약 성공 98.33%(기준 99%), 권장 decision 76.67%(기준 90%),
+허용 교정문 53.33%(기준 80%)로 세 필수 기준을 실패했습니다. 따라서 현재 승인된
+피드백모델은 없으며 v0.3/v0.4/v0.5 모두 연구
+기록으로만 보존합니다. 기능 플래그 기본 비활성, 학습자 비노출, 자동 재학습 보류를 유지합니다.
+상세는 [`training/feedback/FEEDBACK_V0.5_RESULT.md`](training/feedback/FEEDBACK_V0.5_RESULT.md)를 참고합니다.
+
+후속 조사 위험 게이트는 새 80문항 adversarial 개발 진단에서 위험 30건을 모두 표시했지만
+정상 사건 발생 표현 10건도 전부 오탐했습니다. 정밀도 75%, 정상문장 오신호율 20%로
+사전 기준을 실패했으므로 운영 경로에는 연결하지 않습니다. 이 결과는 게이트 구현 뒤 만든
+개발 진단이며 독립 holdout이 아닙니다.
 
 관리자 반복 이슈 집계도 실제 격리 DB에서 검증했습니다. 같은 판단의 재검수는 고유 판단 1건으로 계산하고, disagree·unreviewable·최종 audit 실패를 내용 없는 그룹으로 표시합니다. 실제 결과는 8개 그룹(emerging 6, recurrent 2), 계약 실패 경고 1건이며 DB 해시는 전후 동일했습니다. 정답 라벨이 없으므로 오류 확정이나 품질 지표로 사용하지 않습니다.
 실제 HTTP/Swagger 스모크에서도 `/docs`·OpenAPI와 보호 API가 정상 동작했습니다. 무인증 요청은 401, 완료 작업 재시도는 409, 모델 중단과 기능 비활성 상태는 503으로 닫혔고 원본 DB는 변경되지 않았습니다.
+
+동일한 자동 생성·검증 holdout v0.4 120건의 Qwen3-8B 베이스라인도 추가해 LoRA 효과를
+분리했습니다. 베이스→`feedback-verifier-v0.3`의 계약 성공률은 41.67%→99.17%, 불일치
+재현율은 18.57%→98.57%, 허용 교정문 일치율은 20.00%→85.71%, p95는
+12.252초→2.617초였습니다. 이는 후향적 내부 비교이며 운영 승인이나 전문가 인증은 아닙니다.
+상세는 [`training/feedback/FEEDBACK_V0.3_BASELINE_LORA_COMPARISON.md`](training/feedback/FEEDBACK_V0.3_BASELINE_LORA_COMPARISON.md)를 참고합니다.
+
+후속 조사 경계 진단에서는 오류 20건을 모두 찾았지만 정상 판단 20건도 모두 불일치로
+표시하는 새로운 과민 반응을 발견했습니다. 문제 유형과 권장 decision의 의미 모순은 이제
+백엔드에서 계약 실패로 차단합니다. 강화 후 계약 성공은 20/40이므로 기능 플래그 OFF와
+운영 미승인을 유지합니다.
+
+강화 프롬프트를 새 미사용 조사 경계 40건에서 정확히 한 번 확인한 결과 계약 성공은
+33/40(82.5%), 불일치 재현율 75%, 권장 decision·허용 교정문 정확도 각 70%였습니다.
+저장 가능한 허위 불일치는 0건이지만 의미 모순 7건이 계약에서 차단됐고 조사 오류도 6건
+놓치거나 잘못 보류했습니다. 프롬프트만으로는 충분하지 않아 `feedback-v0.4` LoRA를
+재학습했지만 새 미사용 시험지에서도 계약 4건과 존재 장소 교정 6건이 남아 미채택했습니다.
 
 
 기준일은 2026-10-15입니다. v0.2-D는 봉인된 `holdout_v0.3` 안전 기준을 통과했고, 기존 50건과 겹치지 않는 실제 저장 STT 100건 shadow에서도 최종 출력 계약 99/100, 재시도율 1%, 성공 99건 p95 1108.711ms로 제한적 staging/shadow 기준을 통과했습니다. 원문 보존 위반 1건은 1회 재시도 후에도 실패해 503 차단 대상으로 남았습니다. sudo 없는 사용자 systemd, 최대 64건·TTL 30초의 단일 consumer 큐와 1 req/s·burst 1의 비식별 admission을 구현했습니다. 합성 rate probe 100건에서 기존 `/analyze` 응답은 100/100 성공했고, shadow 성공 23건·`sampled_out` 77건·failure/drop 0건을 확인했습니다. 기능 플래그 기본 비활성과 학습자 노출 미승인을 유지합니다. 후속 v0.2-I는 안전성 회귀로 미채택했고, 봉인된 `holdout_v0.4`의 D/F 단독 1회 비교에서는 허용 교정문이 D 32/50·F 36/50으로 사전 40/50 기준을 모두 실패했습니다. v0.4는 소비 완료됐으며 최종 운영 승격 후보는 없습니다. 마지막 v0.2-J는 소비된 v0.4를 학습 전용으로 편입해 45-step 학습했고, v0.5에서 정확히 한 번 평가했습니다. 구조 120/120·재현율 92%·복합 오류 6/10은 개선됐지만 과교정 3/50·정밀도 92%·허용 교정문 36/50으로 사전 기준을 실패해 미채택했습니다. Pi용 Q4_K_M+GGUF LoRA 변환과 로딩은 성공했지만 dev72 구조 계약이 71/72로 필수 72/72 기준에 한 건 미달해 Pi 50건 성능 게이트는 보류했습니다. v0.5는 소비 완료됐고 LoRA 반복은 종료했습니다.
@@ -24,7 +52,7 @@
 - 연구·staging 기준선: `Qwen3-4B + judgment-v0.2-D LoRA` 단독
 - 최종 운영 승격 후보: 없음
 - 운영 기본값 승인 모델: 없음
-- 현재 단계: 실제 저장 STT 200건 GPU 듀얼모델 비노출 shadow, 관리자 반복 이슈 집계와 HTTP/Swagger 검증 완료. 기능 플래그 기본 비활성·학습자 노출·자동 재학습 금지를 유지
+- 현재 단계: feedback-v0.5 학습·사전 계획 베이스/LoRA 독립 비교 완료, 필수 기준 미달로 승인 피드백모델 없음. 기능 플래그 기본 비활성·학습자 노출·자동 재학습 금지를 유지
 
 기존 `POST /utterances/{id}/analyze`의 이진 분석 계약은 그대로 유지합니다. 별도 `POST /utterances/{id}/judgment`는 3단계 판단 계약을 사용하며 `JUDGMENT_ENABLED=false`가 기본값입니다. 모델 서버가 없거나 출력 계약을 위반하면 판단 보류로 위장하지 않고 HTTP 503을 반환합니다.
 
@@ -39,6 +67,15 @@
 | feedback-v0.2 최종 내부 평가 | [`training/feedback/FEEDBACK_V0.2_HOLDOUT_V0.3_RESULT.md`](training/feedback/FEEDBACK_V0.2_HOLDOUT_V0.3_RESULT.md) | 단일 실행 지표, 반복 허위 불일치 6건과 미채택 근거 |
 | feedback-v0.3 학습 결과 | [`training/feedback/FEEDBACK_V0.3_TRAIN_RESULT.md`](training/feedback/FEEDBACK_V0.3_TRAIN_RESULT.md) | 1,782건 학습 조건, 손실, 어댑터·run manifest 해시 |
 | feedback-v0.3 내부 평가 | [`training/feedback/FEEDBACK_V0.3_HOLDOUT_V0.4_RESULT.md`](training/feedback/FEEDBACK_V0.3_HOLDOUT_V0.4_RESULT.md) | 120건 단일 실행 지표, 남은 실패와 GPU-only shadow 범위 |
+| Qwen3-8B 베이스↔LoRA 비교 | [`training/feedback/FEEDBACK_V0.3_BASELINE_LORA_COMPARISON.md`](training/feedback/FEEDBACK_V0.3_BASELINE_LORA_COMPARISON.md) | 동일 120건에서 LoRA 효과, 지연시간, 단일 회귀와 후향적 비교 한계 |
+| feedback-v0.3 조사 경계 진단 | [`training/feedback/FEEDBACK_V0.3_EXISTENCE_PARTICLE_DIAGNOSTIC_RESULT.md`](training/feedback/FEEDBACK_V0.3_EXISTENCE_PARTICLE_DIAGNOSTIC_RESULT.md) | 정상 판단 과민 반응, 의미 계약 강화, 운영 활성 차단 근거 |
+| feedback-v0.4 설계·학습 데이터 | [`training/feedback/FEEDBACK_V0.4_DESIGN_AND_DATA.md`](training/feedback/FEEDBACK_V0.4_DESIGN_AND_DATA.md) | 미사용 holdout v0.5 선봉인, 의미 일관성 보강 300건, 학습 조건과 해시 |
+| feedback-v0.4 독립 평가 | [`training/feedback/FEEDBACK_V0.4_RESULT.md`](training/feedback/FEEDBACK_V0.4_RESULT.md) | 베이스/LoRA 사전 계획 비교, 계약·교정문 기준 실패와 미채택 근거 |
+| feedback-v0.5 설계·학습 | [`training/feedback/FEEDBACK_V0.5_DESIGN_AND_TRAIN.md`](training/feedback/FEEDBACK_V0.5_DESIGN_AND_TRAIN.md) | 미사용 holdout v0.6 선봉인, 실패 구조 보강 240건, 학습 조건·손실·해시 |
+| feedback-v0.5 독립 평가 | [`training/feedback/FEEDBACK_V0.5_RESULT.md`](training/feedback/FEEDBACK_V0.5_RESULT.md) | 베이스/LoRA 단일 비교, 계약·권장 판단·교정문 기준 실패와 미채택 근거 |
+| 조사 위험 게이트 후향 진단 | [`training/feedback/FEEDBACK_PARTICLE_RISK_GATE_V0.1_RESULT.md`](training/feedback/FEEDBACK_PARTICLE_RISK_GATE_V0.1_RESULT.md) | 반복 조사 실패의 review-only 탐지, 정상 예외·불변성·운영 미연결 경계 |
+| 조사 위험 게이트 adversarial 진단 | [`training/feedback/FEEDBACK_PARTICLE_RISK_ADVERSARIAL_V0.1_RESULT.md`](training/feedback/FEEDBACK_PARTICLE_RISK_ADVERSARIAL_V0.1_RESULT.md) | 새 80문항에서 사건 발생 표현 오탐 확인, 정밀도·오신호 기준 실패와 운영 미연결 근거 |
+| 피드백 연구 동결 체크포인트 | [`training/feedback/FEEDBACK_RESEARCH_FREEZE_2026-10-18.md`](training/feedback/FEEDBACK_RESEARCH_FREEZE_2026-10-18.md) | 승인 모델 없음, v0.3 shadow 한정, v0.4/v0.5·조사 게이트 미채택과 다음 실험 재개 조건 |
 | feedback-v0.3 합성 비노출 shadow | [`training/feedback/FEEDBACK_V0.3_SYNTHETIC_SHADOW_RESULT.md`](training/feedback/FEEDBACK_V0.3_SYNTHETIC_SHADOW_RESULT.md) | 실제 데이터 부재 시 200건 운영 배선 검증, 판단 불변성·queue 무결성·지연시간과 품질 주장 금지 경계 |
 | feedback-v0.3 실제 저장 STT shadow | [`training/feedback/FEEDBACK_V0.3_ACTUAL_STT_SHADOW_RESULT.md`](training/feedback/FEEDBACK_V0.3_ACTUAL_STT_SHADOW_RESULT.md) | 실제 200건 계약·재시도·격리·불변성 결과와 품질 주장 금지 경계 |
 | feedback 관리자 API 합성 shadow | [`training/feedback/FEEDBACK_V0.3_ADMIN_SHADOW_RESULT.md`](training/feedback/FEEDBACK_V0.3_ADMIN_SHADOW_RESULT.md) | Bearer 보호, 목록 비노출, 이슈 집계, retry 차단과 모델 장애 readiness 503 검증 |

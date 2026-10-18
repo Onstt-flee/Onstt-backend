@@ -1,0 +1,70 @@
+{
+  "base_dataset": "training/feedback/data/feedback_v0.4.jsonl",
+  "base_dataset_sha256": "b9bee0df8d341e83d96d1475e07a15c095cd3ef89ae9ef009f56669cc008cd8c",
+  "case_type_counts": {
+    "agree_anchor": 747,
+    "agree_existence_correction": 20,
+    "agree_reason_diversity": 100,
+    "audio_boundary_anchor": 20,
+    "audio_required_unreviewable": 26,
+    "boundary_abstention_agree": 20,
+    "boundary_should_abstain": 20,
+    "correction_agree": 20,
+    "correction_false_negative": 20,
+    "destination_agree_stability": 60,
+    "false_negative": 96,
+    "false_negative_consistent": 75,
+    "false_negative_contract_anchor": 80,
+    "false_positive": 115,
+    "false_positive_consistent": 75,
+    "false_positive_contract_anchor": 40,
+    "invented_correction": 88,
+    "reason_mismatch": 113,
+    "should_abstain": 88,
+    "unnecessary_abstention": 114,
+    "unnecessary_abstention_anchor": 20,
+    "unnecessary_abstention_consistent": 50,
+    "valid_japanese_agree": 60,
+    "valid_japanese_not_foreign": 60,
+    "wrong_correction": 97,
+    "wrong_error_type": 98
+  },
+  "eval_records": 238,
+  "eval_sha256": "e1fbc503a2016df6994e03bf816769b5fe77ba3de30bd8e3526874e7b9fb9fe9",
+  "holdout_used": false,
+  "limitations": [
+    "자동 생성·계약 검증 데이터이며 사람 또는 일본어 전문가 검수 데이터가 아닙니다.",
+    "소비된 v0.5 실패 문장은 포함하지 않고 실패 구조만 새 템플릿으로 일반화했습니다.",
+    "봉인된 holdout v0.6은 학습에 사용하지 않았습니다."
+  ],
+  "protected_overlap": {
+    "diagnostic_v0.1": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "diagnostic_v0.2": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "holdout_v0.5": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "holdout_v0.6": {
+      "exact_input": 0,
+      "text": 0
+    }
+  },
+  "records": 2322,
+  "review_status": "generated_validated",
+  "schema_version": "feedback-training-manifest-v0.5",
+  "source_sha256": "991bb71e8a9115cb1b18f786f18636cd0c6e693790d16a7c22b37fb9b7b6220a",
+  "targeted_records": 240,
+  "train_records": 2084,
+  "train_sha256": "7684f1e6707da0def1e7ef603d3dbca84d79cd38e7c938a5f5ce37db1c1c2211",
+  "verdict_counts": {
+    "agree": 1027,
+    "disagree": 1249,
+    "unreviewable": 46
+  }
+}
