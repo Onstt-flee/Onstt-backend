@@ -12,7 +12,8 @@ from typing import Any
 from sqlalchemy.orm import Session
 
 import models
-from analyzer.feedback_contract import CONTRACT_VERSION, canonical_json
+from analyzer.feedback_contract import CONTRACT_VERSION as LEGACY_CONTRACT_VERSION, canonical_json
+from analyzer.feedback_two_stage_contract import CONTRACT_VERSION as TWO_STAGE_CONTRACT_VERSION
 
 
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
@@ -31,6 +32,7 @@ def feedback_configuration() -> dict[str, str]:
         "model": os.getenv("FEEDBACK_MODEL", "feedback-qwen3-8b-v01").strip(),
         "adapter": os.getenv("FEEDBACK_ADAPTER", "feedback-verifier-v0.1").strip(),
         "model_hash": os.getenv("FEEDBACK_MODEL_SHA256", "").strip(),
+        "contract_version": os.getenv("FEEDBACK_CONTRACT_VERSION", LEGACY_CONTRACT_VERSION).strip(),
     }
 
 
@@ -42,6 +44,8 @@ def configuration_error() -> str | None:
         return "missing_model_identity"
     if not SHA256_RE.fullmatch(config["model_hash"]):
         return "invalid_feedback_model_hash"
+    if config["contract_version"] not in {LEGACY_CONTRACT_VERSION, TWO_STAGE_CONTRACT_VERSION}:
+        return "invalid_feedback_contract_version"
     if len(os.getenv("FEEDBACK_ADMIN_TOKEN", "")) < 32:
         return "invalid_admin_token"
     return None
@@ -58,14 +62,14 @@ def _enqueue(db: Session, judgment_id: int) -> models.FeedbackAuditJob | None:
     existing = db.query(models.FeedbackAuditJob).filter_by(
         judgment_id=judgment_id,
         feedback_model_hash=config["model_hash"],
-        contract_version=CONTRACT_VERSION,
+        contract_version=config["contract_version"],
     ).one_or_none()
     if existing is not None:
         return existing
     job = models.FeedbackAuditJob(
         judgment_id=judgment_id,
         feedback_model=config["model"], feedback_adapter=config["adapter"],
-        feedback_model_hash=config["model_hash"], contract_version=CONTRACT_VERSION,
+        feedback_model_hash=config["model_hash"], contract_version=config["contract_version"],
         status="pending", attempts=0, next_attempt_at=datetime.now(timezone.utc),
     )
     db.add(job)

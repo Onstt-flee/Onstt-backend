@@ -1,0 +1,41 @@
+{
+  "metrics": {
+    "accepted_correction_rate": 0.0,
+    "conditional_total_p95_seconds": 1.095614,
+    "disagreement_precision": 0.0,
+    "disagreement_recall": 0.0,
+    "false_disagreement_rate": 0.0,
+    "recommended_decision_accuracy": 0.0,
+    "records": 120,
+    "schema_version": "feedback-two-stage-score-v0.1",
+    "stage1_contract_success_rate": 0.5,
+    "stage2_call_discipline_rate": 1.0,
+    "stage2_called_count": 0,
+    "stage2_contract_success_rate": 0.0,
+    "unreviewable_accuracy": 0.0
+  },
+  "threshold_evaluation": {
+    "checks": {
+      "accepted_correction_rate": false,
+      "conditional_total_p95_seconds": true,
+      "disagreement_precision": false,
+      "disagreement_recall": false,
+      "false_disagreement_rate": true,
+      "recommended_decision_accuracy": false,
+      "stage1_contract_success_rate": false,
+      "stage2_call_discipline_rate": true,
+      "stage2_contract_success_rate": false,
+      "unreviewable_accuracy": false
+    },
+    "failed_thresholds": [
+      "accepted_correction_rate",
+      "disagreement_precision",
+      "disagreement_recall",
+      "recommended_decision_accuracy",
+      "stage1_contract_success_rate",
+      "stage2_contract_success_rate",
+      "unreviewable_accuracy"
+    ],
+    "passed": false
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "dataset": "holdout_v0.9.jsonl",
+  "expert_reviewed": false,
+  "family_counts": {
+    "agree_correct_conjugation": 10,
+    "agree_correct_particle": 10,
+    "agree_valid_action": 10,
+    "agree_valid_existence": 10,
+    "agree_valid_person": 10,
+    "disagree_false_negative_particle": 10,
+    "disagree_nonminimal_meaning_addition": 10,
+    "disagree_nonminimal_meaning_location": 10,
+    "disagree_reason_mismatch": 5,
+    "disagree_unnecessary_abstention": 5,
+    "disagree_wrong_correction_conjugation": 10,
+    "disagree_wrong_correction_particle": 10,
+    "unreviewable_audio_orthography": 10
+  },
+  "human_reviewed": false,
+  "limitations": [
+    "자동 생성·계약 검증 데이터이며 사람 또는 일본어 전문가 검수 데이터가 아닙니다.",
+    "feedback-v0.7 학습 전에 봉인하며 결과 확인 후 같은 시험지에 맞춰 수정하지 않습니다.",
+    "소비된 v0.8 실패 문장을 복사하지 않고 다른 어휘와 구조로 독립 생성했습니다.",
+    "기존 학습·holdout·진단 문장과 정확 입력 및 원문 중복이 없습니다."
+  ],
+  "model_inference_count": 0,
+  "overlap": {
+    "diagnostic_v0.1": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "diagnostic_v0.2": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "holdout_v0.1": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "holdout_v0.2": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "holdout_v0.3": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "holdout_v0.4": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "holdout_v0.5": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "holdout_v0.6": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "holdout_v0.7": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "holdout_v0.8": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "particle_adversarial_v0.1": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "training_v0.1": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "training_v0.2": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "training_v0.3": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "training_v0.4": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "training_v0.5": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "training_v0.6": {
+      "exact_input": 0,
+      "text": 0
+    }
+  },
+  "qualification_scope": "future_stage1_correction_comparison_candidate_selection_only",
+  "records": 120,
+  "review_status": "generated_validated",
+  "schema_version": "feedback-holdout-manifest-v0.9",
+  "sealed_before_v0.7_training": true,
+  "sha256": "8582052baeece84b67e6afd44f167deff71ae275eac68fe61c5f77fe7ea1df48",
+  "stage2_expected_rows": 60,
+  "targeted_stage1_rows": 40,
+  "verdict_counts": {
+    "agree": 50,
+    "disagree": 60,
+    "unreviewable": 10
+  }
+}

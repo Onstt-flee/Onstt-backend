@@ -1,0 +1,22 @@
+{
+  "candidate_status": "rejected",
+  "consumed": true,
+  "execution_count": 1,
+  "execution_plan_sha256": "1defe7d51776354a452eeab2d79e8adbed6dfedd4f23f4736d0e2384115e1862",
+  "external_artifacts": {
+    "claim_sha256": "9d3e7b0b0292ffcd7f71a89fd9a117eb83007d4f3c283bc6e3339e34bea9f641",
+    "manifest_sha256": "2e70d08d271a29352d3596fb3d5bc6f9ae0a603dd7467d8f3e8b43171a3ef00c",
+    "raw_result_sha256": "a0e19c0b3d7127212df1e2ed1489233236d166d5fb9bce18f05002b89c9ed60c",
+    "receipt_sha256": "61ade50dcea2dbbad114c821a7d10f2786b5791b5708024e641a49f0caceb91f"
+  },
+  "holdout_id": "feedback-holdout-v0.9",
+  "model_requests": {
+    "stage1": 120,
+    "stage2": 55,
+    "transport_success": 175
+  },
+  "recorded_at": "2026-10-19",
+  "result_summary_sha256": "8bc963bff8d439bac8a98b48284c9ac74247f8d2783ba344320f77b8f7f260c4",
+  "schema_version": "feedback-two-stage-execution-record-v0.1",
+  "single_use": true
+}

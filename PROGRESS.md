@@ -1092,3 +1092,152 @@ venv/bin/python -m pip check
 - 현재 정책 검증 14/14 항목이 통과했다. 다음 실험은 신규 후보, 학습 전 새 미사용 평가셋 봉인, 사전 임계값 고정 전에는 승인하지 않는다.
 - 전체 회귀 테스트 393/393, 두 환경 `pip check`, 80개 변경 경로 체크포인트 감사와 `git diff --check`가 통과했다.
 - 상세는 `training/feedback/FEEDBACK_RESEARCH_FREEZE_2026-10-18.md`를 따른다. 커밋과 푸시는 수행하지 않았다.
+
+## 2026-10-18 2단계 피드백 holdout v0.7 선봉인·계약 구현
+
+- 단일 호출에서 verdict와 권장 교정을 함께 생성하던 구조를 분리하기 전에 신규 holdout v0.7 120문항을 봉인했다.
+- 분포는 agree 50, disagree 60, unreviewable 10이며 stage 2 정답은 disagree 60건에만 존재한다. 기존 학습 v0.1~v0.5, holdout v0.1~v0.6, 조사 진단·adversarial과 정확 입력·원문 중복은 0건이다.
+- 데이터 SHA-256은 `e928c104a39623891dc41d9fcc8ed285517594d9eea417662cdc91235f84e6ab`이며 모델 추론은 0회, `ready_for_inference=false`, `consumed=false`다.
+- 별도 `feedback-two-stage-v0.1` 계약을 구현했다. stage 1은 verdict·issue만 생성하고, stage 2는 유효한 disagree일 때만 권장 판단·최소 교정을 생성한다.
+- 두 단계 결과는 기존 feedback 저장 계약으로 결합되며 worker·DB·공개 API에는 아직 연결하지 않았다. 봉인·계약 단위 테스트 8개가 통과했다.
+- 전체 회귀 테스트 401/401, 두 환경 `pip check`, 17개 변경 경로 체크포인트 감사와 `git diff --check`가 통과했다.
+- 상세는 `training/feedback/HOLDOUT_V0.7_SEAL.md`와 `training/feedback/FEEDBACK_TWO_STAGE_V0.1_DESIGN.md`를 따른다.
+
+## 2026-10-18 2단계 피드백 오프라인 실행기·채점기 구현
+
+- stage 1을 항상 호출하고 유효한 `disagree`에만 stage 2를 정확히 한 번 호출하는 실행기를 추가했다. stage 1 계약 실패는 stage 2 없이 안전하게 차단한다.
+- 선봉인 protocol을 수정하지 않고 별도 execution plan의 후보·코드 해시, 단일 실행 및 미소비 상태를 검사하도록 했다.
+- 단계별 계약률, 불일치 탐지, stage 2 호출 규율, 권장 판단·허용 교정문, 조건부 총 p95를 계산하는 채점기를 추가했다.
+- 계약·실행기·채점기 해시를 감사 규칙과 설계 문서에 고정했다. holdout v0.7은 여전히 `ready_for_inference=false`, `consumed=false`, 모델 추론 0회다.
+- 전체 회귀 테스트 409/409, 두 환경 `pip check`, 21개 변경 경로 감사와 `git diff --check`가 통과했다. 이 중 Pi 보류 변경 4개는 계속 별도 범위다.
+
+## 2026-10-18 2단계 피드백 v0.7 실행계획 봉인
+
+- 기존 단일 호출에서 미채택된 Qwen3-8B `feedback-verifier-v0.5`를 재학습하지 않고 stage 1/2로 역할 분리하는 구조적 가설을 고정했다. 기존 미채택 상태는 유지한다.
+- 베이스 manifest, 어댑터, 계약·실행기·채점기, endpoint와 원시 결과·claim·receipt 경로를 별도 execution plan에 고정했다.
+- 실행기가 시작 즉시 원자적 claim을 생성하도록 보강해 중단 시에도 다른 출력 경로로 holdout을 재실행하지 못하게 했다.
+- FlashInfer sampler JIT가 현재 CUDA/CUB 조합에서 실패하는 기존 환경 특성을 반영해 검증된 `VLLM_USE_FLASHINFER_SAMPLER=0`을 실행 조건에 추가했다.
+- 첫 CLI 시도는 모델 호출·claim 생성 전에 프로젝트 모듈 경로를 찾지 못해 종료됐다. 직접 실행 진입점을 수정하고 회귀 테스트를 추가했으며 holdout 추론 횟수는 계속 0이다.
+- 최종 execution plan SHA-256은 `f65313e0a629619e13edf918bf7868c13e828b7eed74d1f84bade0d0741288b6`이다.
+
+## 2026-10-19 2단계 피드백 v0.7 단일 실행·미채택
+
+- v0.5 2단계 후보를 봉인된 120문항에서 정확히 한 번 실행했다. stage 1 전송은 120/120 성공했고 p95는 1.096초였다.
+- stage 1 계약은 60/120만 통과했고 유효 출력은 모두 `agree`였다. 나머지 60건은 audit issue code 대신 문법 오류 유형을 출력해 차단됐다.
+- 유효한 `disagree`가 없어 stage 2는 0회 호출됐다. 사전 품질 기준 7개를 실패했으므로 후보를 미채택하고 운영·경고·학습자 노출에 연결하지 않는다.
+- 원시 결과는 Git 밖에 두고 해시만 기록했다. holdout v0.7은 소비 완료이며 재실행하지 않는다.
+- 전체 회귀 테스트 414/414, 두 환경 `pip check`, 27개 변경 경로 감사와 `git diff --check`가 통과했다. Pi 보류 변경 4개는 계속 별도 범위다.
+
+## 2026-10-19 holdout v0.8 선봉인·feedback-v0.6 학습 데이터
+
+- feedback-v0.6 학습 전에 신규 holdout v0.8 120건을 봉인했다. agree 50, disagree 60, unreviewable 10이며 기존 학습·평가·진단과 정확 입력·원문 중복은 0건이다.
+- 기존 v0.5 원천 2,322건을 Stage 1 2,322건과 disagree 전용 Stage 2 1,249건으로 분리해 총 3,571건의 단계별 학습 자료를 생성했다.
+- train 3,207건, eval 364건이며 실제 2단계 계약의 메시지 구조를 그대로 사용한다. v0.7·v0.8은 학습에 사용하지 않았다.
+- Qwen3-8B, LoRA r16/alpha32/dropout0.05, seed 42, epoch 1로 401 step 학습을 완료했다. train loss 0.1397754, eval loss 0.00516844이며 어댑터 SHA-256은 `7095ba9aba1cc1a94ee3558e92c485758498c8cfe05f792f58fcc738c5ec4475`다.
+- 공용 학습기가 stage별 계약을 엄격히 검증하도록 확장했고 기존 판단 학습 계약의 회귀 테스트도 통과했다. v0.8 추론은 아직 0회이며 이 단계에서 모델 채택을 주장하지 않는다.
+
+## 2026-10-19 feedback-v0.6 holdout v0.8 단일 실행계획
+
+- 학습 완료된 `feedback-verifier-v0.6-two-stage`와 봉인된 holdout v0.8을 별도 execution plan으로 연결했다.
+- 베이스·어댑터·실행 manifest, 계약·실행기·채점기, endpoint와 원시 결과·claim·receipt 경로를 SHA-256으로 고정했다.
+- execution plan SHA-256은 `a4fdfe9ff87947cc2371efa13f6b84994faafc992d74ebf662f6b7741b02b4e6`이며 추론 횟수는 아직 0회다.
+- 다음 단계는 vLLM alias 확인 후 v0.8을 정확히 한 번 실행하는 것이다. 결과와 무관하게 재실행하지 않으며 자동 운영 승격도 하지 않는다.
+
+## 2026-10-19 feedback-v0.6 holdout v0.8 단일 실행·미채택
+
+- 봉인 v0.8 120건을 계획대로 정확히 한 번 실행했다. Stage 1 계약 120/120, Stage 2 계약 40/40, 호출 규율 120/120으로 라벨 공간 혼동은 해소됐다.
+- 정밀도 100%, 허위 불일치 0%, 보류 정확도 100%, 조건부 p95 2.807초는 통과했다.
+- Stage 1이 `wrong_correction` 10건과 `nonminimal_correction + meaning_changed` 10건을 `agree`로 놓쳐 재현율 66.67%, 권장 decision 66.67%, 허용 교정문 50%로 세 기준을 실패했다.
+- 후보를 미채택하고 holdout v0.8을 소비 완료로 잠갔다. 운영·관리자 경고·학습자 노출·자동 재학습에는 연결하지 않는다.
+
+## 2026-10-19 holdout v0.9 선봉인
+
+- v0.7 Stage 1 교정문 비교 보강 전에 신규 holdout v0.9 120건을 봉인했다. agree 50, disagree 60, unreviewable 10이며 교정문 오류·의미 변경 집중 문항은 40건이다.
+- 소비된 v0.8 문장을 복사하지 않았고 기존 학습 v0.1~v0.6, holdout v0.1~v0.8, 진단 자료와 정확 입력·원문 중복은 0건이다.
+- 데이터 SHA-256은 `8582052baeece84b67e6afd44f167deff71ae275eac68fe61c5f77fe7ea1df48`이며 `ready_for_inference=false`, `consumed=false`, 모델 추론 0회다.
+
+## 2026-10-19 feedback-v0.7 Stage 1 교정문 비교 데이터
+
+- v0.6 3,571건을 유지하고 Stage 1 원문↔후보 교정문 최소대립쌍 160건을 추가했다. 추가분은 agree 80, disagree 80으로 균형을 맞췄다.
+- 총 3,731건, train 3,351, eval 380이며 Stage 2 1,249건은 변경하지 않았다.
+- 봉인된 v0.7·v0.8·v0.9와 정확 입력·원문 중복은 0건이다. Qwen3-8B, seed 42, epoch 1과 기존 LoRA 설정을 유지한다.
+- 419 step 학습을 완료했다. train loss는 `0.13965016640617173`, eval loss는 `0.005171988625079393`, 전체 실행은 `1489.003초`이며 어댑터 SHA-256은 `d336e68a82643a9e161f6430ffb7f7fc164c6dd3ac9e863891b82564e9444382`다.
+- v0.7 후보는 아직 채택하지 않았고 holdout v0.9 추론은 0회다. 다음 단계에서 실행계획과 단일 실행 claim을 먼저 고정한다.
+
+## 2026-10-19 holdout v0.10 선봉인·feedback-v0.8 데이터 준비
+
+- v0.8 학습 전에 신규 holdout v0.10 120건을 봉인했다. agree 50, disagree 60, unreviewable 10이며 기존 학습 v0.1~v0.7, holdout v0.1~v0.9 및 진단 자료와 정확 입력·원문 중복은 0건이다.
+- v0.7 전체 3,731건을 유지하고 Stage 1 보류 경계 40건과 Stage 2 정상 원문 복구·정중체·장소 의미 보존 100건을 추가했다. 총 3,871건, train 3,477, eval 394다.
+- Qwen3-8B, LoRA r16/alpha32/dropout0.05, seed 42, epoch 1 등 하이퍼파라미터는 v0.7과 동일하다. holdout v0.10 추론은 0회이며 학습 완료 전에는 열지 않는다.
+
+## 2026-10-19 feedback-v0.8 Stage 2 복구·문체 학습
+
+- Qwen3-8B BF16과 v0.8의 3,477개 train·394개 eval 자료로 435 step 학습을 완료했다.
+- train loss는 `0.13570145415150542`, eval loss는 `0.005595449358224869`, 전체 실행은 `1522.511초`다.
+- 어댑터 SHA-256은 `c2f5901f97474337617f8e81fa61257f5e5d556f8b61a19ab57cb3e5e91e6180`이며 모델 가중치는 Git 밖에 보관한다.
+- 학습 완료만으로 후보를 채택하지 않는다. 봉인된 holdout v0.10은 추론 0회 상태이며, 실행계획·단일 실행 claim 고정 후 정확히 한 번 평가한다.
+
+## 2026-10-20 feedback-v0.8 holdout v0.10 단일 실행계획
+
+- 학습 완료된 `feedback-verifier-v0.8-stage2-recovery-style`과 봉인된 holdout v0.10을 별도 execution plan으로 연결했다.
+- 베이스·어댑터·실행 manifest, 계약·실행기·채점기, endpoint와 원시 결과·claim·receipt 경로를 SHA-256으로 고정했다.
+- execution plan SHA-256은 `25c91711a89d1c8663127705b6a94111265e281eedfc17327ad88b89fde52c3e`이며 추론 횟수는 아직 0회다.
+- 다음 단계는 vLLM alias 확인 후 v0.10을 정확히 한 번 실행하는 것이다. 결과와 무관하게 재실행하지 않으며 자동 운영 승격도 하지 않는다.
+
+## 2026-10-20 feedback-v0.8 holdout v0.10 단일 실행·통과
+
+- 봉인 v0.10 120건을 계획대로 정확히 한 번 실행했다. Stage 1 계약 120/120, Stage 2 계약 60/60, 호출 규율 120/120이다.
+- 불일치 정밀도·재현율 100%, 허위 불일치 0%, 보류 정확도 100%, 허용 교정문 100%, 조건부 p95 2.782초로 사전 기준을 모두 통과했다.
+- 권장 decision은 57/60(95%)이며 남은 3건은 모두 올바른 원문 복구를 `needs_correction`으로 분류한 동일 가족 오차다.
+- v0.8을 GPU 전용 제한적 shadow 후보로 분류하되 운영 기본값·관리자 경고·학습자 노출·자동 재학습에는 아직 연결하지 않는다. v0.10은 소비 완료이며 재실행하지 않는다.
+
+## 2026-10-20 feedback-v0.8 2단계 worker 연결·shadow 사전점검
+
+- `feedback-two-stage-v0.1`을 영속 worker에 연결했다. Stage 1은 항상 실행하고, 유효한 `disagree`일 때만 Stage 2를 실행하며 두 단계 지연시간을 합산한다.
+- audit job이 생성 당시의 피드백 계약 버전을 보존해 worker에 전달하도록 했다. legacy `feedback-v0.1`과 2단계 계약을 모두 지원하며, 지원하지 않는 계약과 단계별 계약 실패는 audit 저장 없이 fail-closed 처리한다.
+- staging alias·어댑터·정책을 `feedback-verifier-v0.8-stage2-recovery-style`과 `feedback-two-stage-v0.1`로 갱신했다. 기능 플래그 기본값은 계속 OFF다.
+- 테스트용 actual-shadow runner도 새 계약 인자를 검증하도록 수정했다. 전체 회귀 테스트 `445/445`, 프로젝트·Qwen3 PEFT 두 환경 `pip check`, 97개 체크포인트 경로와 외부 가중치·원시 실행 해시 감사, `git diff --check`가 모두 통과했다.
+- 신규 실제 200건 shadow의 사전조건은 아직 충족되지 않았다. 현재 운영 DB는 `judgment_results=0`이고 provenance/audit 테이블이 없으며, 과거 격리본에는 유효 GPU 판단이 198건뿐이다. 표본 복제나 기준 완화 없이 정확히 200개의 신규 provenance 포함 GPU 판단이 누적될 때까지 실행을 보류한다.
+- 커밋·푸시와 모델 서비스 시작은 수행하지 않았다. Pi 관련 보류 변경 4개는 계속 별도 범위로 유지한다.
+
+## 2026-10-20 feedback-v0.8 실제 저장 STT 200건 비노출 shadow
+
+- 기존 비공개 저장 STT snapshot 200건에서 GPU `judgment-v0.2-D` → `feedback-v0.8` 2단계 경로를 새 격리 DB로 실행했다. 운영 DB는 변경하지 않았다.
+- 판단은 전송 200/200, 계약 198/200(99.0%), 재시도 4건 중 2건 복구·2건 차단, p95 1221.458ms로 판단 운영 기준을 통과했다.
+- 피드백은 198개 job 중 audit 195건, `failed/contract` 3건으로 coverage 98.48%였다. 세 실패는 1분→5분 백오프와 총 3회 시도 후 부분 결과 없이 안전 격리됐다.
+- 판단 snapshot 변경과 중복 job/audit은 모두 0건이고 성공 audit p95는 1424.558ms였다. 다만 coverage 99% 기준을 실패했으므로 실제 shadow 운영 게이트는 미통과다.
+- 기능 플래그·관리자 경고·학습자 노출·자동 재학습은 계속 비활성이다. 원문·원시 출력·SQLite는 Git 밖에 보관하고 비식별 집계와 SHA-256만 추적한다.
+- 상세는 `training/feedback/FEEDBACK_V0.8_ACTUAL_STT_SHADOW_RESULT.md`를 따른다. 두 vLLM 서버는 종료했고 커밋·푸시는 수행하지 않았다.
+- 결과 회귀 테스트 추가 후 전체 `447/447`, 두 환경 `pip check`, 100개 체크포인트 경로 감사와 `git diff --check`가 통과했다.
+
+## 2026-10-20 feedback holdout v0.11 선봉인
+
+- feedback-v0.9 학습 전에 신규 120문항 holdout v0.11을 봉인했다. agree 30, disagree 80, unreviewable 10이며 Stage 2 권장 정답은 80건이다.
+- 권장 decision은 `acceptable` 30건, `needs_correction` 45건, `insufficient_evidence` 5건으로 세 출력을 모두 포함한다.
+- 기존 학습 v0.1~v0.8, holdout v0.1~v0.10, 조사 진단·adversarial 자료와 정확 입력 및 원문 중복은 0건이다. 첫 중복 검사에서 v0.9 원문 11건을 발견해 봉인 전에 어휘를 교체했으며, 실패 실행에서는 파일을 생성하지 않았다.
+- 최종 중복 정규화 수정 후 데이터 SHA-256은 `a020895a9b289fd5e4a1b68660486898d4813b5b72d542da89855df8e745b984`이다. `ready_for_inference=false`, `consumed=false`, 모델 추론 0회이며 v0.9 학습·실행계획 고정 전에는 열지 않는다.
+- v0.11 추가 후 전체 회귀 테스트 `452/452`가 통과했다.
+
+## 2026-10-20 feedback-v0.8 실제 shadow 실패 단계 진단
+
+- 2단계 피드백 서비스와 worker가 계약 실패를 `contract_stage1`과 `contract_stage2`로 구분해 저장하도록 보강했다. 기존 단일 단계 계약의 `contract` 분류는 유지한다.
+- 최종 실패 3건을 격리 DB 읽기 전용 상태에서 각각 한 번만 재호출했다. 세 건 모두 Stage 1은 통과하고 Stage 2 권장 판단·교정안 계약에서 실패했다.
+- 진단 전후 SQLite SHA-256은 `bad96c53ff57d1af82380f69e1946cf608edf8f02e5dfe31d211ff6355660f42`로 동일하다. 추적 결과에는 원문·원시 출력·판단 ID를 포함하지 않았다.
+- 이 진단은 실패 위치 확인용이며 품질 평가·모델 선택·학습자 노출 근거로 사용하지 않는다. 다음 후보가 필요하면 Stage 1은 고정하고 Stage 2 계약 안정성만 보강한다.
+- 전체 회귀 테스트 `450/450`, 두 환경 `pip check`, 102개 체크포인트 경로와 외부 해시 감사, `git diff --check`가 모두 통과했다. 피드백 vLLM은 종료했으며 커밋·푸시는 수행하지 않았다.
+
+## 2026-10-20 feedback-v0.9 학습 및 holdout v0.11 최종 판정
+
+- Qwen3-8B에 v0.8 전체 데이터와 Stage 2 계약 안정성 120건을 합친 3,991건으로 `feedback-verifier-v0.9-stage2-contract-stability`을 449 steps 학습했다. 학습 손실은 0.134448, 검증 손실은 0.004822이며 어댑터 SHA-256은 `ce68df0d09446bea943e5b800995cd489703bce7a2f57544f974cc3b069f4cdc`다.
+- 봉인된 holdout v0.11 120건을 정확히 한 번 실행했다. Stage 1 계약·정밀도·재현율은 100%, 권장 decision 93.75%, 허용 교정문 100%, p95 2.888초였다.
+- Stage 2 계약은 76/80(95%)로 필수 99% 기준을 실패했다. 실패 4건은 모두 미완성 발화 보류 가족에서 Stage 1 issue code와 Stage 2 권장 decision 의미가 충돌한 경우다.
+- v0.9는 미채택이며 운영·관리자 경고·학습자 노출에 연결하지 않는다. 같은 holdout은 재실행하지 않고 추가 v0.10 학습도 자동으로 이어가지 않는다. 현재 v0.8 역시 실제 STT shadow coverage 실패 때문에 제한적 내부 연구 후보로만 남긴다.
+- 원시 결과와 모델 가중치는 Git 밖에 보관하고, 추적 문서에는 집계와 SHA-256만 기록한다. 커밋·푸시는 수행하지 않았다.
+- 프로젝트 Python 3.12에서 전체 회귀 테스트 `458/458`, 두 Python 3.12 환경 `pip check`, 124개 변경 경로 분류·내외부 해시 감사, `git diff --check`가 모두 통과했다.
+
+## 2026-10-20 피드백 연구 정책 최종 동결
+
+- `model-policy.json`에 v0.6·v0.7·v0.9 미채택, v0.8 내부 shadow 전용 상태를 기계 판독 가능하게 기록했다.
+- 운영 승인 모델은 `null`, `FEEDBACK_AUDIT_ENABLED=false`, 학습자 노출·자동 재학습·자동 v0.10 학습은 모두 금지 상태다.
+- 소비 완료 holdout v0.7~v0.11은 향후 모델 선택에 재사용하지 않는다. 새 독립 라벨 근거나 구조적으로 다른 아키텍처 변경이 있을 때만 연구를 재개한다.
+- 정책 검증 22/22가 통과했으며 최신 내용 없는 검증 결과에는 shadow alias `feedback-qwen3-8b-v08-stage2-recovery-style`과 정책 해시를 기록했다.

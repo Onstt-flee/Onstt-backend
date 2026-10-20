@@ -1,0 +1,22 @@
+{
+  "eval_file": "training/feedback/data/eval_v0.9.stage2-contract-stability.chatml.jsonl",
+  "experiment_id": "feedback-qwen3-8b-v0.9-stage2-contract-stability",
+  "gradient_accumulation_steps": 8,
+  "learning_rate": 0.0002,
+  "lora_alpha": 32,
+  "lora_dropout": 0.05,
+  "lora_r": 16,
+  "max_length": 2048,
+  "max_steps": -1,
+  "model_path": "/home/cap-minsung/lora-adapter-bank/base-models/qwen3-8b-hf",
+  "num_train_epochs": 1,
+  "output_dir": "/home/cap-minsung/lora-adapter-bank/adapters/feedback-verifier-v0.9-stage2-contract-stability",
+  "per_device_train_batch_size": 1,
+  "seed": 42,
+  "source_dataset": "training/feedback/data/feedback_v0.9.stage2-contract-stability.jsonl",
+  "status": "generated_validated",
+  "target_modules": ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"],
+  "train_file": "training/feedback/data/train_v0.9.stage2-contract-stability.chatml.jsonl",
+  "warmup_steps": 10,
+  "weight_decay": 0.01
+}

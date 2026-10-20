@@ -1,0 +1,22 @@
+{
+  "candidate_status": "passed_offline_thresholds",
+  "consumed": true,
+  "execution_count": 1,
+  "execution_plan_sha256": "25c91711a89d1c8663127705b6a94111265e281eedfc17327ad88b89fde52c3e",
+  "external_artifacts": {
+    "claim_sha256": "1e6ab4b373221ed83ef32764dbfd9c1418558189591ab5fd03872ff8f63c4ff5",
+    "manifest_sha256": "5d29f5d9da4cc4f53d24ed5fa446d2b711d3f1316e91934af36c9dec50e72ef4",
+    "raw_result_sha256": "6109d39728cebd13081f351f76e0f804302bb33eb9d1af1b52c6c5a953275892",
+    "receipt_sha256": "25e3fb051bc9e5d5969b1cdc0160fa05f460df0cd9c3a415127eaff196a2d88a"
+  },
+  "holdout_id": "feedback-holdout-v0.10",
+  "model_requests": {
+    "stage1": 120,
+    "stage2": 60,
+    "transport_success": 180
+  },
+  "recorded_at": "2026-10-20",
+  "result_summary_sha256": "82b02f2ca337274c4cbd0faa665615e90b5b8ce9e16d53a76949ba493b04e595",
+  "schema_version": "feedback-two-stage-execution-record-v0.1",
+  "single_use": true
+}

@@ -1,0 +1,74 @@
+{
+  "base_dataset": "training/feedback/data/feedback_v0.8.stage2-recovery-style.jsonl",
+  "base_dataset_sha256": "07ae62567c5448066b107bd07b96372c65548146a7c3c542cc6cec542090ab6d",
+  "base_records": 3871,
+  "eval_records": 406,
+  "eval_sha256": "96036bdbbeca272c91ec450ca859207c3d964d8fd21717db31a79f7751a517fd",
+  "eval_task_counts": {
+    "feedback_stage1": 258,
+    "feedback_stage2": 148
+  },
+  "holdout_used": false,
+  "limitations": [
+    "자동 생성·계약 검증 데이터이며 사람 또는 일본어 전문가 검수 데이터가 아닙니다.",
+    "v0.8 전체를 유지하고 Stage 2 계약 안정성 예시 120건만 추가했습니다.",
+    "봉인된 holdout v0.7~v0.11은 학습에 사용하지 않았습니다."
+  ],
+  "protected_overlap": {
+    "holdout_v0.10": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "holdout_v0.11": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "holdout_v0.7": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "holdout_v0.8": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "holdout_v0.9": {
+      "exact_input": 0,
+      "text": 0
+    }
+  },
+  "records": 3991,
+  "review": {
+    "reviewed_at": null,
+    "status": "generated_validated"
+  },
+  "schema_version": "feedback-training-manifest-v0.9-stage2-contract-stability",
+  "source_sha256": "c717cce5637e627b805d92b842f56b03e1de76ff6300efd5cb954fed4aabd174",
+  "targeted_case_counts": {
+    "formal_conjugation_control": 20,
+    "formal_conjugation_primary": 20,
+    "minimal_location_recovery": 20,
+    "recover_acceptable_control": 20,
+    "recover_acceptable_primary": 20,
+    "recover_insufficient_evidence": 20
+  },
+  "targeted_records": 120,
+  "targeted_stage1_verdict_counts": {},
+  "targeted_stage2_decision_counts": {
+    "acceptable": 40,
+    "insufficient_evidence": 20,
+    "needs_correction": 60
+  },
+  "targeted_task_counts": {
+    "feedback_stage2": 120
+  },
+  "task_counts": {
+    "feedback_stage1": 2522,
+    "feedback_stage2": 1469
+  },
+  "train_records": 3585,
+  "train_sha256": "e328e41bd3d082e0da492f7a50b95b043aed1095cfdbc048ff9122d5e64fda12",
+  "train_task_counts": {
+    "feedback_stage1": 2264,
+    "feedback_stage2": 1321
+  }
+}

@@ -1,8 +1,8 @@
 # 일본어 판단·피드백 듀얼모델 통합 현황
 
-기준일: 2026-10-17
+기준일: 2026-10-20
 대상 브랜치: `api`
-기준 체크포인트: 실제 shadow `758f345` 이후 관리자 집계 후속 체크포인트
+기준 체크포인트: feedback-v0.9 holdout v0.11 최종 판정 및 연구 동결
 
 이 문서는 현재 사용할 모델, 완료된 검증, 아직 증명되지 않은 범위와 다음 작업을 한곳에서
 확인하기 위한 상위 요약이다. 세부 수치와 재현 근거는 마지막의 원본 문서를 따른다.
@@ -10,8 +10,8 @@
 ## 1. 한 줄 결론
 
 GPU 서버에서 `Qwen3-4B + judgment-v0.2-D`가 먼저 판단하고,
-`Qwen3-8B + feedback-verifier-v0.3`이 비동기로 그 결과를 검수하는 구조까지 구현·시험했다.
-후속 v0.5까지 학습했지만 독립 시험의 필수 기준 세 항목을 실패해 **승인된 피드백모델은 없다**.
+`Qwen3-8B + feedback-verifier-v0.8`이 비동기로 그 결과를 검수하는 구조까지 구현·시험했다.
+최종 후보 v0.9까지 학습했지만 Stage 2 계약 필수 기준을 실패해 **승인된 피드백모델은 없다**.
 운영 기본 활성, 학습자 노출, 자동 교체·자동 배포는 승인하지 않았다. Raspberry Pi 경로는
 현재 범위에서 제외하고 후속 작업으로 보존한다.
 
@@ -20,15 +20,15 @@ GPU 서버에서 `Qwen3-4B + judgment-v0.2-D`가 먼저 판단하고,
 | 역할 | 현재 모델 | 상태 | 사용 범위 |
 | --- | --- | --- | --- |
 | 1차 문법 판단 | Qwen3-4B-Instruct-2507 + `judgment-v0.2-D` LoRA | 제한적 staging/shadow 기준선 | GPU, 기능 플래그 기본 OFF |
-| 2차 결과 검수 | Qwen3-8B + `feedback-verifier-v0.3` LoRA | 내부 holdout 통과 후 조사 경계 진단 실패 | GPU 비동기 연구용, 기능 플래그 기본 OFF |
+| 2차 결과 검수 | Qwen3-8B + `feedback-verifier-v0.8` LoRA | 내부 holdout 통과, 실제 shadow coverage 98.48% 실패 | GPU 비동기 shadow 전용, 기능 플래그 기본 OFF |
 | 2차 후속 검수 | Qwen3-8B + `feedback-verifier-v0.4` LoRA | 독립 holdout 필수 기준 2개 실패 | 연구 기록만 유지, 운영 연결 금지 |
-| 2차 최종 검수 후보 | Qwen3-8B + `feedback-verifier-v0.5` LoRA | 독립 holdout 필수 기준 3개 실패 | 연구 기록만 유지, 운영 연결 금지 |
+| 2차 최종 검수 후보 | Qwen3-8B + `feedback-verifier-v0.9` LoRA | Stage 2 계약 76/80(95%)로 필수 99% 실패 | 미채택, 운영 연결 금지 |
 | 판단 후속 LoRA | v0.2-F/I/J 등 | 미채택 | 비교 기록만 유지 |
 | Pi 판단 | Q4_K_M/Q5_K_M GGUF + v0.2-D LoRA | 보류 | 이번 피드백모델 단계에서 제외 |
 | 고용량 상한 비교 | Qwen3-14B | 오프라인 기준선 | 온라인 서비스 미사용 |
 
 `v0.2-D`는 현재 가장 안정적인 판단 기준선이지만 최종 운영 승인 모델은 아니다.
-피드백 v0.3도 판단 결과를 덮어쓰지 않으며 별도 audit으로만 저장한다.
+피드백 v0.8도 판단 결과를 덮어쓰지 않으며 별도 audit으로만 저장한다.
 
 ### feedback-v0.4 최종 결과
 
@@ -57,10 +57,18 @@ GPU 서버에서 `Qwen3-4B + judgment-v0.2-D`가 먼저 판단하고,
 ### 피드백 연구 동결
 
 - 기계 판독 정책에서 운영 승인 모델을 `null`, 기능 플래그 기본 비활성, 학습자 노출·자동 재학습 금지로 고정했다.
-- `feedback-verifier-v0.3`만 관리자용 GPU 비노출 shadow에 허용한다. 이는 언어 품질이나 운영 기본값 승인이 아니다.
-- v0.4/v0.5는 미채택, 조사 위험 게이트는 오프라인 연구 전용이다.
+- `feedback-verifier-v0.8`만 관리자용 GPU 비노출 shadow에 허용한다. 이는 언어 품질이나 운영 기본값 승인이 아니다.
+- v0.4~v0.7과 v0.9는 미채택, 조사 위험 게이트는 오프라인 연구 전용이다.
 - 다음 실험은 신규 후보·학습 전 미사용 평가셋 봉인·사전 임계값 고정 없이는 승인되지 않는다.
-- 정책 검증 14/14 항목이 통과했다. 상세는 `training/feedback/FEEDBACK_RESEARCH_FREEZE_2026-10-18.md`를 따른다.
+- 정책 검증 22/22 항목이 통과했다. 상세는 `training/feedback/FEEDBACK_RESEARCH_FREEZE_2026-10-18.md`를 따른다.
+
+### 2단계 피드백 v0.1 준비
+
+- verdict 검수와 권장 판단·교정 생성을 분리하는 2단계 계약을 오프라인 모듈로 구현했다.
+- stage 2는 유효한 stage 1 `disagree`에만 허용하며 agree·unreviewable에는 호출하지 않는다.
+- 구현 전에 신규 holdout v0.7 120문항과 stage별 임계값을 봉인했다. 기존 14개 데이터 계열과 입력·원문 중복은 0건이고 모델 추론은 0회다.
+- 기존 feedback audit 저장 계약으로 결합 가능하지만 worker·DB·API에는 아직 연결하지 않았다.
+- 후보·실행기·채점기 해시를 고정하기 전에는 v0.7을 실행하지 않는다.
 
 ## 3. 실행 구조
 
@@ -69,7 +77,7 @@ STT 텍스트
   -> judgment-v0.2-D
   -> judgment_results 저장
   -> feedback_audit_jobs 생성
-  -> feedback-verifier-v0.3 비동기 검수
+  -> feedback-verifier-v0.8 비동기 검수
   -> agree / disagree / unreviewable
   -> feedback_audits 별도 저장
   -> 보호된 관리자 API에서만 조회
@@ -208,32 +216,41 @@ issue code는 `false_negative`인 의미 모순이었다. 파서와 프롬프트
 | 항목 | 상태 |
 | --- | --- |
 | 판단·피드백 코드 및 DB 구조 | 구현 완료 |
-| feedback-v0.3 내부 GPU 평가 | 광범위 holdout 통과, 후속 조사 경계 진단 실패 |
+| feedback-v0.8 내부 GPU 평가 | holdout 통과, 실제 STT shadow coverage 기준 실패 |
 | 실모델 합성 200건 배선 검증 | 통과 |
 | 관리자 API 인증·장애 검증 | 통과 |
 | worker lease·재시도·강제 종료 복구 | 통과 |
 | 실제 STT 관리자 반복 이슈 집계 | 읽기 전용·비노출 검증 통과, 품질 판정은 미실행 |
 | 실제 STT 관리자 HTTP/Swagger | 접근 제어·fail-closed·DB 불변성 검증 통과 |
-| 실제 저장 STT 200건 feedback shadow | 운영 계약 통과, 품질 검수는 미실행 |
+| 실제 저장 STT 200건 feedback shadow | audit 195/198(98.48%)로 운영 coverage 기준 실패 |
 | 최소 독립 품질 검수 | 사람 검수 보류에 따라 미실행 |
 | 학습자 경고 노출 | 금지 |
 | 운영 기본 활성 | 금지 |
 | 피드백 기반 자동 재학습·자동 배포 | 금지 |
 | Pi 판단과 피드백 연동 | 보류 |
 
-따라서 지금 가능한 작업은 기능 플래그를 기본 OFF로 유지한 **GPU 관리자용 비노출 shadow**다.
+따라서 지금 가능한 범위는 기능 플래그를 기본 OFF로 유지한 **GPU 관리자용 제한적 비노출 shadow 연구**뿐이다.
 
 실제 저장 일본어 STT 200건을 비공개 snapshot으로 고정해 두 실모델을 실행했다.
 판단모델은 운영과 동일한 1회 원문보존 재시도 적용 후 198/200(99.0%) 계약 성공,
 재시도 5건 중 3건 복구, 2건 최종 차단을 기록했다. 피드백모델은 유효 판단 198건 중
-197건 audit을 저장했고 1건은 3회 계약 실패 후 안전하게 격리했다. 판단 변경과 중복은
+195건 audit을 저장했고 3건은 3회 계약 실패 후 안전하게 격리했다. 판단 변경과 중복은
 0건이었다. 정답 라벨과 음성 근거가 없으므로 품질 성능으로 해석하지 않는다.
 
 ## 8. 체크포인트와 파일 보존
 
+### 2단계 피드백 후속 실험
+
+2026-10-19에 기존 미채택 `feedback-verifier-v0.5`를 재학습 없이 stage 1/2로 분리해
+신규 holdout v0.7 120건에서 한 번 평가했다. stage 1 계약은 60/120이었고 유효 출력은
+모두 `agree`였다. 나머지 60건은 audit issue code 대신 문법 오류 유형을 출력해 차단됐으며
+stage 2는 0회 호출됐다. 후보는 미채택이고 holdout v0.7은 소비 완료다.
+
+상세는 `training/feedback/FEEDBACK_TWO_STAGE_V0.1_HOLDOUT_V0.7_RESULT.md`를 따른다.
+
 - 로컬 기준점: 실제 shadow `758f345`와 후속 관리자 집계 체크포인트
 - 브랜치 상태: 로컬 `api` 변경은 원격에 아직 푸시하지 않음
-- 전체 회귀 테스트: `393/393` 통과
+- 전체 회귀 테스트: `458/458` 통과
 - 프로젝트·Qwen3 PEFT 두 환경 `pip check`: 통과
 - 가중치, 원시 모델 출력, 임시 SQLite, 음성은 Git에 넣지 않는다.
 - 추적 문서에는 집계와 SHA-256만 남긴다.
@@ -259,11 +276,11 @@ issue code는 `false_negative`인 의미 모순이었다. 파서와 프롬프트
 
 ## 9. 다음 작업 순서
 
-1. 기능 플래그 OFF와 학습자 비노출 상태를 유지한다. 조사 위험 게이트도 오프라인 연구용으로만 둔다.
+1. 피드백 연구 동결과 기능 플래그 OFF, 학습자 비노출 상태를 유지한다. 조사 위험 게이트도 오프라인 연구용으로만 둔다.
 2. 관리자 반복 이슈 집계는 검증 완료 상태로 유지하고 새 staging 데이터만 누적 관찰한다.
 3. 사람 상세 검수는 보류하되 학습자 경고나 자동 재학습 전에 최소 독립 품질 검수를 요구한다.
 4. 정답 라벨 없는 실제 shadow 결과를 학습 데이터나 정확도 주장에 사용하지 않는다.
-5. 반복 실패가 충분히 누적된 뒤에만 새 판단모델 후보와 미사용 holdout을 설계한다.
+5. 새 독립 라벨 근거나 구조적으로 다른 아키텍처 변경이 생길 때만 새 피드백 후보와 미사용 holdout을 설계한다.
 6. Raspberry Pi 연동은 GPU 경로와 분리된 체크포인트에서 재개한다.
 
 ## 10. 기준 문서 지도
@@ -282,6 +299,8 @@ issue code는 `false_negative`인 의미 모순이었다. 파서와 프롬프트
 | 체크포인트 안전 감사 | [`../training/feedback/FEEDBACK_V0.3_CHECKPOINT_AUDIT.md`](../training/feedback/FEEDBACK_V0.3_CHECKPOINT_AUDIT.md) |
 | 조사 위험 게이트 adversarial 진단 | [`../training/feedback/FEEDBACK_PARTICLE_RISK_ADVERSARIAL_V0.1_RESULT.md`](../training/feedback/FEEDBACK_PARTICLE_RISK_ADVERSARIAL_V0.1_RESULT.md) |
 | 피드백 연구 동결 정책 | [`../training/feedback/FEEDBACK_RESEARCH_FREEZE_2026-10-18.md`](../training/feedback/FEEDBACK_RESEARCH_FREEZE_2026-10-18.md) |
+| 2단계 holdout v0.7 봉인 | [`../training/feedback/HOLDOUT_V0.7_SEAL.md`](../training/feedback/HOLDOUT_V0.7_SEAL.md) |
+| 2단계 피드백 계약 | [`../training/feedback/FEEDBACK_TWO_STAGE_V0.1_DESIGN.md`](../training/feedback/FEEDBACK_TWO_STAGE_V0.1_DESIGN.md) |
 | 판단모델 정책 | [`../deployment/judgment-staging/MODEL_POLICY.md`](../deployment/judgment-staging/MODEL_POLICY.md) |
 | 판단 v0.2-D 최종 선택 근거 | [`../training/judgment/V0.2_DF_HOLDOUT_V0.3_RESULT.md`](../training/judgment/V0.2_DF_HOLDOUT_V0.3_RESULT.md) |
 | Pi 보류 경로 | [`../deployment/judgment-pi5/README.md`](../deployment/judgment-pi5/README.md) |
@@ -293,3 +312,17 @@ issue code는 `false_negative`인 의미 모순이었다. 파서와 프롬프트
 - **합성 shadow**는 운영 배선 근거이며 실제 사용자 분포나 언어 정확도 근거가 아니다.
 - **staging 후보**는 운영 기본값 승인과 다르다.
 - **agree 199/200**은 정답률 99.5%가 아니다. 정답 라벨이 없는 모델 간 일치 집계다.
+
+## 2026-10-20 피드백모델 최신 상태
+
+- 최종 후보 `feedback-verifier-v0.9-stage2-contract-stability`은 3,991건·449-step 학습 후 holdout v0.11 단일 평가에서 Stage 2 계약 76/80(95%)로 필수 99% 기준을 실패해 미채택했다. 그 외 Stage 1 계약·정밀도·재현율은 100%, 권장 decision 93.75%, 허용 교정문 100%, p95 2.888초였다. 추가 버전 학습은 자동으로 이어가지 않는다.
+
+- Stage 2 계약 안정성 차기 후보 학습 전에 holdout v0.11 120문항을 선봉인했다. 기존 학습 v0.1~v0.8과 holdout v0.1~v0.10을 포함한 전체 비교에서 정확 입력·원문 중복은 0건이며 추론은 0회다.
+
+- `feedback-verifier-v0.8-stage2-recovery-style`이 신규 봉인 holdout v0.10 120건에서 사전 기준을 모두 통과했다.
+- Stage 1/2 계약은 모두 100%, 불일치 정밀도·재현율 100%, 권장 decision 95%, 허용 교정문 100%, 조건부 p95 2.782초다.
+- 남은 권장 decision 오차 3건과 실제 사용자 분포 검증 부재 때문에 상태는 GPU 전용 제한적 shadow 후보다. 운영 기본값·학습자 노출·기존 판단 자동 덮어쓰기는 계속 금지한다.
+- 상세 근거는 `training/feedback/FEEDBACK_V0.8_HOLDOUT_V0.10_RESULT.md`를 따른다. Pi 피드백 경로는 이번 후보 판정에서 제외했다.
+- `feedback-two-stage-v0.1`을 영속 worker에 연결했다. Stage 1은 항상 호출하고 유효한 `disagree`에만 Stage 2를 호출하며, 어느 단계든 계약 실패 시 부분 audit을 저장하지 않는다.
+- staging alias와 정책은 v0.8로 갱신했지만 `FEEDBACK_AUDIT_ENABLED=false` 기본값은 유지한다.
+- 운영 DB의 신규 판단은 0건이라 기존 비공개 저장 STT snapshot 200건을 새 격리 DB에서 재판단해 v0.8 shadow를 실행했다. 판단 계약 198/200은 통과했지만 audit 195/198(98.48%), 계약 실패 3건으로 coverage 99% 기준을 실패했다. 실패 작업은 총 3회 후 안전 격리됐고 판단 변경·중복은 0건이다. 후속 읽기 전용 진단에서 세 건 모두 Stage 1은 통과하고 Stage 2 권장안 계약에서 실패한 것으로 분류됐다.

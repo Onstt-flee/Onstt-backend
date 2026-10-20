@@ -62,7 +62,11 @@ def claim_next(db: Session, *, lease_seconds: int = 180) -> models.FeedbackAudit
 
 def _fail(db: Session, job: models.FeedbackAuditJob, category: str) -> None:
     now = utcnow()
-    job.error_category = category if category in {"configuration", "transport", "contract", "missing_input"} else "internal"
+    known_categories = {
+        "configuration", "transport", "contract", "contract_stage1",
+        "contract_stage2", "missing_input",
+    }
+    job.error_category = category if category in known_categories else "internal"
     job.lease_expires_at = None
     if job.attempts >= 3:
         job.status = "failed"
@@ -87,7 +91,7 @@ def process_one(db: Session, *, runner: Callable = run_feedback) -> bool:
         result = runner(
             utterance.stt_text, context=judgment.context,
             learner_level=judgment.learner_level, judgment=judgment_input(judgment),
-            model_name=job.feedback_model,
+            model_name=job.feedback_model, contract_version=job.contract_version,
         )
         recommended = result["recommended_judgment"]
         edits = recommended.pop("edits", []) if recommended else []

@@ -76,7 +76,9 @@ def build_source(path: Path, count: int = SAMPLE_SIZE) -> None:
     engine.dispose()
 
 
-def agree_runner(text, *, context, learner_level, judgment, model_name):
+def agree_runner(text, *, context, learner_level, judgment, model_name, contract_version):
+    if contract_version != "feedback-v0.1":
+        raise AssertionError(f"unexpected feedback contract: {contract_version}")
     return {
         "verdict": "agree",
         "issue_codes": [],

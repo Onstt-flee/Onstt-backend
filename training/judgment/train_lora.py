@@ -11,6 +11,14 @@ from pathlib import Path
 import platform
 import time
 
+from analyzer.feedback_contract import canonical_json, validate_input
+from analyzer.feedback_two_stage_contract import (
+    STAGE1_SYSTEM_PROMPT,
+    STAGE2_SYSTEM_PROMPT,
+    parse_stage1_output,
+    parse_stage2_output,
+)
+
 
 ROOT = Path(__file__).resolve().parents[2]
 CONFIG_KEYS = {
@@ -80,6 +88,36 @@ def load_chatml(path: Path) -> list[dict]:
                 expected = json.loads(messages[2]["content"])
             except (TypeError, json.JSONDecodeError) as exc:
                 raise ValueError(f"{path}:{line_number}: content must be JSON") from exc
+            system_prompt = messages[0]["content"]
+            if system_prompt == STAGE1_SYSTEM_PROMPT:
+                try:
+                    validate_input(model_input)
+                except (TypeError, ValueError) as exc:
+                    raise ValueError(f"{path}:{line_number}: invalid stage-1 input") from exc
+                parsed, error = parse_stage1_output(canonical_json(expected))
+                if parsed is None:
+                    raise ValueError(f"{path}:{line_number}: invalid stage-1 output: {error}")
+                records.append(row)
+                continue
+            if system_prompt == STAGE2_SYSTEM_PROMPT:
+                if set(model_input) != {"input", "stage1_audit"}:
+                    raise ValueError(f"{path}:{line_number}: invalid stage-2 input")
+                try:
+                    validate_input(model_input["input"])
+                except (TypeError, ValueError) as exc:
+                    raise ValueError(f"{path}:{line_number}: invalid stage-2 model input") from exc
+                stage1, error = parse_stage1_output(canonical_json(model_input["stage1_audit"]))
+                if stage1 is None or stage1["verdict"] != "disagree":
+                    raise ValueError(f"{path}:{line_number}: invalid stage-2 audit: {error}")
+                parsed, error = parse_stage2_output(
+                    canonical_json(expected),
+                    model_input["input"]["text"],
+                    stage1["issue_codes"],
+                )
+                if parsed is None:
+                    raise ValueError(f"{path}:{line_number}: invalid stage-2 output: {error}")
+                records.append(row)
+                continue
             valid_inputs = [
                 {"context", "learner_level", "text"},
                 {"context", "judgment", "learner_level", "text"},

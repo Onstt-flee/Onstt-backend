@@ -1,0 +1,49 @@
+{
+  "candidate": {
+    "adapter_name": "feedback-verifier-v0.5",
+    "adapter_path": "/home/cap-minsung/lora-adapter-bank/adapters/feedback-verifier-v0.5",
+    "adapter_run_manifest_sha256": "be5a802a6127d9804f3162327410aaf6cef8fbd43ef3455ba8dded9e29f80e2f",
+    "adapter_sha256": "f6896ab2f0fdd408fb42a4a1fa6fa28f5039f557fab25a0aa7b7a1e76af52d95",
+    "model_identity": "Qwen/Qwen3-8B@b968826d9c46dd6066d109eabc6255188de91218",
+    "model_identity_type": "model_manifest_sha256",
+    "model_path": "/home/cap-minsung/lora-adapter-bank/base-models/qwen3-8b-hf",
+    "model_sha256": "915e444325028baa6485288a8147ee067385eb34bab425006605f21cba1647f5",
+    "stage1_model": "feedback-qwen3-8b-v05-two-stage",
+    "stage2_model": "feedback-qwen3-8b-v05-two-stage"
+  },
+  "code_sha256": {
+    "contract": "d9e5e4d1c7faa4a032f9f0b5073552f088f34dab00083be31160b5062ce20e68",
+    "runner": "d11efec2d5f370570f2fb4299227e851c759326db9e09ad94283f4f1190fc3af",
+    "scorer": "845fd2706984e357f11c2e954a23246bbfa6d96ca3cb6c5febd57d6856fc4bda"
+  },
+  "consumed": false,
+  "contract_version": "feedback-two-stage-v0.1",
+  "dataset_sha256": "e928c104a39623891dc41d9fcc8ed285517594d9eea417662cdc91235f84e6ab",
+  "execution": {
+    "claim_path": "/home/cap-minsung/lora-adapter-bank/runs/feedback-two-stage-v0.1/holdout-v0.7-v05.claim.json",
+    "endpoint": "http://127.0.0.1:1235/v1/chat/completions",
+    "output_path": "/home/cap-minsung/lora-adapter-bank/runs/feedback-two-stage-v0.1/holdout-v0.7-v05.jsonl",
+    "receipt_path": "/home/cap-minsung/lora-adapter-bank/runs/feedback-two-stage-v0.1/holdout-v0.7-v05.receipt.json"
+  },
+  "execution_count": 0,
+  "experiment_scope": "offline_research_only_no_operational_approval",
+  "generation": {
+    "stage1_max_tokens": 192,
+    "stage2_max_tokens": 384,
+    "temperature": 0.0,
+    "top_p": 1.0
+  },
+  "hypothesis": "Separating verdict detection from recommendation generation may reduce the combined-contract failures observed with feedback-verifier-v0.5 without retraining.",
+  "ready_for_inference": true,
+  "schema_version": "feedback-two-stage-execution-plan-v0.1",
+  "seal_protocol_sha256": "f07ca0feb36deca11521a70d5e22f39deab2e1f56a4f9f528fd4e0e3936309d7",
+  "serving": {
+    "engine": "vllm",
+    "engine_version": "0.28.0",
+    "flashinfer_sampler": false,
+    "max_model_len": 4096,
+    "max_num_seqs": 1,
+    "reasoning_parser": "qwen3"
+  },
+  "single_use": true
+}

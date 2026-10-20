@@ -4,9 +4,7 @@ This profile keeps the judgment response synchronous and moves verification to
 a persistent DB-backed worker. It is disabled by default and does not expose
 feedback to learners or overwrite `judgment_results`.
 
-The selected verifier is `feedback-verifier-v0.3`. It passed the generated-validated
-GPU internal holdout but is authorized only for GPU-judgment shadow with no
-learner exposure. Pi intake is deferred.
+The selected verifier is `feedback-verifier-v0.8-stage2-recovery-style`. It passed all predeclared thresholds on the single-use generated-validated holdout v0.10 and is authorized only for GPU-judgment shadow with no learner exposure. The worker uses `feedback-two-stage-v0.1`: Stage 1 always runs and Stage 2 runs only after a valid `disagree`. Pi intake is deferred.
 
 The machine-readable freeze policy is `model-policy.json`. Run
 `venv/bin/python scripts/validate_feedback_model_policy.py` from the repository
@@ -17,7 +15,7 @@ particle-risk gate is offline research only.
 ## Resource envelope
 
 - judgment Qwen3-4B + v0.2-D: port 1234, GPU reservation 0.30
-- feedback Qwen3-8B + feedback-v0.3: port 1235, reservation 0.50
+- feedback Qwen3-8B + feedback-v0.8: port 1235, reservation 0.50
 - total configured reservation: 0.80; feedback concurrency: one
 - Qwen3-14B remains an offline upper-bound model only
 
@@ -37,10 +35,7 @@ operator; repository changes never activate them.
 The admin token must contain at least 32 characters. List APIs exclude source
 text; the detail API is privileged and intended only for investigation.
 
-The service config separates Qwen reasoning from OpenAI `content` with
-`--reasoning-parser qwen3`. This was added after the consumed v0.1 holdout found
-an empty think wrapper in every content string. It is not retroactively applied
-to that result and must be validated once on a new sealed holdout before use.
+The service config separates Qwen reasoning from OpenAI `content` with `--reasoning-parser qwen3`. The two-stage contract and this serving configuration passed the single-use holdout v0.10; that result authorizes shadow only and does not authorize learner exposure.
 
 ## Failure semantics
 
@@ -103,7 +98,7 @@ Prerequisites:
 
 - both source tables and judgment provenance are present;
 - 200 eligible judgments exist after the explicit cursor;
-- feedback vLLM alias `feedback-qwen3-8b-v03` is ready on loopback;
+- feedback vLLM alias `feedback-qwen3-8b-v08-stage2-recovery-style` is ready on loopback;
 - the content-bearing isolated DB is outside the Git workspace;
 - the tracked summary path does not already exist unless `--overwrite` is
   explicitly intended.

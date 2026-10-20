@@ -61,6 +61,16 @@ class FeedbackStoreTests(unittest.TestCase):
         self.assertEqual(self.db.query(models.JudgmentProvenance).count(), 1)
         self.assertEqual(self.db.query(models.FeedbackAuditJob).count(), 1)
 
+    def test_two_stage_contract_is_persisted_in_job_identity(self):
+        with patch.dict(os.environ, {"FEEDBACK_AUDIT_ENABLED": "true",
+            "FEEDBACK_MODEL_SHA256": HASH, "FEEDBACK_ADMIN_TOKEN": "x" * 32,
+            "FEEDBACK_CONTRACT_VERSION": "feedback-two-stage-v0.1",
+            "EDGE_MODE": "false"}, clear=False):
+            feedback_store.record_gpu_judgment(self.db, self.judgment, {})
+            self.db.commit()
+        job = self.db.query(models.FeedbackAuditJob).one()
+        self.assertEqual(job.contract_version, "feedback-two-stage-v0.1")
+
     def test_invalid_enabled_configuration_never_breaks_judgment(self):
         with patch.dict(os.environ, {"FEEDBACK_AUDIT_ENABLED": "true",
             "FEEDBACK_MODEL_SHA256": "bad", "FEEDBACK_ADMIN_TOKEN": "x" * 32,

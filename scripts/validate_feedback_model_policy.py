@@ -52,18 +52,26 @@ def validate(
         "shadow_alias_matches_env": env.get("FEEDBACK_MODEL") == shadow.get("model_alias"),
         "shadow_adapter_matches_env": env.get("FEEDBACK_ADAPTER") == shadow.get("adapter"),
         "shadow_hash_matches_env": env.get("FEEDBACK_MODEL_SHA256") == shadow.get("adapter_sha256"),
+        "shadow_contract_matches_env": env.get("FEEDBACK_CONTRACT_VERSION") == shadow.get("contract_version"),
         "shadow_service_is_pinned": (
             f"{shadow.get('model_alias')}=" in service_text
             and f"/{shadow.get('adapter')}" in service_text
         ),
         "v04_rejected": artifacts.get("feedback-verifier-v0.4", {}).get("status") == "rejected",
         "v05_rejected": artifacts.get("feedback-verifier-v0.5", {}).get("status") == "rejected",
+        "v06_rejected": artifacts.get("feedback-verifier-v0.6-two-stage", {}).get("status") == "rejected",
+        "v07_rejected": artifacts.get("feedback-verifier-v0.7-stage1-comparison", {}).get("status") == "rejected",
+        "v08_shadow_only": artifacts.get("feedback-verifier-v0.8-stage2-recovery-style", {}).get("status") == "shadow_only_not_operational",
+        "v09_rejected": artifacts.get("feedback-verifier-v0.9-stage2-contract-stability", {}).get("status") == "rejected",
         "particle_gate_offline": (
             artifacts.get("feedback-particle-risk-v0.1", {}).get("status") == "offline_research_only"
             and particle_result.get("decision") == "failed_development_diagnostic"
             and particle_result.get("operational_activation_allowed") is False
         ),
         "next_experiment_not_authorized": next_experiment.get("authorized") is False,
+        "research_frozen": next_experiment.get("research_frozen") is True,
+        "no_automatic_v010": next_experiment.get("may_train_v0_10_automatically") is False,
+        "consumed_holdouts_locked": next_experiment.get("consumed_holdouts") == ["v0.7", "v0.8", "v0.9", "v0.10", "v0.11"],
         "new_holdout_required": (
             next_experiment.get("requires_presealed_unused_evaluation_set") is True
             and next_experiment.get("may_reuse_consumed_holdouts_for_selection") is False

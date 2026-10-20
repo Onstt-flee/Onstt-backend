@@ -1,0 +1,28 @@
+{
+  "candidate_family": "feedback-verifier-v0.6-stage-specific",
+  "consumed": false,
+  "contract_version": "feedback-two-stage-v0.1",
+  "dataset_sha256": "541b8cd0cccfbb5fd9c8e7a63fcbe2174871472fb6e635c841387198ced7a16d",
+  "model_inference_count": 0,
+  "operational_qualification": "blocked_generated_validation_only",
+  "ready_for_inference": false,
+  "schema_version": "feedback-holdout-protocol-v0.8",
+  "single_use": true,
+  "stage1_max_tokens": 192,
+  "stage2_max_tokens": 384,
+  "temperature": 0.0,
+  "thresholds": {
+    "accepted_correction_rate_min": 0.8,
+    "conditional_total_p95_seconds_max": 10.0,
+    "disagreement_precision_min": 0.95,
+    "disagreement_recall_min": 0.8,
+    "false_disagreement_rate_max": 0.02,
+    "recommended_decision_accuracy_min": 0.9,
+    "stage1_contract_success_rate_min": 0.99,
+    "stage2_call_discipline_rate_min": 1.0,
+    "stage2_contract_success_rate_min": 0.99,
+    "unreviewable_accuracy_min": 0.9
+  },
+  "top_p": 1.0,
+  "training_started": false
+}

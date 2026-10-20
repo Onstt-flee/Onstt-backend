@@ -1,0 +1,22 @@
+{
+  "candidate_status": "rejected_stage2_contract_threshold",
+  "consumed": true,
+  "execution_count": 1,
+  "execution_plan_sha256": "6d2d776cedbeffb27b2039a78a2905423a9d4449eb6c93842b89e79eded3c83d",
+  "external_artifacts": {
+    "claim_sha256": "73bbd72ee0e728a6552c408307817235a718c02351ad3dfdaffa8a9764b0dad7",
+    "manifest_sha256": "d8f017e5cf969a2786b4e41b63bc4a901c65f0f64e33b8107d3acea8210421a1",
+    "raw_result_sha256": "5681e535aaea04ef672ad1d48c7fffef4048ffdd5aeff0ae74168cc8035e35b8",
+    "receipt_sha256": "8087b8d95d1cb344ff8050517b5cb15458bfa9e454b8ff75f034b5a34e6c055e"
+  },
+  "holdout_id": "feedback-holdout-v0.11",
+  "model_requests": {
+    "stage1": 120,
+    "stage2": 80,
+    "transport_success": 200
+  },
+  "recorded_at": "2026-10-20",
+  "result_summary_sha256": "25ee4ca9e3652fba0681ee51c21864b9fc9a4a3c9b34f88d5edfbfec2f39aa5d",
+  "schema_version": "feedback-two-stage-execution-record-v0.1",
+  "single_use": true
+}

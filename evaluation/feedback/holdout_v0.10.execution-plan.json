@@ -1,0 +1,49 @@
+{
+  "candidate": {
+    "adapter_name": "feedback-verifier-v0.8-stage2-recovery-style",
+    "adapter_path": "/home/cap-minsung/lora-adapter-bank/adapters/feedback-verifier-v0.8-stage2-recovery-style",
+    "adapter_run_manifest_sha256": "99445e0f031ebd960f9463113bcb66ccfbbfea2c05a969a41f95d79900da96e9",
+    "adapter_sha256": "c2f5901f97474337617f8e81fa61257f5e5d556f8b61a19ab57cb3e5e91e6180",
+    "model_identity": "Qwen/Qwen3-8B@b968826d9c46dd6066d109eabc6255188de91218",
+    "model_identity_type": "model_manifest_sha256",
+    "model_path": "/home/cap-minsung/lora-adapter-bank/base-models/qwen3-8b-hf",
+    "model_sha256": "915e444325028baa6485288a8147ee067385eb34bab425006605f21cba1647f5",
+    "stage1_model": "feedback-qwen3-8b-v08-stage2-recovery-style",
+    "stage2_model": "feedback-qwen3-8b-v08-stage2-recovery-style"
+  },
+  "code_sha256": {
+    "contract": "d9e5e4d1c7faa4a032f9f0b5073552f088f34dab00083be31160b5062ce20e68",
+    "runner": "d11efec2d5f370570f2fb4299227e851c759326db9e09ad94283f4f1190fc3af",
+    "scorer": "845fd2706984e357f11c2e954a23246bbfa6d96ca3cb6c5febd57d6856fc4bda"
+  },
+  "consumed": false,
+  "contract_version": "feedback-two-stage-v0.1",
+  "dataset_sha256": "a3457b98022971afbed368b647a1801284069d1857a886a02151e3c382e186c1",
+  "execution": {
+    "claim_path": "/home/cap-minsung/lora-adapter-bank/runs/feedback-two-stage-v0.1/holdout-v0.10-v08.claim.json",
+    "endpoint": "http://127.0.0.1:1235/v1/chat/completions",
+    "output_path": "/home/cap-minsung/lora-adapter-bank/runs/feedback-two-stage-v0.1/holdout-v0.10-v08.jsonl",
+    "receipt_path": "/home/cap-minsung/lora-adapter-bank/runs/feedback-two-stage-v0.1/holdout-v0.10-v08.receipt.json"
+  },
+  "execution_count": 0,
+  "experiment_scope": "offline_research_only_no_operational_approval",
+  "generation": {
+    "stage1_max_tokens": 192,
+    "stage2_max_tokens": 384,
+    "temperature": 0.0,
+    "top_p": 1.0
+  },
+  "hypothesis": "Training feedback-verifier-v0.8-stage2-recovery-style on focused recovery and style-preservation pairs may restore Stage 2 contract and recommendation quality while preserving Stage 1 safety.",
+  "ready_for_inference": true,
+  "schema_version": "feedback-two-stage-execution-plan-v0.1",
+  "seal_protocol_sha256": "d21c28079ae4c6b85a24d07ca86b146ecfe40e8ac5b1fbfdf45ae24d220b9f95",
+  "serving": {
+    "engine": "vllm",
+    "engine_version": "0.28.0",
+    "flashinfer_sampler": false,
+    "max_model_len": 4096,
+    "max_num_seqs": 1,
+    "reasoning_parser": "qwen3"
+  },
+  "single_use": true
+}

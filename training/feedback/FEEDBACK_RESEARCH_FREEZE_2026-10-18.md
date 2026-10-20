@@ -2,6 +2,8 @@
 
 기준일: 2026-10-18
 
+> 이 문서는 2026-10-18 당시 체크포인트다. 최신 상태는 `FEEDBACK_V0.9_HOLDOUT_V0.11_RESULT.md`와 `deployment/feedback-staging/model-policy.json`을 따른다.
+
 ## 확정 상태
 
 - 운영 승인 피드백모델: 없음

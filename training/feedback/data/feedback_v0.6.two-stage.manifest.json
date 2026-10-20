@@ -1,0 +1,43 @@
+{
+  "eval_records": 364,
+  "eval_sha256": "6bc814bf7ccc5b80ace88a51bb330236aa9d167301840fa499baae06a67cde10",
+  "eval_task_counts": {
+    "feedback_stage1": 238,
+    "feedback_stage2": 126
+  },
+  "holdout_used": false,
+  "limitations": [
+    "자동 생성·계약 검증 데이터이며 사람 또는 일본어 전문가 검수 데이터가 아닙니다.",
+    "기존 v0.5 입력을 단계별 출력 계약으로 재표현했으며 새 언어 정답을 만들지 않았습니다.",
+    "봉인된 holdout v0.7과 v0.8은 학습에 사용하지 않았습니다."
+  ],
+  "protected_overlap": {
+    "holdout_v0.7": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "holdout_v0.8": {
+      "exact_input": 0,
+      "text": 0
+    }
+  },
+  "records": 3571,
+  "review": {
+    "reviewed_at": null,
+    "status": "generated_validated"
+  },
+  "schema_version": "feedback-training-manifest-v0.6-two-stage",
+  "source_dataset": "training/feedback/data/feedback_v0.5.jsonl",
+  "source_dataset_sha256": "991bb71e8a9115cb1b18f786f18636cd0c6e693790d16a7c22b37fb9b7b6220a",
+  "source_sha256": "39eda98851cb42c5bd608d48f794d020a4d80214cd827c7e5e78ac99fa8e5dfe",
+  "task_counts": {
+    "feedback_stage1": 2322,
+    "feedback_stage2": 1249
+  },
+  "train_records": 3207,
+  "train_sha256": "3a2864966bf37ba9e30557711d4caa0438dc90e7ed7f22be895979685eec63b8",
+  "train_task_counts": {
+    "feedback_stage1": 2084,
+    "feedback_stage2": 1123
+  }
+}

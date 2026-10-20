@@ -43,6 +43,20 @@ class FeedbackWorkerTests(unittest.TestCase):
         self.assertEqual(self.db.query(models.FeedbackAudit).count(), 1)
         self.assertEqual(self.db.get(models.JudgmentResult, self.job.judgment_id).corrected_text, original)
 
+    def test_worker_passes_job_contract_version_to_runner(self):
+        job = self.db.get(models.FeedbackAuditJob, self.job.id)
+        job.contract_version = "feedback-two-stage-v0.1"
+        self.db.commit()
+        seen = {}
+        def runner(*args, **kwargs):
+            seen.update(kwargs)
+            return {"verdict": "agree", "issue_codes": [], "recommended_judgment": None,
+                    "review_reason_ko": "타당합니다.", "latency_ms": 4.0}
+        process_one(self.db, runner=runner)
+        self.assertEqual(seen["contract_version"], "feedback-two-stage-v0.1")
+        audit = self.db.query(models.FeedbackAudit).one()
+        self.assertEqual(audit.contract_version, "feedback-two-stage-v0.1")
+
     def test_failure_retries_then_stays_failed(self):
         def runner(*args, **kwargs): raise FeedbackServiceError("contract")
         for expected in ("pending", "pending", "failed"):
@@ -52,6 +66,13 @@ class FeedbackWorkerTests(unittest.TestCase):
             process_one(self.db, runner=runner)
             self.assertEqual(self.db.get(models.FeedbackAuditJob, self.job.id).status, expected)
         self.assertEqual(self.db.query(models.FeedbackAudit).count(), 0)
+
+    def test_stage_contract_category_is_preserved_for_retry(self):
+        def runner(*args, **kwargs): raise FeedbackServiceError("contract_stage2")
+        process_one(self.db, runner=runner)
+        job = self.db.get(models.FeedbackAuditJob, self.job.id)
+        self.assertEqual(job.status, "pending")
+        self.assertEqual(job.error_category, "contract_stage2")
 
 
 if __name__ == "__main__": unittest.main()

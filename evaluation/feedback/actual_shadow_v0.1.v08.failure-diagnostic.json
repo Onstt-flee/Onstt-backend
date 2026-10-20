@@ -1,0 +1,13 @@
+{
+  "content_included": false,
+  "database_sha256_after": "bad96c53ff57d1af82380f69e1946cf608edf8f02e5dfe31d211ff6355660f42",
+  "database_sha256_before": "bad96c53ff57d1af82380f69e1946cf608edf8f02e5dfe31d211ff6355660f42",
+  "database_unchanged": true,
+  "failed_job_count": 3,
+  "operational_diagnostic_only": true,
+  "outcome_counts": {
+    "contract_stage2": 3
+  },
+  "quality_claim_allowed": false,
+  "schema_version": "feedback-failed-stage-diagnostic-v0.1"
+}

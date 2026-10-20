@@ -6,13 +6,13 @@
 
 ## 현재 개발 상태와 문서 안내
 
-2026-10-17 기준 GPU 전용 듀얼모델 배선과 실제 저장 STT 200건 비노출 shadow를 완료했고,
-후속 `feedback-v0.5`까지 학습·독립 평가했습니다. v0.5는 Qwen3-8B 베이스보다 크게 개선됐지만
-봉인 holdout v0.6에서 계약 성공 98.33%(기준 99%), 권장 decision 76.67%(기준 90%),
-허용 교정문 53.33%(기준 80%)로 세 필수 기준을 실패했습니다. 따라서 현재 승인된
-피드백모델은 없으며 v0.3/v0.4/v0.5 모두 연구
-기록으로만 보존합니다. 기능 플래그 기본 비활성, 학습자 비노출, 자동 재학습 보류를 유지합니다.
-상세는 [`training/feedback/FEEDBACK_V0.5_RESULT.md`](training/feedback/FEEDBACK_V0.5_RESULT.md)를 참고합니다.
+2026-10-20 기준 GPU 전용 듀얼모델 배선과 실제 저장 STT 200건 비노출 shadow를 완료했습니다.
+`feedback-v0.3`~`v0.7`의 실패를 보강한 `feedback-v0.8-stage2-recovery-style`은 신규 봉인
+holdout v0.10에서 Stage 1/2 계약 100%, 불일치 정밀도·재현율 100%, 권장 decision 95%,
+허용 교정문 100%, 조건부 p95 2.782초로 사전 기준을 모두 통과했습니다. 2단계 계약을
+영속 worker와 staging 프로필에도 연결했습니다. 이후 실제 저장 STT 200건 비노출 shadow에서
+판단 계약은 198/200으로 통과했지만 피드백 audit coverage가 195/198(98.48%)로 99% 기준을
+실패했습니다. 후속 v0.9는 3,991건으로 학습했지만 신규 holdout v0.11에서 Stage 2 계약이 76/80(95%)로 필수 99% 기준을 실패해 미채택했습니다. 운영 승인 모델은 없으며 기능 플래그 기본 비활성, 학습자 비노출, 자동 재학습 금지를 유지합니다. 최종 판정은 [`training/feedback/FEEDBACK_V0.9_HOLDOUT_V0.11_RESULT.md`](training/feedback/FEEDBACK_V0.9_HOLDOUT_V0.11_RESULT.md)를 참고합니다.
 
 후속 조사 위험 게이트는 새 80문항 adversarial 개발 진단에서 위험 30건을 모두 표시했지만
 정상 사건 발생 표현 10건도 전부 오탐했습니다. 정밀도 75%, 정상문장 오신호율 20%로
@@ -52,7 +52,7 @@
 - 연구·staging 기준선: `Qwen3-4B + judgment-v0.2-D LoRA` 단독
 - 최종 운영 승격 후보: 없음
 - 운영 기본값 승인 모델: 없음
-- 현재 단계: feedback-v0.5 학습·사전 계획 베이스/LoRA 독립 비교 완료, 필수 기준 미달로 승인 피드백모델 없음. 기능 플래그 기본 비활성·학습자 노출·자동 재학습 금지를 유지
+- 현재 단계: feedback-v0.8은 내부 shadow만 유지하고, 최종 후보 v0.9는 Stage 2 계약 95%로 미채택. 피드백 연구는 동결했으며 운영 승인 피드백모델은 없음
 
 기존 `POST /utterances/{id}/analyze`의 이진 분석 계약은 그대로 유지합니다. 별도 `POST /utterances/{id}/judgment`는 3단계 판단 계약을 사용하며 `JUDGMENT_ENABLED=false`가 기본값입니다. 모델 서버가 없거나 출력 계약을 위반하면 판단 보류로 위장하지 않고 HTTP 503을 반환합니다.
 
@@ -76,6 +76,25 @@
 | 조사 위험 게이트 후향 진단 | [`training/feedback/FEEDBACK_PARTICLE_RISK_GATE_V0.1_RESULT.md`](training/feedback/FEEDBACK_PARTICLE_RISK_GATE_V0.1_RESULT.md) | 반복 조사 실패의 review-only 탐지, 정상 예외·불변성·운영 미연결 경계 |
 | 조사 위험 게이트 adversarial 진단 | [`training/feedback/FEEDBACK_PARTICLE_RISK_ADVERSARIAL_V0.1_RESULT.md`](training/feedback/FEEDBACK_PARTICLE_RISK_ADVERSARIAL_V0.1_RESULT.md) | 새 80문항에서 사건 발생 표현 오탐 확인, 정밀도·오신호 기준 실패와 운영 미연결 근거 |
 | 피드백 연구 동결 체크포인트 | [`training/feedback/FEEDBACK_RESEARCH_FREEZE_2026-10-18.md`](training/feedback/FEEDBACK_RESEARCH_FREEZE_2026-10-18.md) | 승인 모델 없음, v0.3 shadow 한정, v0.4/v0.5·조사 게이트 미채택과 다음 실험 재개 조건 |
+| 2단계 피드백 holdout v0.7 봉인 | [`training/feedback/HOLDOUT_V0.7_SEAL.md`](training/feedback/HOLDOUT_V0.7_SEAL.md) | 계약 구현 전 120문항·중복 0건·추론 0회 봉인과 stage별 사전 임계값 |
+| 2단계 피드백 계약 설계 | [`training/feedback/FEEDBACK_TWO_STAGE_V0.1_DESIGN.md`](training/feedback/FEEDBACK_TWO_STAGE_V0.1_DESIGN.md) | verdict 검수와 권장 교정 생성 분리, 조건부 호출과 기존 저장 계약 호환성 |
+| 2단계 피드백 v0.7 실행계획 | [`training/feedback/FEEDBACK_TWO_STAGE_V0.1_EXECUTION_PLAN.md`](training/feedback/FEEDBACK_TWO_STAGE_V0.1_EXECUTION_PLAN.md) | v0.5 가중치 역할 분리 가설, 후보·코드·endpoint·단일 실행 claim 고정 |
+| 2단계 피드백 v0.7 결과 | [`training/feedback/FEEDBACK_TWO_STAGE_V0.1_HOLDOUT_V0.7_RESULT.md`](training/feedback/FEEDBACK_TWO_STAGE_V0.1_HOLDOUT_V0.7_RESULT.md) | stage 1 라벨 공간 혼동, 계약 50%·stage 2 미호출과 미채택 근거 |
+| 2단계 피드백 holdout v0.8 봉인 | [`training/feedback/HOLDOUT_V0.8_SEAL.md`](training/feedback/HOLDOUT_V0.8_SEAL.md) | v0.6 학습 전 신규 120문항·중복 0건·추론 0회 봉인 |
+| feedback-v0.6 단계별 학습·결과 | [`training/feedback/FEEDBACK_V0.6_TWO_STAGE_DESIGN_AND_DATA.md`](training/feedback/FEEDBACK_V0.6_TWO_STAGE_DESIGN_AND_DATA.md) | Stage 1/2 라벨 공간 분리, 3,571건, 401-step 학습 손실·어댑터 해시 |
+| feedback-v0.6 v0.8 단일 실행계획 | [`training/feedback/FEEDBACK_V0.6_TWO_STAGE_EXECUTION_PLAN.md`](training/feedback/FEEDBACK_V0.6_TWO_STAGE_EXECUTION_PLAN.md) | v0.6 후보·코드·endpoint·단일사용 출력 경로와 사전 임계값 고정 |
+| feedback-v0.6 v0.8 단일 실행 결과 | [`training/feedback/FEEDBACK_V0.6_HOLDOUT_V0.8_RESULT.md`](training/feedback/FEEDBACK_V0.6_HOLDOUT_V0.8_RESULT.md) | 계약 100% 달성, 불일치 누락 20건으로 품질 기준 3개 실패·미채택 |
+| 2단계 피드백 holdout v0.9 봉인 | [`training/feedback/HOLDOUT_V0.9_SEAL.md`](training/feedback/HOLDOUT_V0.9_SEAL.md) | v0.7 학습 전 신규 120문항·교정문 비교 집중 40건·중복 0건·추론 0회 |
+| feedback-v0.7 Stage 1 비교 설계·학습 | [`training/feedback/FEEDBACK_V0.7_STAGE1_COMPARISON_DESIGN_AND_DATA.md`](training/feedback/FEEDBACK_V0.7_STAGE1_COMPARISON_DESIGN_AND_DATA.md) | 교정문 비교 최소대립쌍 160건, 총 3,731건·419-step 학습 손실·어댑터 해시 |
+| feedback-v0.7 v0.9 단일 실행계획 | [`training/feedback/FEEDBACK_V0.7_STAGE1_COMPARISON_EXECUTION_PLAN.md`](training/feedback/FEEDBACK_V0.7_STAGE1_COMPARISON_EXECUTION_PLAN.md) | v0.7 후보·코드·단일사용 출력 경로와 사전 임계값 고정 |
+| feedback-v0.7 v0.9 단일 실행 결과 | [`training/feedback/FEEDBACK_V0.7_HOLDOUT_V0.9_RESULT.md`](training/feedback/FEEDBACK_V0.7_HOLDOUT_V0.9_RESULT.md) | 재현율 91.67% 개선, Stage 2 계약·권장 판단·교정문 기준 실패와 미채택 |
+| 2단계 피드백 holdout v0.10 봉인 | [`training/feedback/HOLDOUT_V0.10_SEAL.md`](training/feedback/HOLDOUT_V0.10_SEAL.md) | v0.8 학습 전 신규 120문항·기존 자료 중복 0건·추론 0회 |
+| 2단계 피드백 holdout v0.11 봉인 | [`training/feedback/HOLDOUT_V0.11_SEAL.md`](training/feedback/HOLDOUT_V0.11_SEAL.md) | v0.9 학습 전 신규 120문항·Stage 2 정답 80건·기존 자료 중복 0건·추론 0회 봉인 |
+| feedback-v0.9 학습·v0.11 최종 평가 | [`training/feedback/FEEDBACK_V0.9_HOLDOUT_V0.11_RESULT.md`](training/feedback/FEEDBACK_V0.9_HOLDOUT_V0.11_RESULT.md) | 3,991건·449-step 학습, Stage 2 계약 76/80로 기준 실패·미채택, 추가 버전 자동 중단 |
+| feedback-v0.8 Stage 2 복구·문체 설계·학습 | [`training/feedback/FEEDBACK_V0.8_STAGE2_RECOVERY_STYLE_DESIGN_AND_DATA.md`](training/feedback/FEEDBACK_V0.8_STAGE2_RECOVERY_STYLE_DESIGN_AND_DATA.md) | 보류 경계 40건·정상 복구 및 정중체 보존 100건, 총 3,871건·435-step 학습 손실·어댑터 해시 |
+| feedback-v0.8 v0.10 단일 실행계획 | [`training/feedback/FEEDBACK_V0.8_STAGE2_RECOVERY_STYLE_EXECUTION_PLAN.md`](training/feedback/FEEDBACK_V0.8_STAGE2_RECOVERY_STYLE_EXECUTION_PLAN.md) | v0.8 후보·코드·단일사용 출력 경로와 사전 임계값 고정 |
+| feedback-v0.8 v0.10 단일 실행 결과 | [`training/feedback/FEEDBACK_V0.8_HOLDOUT_V0.10_RESULT.md`](training/feedback/FEEDBACK_V0.8_HOLDOUT_V0.10_RESULT.md) | 전체 사전 기준 통과, 권장 decision 잔여 오차 3건과 GPU 제한적 shadow 경계 |
+| feedback-v0.8 실제 STT shadow·실패 단계 진단 | [`training/feedback/FEEDBACK_V0.8_ACTUAL_STT_SHADOW_RESULT.md`](training/feedback/FEEDBACK_V0.8_ACTUAL_STT_SHADOW_RESULT.md) | audit coverage 195/198로 운영 게이트 실패, 최종 실패 3건 모두 Stage 2 계약 실패·원문 비노출 진단 |
 | feedback-v0.3 합성 비노출 shadow | [`training/feedback/FEEDBACK_V0.3_SYNTHETIC_SHADOW_RESULT.md`](training/feedback/FEEDBACK_V0.3_SYNTHETIC_SHADOW_RESULT.md) | 실제 데이터 부재 시 200건 운영 배선 검증, 판단 불변성·queue 무결성·지연시간과 품질 주장 금지 경계 |
 | feedback-v0.3 실제 저장 STT shadow | [`training/feedback/FEEDBACK_V0.3_ACTUAL_STT_SHADOW_RESULT.md`](training/feedback/FEEDBACK_V0.3_ACTUAL_STT_SHADOW_RESULT.md) | 실제 200건 계약·재시도·격리·불변성 결과와 품질 주장 금지 경계 |
 | feedback 관리자 API 합성 shadow | [`training/feedback/FEEDBACK_V0.3_ADMIN_SHADOW_RESULT.md`](training/feedback/FEEDBACK_V0.3_ADMIN_SHADOW_RESULT.md) | Bearer 보호, 목록 비노출, 이슈 집계, retry 차단과 모델 장애 readiness 503 검증 |

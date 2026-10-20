@@ -1,0 +1,96 @@
+{
+  "dataset": "holdout_v0.7.jsonl",
+  "expert_reviewed": false,
+  "family_counts": {
+    "agree_correct_conjugation": 10,
+    "agree_correct_particle": 10,
+    "agree_valid_action": 10,
+    "agree_valid_existence": 10,
+    "agree_valid_person": 10,
+    "disagree_false_negative_conjugation": 10,
+    "disagree_false_negative_particle": 10,
+    "disagree_false_positive": 10,
+    "disagree_nonminimal_meaning": 10,
+    "disagree_reason_mismatch": 5,
+    "disagree_unnecessary_abstention": 5,
+    "disagree_wrong_correction": 10,
+    "unreviewable_audio_orthography": 10
+  },
+  "human_reviewed": false,
+  "limitations": [
+    "자동 생성·계약 검증 데이터이며 사람 또는 일본어 전문가 검수 데이터가 아닙니다.",
+    "2단계 계약 구현 전에 봉인했으며 결과 확인 후 같은 시험지에 맞춰 수정하지 않습니다.",
+    "기존 학습·holdout·진단 문장과 정확 입력 및 원문 중복이 없습니다."
+  ],
+  "model_inference_count": 0,
+  "overlap": {
+    "diagnostic_v0.1": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "diagnostic_v0.2": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "holdout_v0.1": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "holdout_v0.2": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "holdout_v0.3": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "holdout_v0.4": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "holdout_v0.5": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "holdout_v0.6": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "particle_adversarial_v0.1": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "training_v0.1": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "training_v0.2": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "training_v0.3": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "training_v0.4": {
+      "exact_input": 0,
+      "text": 0
+    },
+    "training_v0.5": {
+      "exact_input": 0,
+      "text": 0
+    }
+  },
+  "qualification_scope": "future_two_stage_candidate_selection_only",
+  "records": 120,
+  "review_status": "generated_validated",
+  "schema_version": "feedback-holdout-manifest-v0.7",
+  "sealed_before_two_stage_implementation": true,
+  "sha256": "e928c104a39623891dc41d9fcc8ed285517594d9eea417662cdc91235f84e6ab",
+  "stage2_expected_rows": 60,
+  "verdict_counts": {
+    "agree": 50,
+    "disagree": 60,
+    "unreviewable": 10
+  }
+}
